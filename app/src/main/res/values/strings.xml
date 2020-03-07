@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">CheckUp</string>
     <string name="logo">DPI LOGO</string>
+    <string name="hey">Hello there!!</string>
+    <string name="btn">Experiment</string>
+    <string name="msg">This is a short message.</string>
 </resources>

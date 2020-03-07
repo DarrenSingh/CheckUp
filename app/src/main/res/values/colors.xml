@@ -6,4 +6,8 @@
     <color name="darkBlue">#000031</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="ceruleanBlue">#2A52BE</color>
+    <color name="crayolaCerulean">#1DACD6</color>
+    <color name="skyBlue">#87CEEB</color>
+    <color name="orange">#F0D43A</color>
 </resources>
