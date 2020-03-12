@@ -14,11 +14,11 @@
 
         <ImageView
             android:id="@+id/img_profile_picture"
+            android:src="@drawable/ic_account_circle_black_48dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="48dp"
             android:layout_marginLeft="48dp"
-            android:background="@color/colorAccent"
             android:contentDescription="Profile Picture"/>
 
         <LinearLayout
@@ -50,21 +50,24 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="158dp"
             android:layout_alignLeft="@id/img_profile_picture">
 
             <TextView
+                android:id="@+id/text_patientprof_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="First Last Name"/>
 
             <TextView
+                android:id="@+id/text_patientprof_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Address"/>
 
             <TextView
+                android:id="@+id/text_patientprof_msp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -91,12 +94,13 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/list_inbox"
+        android:id="@+id/list_patient_inbox"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:layout_weight="5"/>
+        android:layout_weight="5"
+        tools:listitem="@layout/item_inbox_message"/>
 
 
 

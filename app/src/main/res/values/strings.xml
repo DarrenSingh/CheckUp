@@ -4,6 +4,7 @@
     <string name="hey">Hello there!!</string>
     <string name="btn">Login Activity</string>
     <string name="msg">This is a short message.</string>
+    <string name="txt_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu posuere, ultricies quam vel, pulvinar nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel ultricies sem. Nulla facilisi.</string>
     <string-array name="yes_or_No">
         <item>yes</item>
         <item>no</item>
