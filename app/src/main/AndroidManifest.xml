@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeBase">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SubmitPaymentActivity"></activity>
+        <activity android:name=".PatientPaymentHistoryActivity" />
+        <activity android:name=".NewMessageActivity" />
+        <activity android:name=".PatientEditProfileActivity" />
+        <activity android:name=".DoctorInfoActivity" />
+        <activity android:name=".AccountProfileActivity" />
+        <activity android:name=".PatientHomeActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.EditCashierAccountActivity"></activity>
         <activity android:name=".EditAndUpdateAccountPackage.EditDoctorAccountActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.EditPatientAccountActivity" />
