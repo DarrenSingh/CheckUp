@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateAccountPackage.AccountTypeOptionActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select account type"
+        android:textAlignment="center"
+        android:textSize="40sp"></TextView>
+
+    <Button
+        android:id="@+id/btn_toAdminAccountCreateActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Administrator Account"
+        android:layout_marginTop="30dp"
+        android:onClick="buttonClicked"
+        android:textSize="30sp"></Button>
+
+    <Button
+        android:id="@+id/btn_toPatientAccountCreateActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Patient Account"
+        android:layout_marginTop="30dp"
+        android:onClick="buttonClicked"
+        android:textSize="30sp"></Button>
+
+    <Button
+        android:id="@+id/btn_toDoctorAccountCreateActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doctor Account"
+        android:layout_marginTop="30dp"
+        android:onClick="buttonClicked"
+        android:textSize="30sp"></Button>
+
+    <Button
+        android:id="@+id/btn_toCashierAccountCreateActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cashier Account"
+        android:layout_marginTop="30dp"
+        android:onClick="buttonClicked"
+        android:textSize="30sp"></Button>
+</LinearLayout>

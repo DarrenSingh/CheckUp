@@ -10,6 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeBase">
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".EditAndUpdateAccountPackage.EditCashierAccountActivity"></activity>
+        <activity android:name=".EditAndUpdateAccountPackage.EditDoctorAccountActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.EditPatientAccountActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.EditAdminAccountActivity" />
+        <activity android:name=".CreateAccountPackage.CashierAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.DoctorAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.PatientAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.AdminAccountCreateActivity" />
+        <activity android:name=".ViewUserHistoryActivity" />
+        <activity android:name=".AppMaintenancePackage.AppMaintenanceActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity" />
+        <activity android:name=".CreateAccountPackage.AccountTypeOptionActivity" />
+        <activity android:name=".AdminActivity"/>
         <activity android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -19,5 +32,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
