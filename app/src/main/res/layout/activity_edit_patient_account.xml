@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditAndUpdateAccountPackage.EditPatientAccountActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="First Name"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="First Name"
+        android:textSize="30sp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Last Name"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Last Name"
+        android:textSize="30sp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Address"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:textSize="30sp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Phone Number"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:textSize="30sp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Email"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textSize="30sp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Login ID"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientLoginID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="loginID"
+        android:textSize="30sp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Password"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textSize="30sp"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Do you have a MSP coverage?"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"></TextView>
+    <Spinner
+        android:id="@+id/spinner_editPatientMSPStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/yes_or_No"
+        ></Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Health Card Number"
+        android:textSize="20sp"></TextView>
+
+    <EditText
+        android:id="@+id/editTxt_editPatientHealthCardNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Health Card Number"
+        android:textSize="30sp"></EditText>
+
+    <Button
+        android:id="@+id/btn_editPatientAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="EDIT"
+        android:textSize="30sp"></Button>
+    </LinearLayout>
+</ScrollView>

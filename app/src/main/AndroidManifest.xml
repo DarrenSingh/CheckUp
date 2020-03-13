@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.Group6.checkup">
 
@@ -7,5 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" />
+        android:theme="@style/AppTheme">
+        <activity android:name=".EditAndUpdateAccountPackage.EditCashierAccountActivity"></activity>
+        <activity android:name=".EditAndUpdateAccountPackage.EditDoctorAccountActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.EditPatientAccountActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.EditAdminAccountActivity" />
+        <activity android:name=".CreateAccountPackage.CashierAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.DoctorAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.PatientAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.AdminAccountCreateActivity" />
+        <activity android:name=".ViewUserHistoryActivity" />
+        <activity android:name=".AppMaintenancePackage.AppMaintenanceActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity" />
+        <activity android:name=".CreateAccountPackage.AccountTypeOptionActivity" />
+        <activity android:name=".AdminActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
 </manifest>

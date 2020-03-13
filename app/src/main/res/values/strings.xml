@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CheckUp</string>
+    <string-array name="yes_or_No">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
 </resources>
