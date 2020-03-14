@@ -4,4 +4,6 @@
     <string name="hey">Hello there!!</string>
     <string name="btn">Experiment</string>
     <string name="msg">This is a short message.</string>
+    <string name="image">An Image</string>
+    <string name="btnSend">SEND</string>
 </resources>
