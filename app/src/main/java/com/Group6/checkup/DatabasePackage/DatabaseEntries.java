@@ -11,7 +11,7 @@ public class DatabaseEntries {
             DatabaseTable.AdminTable.PASSWORD
     );
 
-    public static final String SQL_PATIENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s BOOLEAN NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (adminID) REFERENCES Admin (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_PATIENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (adminID) REFERENCES Admin (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.PatientTable.TABLE_NAME,
             DatabaseTable.PatientTable._ID,
             DatabaseTable.PatientTable.FIRST_NAME,
@@ -49,7 +49,7 @@ public class DatabaseEntries {
             DatabaseTable.CashierTable.ADMIN_ID
     );
 
-    public static final String SQL_INVOICE_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s DOUBLE NOT NULL, %s DATE NOT NULL, %s BOOLEAN NOT NULL, %s DATETIME NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (cashierID) REFERENCES Cashier (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (appointmentID) REFERENCES Appointment (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_INVOICE_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s REAL NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (cashierID) REFERENCES Cashier (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (appointmentID) REFERENCES Appointment (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.InvoiceTable.TABLE_NAME,
             DatabaseTable.InvoiceTable._ID,
             DatabaseTable.InvoiceTable.PRICE,
@@ -62,7 +62,7 @@ public class DatabaseEntries {
             DatabaseTable.InvoiceTable.APPOINTMENT_ID
     );
 
-    public static final String SQL_PAYMENT_NOTIFICATION_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATETIME NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (cashierID) REFERENCES Cashier (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_PAYMENT_NOTIFICATION_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (cashierID) REFERENCES Cashier (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.PaymentNotificationTable.TABLE_NAME,
             DatabaseTable.PaymentNotificationTable._ID,
             DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE_TITLE,
@@ -72,7 +72,7 @@ public class DatabaseEntries {
             DatabaseTable.PaymentNotificationTable.CASHIER_ID
     );
 
-    public static final String SQL_APPOINTMENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s DATETIME NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_APPOINTMENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.AppointmentTable.TABLE_NAME,
             DatabaseTable.AppointmentTable._ID,
             DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME,
@@ -80,7 +80,7 @@ public class DatabaseEntries {
             DatabaseTable.AppointmentTable.DOCTOR_ID
     );
 
-    public static final String SQL_ONLINE_HELP_REPLY_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATETIME NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_ONLINE_HELP_REPLY_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.OnlineHelpReplyTable.TABLE_NAME,
             DatabaseTable.OnlineHelpReplyTable._ID,
             DatabaseTable.OnlineHelpReplyTable.REPLY_MESSAGE_TITLE,
@@ -89,12 +89,13 @@ public class DatabaseEntries {
             DatabaseTable.OnlineHelpReplyTable.DOCTOR_ID
     );
 
-    public static final String SQL_ONLINE_HELP_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s DATETIME NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_ONLINE_HELP_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION FOREIGN KEY (onlineHelpReplyID) REFERENCES Online_help (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.OnlineHelpTable.TABLE_NAME,
             DatabaseTable.OnlineHelpTable._ID,
             DatabaseTable.OnlineHelpTable.MESSAGE_TITLE,
             DatabaseTable.OnlineHelpTable.MESSAGE_CONTENT,
             DatabaseTable.OnlineHelpTable.SENT_DATE_TIME,
+            DatabaseTable.OnlineHelpTable.PATIENT_ID,
             DatabaseTable.OnlineHelpTable.DOCTOR_ID,
             DatabaseTable.OnlineHelpTable.ONLINE_HELP_REPLY_ID
     );

@@ -29,7 +29,7 @@ public class DoctorAccountCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_account_create);
 
-        dbh = new DatabaseHelper(this, DatabaseTable.DoctorTable.TABLE_NAME, DatabaseTable.DoctorTable.DATABASE_VERSION);
+        dbh = new DatabaseHelper(this);
         doctorData = new ContentValues();
 
         btnCreateAccount = findViewById(R.id.btn_createDoctorAccount);

@@ -4,21 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.Group6.checkup.DatabasePackage.DatabaseDAO;
 import com.Group6.checkup.R;
+
+import java.util.ArrayList;
 
 public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
 
     Button btnSearch;
     EditText editTxtLoginID;
     ListView listView;
-    String[] listItem = {"a", "b", "c", "d"};
+    ArrayList<String> listItem;
+    DatabaseDAO dao;
+    String firstLetter, loginID;
+    Intent nextActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,33 +36,53 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btn_accountSearch);
         editTxtLoginID = findViewById(R.id.editTxt_accountSearch);
         listView = findViewById(R.id.listView_accountSearch);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, listItem);
-        listView.setAdapter(adapter);
+        listItem = new ArrayList<String>();
+        dao = new DatabaseDAO();
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Database Search and put values in array
-
+                if (TextUtils.isEmpty(editTxtLoginID.getText().toString())) {
+                    editTxtLoginID.setError("Please enter the loginID");
+                }else {
+                    listItem = dao.accountSearch(editTxtLoginID.getText().toString(), EditAndUpdateAccountSearchActivity.this);
+                    if(listItem.size() > 0) {
+                        loginID = (listItem.get(3));
+                        firstLetter = (loginID.substring(0, 1));
+                        String[] list = {loginID};
+                        ArrayAdapter adapter = new ArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, android.R.id.text1, list);
+                        listView.setAdapter(adapter);
+                    }else{
+                        Toast.makeText(EditAndUpdateAccountSearchActivity.this, "Not found", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch(position){
-                    case 0:
-                        startActivity(new Intent(getBaseContext(), EditAdminAccountActivity.class));
+                switch (firstLetter) {
+                    case "A":
+                        nextActivity = new Intent(getBaseContext(), EditAdminAccountActivity.class);
+                        nextActivity.putExtra("loginID", loginID);
+                        startActivity(nextActivity);
                         break;
-                    case 1:
-                        startActivity(new Intent(getBaseContext(), EditPatientAccountActivity.class));
+                    case "P":
+                        nextActivity = new Intent(getBaseContext(), EditPatientAccountActivity.class);
+                        nextActivity.putExtra("loginID", loginID);
+                        startActivity(nextActivity);
                         break;
-                    case 2:
-                        startActivity(new Intent(getBaseContext(), EditDoctorAccountActivity.class));
+                    case "D":
+                        nextActivity = new Intent(getBaseContext(), EditDoctorAccountActivity.class);
+                        nextActivity.putExtra("loginID", loginID);
+                        startActivity(nextActivity);
                         break;
-                    case 3:
-                        startActivity(new Intent(getBaseContext(), EditCashierAccountActivity.class));
+                    case "C":
+                        nextActivity = new Intent(getBaseContext(), EditCashierAccountActivity.class);
+                        nextActivity.putExtra("loginID", loginID);
+                        startActivity(nextActivity);
                         break;
                 }
             }

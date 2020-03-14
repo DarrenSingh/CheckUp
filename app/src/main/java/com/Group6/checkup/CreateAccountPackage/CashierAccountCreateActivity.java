@@ -21,13 +21,10 @@ public class CashierAccountCreateActivity extends AppCompatActivity {
     Button btnCreateAccount;
     EditText etFirstName, etLastName, etLoginID, etPassword;
     String firstName, lastName, loginID, password;
-    String key;
 
     SQLiteDatabase db;
     ContentValues cashierData;
     DatabaseHelper dbh;
-
-    Cursor adminCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +32,8 @@ public class CashierAccountCreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cashier_account_create_activity);
 
         cashierData = new ContentValues();
-        dbh = new DatabaseHelper(this, DatabaseTable.CashierTable.TABLE_NAME, DatabaseTable.CashierTable.DATABASE_VERSION);
+        dbh = new DatabaseHelper(this);
 
-        adminCursor = getAdminCursor();
-        while(adminCursor.moveToNext()) {
-            key = adminCursor.getString(0);
-        }
 
         etFirstName = findViewById(R.id.editTxt_cashierFirstName);
         etLastName = findViewById(R.id.editTxt_cashierLastName);
@@ -77,8 +70,5 @@ public class CashierAccountCreateActivity extends AppCompatActivity {
             }
         });
     }
-    private Cursor getAdminCursor(){
-        db = dbh.getReadableDatabase();
-        return db.query(DatabaseTable.AdminTable.TABLE_NAME, null, null, null, null,null, null);
-    }
+
 }

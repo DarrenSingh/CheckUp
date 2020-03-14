@@ -78,6 +78,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                 password = etPassword.getText().toString();
                 healthCardNumber = etHealthCardNumber.getText().toString();
                 msp = spinnerYesOrNo.getSelectedItem().toString();
+
                 if(msp.equals("yes")){
                     mspStatus = true;
                 }else{
@@ -85,6 +86,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                 }
 
                 //Insert to Database;
+
             }
         });
     }

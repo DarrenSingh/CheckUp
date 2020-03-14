@@ -11,15 +11,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static DatabaseHelper sInstance;
 
-    public static DatabaseHelper getInstance(Context context, String name, int version) {
+    public static DatabaseHelper getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new DatabaseHelper(context, name, version);
+            sInstance = new DatabaseHelper(context);
         }
         return sInstance;
     }
 
-    public DatabaseHelper(@Nullable Context context, @Nullable String name, int version) {
-        super(context, name, null, version);
+    public DatabaseHelper(@Nullable Context context) {
+        super(context, DatabaseTable.DATABASE_NAME, null, DatabaseTable.DATABASE_VERSION);
     }
 
     @Override
@@ -59,4 +59,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.setForeignKeyConstraintsEnabled(true);
         }
     }
+
+
 }

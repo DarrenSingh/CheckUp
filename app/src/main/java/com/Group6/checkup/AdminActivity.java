@@ -21,7 +21,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        dbh = new DatabaseHelper(this, DatabaseTable.AdminTable.TABLE_NAME, DatabaseTable.AdminTable.DATABASE_VERSION);
+        dbh = new DatabaseHelper(this);
 
     }
 
@@ -35,7 +35,7 @@ public class AdminActivity extends AppCompatActivity {
         } else if(view.getId() == R.id.btn_toAppMaintenanceActivity){
             startActivity(new Intent(AdminActivity.this, AppMaintenanceActivity.class));
         } else if(view.getId() == R.id.btn_toReturnLogInActivity){
-            //startActivity(new Intent(AdminActivity.this, ));
+            startActivity(new Intent(AdminActivity.this, MainActivity.class));
         }
     }
 }
