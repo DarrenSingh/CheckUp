@@ -7,31 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".PatientEditProfileActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        android:text="Edit Profile Information"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
-
 
     <ImageView
         android:id="@+id/img_editprofile_picture"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginLeft="32dp"
-        android:layout_gravity=""
-        android:background="@color/colorAccent"/>
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_account_circle_black_48dp"/>
 
     <!-- Current Account Info   -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="32dp">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,10 +43,10 @@
 
     </LinearLayout>
 
-    <view
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent"/>
+<!--    <view-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/colorAccent"/>-->
 
     <LinearLayout
 
@@ -63,8 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp">
-
+        android:layout_marginTop="64dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -116,10 +106,11 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_edit_profile_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom|center"
         android:text="Confirm"/>
 
 

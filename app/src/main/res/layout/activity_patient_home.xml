@@ -77,16 +77,22 @@
         android:layout_gravity="center"
         android:text="Account Profile"/>
 
-    <Button
-        android:id="@+id/btn_home_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="175dp"
-        android:layout_gravity="center|bottom"
-        android:text="Logout"/>
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:gravity="center|bottom"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
+        <Button
+            android:id="@+id/btn_home_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="32dp"
+            android:text="Logout"/>
 
-
+    </RelativeLayout>
 
 
 </LinearLayout>

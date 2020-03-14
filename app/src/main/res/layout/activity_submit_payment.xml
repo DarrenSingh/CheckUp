@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="96dp"
-        android:inputType="numberSigned"
+        android:inputType="numberDecimal"
         android:minWidth="200dp"
         android:hint="Payment Amount"
         android:gravity="center"/>
