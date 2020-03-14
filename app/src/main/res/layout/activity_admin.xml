@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="70dp"
+    tools:context=".AdminActivity">
+
+    <TextView
+        android:id="@+id/txt_accountType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="Administrator"
+        android:textColor="#64B5F6"
+        android:textSize="30sp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+
+        android:text="Welcome Administrator Name!"></TextView>
+
+    <Button
+        android:id="@+id/btn_toCreateAccountActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="buttonClicked"
+        android:text="Create Account"
+        android:textSize="20sp"></Button>
+
+    <Button
+        android:id="@+id/btn_toEditAndUpdateAccountActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="buttonClicked"
+        android:text="Edit/Update Account Details"
+        android:textSize="20sp"></Button>
+
+    <Button
+        android:id="@+id/btn_toViewUserHistoryActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="buttonClicked"
+        android:text="View User History"
+        android:textSize="20sp"></Button>
+
+    <Button
+        android:id="@+id/btn_toAppMaintenanceActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="buttonClicked"
+        android:text="App Maintenance"
+        android:textSize="20sp"></Button>
+
+    <Button
+        android:id="@+id/btn_toReturnLogInActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="buttonClicked"
+        android:text="Return to log-in"
+        android:textSize="20sp"></Button>
+
+
+</LinearLayout>

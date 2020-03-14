@@ -4,4 +4,8 @@
     <string name="hey">Hello there!!</string>
     <string name="btn">Experiment</string>
     <string name="msg">This is a short message.</string>
+    <string-array name="yes_or_No">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
 </resources>
