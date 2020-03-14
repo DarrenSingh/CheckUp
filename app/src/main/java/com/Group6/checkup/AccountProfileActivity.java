@@ -2,6 +2,7 @@ package com.Group6.checkup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -53,6 +54,22 @@ public class AccountProfileActivity extends AppCompatActivity {
 
 
         //UI Event Listeners
+        mBtnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO start activity for result?
+                startActivity(new Intent(AccountProfileActivity.this,PatientEditProfileActivity.class));
+            }
+        });
+
+        mBtnPaymentHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountProfileActivity.this,PatientPaymentHistoryActivity.class));
+            }
+        });
+
+
 
         //TODO Inbox item onItemClickListener
         mListViewInbox.setOnItemClickListener(new AdapterView.OnItemClickListener() {
