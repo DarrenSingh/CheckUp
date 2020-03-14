@@ -2,7 +2,7 @@
     <string name="app_name">CheckUp</string>
     <string name="logo">DPI LOGO</string>
     <string name="hey">Hello there!!</string>
-    <string name="btn">Experiment</string>
+    <string name="btn">Login Activity</string>
     <string name="msg">This is a short message.</string>
     <string-array name="yes_or_No">
         <item>yes</item>
