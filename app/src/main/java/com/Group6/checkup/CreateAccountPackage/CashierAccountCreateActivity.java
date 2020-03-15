@@ -2,38 +2,35 @@ package com.Group6.checkup.CreateAccountPackage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.Group6.checkup.DatabasePackage.DatabaseHelper;
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Cashier;
+import com.Group6.checkup.DatabasePackage.DatabaseDAO;
 import com.Group6.checkup.R;
+
+import java.util.ArrayList;
 
 public class CashierAccountCreateActivity extends AppCompatActivity {
 
     Button btnCreateAccount;
     EditText etFirstName, etLastName, etLoginID, etPassword;
-    String firstName, lastName, loginID, password;
+    SharedPreferences currentLogin;
+    ArrayList<String> currentLoginInfo;
 
-    SQLiteDatabase db;
-    ContentValues cashierData;
-    DatabaseHelper dbh;
+    DatabaseDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier_account_create_activity);
 
-        cashierData = new ContentValues();
-        dbh = new DatabaseHelper(this);
+        dao = new DatabaseDAO();
 
+        currentLogin= getApplicationContext().getSharedPreferences("loginInfo", MODE_PRIVATE);
 
         etFirstName = findViewById(R.id.editTxt_cashierFirstName);
         etLastName = findViewById(R.id.editTxt_cashierLastName);
@@ -42,30 +39,25 @@ public class CashierAccountCreateActivity extends AppCompatActivity {
 
         btnCreateAccount = findViewById(R.id.btn_createCashierAccount);
 
+        currentLoginInfo = dao.accountSearch(currentLogin.getString("loginID", "failed"), CashierAccountCreateActivity.this);
+
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                firstName = etFirstName.getText().toString();
-                lastName = etLastName.getText().toString();
-                loginID = etLoginID.getText().toString();
-                password = etPassword.getText().toString();
-                String number = "1";
+                if(etLoginID.getText().toString().charAt(0) != 'C'){
+                    etLoginID.setError("Patient Account has to start with letter 'C'.");
+                }
+                else {
+                    Cashier newCashierAccount = new Cashier();
+                    newCashierAccount.setFirstName(etFirstName.getText().toString());
+                    newCashierAccount.setLastName(etLastName.getText().toString());
+                    newCashierAccount.setLoginID(etLoginID.getText().toString());
+                    newCashierAccount.setPassword(etPassword.getText().toString());
+                    newCashierAccount.setAdminID(Integer.parseInt(currentLoginInfo.get(0)));
 
-                //Insert to Database
-                db = dbh.getWritableDatabase();
-
-                cashierData.put(DatabaseTable.CashierTable.ADMIN_ID, 1);
-                cashierData.put(DatabaseTable.CashierTable.FIRST_NAME, firstName);
-                cashierData.put(DatabaseTable.CashierTable.LAST_NAME, lastName);
-                cashierData.put(DatabaseTable.CashierTable.LOGIN_ID, loginID);
-                cashierData.put(DatabaseTable.CashierTable.PASSWORD, password);
-
-                long newRowId = db.insert(DatabaseTable.CashierTable.TABLE_NAME, null, cashierData);
-                if(newRowId == -1) {
-                    Toast.makeText(getBaseContext(), "Failed", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getBaseContext(), "Saved", Toast.LENGTH_SHORT).show();
+                    //Insert to Database
+                    dao.cashierAccountInsert(newCashierAccount, CashierAccountCreateActivity.this);
                 }
             }
         });

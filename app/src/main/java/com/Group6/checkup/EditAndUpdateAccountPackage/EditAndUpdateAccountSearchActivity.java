@@ -48,7 +48,13 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
                 }else {
                     listItem = dao.accountSearch(editTxtLoginID.getText().toString(), EditAndUpdateAccountSearchActivity.this);
                     if(listItem.size() > 0) {
-                        loginID = (listItem.get(3));
+                        if(listItem.get(5).equals("admin") || listItem.get(6).equals("cashier")){
+                            loginID = (listItem.get(3));
+                        }
+                        else if(listItem.get(9).equals("doctor")|| listItem.get(11).equals("patient")){
+                            loginID = (listItem.get(4));
+                        }
+
                         firstLetter = (loginID.substring(0, 1));
                         String[] list = {loginID};
                         ArrayAdapter adapter = new ArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, android.R.id.text1, list);

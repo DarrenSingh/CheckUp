@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,16 +40,20 @@ public class AdminAccountCreateActivity extends AppCompatActivity {
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (etLoginID.getText().toString().charAt(0) != 'A') {
+                    etLoginID.setError("Admin Account has to start with letter 'A'.");
+                } else {
 
-                dao = new DatabaseDAO();
+                    dao = new DatabaseDAO();
 
-               Admin newAdminAccount = new Admin();
-               newAdminAccount.setFirstName(etFirstName.getText().toString());
-               newAdminAccount.setLastName(etLastName.getText().toString());
-               newAdminAccount.setLoginID(etLoginID.getText().toString());
-               newAdminAccount.setPassword(etPassword.getText().toString());
+                    Admin newAdminAccount = new Admin();
+                    newAdminAccount.setFirstName(etFirstName.getText().toString());
+                    newAdminAccount.setLastName(etLastName.getText().toString());
+                    newAdminAccount.setLoginID(etLoginID.getText().toString());
+                    newAdminAccount.setPassword(etPassword.getText().toString());
 
-               dao.adminAccountInsert(newAdminAccount, AdminAccountCreateActivity.this);
+                    dao.adminAccountInsert(newAdminAccount, AdminAccountCreateActivity.this);
+                }
             }
         });
     }
