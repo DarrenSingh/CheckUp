@@ -6,4 +6,5 @@
     <string name="msg">This is a short message.</string>
     <string name="image">An Image</string>
     <string name="btnSend">SEND</string>
+    <string name="message_hint">Write a message</string>
 </resources>
