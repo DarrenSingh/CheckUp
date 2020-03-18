@@ -50,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //Foreign key constraint
     public void onConfigure(SQLiteDatabase db) {
         super.onConfigure(db);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {

@@ -12,22 +12,24 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.Group6.checkup.DatabasePackage.DatabaseDAO;
-import com.Group6.checkup.Patient;
+import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
+import com.Group6.checkup.DatabasePackage.DAOPackage.PatientDAO;
+import com.Group6.checkup.TableClassPackage.Patient;
 import com.Group6.checkup.R;
 
 import java.util.ArrayList;
 
-public class EditPatientAccountActivity extends AppCompatActivity {
+public class PatientAccountEditActivity extends AppCompatActivity {
 
     Button btnEditAccount, btnDeleteAccount;
     Spinner spinnerYesOrNo;
     EditText etFirstName, etLastName, etAddress, etPhoneNumber, etEmail, etLoginID, etPassword, etHealthCardNumber;
-    String firstName, lastName, address, phoneNumber, email, loginID, password,healthCardNumber, adminID, msp, mspStatus, rowID;
+    String firstName, lastName, address, phoneNumber, email, loginID, password, healthCardNumber, adminID, msp, mspStatus, rowID, enteredLoginID;
     String[] yesOrNo = {"yes", "no"};
-    ArrayList<String> patientInfo;
+    ArrayList<String> patientInfo, newPatientInfo;
     Intent getIntent;
-    DatabaseDAO dao;
+    AccountSearchDAO accountSearchDAO;
+    PatientDAO patientDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,12 @@ public class EditPatientAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_patient_account);
 
         getIntent = getIntent();
-        dao = new DatabaseDAO();
+        accountSearchDAO = new AccountSearchDAO();
         patientInfo = new ArrayList<>();
+        newPatientInfo = new ArrayList<>();
 
         loginID = getIntent.getStringExtra("loginID");
-        patientInfo = dao.accountSearch(loginID, EditPatientAccountActivity.this);
+        patientInfo = accountSearchDAO.accountSearch(loginID, PatientAccountEditActivity.this);
 
         rowID = patientInfo.get(0);
         firstName = patientInfo.get(1);
@@ -54,6 +57,8 @@ public class EditPatientAccountActivity extends AppCompatActivity {
         adminID = patientInfo.get(10);
 
         btnEditAccount = findViewById(R.id.btn_editPatientAccount);
+        btnDeleteAccount = findViewById(R.id.btn_deletePatientAccount);
+
         spinnerYesOrNo = findViewById(R.id.spinner_editPatientMSPStatus);
 
         etFirstName = findViewById(R.id.editTxt_editPatientFirstName);
@@ -105,37 +110,53 @@ public class EditPatientAccountActivity extends AppCompatActivity {
                 address = etAddress.getText().toString();
                 phoneNumber = etPhoneNumber.getText().toString();
                 email = etEmail.getText().toString();
-                loginID = etLoginID.getText().toString();
+                enteredLoginID = etLoginID.getText().toString();
                 password = etPassword.getText().toString();
                 healthCardNumber = etHealthCardNumber.getText().toString();
                 msp = spinnerYesOrNo.getSelectedItem().toString();
-                if(msp.equals("yes")){
-                    mspStatus = "true";
-                }else{
-                    mspStatus = "false";
+
+                newPatientInfo = accountSearchDAO.accountSearch(enteredLoginID, PatientAccountEditActivity.this);
+
+                //Edit loginID validation
+                if (loginID.charAt(0) != 'P') {
+                    etLoginID.setError("Patient Account has to start with letter 'P'.");
+                }
+                if (!enteredLoginID.equals(loginID) && newPatientInfo.size() > 0) {
+                    etLoginID.setError("Login ID is already exists");
                 }
 
-                //Update to Database;
-                Patient updatePatient = new Patient();
-                updatePatient.setPatientID(Integer.parseInt(rowID));
-                updatePatient.setFirstName(firstName);
-                updatePatient.setLastName(lastName);
-                updatePatient.setAddress(address);
-                updatePatient.setLoginID(loginID);
-                updatePatient.setPassword(password);
-                updatePatient.setMspStatus(mspStatus);
-                updatePatient.setPhoneNumber(phoneNumber);
-                updatePatient.setHealthCareCardNumber(healthCardNumber);
-                updatePatient.setEmailAddress(email);
+                //If user input pass the validation, edit the data.
+                if (loginID.charAt(0) == 'P' && enteredLoginID.equals(loginID)) {
 
-                dao.patientAccountEdit(updatePatient, EditPatientAccountActivity.this);
+                    if (msp.equals("yes")) {
+                        mspStatus = "true";
+                    } else {
+                        mspStatus = "false";
+                    }
+
+                    //Update to Database;
+                    Patient updatePatient = new Patient();
+                    updatePatient.setPatientID(Integer.parseInt(rowID));
+                    updatePatient.setFirstName(firstName);
+                    updatePatient.setLastName(lastName);
+                    updatePatient.setAddress(address);
+                    updatePatient.setLoginID(loginID);
+                    updatePatient.setPassword(password);
+                    updatePatient.setMspStatus(mspStatus);
+                    updatePatient.setPhoneNumber(phoneNumber);
+                    updatePatient.setHealthCareCardNumber(healthCardNumber);
+                    updatePatient.setEmailAddress(email);
+
+                    patientDAO.patientAccountEdit(updatePatient, PatientAccountEditActivity.this);
+                }
             }
         });
 
+        //Delete button
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao.patientAccountDelete(Integer.parseInt(rowID), EditPatientAccountActivity.this);
+                patientDAO.patientAccountDelete(Integer.parseInt(rowID), PatientAccountEditActivity.this);
             }
         });
 

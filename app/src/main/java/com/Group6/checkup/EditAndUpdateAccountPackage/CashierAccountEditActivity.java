@@ -8,20 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.Group6.checkup.Cashier;
-import com.Group6.checkup.DatabasePackage.DatabaseDAO;
+import com.Group6.checkup.TableClassPackage.Cashier;
+import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
+import com.Group6.checkup.DatabasePackage.DAOPackage.CashierDAO;
 import com.Group6.checkup.R;
 
 import java.util.ArrayList;
 
-public class EditCashierAccountActivity extends AppCompatActivity {
+public class CashierAccountEditActivity extends AppCompatActivity {
 
     Button btnEditAccount, btnDeleteAccount;
     EditText etFirstName, etLastName, etLoginID, etPassword;
-    String firstName, lastName, loginID, password, rowID, adminID;
+    String firstName, lastName, loginID, password, rowID, adminID, enteredLoginID;
     Intent getIntent;
-    DatabaseDAO dao;
-    ArrayList<String> cashierInfo;
+    AccountSearchDAO accountSearchDAO;
+    CashierDAO cashierDAO;
+    ArrayList<String> cashierInfo, newCashierInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,14 @@ public class EditCashierAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_cashier_account);
 
         getIntent = getIntent();
-        dao = new DatabaseDAO();
+        accountSearchDAO = new AccountSearchDAO();
+        cashierDAO = new CashierDAO();
+
         cashierInfo = new ArrayList<>();
+        newCashierInfo = new ArrayList<>();
 
         loginID = getIntent.getStringExtra("loginID");
-        cashierInfo = dao.accountSearch(loginID, EditCashierAccountActivity.this);
+        cashierInfo = accountSearchDAO.accountSearch(loginID, CashierAccountEditActivity.this);
 
         rowID = cashierInfo.get(0);
         firstName = cashierInfo.get(1);
@@ -61,25 +66,40 @@ public class EditCashierAccountActivity extends AppCompatActivity {
 
                 firstName = etFirstName.getText().toString();
                 lastName = etLastName.getText().toString();
-                loginID = etLoginID.getText().toString();
+                enteredLoginID = etLoginID.getText().toString();
                 password = etPassword.getText().toString();
 
-                //Insert to Database
-                Cashier updateCashier = new Cashier();
-                updateCashier.setCashierID(Integer.parseInt(rowID));
-                updateCashier.setFirstName(firstName);
-                updateCashier.setLastName(lastName);
-                updateCashier.setLoginID(loginID);
-                updateCashier.setPassword(password);
+                newCashierInfo = accountSearchDAO.accountSearch(enteredLoginID, CashierAccountEditActivity.this);
 
-                dao.cashierAccountEdit(updateCashier, EditCashierAccountActivity.this);
+                //Edit loginID validation
+                if (loginID.charAt(0) != 'C') {
+                    etLoginID.setError("Cashier Account has to start with letter 'C'.");
+                }
+
+                if (!enteredLoginID.equals(loginID) && newCashierInfo.size() > 0) {
+                    etLoginID.setError("Login ID is already exists");
+                }
+
+                //If user input pass the validation, edit the data.
+                if (loginID.charAt(0) == 'C' && enteredLoginID.equals(loginID)) {
+
+                    Cashier updateCashier = new Cashier();
+                    updateCashier.setCashierID(Integer.parseInt(rowID));
+                    updateCashier.setFirstName(firstName);
+                    updateCashier.setLastName(lastName);
+                    updateCashier.setLoginID(loginID);
+                    updateCashier.setPassword(password);
+
+                    cashierDAO.cashierAccountEdit(updateCashier, CashierAccountEditActivity.this);
+                }
             }
         });
 
+        //Delete button
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao.cashierAccountDelete(Integer.parseInt(rowID), EditCashierAccountActivity.this);
+                cashierDAO.cashierAccountDelete(Integer.parseInt(rowID), CashierAccountEditActivity.this);
             }
         });
     }

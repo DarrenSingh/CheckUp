@@ -12,8 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.Group6.checkup.DatabasePackage.DatabaseDAO;
-import com.Group6.checkup.Patient;
+import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
+import com.Group6.checkup.DatabasePackage.DAOPackage.PatientDAO;
+import com.Group6.checkup.TableClassPackage.Patient;
 import com.Group6.checkup.R;
 
 import java.util.ArrayList;
@@ -25,16 +26,18 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
     EditText etFirstName, etLastName, etAddress, etPhoneNumber, etEmail, etLoginID, etPassword, etHealthCardNumber;
     String msp, mspStatus;
     String[] yesOrNo = {"yes", "no"};
-    DatabaseDAO dao;
+    PatientDAO patientDAO;
+    AccountSearchDAO accountSearchDAO;
     SharedPreferences currentLogin;
-    ArrayList<String> currentLoginInfo;
+    ArrayList<String> currentLoginInfo, patientAccountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_account_create);
 
-        dao = new DatabaseDAO();
+        patientDAO = new PatientDAO();
+        accountSearchDAO = new AccountSearchDAO();
 
         currentLogin = getApplicationContext().getSharedPreferences("loginInfo", MODE_PRIVATE);
 
@@ -54,7 +57,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerYesOrNo.setAdapter(adapter);
 
-        currentLoginInfo = dao.accountSearch(currentLogin.getString("loginID", "failed"), PatientAccountCreateActivity.this);
+        currentLoginInfo = accountSearchDAO.accountSearch(currentLogin.getString("loginID", "failed"), PatientAccountCreateActivity.this);
 
 
         spinnerYesOrNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -69,7 +72,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                     etHealthCardNumber.setEnabled(false);
                 }
             }
-
+            
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Toast.makeText(getBaseContext(), "Please choose MSP Status", Toast.LENGTH_SHORT).show();
@@ -79,9 +82,25 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                patientAccountInfo = new ArrayList<String>();
+
+                //Account Search and check current loginID status.
+                patientAccountInfo = accountSearchDAO.accountSearch(etLoginID.getText().toString(), PatientAccountCreateActivity.this);
+
+                //Searching and finding the data that has the same loginID.
                 if (etLoginID.getText().toString().charAt(0) != 'P') {
                     etLoginID.setError("Patient Account has to start with letter 'P'.");
-                } else {
+                }
+
+                //LoginID existence validation
+                if (0 < patientAccountInfo.size()) {
+                    etLoginID.setError("Login Id is already exists");
+                }
+
+                //If user Input pass the validation, insert to database.
+                if (etLoginID.getText().toString().charAt(0) == 'P' && 0 == patientAccountInfo.size()) {
+
                     msp = spinnerYesOrNo.getSelectedItem().toString();
 
                     if (msp.equals("yes")) {
@@ -90,6 +109,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                         mspStatus = "false";
                     }
 
+                    //Creating adminDAO Object.
                     Patient newPatient = new Patient();
                     newPatient.setFirstName(etFirstName.getText().toString());
                     newPatient.setLastName(etLastName.getText().toString());
@@ -103,7 +123,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                     newPatient.setAdminID(Integer.parseInt(currentLoginInfo.get(0)));
 
                     //Insert to Database;
-                    dao.patientAccountInsert(newPatient, PatientAccountCreateActivity.this);
+                    patientDAO.patientAccountInsert(newPatient, PatientAccountCreateActivity.this);
                 }
             }
         });

@@ -16,7 +16,7 @@ public class AccountTypeOptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_type_option);
 
     }
-
+    //Button click move to corresponding activities
     public void buttonClicked(View view) {
         if (view.getId() == R.id.btn_toAdminAccountCreateActivity) {
             startActivity(new Intent(AccountTypeOptionActivity.this, AdminAccountCreateActivity.class));

@@ -2,6 +2,7 @@ package com.Group6.checkup.DatabasePackage;
 
 public class DatabaseEntries {
 
+    //Admin table creating query.
     public static final String SQL_ADMIN_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL)",
             DatabaseTable.AdminTable.TABLE_NAME,
             DatabaseTable.AdminTable._ID,
@@ -11,6 +12,7 @@ public class DatabaseEntries {
             DatabaseTable.AdminTable.PASSWORD
     );
 
+    //Patient table creating query.
     public static final String SQL_PATIENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (adminID) REFERENCES Admin (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.PatientTable.TABLE_NAME,
             DatabaseTable.PatientTable._ID,
@@ -26,6 +28,7 @@ public class DatabaseEntries {
             DatabaseTable.PatientTable.ADMIN_ID
     );
 
+    //Doctor table creating query.
     public static final String SQL_DOCTOR_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (adminID) REFERENCES Admin(_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.DoctorTable.TABLE_NAME,
             DatabaseTable.DoctorTable._ID,
@@ -39,6 +42,7 @@ public class DatabaseEntries {
             DatabaseTable.DoctorTable.ADMIN_ID
     );
 
+    //Cashier table creating query.
     public static final String SQL_CASHIER_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (adminID) REFERENCES Admin (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.CashierTable.TABLE_NAME,
             DatabaseTable.CashierTable._ID,
@@ -49,7 +53,8 @@ public class DatabaseEntries {
             DatabaseTable.CashierTable.ADMIN_ID
     );
 
-    public static final String SQL_INVOICE_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s REAL NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (cashierID) REFERENCES Cashier (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (appointmentID) REFERENCES Appointment (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    //Invoice table creating query.
+    public static final String SQL_INVOICE_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s REAL NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (cashierID) REFERENCES Cashier (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (appointmentID) REFERENCES Appointment (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.InvoiceTable.TABLE_NAME,
             DatabaseTable.InvoiceTable._ID,
             DatabaseTable.InvoiceTable.PRICE,
@@ -62,6 +67,7 @@ public class DatabaseEntries {
             DatabaseTable.InvoiceTable.APPOINTMENT_ID
     );
 
+    //Payment_notification table creating query.
     public static final String SQL_PAYMENT_NOTIFICATION_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (cashierID) REFERENCES Cashier (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.PaymentNotificationTable.TABLE_NAME,
             DatabaseTable.PaymentNotificationTable._ID,
@@ -72,6 +78,7 @@ public class DatabaseEntries {
             DatabaseTable.PaymentNotificationTable.CASHIER_ID
     );
 
+    //Appointment table creating query.
     public static final String SQL_APPOINTMENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.AppointmentTable.TABLE_NAME,
             DatabaseTable.AppointmentTable._ID,
@@ -80,6 +87,7 @@ public class DatabaseEntries {
             DatabaseTable.AppointmentTable.DOCTOR_ID
     );
 
+    //Online_help_reply table creating query.
     public static final String SQL_ONLINE_HELP_REPLY_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.OnlineHelpReplyTable.TABLE_NAME,
             DatabaseTable.OnlineHelpReplyTable._ID,
@@ -89,7 +97,8 @@ public class DatabaseEntries {
             DatabaseTable.OnlineHelpReplyTable.DOCTOR_ID
     );
 
-    public static final String SQL_ONLINE_HELP_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION FOREIGN KEY (onlineHelpReplyID) REFERENCES Online_help (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    //Online_help table creating query.
+    public static final String SQL_ONLINE_HELP_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION FOREIGN KEY (onlineHelpReplyID) REFERENCES Online_help (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.OnlineHelpTable.TABLE_NAME,
             DatabaseTable.OnlineHelpTable._ID,
             DatabaseTable.OnlineHelpTable.MESSAGE_TITLE,
@@ -100,6 +109,7 @@ public class DatabaseEntries {
             DatabaseTable.OnlineHelpTable.ONLINE_HELP_REPLY_ID
     );
 
+    //Drop table if exists queries
     public static final String SQL_ADMIN_TABLE_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + DatabaseTable.AdminTable.TABLE_NAME;
 
     public static final String SQL_PATIENT_TABLE_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + DatabaseTable.PatientTable.TABLE_NAME;

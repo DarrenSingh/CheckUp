@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeBase">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".EditAndUpdateAccountPackage.EditCashierAccountActivity"></activity>
-        <activity android:name=".EditAndUpdateAccountPackage.EditDoctorAccountActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.EditPatientAccountActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.EditAdminAccountActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity"></activity>
+        <activity android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity" />
         <activity android:name=".CreateAccountPackage.CashierAccountCreateActivity" />
         <activity android:name=".CreateAccountPackage.DoctorAccountCreateActivity" />
         <activity android:name=".CreateAccountPackage.PatientAccountCreateActivity" />

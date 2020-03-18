@@ -1,4 +1,4 @@
-package com.Group6.checkup;
+package com.Group6.checkup.TableClassPackage;
 
 public class Doctor {
 

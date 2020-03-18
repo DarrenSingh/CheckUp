@@ -91,7 +91,7 @@ public class DatabaseTable {
         public static final String DOCTOR_ID = "doctorID";
     }
 
-    public static class OnlineHelpTable implements  BaseColumns{
+    public static class OnlineHelpTable implements BaseColumns {
         public static final String TABLE_NAME = "Online_help";
         public static final String MESSAGE_TITLE = "messageTitle";
         public static final String MESSAGE_CONTENT = "messageContent";

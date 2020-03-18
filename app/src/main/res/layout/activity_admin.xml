@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:text="Administrator"
+        android:text="@string/title_adminActivityTitle"
         android:textColor="#64B5F6"
         android:textSize="30sp"></TextView>
 
@@ -22,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-
         android:text="Welcome Administrator Name!"></TextView>
 
     <Button
@@ -31,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="Create Account"
+        android:text="@string/button_createAccountOption"
         android:textSize="20sp"></Button>
 
     <Button
@@ -40,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="Edit/Update Account Details"
+        android:text="@string/button_editUpdateAccountOption"
         android:textSize="20sp"></Button>
 
     <Button
@@ -49,16 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="View User History"
-        android:textSize="20sp"></Button>
-
-    <Button
-        android:id="@+id/btn_toAppMaintenanceActivity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="buttonClicked"
-        android:text="App Maintenance"
+        android:text="@string/button_viewUserHistoryOption"
         android:textSize="20sp"></Button>
 
     <Button
@@ -67,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="Return to log-in"
+        android:text="@string/button_returnToLoginOption"
         android:textSize="20sp"></Button>
 
 

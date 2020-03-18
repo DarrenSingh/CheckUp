@@ -8,20 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.Group6.checkup.Admin;
-import com.Group6.checkup.DatabasePackage.DatabaseDAO;
+import com.Group6.checkup.TableClassPackage.Admin;
+import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
+import com.Group6.checkup.DatabasePackage.DAOPackage.AdminDAO;
 import com.Group6.checkup.R;
 
 import java.util.ArrayList;
 
-public class EditAdminAccountActivity extends AppCompatActivity {
+public class AdminAccountEditActivity extends AppCompatActivity {
 
     Button btnEditAccount, btnDeleteAccount;
     EditText etFirstName, etLastName, etLoginID, etPassword;
-    String firstName, lastName, loginID, password, rowID;
-    ArrayList<String> adminInfo;
+    String firstName, lastName, loginID, password, rowID, enteredLoginID;
+    ArrayList<String> adminInfo, newAdminInfo;
     Intent getIntent;
-    DatabaseDAO dao;
+    AdminDAO adminDAO;
+    AccountSearchDAO accountSearchDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,15 @@ public class EditAdminAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_admin_account);
 
         getIntent = getIntent();
-        dao = new DatabaseDAO();
+
+        adminDAO = new AdminDAO();
+        accountSearchDAO = new AccountSearchDAO();
+
         adminInfo = new ArrayList<>();
+        newAdminInfo = new ArrayList<>();
 
         loginID = getIntent.getStringExtra("loginID");
-        adminInfo = dao.accountSearch(loginID, EditAdminAccountActivity.this);
+        adminInfo = accountSearchDAO.accountSearch(loginID, AdminAccountEditActivity.this);
 
         rowID = adminInfo.get(0);
         firstName = adminInfo.get(1);
@@ -56,27 +62,44 @@ public class EditAdminAccountActivity extends AppCompatActivity {
         btnEditAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 firstName = etFirstName.getText().toString();
                 lastName = etLastName.getText().toString();
-                loginID = etLoginID.getText().toString();
+                enteredLoginID = etLoginID.getText().toString();
                 password = etPassword.getText().toString();
 
-                Admin updateAdmin = new Admin();
-                updateAdmin.setAdminID(Integer.parseInt(rowID));
-                updateAdmin.setFirstName(firstName);
-                updateAdmin.setLastName(lastName);
-                updateAdmin.setLoginID(loginID);
-                updateAdmin.setPassword(password);
+                newAdminInfo = accountSearchDAO.accountSearch(enteredLoginID, AdminAccountEditActivity.this);
 
-                dao.adminAccountEdit(updateAdmin, EditAdminAccountActivity.this);
-                //update database
+                //Edit loginID validation
+                if (loginID.charAt(0) != 'A') {
+                    etLoginID.setError("Admin Account has to start with letter 'A'.");
+                }
+
+                if(!enteredLoginID.equals(loginID) && newAdminInfo.size() > 0){
+                    etLoginID.setError("Login ID is already exists");
+                }
+
+                //If user input pass the validation, edit the data.
+                if (loginID.charAt(0) == 'A' && enteredLoginID.equals(loginID)) {
+
+                    Admin updateAdmin = new Admin();
+                    updateAdmin.setAdminID(Integer.parseInt(rowID));
+                    updateAdmin.setFirstName(firstName);
+                    updateAdmin.setLastName(lastName);
+                    updateAdmin.setLoginID(loginID);
+                    updateAdmin.setPassword(password);
+
+                    adminDAO.adminAccountEdit(updateAdmin, AdminAccountEditActivity.this);
+                    //update database
+                }
             }
         });
 
+        //Delete button
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao.adminAccountDelete(Integer.parseInt(rowID), EditAdminAccountActivity.this);
+                adminDAO.adminAccountDelete(Integer.parseInt(rowID), AdminAccountEditActivity.this);
             }
         });
 
