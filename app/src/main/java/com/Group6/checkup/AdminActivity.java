@@ -12,14 +12,10 @@ import com.Group6.checkup.EditAndUpdateAccountPackage.EditAndUpdateAccountSearch
 
 public class AdminActivity extends AppCompatActivity {
 
-    DatabaseHelper dbh;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-
-        dbh = new DatabaseHelper(this);
 
     }
 

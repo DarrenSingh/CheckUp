@@ -8,10 +8,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.Group6.checkup.DatabasePackage.DatabaseHelper;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
+
+    DatabaseHelper dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +43,8 @@ public class SplashScreen extends AppCompatActivity {
         // timer will schedule the MainActivity after a delay of 5seconds.
         Timer time = new Timer();
         time.schedule(task,5000);
+
+        //allow database to create & seed
+        dbh = DatabaseHelper.getInstance(this);
     }
 }

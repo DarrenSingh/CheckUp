@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DoctorAccountEditActivity extends AppCompatActivity {
     Button btnEditAccount, btnDeleteAccount;
     EditText etFirstName, etLastName, etOfficeAddress, etPhoneNumber, etEmail, etLoginID, etPassword;
-    String firstName, lastName, officeAddress, phoneNumber, email, loginID, password, rowID, adminID, enteredLoginID;
+    String firstName, lastName, officeAddress, phoneNumber, email, loginID, password, enteredLoginID;
     Intent getIntent;
     DoctorDao doctorDao;
     Doctor doctorAccount;
@@ -43,15 +43,17 @@ public class DoctorAccountEditActivity extends AppCompatActivity {
         getIntent = getIntent();
         doctorDao = new DoctorDao(this);
 
+        doctorAccount = doctorDao.find(loginID);
+
         loginID = getIntent.getStringExtra("loginID");
 
-        etFirstName.setText(firstName);
-        etLastName.setText(lastName);
-        etOfficeAddress.setText(officeAddress);
-        etLoginID.setText(loginID);
-        etPassword.setText(password);
-        etPhoneNumber.setText(phoneNumber);
-        etEmail.setText(email);
+        etFirstName.setText(doctorAccount.getFirstName());
+        etLastName.setText(doctorAccount.getLastName());
+        etOfficeAddress.setText(doctorAccount.getOfficeAddress());
+        etLoginID.setText(doctorAccount.getLoginID());
+        etPassword.setText(doctorAccount.getPassword());
+        etPhoneNumber.setText(doctorAccount.getPhoneNumber());
+        etEmail.setText(doctorAccount.getEmailAddress());
 
         btnEditAccount.setOnClickListener(new View.OnClickListener() {
             @Override
