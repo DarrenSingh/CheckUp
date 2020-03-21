@@ -35,7 +35,7 @@ public class loginActivity extends AppCompatActivity {
 
                 }else if(id.charAt(0)=='D'||id.charAt(0)=='P'||id.charAt(0)=='A'||id.charAt(0)=='C'){
                     if(id.charAt(0)=='D'){
-                        startActivity(new Intent(loginActivity.this, doctorActivity.class));
+                        startActivity(new Intent(loginActivity.this, DoctorActivity.class));
                     }
                     if(id.charAt(0)=='P'){
                         //startActivity(new Intent(MainActivity.this, patientActivity.class));

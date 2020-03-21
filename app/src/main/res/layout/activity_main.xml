@@ -54,7 +54,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv"
-        app:layout_constraintVertical_bias="0.0"
-        style="@style/messageTextView"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv" />
+
+    <Button
+        android:id="@+id/btn_main_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="30dp"
+        android:text="Admin"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Button
+        android:id="@+id/btn_main_cashier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="CASHIER"
+        app:layout_constraintStart_toStartOf="@+id/btn_main_admin"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_admin" />
+
+    <Button
+        android:id="@+id/btn_main_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="DOCTOR"
+        app:layout_constraintStart_toStartOf="@+id/btn_main_cashier"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_cashier" />
+
+    <Button
+        android:id="@+id/btn_main_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="34dp"
+        android:text="Patient"
+        app:layout_constraintStart_toStartOf="@+id/btn_main_doctor"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_doctor" />
 </androidx.constraintlayout.widget.ConstraintLayout>
