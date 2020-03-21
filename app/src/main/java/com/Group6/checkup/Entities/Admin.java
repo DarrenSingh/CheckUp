@@ -1,19 +1,37 @@
-package com.Group6.checkup.TableClassPackage;
+package com.Group6.checkup.Entities;
 
 public class Admin {
 
-    private int adminID;
+    //Attributes
+    private int ID;
     private String firstName;
     private String lastName;
     private String loginID;
     private String password;
 
-    public int getAdminID() {
-        return adminID;
+    //Constructors
+    public Admin(int ID, String firstName, String lastName, String loginID, String password) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.loginID = loginID;
+        this.password = password;
     }
 
-    public void setAdminID(int adminID) {
-        this.adminID = adminID;
+    public Admin(String firstName, String lastName, String loginID, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.loginID = loginID;
+        this.password = password;
+    }
+
+    //Getters & Setters
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getFirstName() {

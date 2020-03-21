@@ -1,7 +1,5 @@
 package com.Group6.checkup.EditAndUpdateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,49 +10,29 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
-import com.Group6.checkup.DatabasePackage.DAOPackage.PatientDAO;
-import com.Group6.checkup.TableClassPackage.Patient;
-import com.Group6.checkup.R;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.PatientDao;
 
 public class PatientAccountEditActivity extends AppCompatActivity {
 
     Button btnEditAccount, btnDeleteAccount;
     Spinner spinnerYesOrNo;
     EditText etFirstName, etLastName, etAddress, etPhoneNumber, etEmail, etLoginID, etPassword, etHealthCardNumber;
-    String firstName, lastName, address, phoneNumber, email, loginID, password, healthCardNumber, adminID, msp, mspStatus, rowID, enteredLoginID;
+    String firstName, lastName, address, phoneNumber, email, loginID, password, rowID, enteredLoginID;
+    boolean msp;
+    int healthCardNumber;
     String[] yesOrNo = {"yes", "no"};
-    ArrayList<String> patientInfo, newPatientInfo;
     Intent getIntent;
-    AccountSearchDAO accountSearchDAO;
-    PatientDAO patientDAO;
+    PatientDao patientDao;
+    Patient patientAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_patient_account);
-
-        getIntent = getIntent();
-        accountSearchDAO = new AccountSearchDAO();
-        patientInfo = new ArrayList<>();
-        newPatientInfo = new ArrayList<>();
-
-        loginID = getIntent.getStringExtra("loginID");
-        patientInfo = accountSearchDAO.accountSearch(loginID, PatientAccountEditActivity.this);
-
-        rowID = patientInfo.get(0);
-        firstName = patientInfo.get(1);
-        lastName = patientInfo.get(2);
-        address = patientInfo.get(3);
-        loginID = patientInfo.get(4);
-        password = patientInfo.get(5);
-        mspStatus = patientInfo.get(6);
-        phoneNumber = patientInfo.get(7);
-        healthCardNumber = patientInfo.get(8);
-        email = patientInfo.get(9);
-        adminID = patientInfo.get(10);
 
         btnEditAccount = findViewById(R.id.btn_editPatientAccount);
         btnDeleteAccount = findViewById(R.id.btn_deletePatientAccount);
@@ -70,16 +48,24 @@ public class PatientAccountEditActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.editTxt_editPatientPassword);
         etHealthCardNumber = findViewById(R.id.editTxt_editPatientHealthCardNumber);
 
-        etFirstName.setText(firstName);
-        etLastName.setText(lastName);
-        etAddress.setText(address);
-        etPhoneNumber.setText(phoneNumber);
-        etEmail.setText(email);
-        etLoginID.setText(loginID);
-        etPassword.setText(password);
-        etHealthCardNumber.setText(healthCardNumber);
+        getIntent = getIntent();
+        patientDao = new PatientDao(this);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, yesOrNo);
+        loginID = getIntent.getStringExtra("loginID");
+
+        //TODO handle exception
+        patientAccount = patientDao.find(loginID);
+
+        etFirstName.setText(patientAccount.getFirstName());
+        etLastName.setText(patientAccount.getLastName());
+        etAddress.setText(patientAccount.getAddress());
+        etPhoneNumber.setText(patientAccount.getPhoneNumber());
+        etEmail.setText(patientAccount.getEmailAddress());
+        etLoginID.setText(patientAccount.getLoginID());
+        etPassword.setText(patientAccount.getPassword());
+        etHealthCardNumber.setText(patientAccount.getHealthCareCardNumber());
+
+        ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, yesOrNo);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerYesOrNo.setAdapter(adapter);
 
@@ -112,42 +98,35 @@ public class PatientAccountEditActivity extends AppCompatActivity {
                 email = etEmail.getText().toString();
                 enteredLoginID = etLoginID.getText().toString();
                 password = etPassword.getText().toString();
-                healthCardNumber = etHealthCardNumber.getText().toString();
-                msp = spinnerYesOrNo.getSelectedItem().toString();
+                healthCardNumber = Integer.parseInt(etHealthCardNumber.getText().toString());
+                msp = (spinnerYesOrNo.getSelectedItem().toString() == "yes");
 
-                newPatientInfo = accountSearchDAO.accountSearch(enteredLoginID, PatientAccountEditActivity.this);
+                patientAccount.setFirstName(firstName);
+                patientAccount.setLastName(lastName);
+                patientAccount.setAddress(address);
+                patientAccount.setPhoneNumber(phoneNumber);
+                patientAccount.setEmailAddress(email);
+                patientAccount.setLoginID(loginID);
+                patientAccount.setPassword(password);
+                patientAccount.setHealthCareCardNumber(healthCardNumber);
+                patientAccount.setMspStatus(msp);
+
 
                 //Edit loginID validation
                 if (loginID.charAt(0) != 'P') {
                     etLoginID.setError("Patient Account has to start with letter 'P'.");
-                }
-                if (!enteredLoginID.equals(loginID) && newPatientInfo.size() > 0) {
-                    etLoginID.setError("Login ID is already exists");
-                }
 
-                //If user input pass the validation, edit the data.
-                if (loginID.charAt(0) == 'P' && enteredLoginID.equals(loginID)) {
-
-                    if (msp.equals("yes")) {
-                        mspStatus = "true";
-                    } else {
-                        mspStatus = "false";
+                    if (patientDao.exists(loginID)) {
+                        etLoginID.setError("Login ID is already exists");
                     }
-
-                    //Update to Database;
-                    Patient updatePatient = new Patient();
-                    updatePatient.setPatientID(Integer.parseInt(rowID));
-                    updatePatient.setFirstName(firstName);
-                    updatePatient.setLastName(lastName);
-                    updatePatient.setAddress(address);
-                    updatePatient.setLoginID(loginID);
-                    updatePatient.setPassword(password);
-                    updatePatient.setMspStatus(mspStatus);
-                    updatePatient.setPhoneNumber(phoneNumber);
-                    updatePatient.setHealthCareCardNumber(healthCardNumber);
-                    updatePatient.setEmailAddress(email);
-
-                    patientDAO.patientAccountEdit(updatePatient, PatientAccountEditActivity.this);
+                } else{
+                    //update database
+                    if(patientDao.insert(patientAccount)) {
+                        Toast.makeText(PatientAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(PatientAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                    } else {
+                        Toast.makeText(PatientAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -156,7 +135,13 @@ public class PatientAccountEditActivity extends AppCompatActivity {
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                patientDAO.patientAccountDelete(Integer.parseInt(rowID), PatientAccountEditActivity.this);
+
+                if(patientDao.delete(loginID)) {
+                    Toast.makeText(PatientAccountEditActivity.this, "Account Deleted", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PatientAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                } else {
+                    Toast.makeText(PatientAccountEditActivity.this, "Unable to Delete Account", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

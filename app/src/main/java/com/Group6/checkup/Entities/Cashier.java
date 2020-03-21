@@ -1,20 +1,40 @@
-package com.Group6.checkup.TableClassPackage;
+package com.Group6.checkup.Entities;
 
 public class Cashier {
 
-    private int cashierID;
+    //Attributes
+    private int ID;
     private String firstName;
     private String lastName;
     private String loginID;
     private String password;
     private int adminID;
 
-    public int getCashierID() {
-        return cashierID;
+    //Constructors
+    public Cashier(int ID, String firstName, String lastName, String loginID, String password, int adminID) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.loginID = loginID;
+        this.password = password;
+        this.adminID = adminID;
     }
 
-    public void setCashierID(int cashierID) {
-        this.cashierID = cashierID;
+    public Cashier(String firstName, String lastName, String loginID, String password, int adminID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.loginID = loginID;
+        this.password = password;
+        this.adminID = adminID;
+    }
+
+    //Getters & Setters
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getFirstName() {

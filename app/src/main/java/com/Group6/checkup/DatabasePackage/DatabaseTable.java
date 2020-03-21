@@ -71,7 +71,7 @@ public class DatabaseTable {
         public static final String TABLE_NAME = "Payment_notification";
         public static final String NOTIFICATION_MESSAGE_TITLE = "notificationMessageTitle";
         public static final String NOTIFICATION_MESSAGE = "notificationMessage";
-        public static final String SENT_DATE_Time = "sentDateTime";
+        public static final String SENT_DATE_TIME = "sentDateTime";
         public static final String PATIENT_ID = "patientID";
         public static final String CASHIER_ID = "cashierID";
     }

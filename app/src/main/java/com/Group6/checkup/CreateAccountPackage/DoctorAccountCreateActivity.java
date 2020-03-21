@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
-import com.Group6.checkup.DatabasePackage.DAOPackage.DoctorDAO;
-import com.Group6.checkup.TableClassPackage.Doctor;
+import com.Group6.checkup.Utils.Dao.DoctorDao;
+import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.R;
 
 import java.util.ArrayList;
@@ -18,8 +18,6 @@ import java.util.ArrayList;
 public class DoctorAccountCreateActivity extends AppCompatActivity {
     Button btnCreateAccount;
     EditText etFirstName, etLastName, etOfficeAddress, etPhoneNumber, etEmail, etLoginID, etPassword;
-    AccountSearchDAO accountSearchDAO;
-    DoctorDAO doctorDAO;
     SharedPreferences currentLogin;
     ArrayList<String> currentLoginInfo, doctorAccountInfo;
 
@@ -27,12 +25,6 @@ public class DoctorAccountCreateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_account_create);
-
-        accountSearchDAO = new AccountSearchDAO();
-        doctorDAO = new DoctorDAO();
-
-        //Shared Preference to check loginStatus.
-        currentLogin = getApplicationContext().getSharedPreferences("loginInfo", MODE_PRIVATE);
 
         btnCreateAccount = findViewById(R.id.btn_createDoctorAccount);
 
@@ -44,45 +36,41 @@ public class DoctorAccountCreateActivity extends AppCompatActivity {
         etLoginID = findViewById(R.id.editTxt_doctorLoginID);
         etPassword = findViewById(R.id.editTxt_doctorPassword);
 
-        //Account Search and check current loginID status.
-        currentLoginInfo = accountSearchDAO.accountSearch(currentLogin.getString("loginID", "failed"), DoctorAccountCreateActivity.this);
-
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                doctorAccountInfo = new ArrayList<String>();
+                DoctorDao doctorDao = new DoctorDao(getApplicationContext());
 
                 //Searching and finding the data that has the same loginID.
-                doctorAccountInfo = accountSearchDAO.accountSearch(etLoginID.getText().toString(), DoctorAccountCreateActivity.this);
-
-                //Searching and finding the data that has the same loginID.
-                if (etLoginID.getText().toString().charAt(0) != 'D') {
+                if (etLoginID.getText().toString().charAt(0) == 'D') {
                     etLoginID.setError("Patient Account has to start with letter 'D'.");
-                }
+                } else {
+                    //LoginID existence validation
+                    if (doctorDao.exists(etLoginID.getText().toString())) {
 
-                //LoginID existence validation
-                if (0 < doctorAccountInfo.size()) {
-                    etLoginID.setError("Login Id is already exists");
-                }
+                        Toast.makeText(DoctorAccountCreateActivity.this, "Login ID taken", Toast.LENGTH_SHORT).show();
 
-                //If user Input pass the validation, insert to database.
-                if (etLoginID.getText().toString().charAt(0) == 'D' && 0 == doctorAccountInfo.size()) {
+                    } else {
 
-                    //Creating new Doctor class object.
-                    Doctor newDoctor = new Doctor();
-                    newDoctor.setFirstName(etFirstName.getText().toString());
-                    newDoctor.setLastName(etLastName.getText().toString());
-                    newDoctor.setOfficeAddress(etOfficeAddress.getText().toString());
-                    newDoctor.setPhoneNumber(etPhoneNumber.getText().toString());
-                    newDoctor.setEmailAddress(etEmail.getText().toString());
-                    newDoctor.setLoginID(etLoginID.getText().toString());
-                    newDoctor.setPassword(etPassword.getText().toString());
-                    newDoctor.setAdminID(Integer.parseInt(currentLoginInfo.get(0)));
+                        boolean inserted = doctorDao.insert(new Doctor(
+                                etFirstName.getText().toString(),
+                                etLastName.getText().toString(),
+                                etOfficeAddress.getText().toString(),
+                                etLoginID.getText().toString(),
+                                etPassword.getText().toString(),
+                                etPhoneNumber.getText().toString(),
+                                etEmail.getText().toString(),
+                                Integer.parseInt(currentLoginInfo.get(0))
+                        ));
 
-                    //Call admin account insert class from adminDAO, and pass the object.
-                    doctorDAO.doctorAccountInsert(newDoctor, DoctorAccountCreateActivity.this);
+                        //Give (un)successful prompt
+                        if (inserted)
+                            Toast.makeText(DoctorAccountCreateActivity.this, etLoginID.getText().toString() + " created", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(DoctorAccountCreateActivity.this, "Unable to Create Account", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
             }
         });

@@ -1,20 +1,40 @@
-package com.Group6.checkup.TableClassPackage;
+package com.Group6.checkup.Entities;
 
 public class PaymentNotification {
 
-    private int paymentNotificationID;
+    //Attributes
+    private int ID;
     private String messageTitle;
     private String message;
     private String SentDateTime;
     private int patientID;
     private int cashierID;
 
-    public int getPaymentNotificationID() {
-        return paymentNotificationID;
+    //Constructors
+    public PaymentNotification(int ID, String messageTitle, String message, String sentDateTime, int patientID, int cashierID) {
+        this.ID = ID;
+        this.messageTitle = messageTitle;
+        this.message = message;
+        SentDateTime = sentDateTime;
+        this.patientID = patientID;
+        this.cashierID = cashierID;
     }
 
-    public void setPaymentNotificationID(int paymentNotificationID) {
-        this.paymentNotificationID = paymentNotificationID;
+    public PaymentNotification(String messageTitle, String message, String sentDateTime, int patientID, int cashierID) {
+        this.messageTitle = messageTitle;
+        this.message = message;
+        SentDateTime = sentDateTime;
+        this.patientID = patientID;
+        this.cashierID = cashierID;
+    }
+
+    //Getters & Setters
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getMessageTitle() {

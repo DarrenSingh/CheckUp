@@ -1,19 +1,18 @@
 package com.Group6.checkup.EditAndUpdateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.Group6.checkup.TableClassPackage.Cashier;
-import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
-import com.Group6.checkup.DatabasePackage.DAOPackage.CashierDAO;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.CashierDao;
 
-import java.util.ArrayList;
 
 public class CashierAccountEditActivity extends AppCompatActivity {
 
@@ -21,76 +20,61 @@ public class CashierAccountEditActivity extends AppCompatActivity {
     EditText etFirstName, etLastName, etLoginID, etPassword;
     String firstName, lastName, loginID, password, rowID, adminID, enteredLoginID;
     Intent getIntent;
-    AccountSearchDAO accountSearchDAO;
-    CashierDAO cashierDAO;
-    ArrayList<String> cashierInfo, newCashierInfo;
+    CashierDao cashierDao;
+    Cashier cashierAccount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_cashier_account);
 
-        getIntent = getIntent();
-        accountSearchDAO = new AccountSearchDAO();
-        cashierDAO = new CashierDAO();
-
-        cashierInfo = new ArrayList<>();
-        newCashierInfo = new ArrayList<>();
-
-        loginID = getIntent.getStringExtra("loginID");
-        cashierInfo = accountSearchDAO.accountSearch(loginID, CashierAccountEditActivity.this);
-
-        rowID = cashierInfo.get(0);
-        firstName = cashierInfo.get(1);
-        lastName = cashierInfo.get(2);
-        loginID = cashierInfo.get(3);
-        password = cashierInfo.get(4);
-        adminID = cashierInfo.get(5);
 
         etFirstName = findViewById(R.id.editTxt_editCashierFirstName);
         etLastName = findViewById(R.id.editTxt_editCashierLastName);
         etLoginID = findViewById(R.id.editTxt_editCashierLoginID);
         etPassword = findViewById(R.id.editTxt_editCashierPassword);
 
-        etFirstName.setText(firstName);
-        etLastName.setText(lastName);
-        etLoginID.setText(loginID);
-        etPassword.setText(password);
-
         btnEditAccount = findViewById(R.id.btn_editCashierAccount);
         btnDeleteAccount = findViewById(R.id.btn_deleteCashierAccount);
+
+        getIntent = getIntent();
+        cashierDao = new CashierDao(this);
+
+        loginID = getIntent.getStringExtra("loginID");
+
+        //TODO handle exception
+        cashierAccount = cashierDao.find(loginID);
+
+        etFirstName.setText(cashierAccount.getFirstName());
+        etLastName.setText(cashierAccount.getLastName());
+        etLoginID.setText(cashierAccount.getLoginID());
+        etPassword.setText(cashierAccount.getPassword());
 
         btnEditAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                firstName = etFirstName.getText().toString();
-                lastName = etLastName.getText().toString();
-                enteredLoginID = etLoginID.getText().toString();
-                password = etPassword.getText().toString();
-
-                newCashierInfo = accountSearchDAO.accountSearch(enteredLoginID, CashierAccountEditActivity.this);
+                cashierAccount.setFirstName(etFirstName.getText().toString());
+                cashierAccount.setLastName(etLastName.getText().toString());
+                cashierAccount.setLoginID(etLoginID.getText().toString());
+                cashierAccount.setPassword(etPassword.getText().toString());
 
                 //Edit loginID validation
                 if (loginID.charAt(0) != 'C') {
                     etLoginID.setError("Cashier Account has to start with letter 'C'.");
-                }
 
-                if (!enteredLoginID.equals(loginID) && newCashierInfo.size() > 0) {
-                    etLoginID.setError("Login ID is already exists");
-                }
-
-                //If user input pass the validation, edit the data.
-                if (loginID.charAt(0) == 'C' && enteredLoginID.equals(loginID)) {
-
-                    Cashier updateCashier = new Cashier();
-                    updateCashier.setCashierID(Integer.parseInt(rowID));
-                    updateCashier.setFirstName(firstName);
-                    updateCashier.setLastName(lastName);
-                    updateCashier.setLoginID(loginID);
-                    updateCashier.setPassword(password);
-
-                    cashierDAO.cashierAccountEdit(updateCashier, CashierAccountEditActivity.this);
+                    if (cashierDao.exists(etLoginID.getText().toString())) {
+                        etLoginID.setError("Login ID is already exists");
+                    }
+                } else {
+                    //update database
+                    if(cashierDao.insert(cashierAccount)) {
+                        Toast.makeText(CashierAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(CashierAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                    } else {
+                        Toast.makeText(CashierAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -99,8 +83,16 @@ public class CashierAccountEditActivity extends AppCompatActivity {
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cashierDAO.cashierAccountDelete(Integer.parseInt(rowID), CashierAccountEditActivity.this);
+
+                if(cashierDao.delete(loginID)) {
+                    Toast.makeText(CashierAccountEditActivity.this, "Account Deleted", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(CashierAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                } else {
+                    Toast.makeText(CashierAccountEditActivity.this, "Unable to Delete Account", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+
     }
 }

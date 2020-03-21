@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.AdminDao;
+import com.Group6.checkup.Utils.Dao.CashierDao;
+import com.Group6.checkup.Utils.Dao.DoctorDao;
+import com.Group6.checkup.Utils.Dao.PatientDao;
 
 import java.util.ArrayList;
 
@@ -23,8 +26,6 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
     Button btnSearch;
     EditText editTxtLoginID;
     ListView listView;
-    ArrayList<String> listItem;
-    AccountSearchDAO dao;
     String firstLetter, loginID;
     Intent nextActivity;
 
@@ -36,8 +37,6 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
         btnSearch = findViewById(R.id.btn_accountSearch);
         editTxtLoginID = findViewById(R.id.editTxt_accountSearch);
         listView = findViewById(R.id.listView_accountSearch);
-        listItem = new ArrayList<String>();
-        dao = new AccountSearchDAO();
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,29 +47,40 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
                     editTxtLoginID.setError("Please enter the loginID");
                 } else {
 
-                    //Search from the database using loginId and return the data. Save them to array list called listItem.
-                    listItem = dao.accountSearch(editTxtLoginID.getText().toString(), EditAndUpdateAccountSearchActivity.this);
+                    boolean accountFound = false;
+                    loginID = editTxtLoginID.getText().toString();
 
-                    //If listItem size is bigger than 0 -> loginId exists.
-                    if (listItem.size() > 0) {
+                    switch (loginID.charAt(0)) {
 
-                        //Validate the type.
-                        if (listItem.get(5).equals("admin") || listItem.get(6).equals("cashier")) {
+                        case 'A':
+                            AdminDao adminDao = new AdminDao(getApplicationContext());
+                            if (adminDao.exists(loginID))
+                                accountFound = true;
+                            break;
 
-                            //Result of search and save it to loginID variable
-                            loginID = (listItem.get(3));
+                        case 'C':
+                            CashierDao cashierDao = new CashierDao((getApplicationContext()));
+                            if (cashierDao.exists(loginID))
+                                accountFound = true;
+                            break;
 
-                            //Validate the type.
-                        } else if (listItem.get(9).equals("doctor") || listItem.get(11).equals("patient")) {
+                        case 'D':
+                            DoctorDao doctorDao = new DoctorDao(getApplicationContext());
+                            if (doctorDao.exists(loginID))
+                                accountFound = true;
+                            break;
 
-                            //Result of search and save it to loginID variable
-                            loginID = (listItem.get(4));
-                        }
+                        case 'P':
+                            PatientDao patientDao = new PatientDao(getApplicationContext());
+                            if (patientDao.exists(loginID))
+                                accountFound = true;
+                            break;
 
-                        //Get the first letter to identify the account type.
-                        firstLetter = (loginID.substring(0, 1));
+                    }
 
-                        //Save the loginID to array to display into the listview.
+                    //Save the loginID to array to display into the listview.
+                    if (accountFound) {
+
                         String[] list = {loginID};
 
                         //listView adapter and set.
@@ -88,23 +98,23 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //According to first letter of the loginID, start individual activity.
-                switch (firstLetter) {
-                    case "A":
+                switch (loginID.charAt(0)) {
+                    case 'A':
                         nextActivity = new Intent(getBaseContext(), AdminAccountEditActivity.class);
                         nextActivity.putExtra("loginID", loginID);
                         startActivity(nextActivity);
                         break;
-                    case "P":
+                    case 'P':
                         nextActivity = new Intent(getBaseContext(), PatientAccountEditActivity.class);
                         nextActivity.putExtra("loginID", loginID);
                         startActivity(nextActivity);
                         break;
-                    case "D":
+                    case 'D':
                         nextActivity = new Intent(getBaseContext(), DoctorAccountEditActivity.class);
                         nextActivity.putExtra("loginID", loginID);
                         startActivity(nextActivity);
                         break;
-                    case "C":
+                    case 'C':
                         nextActivity = new Intent(getBaseContext(), CashierAccountEditActivity.class);
                         nextActivity.putExtra("loginID", loginID);
                         startActivity(nextActivity);

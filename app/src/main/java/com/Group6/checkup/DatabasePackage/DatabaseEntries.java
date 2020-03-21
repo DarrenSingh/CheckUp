@@ -73,7 +73,7 @@ public class DatabaseEntries {
             DatabaseTable.PaymentNotificationTable._ID,
             DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE_TITLE,
             DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE,
-            DatabaseTable.PaymentNotificationTable.SENT_DATE_Time,
+            DatabaseTable.PaymentNotificationTable.SENT_DATE_TIME,
             DatabaseTable.PaymentNotificationTable.PATIENT_ID,
             DatabaseTable.PaymentNotificationTable.CASHIER_ID
     );

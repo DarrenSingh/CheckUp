@@ -2,39 +2,25 @@ package com.Group6.checkup.CreateAccountPackage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.Group6.checkup.TableClassPackage.Cashier;
-import com.Group6.checkup.DatabasePackage.DAOPackage.AccountSearchDAO;
-import com.Group6.checkup.DatabasePackage.DAOPackage.CashierDAO;
+import com.Group6.checkup.Entities.Cashier;
+import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.R;
-
-import java.util.ArrayList;
 
 public class CashierAccountCreateActivity extends AppCompatActivity {
 
     Button btnCreateAccount;
     EditText etFirstName, etLastName, etLoginID, etPassword;
-    SharedPreferences currentLogin;
-    ArrayList<String> currentLoginInfo, cashierAccountInfo;
-    CashierDAO cashierDAO;
-    AccountSearchDAO accountSearchDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier_account_create_activity);
-
-        //Creating DAO Objects.
-        cashierDAO = new CashierDAO();
-        accountSearchDAO = new AccountSearchDAO();
-
-        //Shared Preference to check loginStatus.
-        currentLogin = getApplicationContext().getSharedPreferences("loginInfo", MODE_PRIVATE);
 
         etFirstName = findViewById(R.id.editTxt_cashierFirstName);
         etLastName = findViewById(R.id.editTxt_cashierLastName);
@@ -43,41 +29,41 @@ public class CashierAccountCreateActivity extends AppCompatActivity {
 
         btnCreateAccount = findViewById(R.id.btn_createCashierAccount);
 
-        //Account Search and check current loginID status.
-        currentLoginInfo = accountSearchDAO.accountSearch(currentLogin.getString("loginID", "failed"), CashierAccountCreateActivity.this);
-
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                cashierAccountInfo = new ArrayList<String>();
-
-                //Searching and finding the data that has the same loginID.
-                cashierAccountInfo = accountSearchDAO.accountSearch(etLoginID.getText().toString(), CashierAccountCreateActivity.this);
+                CashierDao cashierDao = new CashierDao(getApplicationContext());
 
                 //LoginID Validation
                 if (etLoginID.getText().toString().charAt(0) != 'C') {
                     etLoginID.setError("Patient Account has to start with letter 'C'.");
-                }
+                } else {
 
-                //LoginID existence validation
-                if (0 < cashierAccountInfo.size()) {
-                    etLoginID.setError("Login Id is already exists");
-                }
+                    if (cashierDao.exists(etLoginID.getText().toString())) {
+                        etLoginID.setError("Login Id is already exists");
+                    } else {
 
-                //If user Input pass the validation, insert to database.
-                if (etLoginID.getText().toString().charAt(0) == 'C' && 0 == cashierAccountInfo.size()) {
+                        //TODO insert adminID from session info
+                        //creating new Cashier account object.
+                        Cashier newCashierAccount = new Cashier(
+                                etFirstName.getText().toString(),
+                                etLastName.getText().toString(),
+                                etLoginID.getText().toString(),
+                                etPassword.getText().toString(),
+                                1
+                        );
 
-                    //creating new Cashier account object.
-                    Cashier newCashierAccount = new Cashier();
-                    newCashierAccount.setFirstName(etFirstName.getText().toString());
-                    newCashierAccount.setLastName(etLastName.getText().toString());
-                    newCashierAccount.setLoginID(etLoginID.getText().toString());
-                    newCashierAccount.setPassword(etPassword.getText().toString());
-                    newCashierAccount.setAdminID(Integer.parseInt(currentLoginInfo.get(0)));
+                        //Insert to Database
+                        boolean inserted = cashierDao.insert(newCashierAccount);
 
-                    //Insert to Database
-                    cashierDAO.cashierAccountInsert(newCashierAccount, CashierAccountCreateActivity.this);
+                        //Give (un)successful prompt
+                        if (inserted)
+                            Toast.makeText(CashierAccountCreateActivity.this, etLoginID.getText().toString() + " created", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(CashierAccountCreateActivity.this, "Unable to Create Account", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
             }
         });
