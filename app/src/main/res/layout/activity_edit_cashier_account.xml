@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditAndUpdateAccountPackage.CashierAccountEditActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_firstName"
+            android:textSize="20sp"></TextView>
+
+        <EditText
+            android:id="@+id/editTxt_editCashierFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_firstName"
+            android:textSize="30sp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_lastName"
+            android:textSize="20sp"></TextView>
+
+        <EditText
+            android:id="@+id/editTxt_editCashierLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_lastName"
+            android:textSize="30sp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_loginID"
+            android:textSize="20sp"></TextView>
+
+        <EditText
+            android:id="@+id/editTxt_editCashierLoginID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_loginID"
+            android:textSize="30sp"></EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_password"
+            android:textSize="20sp"></TextView>
+
+        <EditText
+            android:id="@+id/editTxt_editCashierPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_password"
+            android:textSize="30sp"></EditText>
+
+        <Button
+            android:id="@+id/btn_editCashierAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/button_edit"
+            android:textSize="30sp"></Button>
+
+        <Button
+            android:id="@+id/btn_deleteCashierAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/button_delete"
+            android:textSize="30sp"></Button>
+
+
+    </LinearLayout>
+</ScrollView>

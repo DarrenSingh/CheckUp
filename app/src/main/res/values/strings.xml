@@ -2,9 +2,37 @@
     <string name="app_name">CheckUp</string>
     <string name="logo">DPI LOGO</string>
     <string name="hey">Hello there!!</string>
-    <string name="btn">Experiment</string>
+    <string name="btn">Login Activity</string>
     <string name="msg">This is a short message.</string>
     <string name="image">An Image</string>
     <string name="btnSend">SEND</string>
     <string name="message_hint">Write a message</string>
+    <string name="text_firstName">First Name</string>
+    <string name="text_lastName">Last Name</string>
+    <string name="text_loginID">Login ID</string>
+    <string name="text_password">Password</string>
+    <string name="button_edit">Edit</string>
+    <string name="button_delete">DELETE</string>
+    <string name="text_selectAccountType">Select account type</string>
+    <string name="button_adminAccountType">Administrator Account</string>
+    <string name="button_patientAccountType">Patient Account</string>
+    <string name="button_doctorAccountType">Doctor Account</string>
+    <string name="button_cashierAccountType">Cashier Account</string>
+    <string name="title_adminActivityTitle">Administrator</string>
+    <string name="button_createAccountOption">Create Account</string>
+    <string name="button_editUpdateAccountOption">Edit/Update Account Details</string>
+    <string name="button_viewUserHistoryOption">View User History</string>
+    <string name="button_returnToLoginOption">Return to log-in</string>
+    <string name="button_accountCreate">CREATE</string>
+    <string name="text_officeAddress">Office Address</string>
+    <string name="text_phoneNumber">Phone Number</string>
+    <string name="text_email">Email</string>
+    <string name="button_searchButton">SEARCH</string>
+    <string name="text_address">Address</string>
+    <string name="text_mspCoverageQuestion">Do you have a MSP coverage?</string>
+    <string name="text_healthCardNumber">Health Card Number</string>
+    <string-array name="yes_or_No">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
 </resources>
