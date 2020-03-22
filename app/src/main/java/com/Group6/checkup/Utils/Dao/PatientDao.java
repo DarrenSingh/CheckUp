@@ -38,7 +38,7 @@ public class PatientDao extends Dao<Patient>{
                 null               // The sort order
         );
 
-        return (cursor.getCount() > -1) ? true : false;
+        return (cursor.getCount() > 0) ? true : false;
     }
 
     @Override
@@ -142,7 +142,6 @@ public class PatientDao extends Dao<Patient>{
         Long result = dbConnection.insert(DatabaseTable.PatientTable.TABLE_NAME,null,objectRecord);
 
         return (result == -1) ? false : true;
-
     }
 
     @Override

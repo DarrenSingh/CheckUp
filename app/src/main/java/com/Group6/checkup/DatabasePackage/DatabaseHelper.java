@@ -87,8 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             //Create Cashier Users
             CashierDao cashierDao = new CashierDao(null);
-            boolean cashier1 = cashierDao.insert(new Cashier("Rachel","Green","C001","password",1));
-            Log.e("Cashier1 added",String.valueOf(cashier1));
+            cashierDao.insert(new Cashier("Rachel","Green","C001","password",1));
 
             //Create Doctor Users
             DoctorDao doctorDao = new DoctorDao(null);

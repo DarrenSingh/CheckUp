@@ -37,7 +37,7 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
                 null               //sort order
         );
 
-        return cursor.getCount() > -1;
+        return (cursor.getCount() > 0) ? true : false;
     }
 
     @Override

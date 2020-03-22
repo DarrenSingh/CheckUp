@@ -39,7 +39,7 @@ public class CashierDao extends Dao<Cashier> {
                 null               //sort order
         );
 
-        return (cursor.getCount() > -1) ? true : false;
+        return (cursor.getCount() > 0) ? true : false;
     }
 
     @Override

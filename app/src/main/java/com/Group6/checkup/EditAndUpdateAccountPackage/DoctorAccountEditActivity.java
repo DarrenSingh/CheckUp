@@ -43,9 +43,9 @@ public class DoctorAccountEditActivity extends AppCompatActivity {
         getIntent = getIntent();
         doctorDao = new DoctorDao(this);
 
-        doctorAccount = doctorDao.find(loginID);
-
         loginID = getIntent.getStringExtra("loginID");
+
+        doctorAccount = doctorDao.find(loginID);
 
         etFirstName.setText(doctorAccount.getFirstName());
         etLastName.setText(doctorAccount.getLastName());

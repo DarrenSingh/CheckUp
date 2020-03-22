@@ -38,6 +38,7 @@ public class AdminDao extends Dao<Admin>{
                 null               //sort order
         );
 
+
         return (cursor.getCount() > 0) ? true : false;
     }
 
@@ -71,6 +72,7 @@ public class AdminDao extends Dao<Admin>{
                 cursor.getString(4)
         );
 
+
         return recordObject;
     }
 
@@ -103,6 +105,7 @@ public class AdminDao extends Dao<Admin>{
 
         }
 
+
         return recordObjectList;
     }
 
@@ -118,6 +121,7 @@ public class AdminDao extends Dao<Admin>{
         recordObject.put(DatabaseTable.AdminTable.PASSWORD, object.getPassword());
 
         long result = dbConnection.insert(DatabaseTable.AdminTable.TABLE_NAME, null, recordObject);
+
 
         return (result >= 0) ? true : false;
     }
@@ -143,6 +147,7 @@ public class AdminDao extends Dao<Admin>{
 
         int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME,recordObject,selection,selectionArgs);
 
+
         return (result > 0) ? true : false;
     }
 
@@ -158,6 +163,7 @@ public class AdminDao extends Dao<Admin>{
                 selection,
                 searchId
         );
+
 
         return (result > 0) ? true : false;
     }

@@ -9,13 +9,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.Group6.checkup.DatabasePackage.DatabaseHelper;
+
+
 public class MainActivity extends AppCompatActivity {
+    DatabaseHelper dbh;
     SharedPreferences loginInfo;
     SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //allow database to create & seed
+        dbh = DatabaseHelper.getInstance(this);
 
         /*ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){

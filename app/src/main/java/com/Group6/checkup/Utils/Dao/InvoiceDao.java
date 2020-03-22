@@ -37,7 +37,7 @@ public class InvoiceDao extends Dao<Invoice> {
                 null               // The sort order
         );
 
-        return (cursor.getCount() > -1) ? true : false;
+        return (cursor.getCount() > 0) ? true : false;
     }
 
     @Override

@@ -37,16 +37,6 @@ public class Doctor {
         this.adminID = adminID;
     }
 
-    public Doctor(String firstName, String lastName, String officeAddress, String loginID, String password, String phoneNumber, String emailAddress) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.officeAddress = officeAddress;
-        this.loginID = loginID;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
-    }
-
     //Getters & Setters
     public int getID() {
         return ID;

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.Group6.checkup.CreateAccountPackage.CashierAccountCreateActivity;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.Dao.AdminDao;
 import com.Group6.checkup.Utils.Dao.CashierDao;
@@ -26,7 +27,7 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
     Button btnSearch;
     EditText editTxtLoginID;
     ListView listView;
-    String firstLetter, loginID;
+    String loginID;
     Intent nextActivity;
 
     @Override
@@ -54,26 +55,22 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
 
                         case 'A':
                             AdminDao adminDao = new AdminDao(getApplicationContext());
-                            if (adminDao.exists(loginID))
-                                accountFound = true;
+                            accountFound = adminDao.exists(loginID);
                             break;
 
                         case 'C':
                             CashierDao cashierDao = new CashierDao((getApplicationContext()));
-                            if (cashierDao.exists(loginID))
-                                accountFound = true;
+                            accountFound = cashierDao.exists(loginID);
                             break;
 
                         case 'D':
                             DoctorDao doctorDao = new DoctorDao(getApplicationContext());
-                            if (doctorDao.exists(loginID))
-                                accountFound = true;
+                            accountFound = doctorDao.exists(loginID);
                             break;
 
                         case 'P':
                             PatientDao patientDao = new PatientDao(getApplicationContext());
-                            if (patientDao.exists(loginID))
-                                accountFound = true;
+                            accountFound = patientDao.exists(loginID);
                             break;
 
                     }

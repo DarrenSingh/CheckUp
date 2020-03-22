@@ -38,7 +38,8 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
                 null               //sort order
         );
 
-        return cursor.getCount() > -1;    }
+        return (cursor.getCount() > 0) ? true : false;
+    }
 
     @Override
     public PaymentNotification find(String... searchId) {
@@ -158,6 +159,7 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
 
         int result = dbConnection.delete(DatabaseTable.PaymentNotificationTable.TABLE_NAME,selection,searchId);
 
-        return result > 0;    }
+        return result > 0;
+    }
 
 }

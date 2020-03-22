@@ -37,7 +37,7 @@ public class DoctorDao extends Dao<Doctor> {
                 null               //sort order
         );
 
-        return (cursor.getCount() > -1) ? true : false;
+        return (cursor.getCount() > 0) ? true : false;
     }
 
     @Override
@@ -70,9 +70,9 @@ public class DoctorDao extends Dao<Doctor> {
                 cursor.getString(3),
                 cursor.getString(4),
                 cursor.getString(5),
+                cursor.getString(6),
                 cursor.getString(7),
-                cursor.getString(9),
-                cursor.getInt(10)
+                cursor.getInt(8)
         );
 
         return recordObject;

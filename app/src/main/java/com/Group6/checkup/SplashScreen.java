@@ -15,8 +15,6 @@ import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
 
-    DatabaseHelper dbh;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,5 @@ public class SplashScreen extends AppCompatActivity {
         Timer time = new Timer();
         time.schedule(task,5000);
 
-        //allow database to create & seed
-        dbh = DatabaseHelper.getInstance(this);
     }
 }

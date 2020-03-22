@@ -63,7 +63,7 @@ public class PatientAccountEditActivity extends AppCompatActivity {
         etEmail.setText(patientAccount.getEmailAddress());
         etLoginID.setText(patientAccount.getLoginID());
         etPassword.setText(patientAccount.getPassword());
-        etHealthCardNumber.setText(patientAccount.getHealthCareCardNumber());
+        etHealthCardNumber.setText(String.valueOf(patientAccount.getHealthCareCardNumber()));
 
         ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, yesOrNo);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
