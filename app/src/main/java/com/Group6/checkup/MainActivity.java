@@ -9,11 +9,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.Group6.checkup.DatabasePackage.DatabaseHelper;
+import com.Group6.checkup.Utils.Session;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbh;
-    SharedPreferences loginInfo;
-    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         if(actionBar != null){
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient));
         }*/
-        loginInfo = getApplicationContext().getSharedPreferences("loginInfo", MODE_PRIVATE);
-        editor = loginInfo.edit();
+
+        final Session appSession = new Session(this);
 
         Button login = findViewById(R.id.button);
         Button admin = findViewById(R.id.btn_main_admin);
@@ -39,17 +38,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,AdminActivity.class));
-                editor.putString("loginID", "Admin");
-                editor.commit();
+                appSession.setCurrentUsername("A001");
+                appSession.setUserId(1);
+
             }
         });
-      
-      
+
         cashier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CashierActivity.class));
+                appSession.setCurrentUsername("C001");
+                appSession.setUserId(1);
             }
         });
+
     }
 }

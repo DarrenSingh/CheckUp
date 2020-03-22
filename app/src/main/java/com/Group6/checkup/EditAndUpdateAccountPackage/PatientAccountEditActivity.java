@@ -79,6 +79,7 @@ public class PatientAccountEditActivity extends AppCompatActivity {
                     etHealthCardNumber.setHint("N/A");
                     etHealthCardNumber.setText("");
                     etHealthCardNumber.setEnabled(false);
+                    healthCardNumber = 0;
                 }
             }
             @Override
@@ -98,7 +99,9 @@ public class PatientAccountEditActivity extends AppCompatActivity {
                 email = etEmail.getText().toString();
                 enteredLoginID = etLoginID.getText().toString();
                 password = etPassword.getText().toString();
-                healthCardNumber = Integer.parseInt(etHealthCardNumber.getText().toString());
+                // set healthcare number to null if no value input
+                healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
+                        ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
                 msp = (spinnerYesOrNo.getSelectedItem().toString() == "yes");
 
                 patientAccount.setFirstName(firstName);

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Session;
 
 public class CashierAccountCreateActivity extends AppCompatActivity {
 
@@ -51,7 +52,7 @@ public class CashierAccountCreateActivity extends AppCompatActivity {
                                 etLastName.getText().toString(),
                                 etLoginID.getText().toString(),
                                 etPassword.getText().toString(),
-                                1
+                                new Session(getApplicationContext()).getUserId()
                         );
 
                         //Insert to Database

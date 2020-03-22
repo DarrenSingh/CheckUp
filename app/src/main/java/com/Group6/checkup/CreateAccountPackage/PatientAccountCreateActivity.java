@@ -1,6 +1,7 @@
 package com.Group6.checkup.CreateAccountPackage;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.Dao.PatientDao;
+import com.Group6.checkup.Utils.Session;
 
 public class PatientAccountCreateActivity extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
     EditText etFirstName, etLastName, etAddress, etPhoneNumber, etEmail, etLoginID, etPassword, etHealthCardNumber;
     String msp;
     boolean mspStatus;
+    int healthCardNumber = 0;
     String[] yesOrNo = {"yes", "no"};
 
     @Override
@@ -40,6 +43,8 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
         etLoginID = findViewById(R.id.editTxt_patientLoginID);
         etPassword = findViewById(R.id.editTxt_patientPassword);
         etHealthCardNumber = findViewById(R.id.editTxt_patientHealthCardNumber);
+
+        Log.e("HealthCareNumber",etHealthCardNumber.getText().toString());
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, yesOrNo);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -89,6 +94,9 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                             mspStatus = false;
                         }
 
+                        healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
+                                ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
+
                         //TODO input adminID data from session
                         //Creating patient Object.
                         Patient newPatient = new Patient(
@@ -99,9 +107,9 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                                 etPassword.getText().toString(),
                                 mspStatus,
                                 etPhoneNumber.getText().toString(),
-                                Integer.parseInt(etHealthCardNumber.getText().toString()),
+                                healthCardNumber,
                                 etEmail.getText().toString(),
-                                0
+                                new Session(getApplicationContext()).getUserId()
                         );
 
                         //Insert to Database;

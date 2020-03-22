@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Session;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class DoctorAccountCreateActivity extends AppCompatActivity {
                                 etPassword.getText().toString(),
                                 etPhoneNumber.getText().toString(),
                                 etEmail.getText().toString(),
-                                Integer.parseInt(currentLoginInfo.get(0))
+                                new Session(getApplicationContext()).getUserId()
                         ));
 
                         //Give (un)successful prompt
