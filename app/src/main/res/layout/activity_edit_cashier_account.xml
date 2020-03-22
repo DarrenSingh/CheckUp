@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".EditAndUpdateAccountPackage.EditCashierAccountActivity">
+    tools:context=".EditAndUpdateAccountPackage.CashierAccountEditActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="First Name"
-        android:textSize="20sp"></TextView>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTxt_editCashierFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="First Name"
-        android:textSize="30sp"></EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_firstName"
+            android:textSize="20sp"></TextView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Last Name"
-        android:textSize="20sp"></TextView>
+        <EditText
+            android:id="@+id/editTxt_editCashierFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_firstName"
+            android:textSize="30sp"></EditText>
 
-    <EditText
-        android:id="@+id/editTxt_editCashierLastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Last Name"
-        android:textSize="30sp"></EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_lastName"
+            android:textSize="20sp"></TextView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Login ID"
-        android:textSize="20sp"></TextView>
+        <EditText
+            android:id="@+id/editTxt_editCashierLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_lastName"
+            android:textSize="30sp"></EditText>
 
-    <EditText
-        android:id="@+id/editTxt_editCashierLoginID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="loginID"
-        android:textSize="30sp"></EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_loginID"
+            android:textSize="20sp"></TextView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Password"
-        android:textSize="20sp"></TextView>
+        <EditText
+            android:id="@+id/editTxt_editCashierLoginID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_loginID"
+            android:textSize="30sp"></EditText>
 
-    <EditText
-        android:id="@+id/editTxt_editCashierPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:textSize="30sp"></EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_password"
+            android:textSize="20sp"></TextView>
 
-    <Button
-        android:id="@+id/btn_editCashierAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="EDIT"
-        android:textSize="30sp"></Button>
+        <EditText
+            android:id="@+id/editTxt_editCashierPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_password"
+            android:textSize="30sp"></EditText>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_editCashierAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/button_edit"
+            android:textSize="30sp"></Button>
+
+        <Button
+            android:id="@+id/btn_deleteCashierAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/button_delete"
+            android:textSize="30sp"></Button>
+
+
+    </LinearLayout>
+</ScrollView>

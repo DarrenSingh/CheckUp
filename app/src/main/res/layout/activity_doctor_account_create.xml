@@ -11,102 +11,103 @@
         android:orientation="vertical"
         android:id="@+id/linearLayout_doctorAccountCreate"
         >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="First Name"
+            android:text="@string/text_firstName"
             android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/editTxt_doctorFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="First Name"
+            android:hint="@string/text_firstName"
             android:textSize="30sp"></EditText>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Last Name"
+            android:text="@string/text_lastName"
             android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/editTxt_doctorLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Last Name"
+            android:hint="@string/text_lastName"
             android:textSize="30sp"></EditText>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Office Address"
+            android:text="@string/text_officeAddress"
             android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/editTxt_doctorAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Office Address"
+            android:hint="@string/text_officeAddress"
             android:textSize="30sp"></EditText>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Phone Number"
+            android:text="@string/text_phoneNumber"
             android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/editTxt_doctorPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
+            android:hint="@string/text_phoneNumber"
             android:textSize="30sp"></EditText>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Email"
+            android:text="@string/text_email"
             android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/editTxt_doctorEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/text_email"
             android:textSize="30sp"></EditText>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Login ID"
+            android:text="@string/text_loginID"
             android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/editTxt_doctorLoginID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="loginID"
+            android:hint="@string/text_loginID"
             android:textSize="30sp"></EditText>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Password"
+            android:text="@string/text_password"
             android:textSize="20sp"></TextView>
 
         <EditText
             android:id="@+id/editTxt_doctorPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/text_password"
             android:textSize="30sp"></EditText>
 
         <Button
@@ -114,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="CREATE"
+            android:text="@string/button_accountCreate"
             android:textSize="30sp"></Button>
     </LinearLayout>
 </ScrollView>
