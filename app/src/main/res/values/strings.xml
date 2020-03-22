@@ -4,6 +4,9 @@
     <string name="hey">Hello there!!</string>
     <string name="btn">Login Activity</string>
     <string name="msg">This is a short message.</string>
+    <string name="image">An Image</string>
+    <string name="btnSend">SEND</string>
+    <string name="message_hint">Write a message</string>
     <string name="text_firstName">First Name</string>
     <string name="text_lastName">Last Name</string>
     <string name="text_loginID">Login ID</string>
