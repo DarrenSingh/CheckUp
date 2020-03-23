@@ -14,7 +14,7 @@ import com.Group6.checkup.Utils.Session;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbh;
-    final Session appSession;
+    Session appSession;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         doctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                appSession.setCurrentUser("D001");
+                appSession.setUserId(1);
                 startActivity(new Intent(MainActivity.this,DoctorActivity.class));
             }
         });
@@ -55,24 +57,27 @@ public class MainActivity extends AppCompatActivity {
         patient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                appSession.setCurrentUser("P001");
+                appSession.setUserId(1);
+                startActivity(new Intent(MainActivity.this,PatientHomeActivity.class));
             }
         });
   
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,AdminActivity.class));
                 appSession.setCurrentUsername("A001");
                 appSession.setUserId(1);
+                startActivity(new Intent(MainActivity.this,AdminActivity.class));
             }
         });
 
         cashier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CashierActivity.class));
                 appSession.setCurrentUsername("C001");
                 appSession.setUserId(1);
+                startActivity(new Intent(MainActivity.this, CashierActivity.class));
             }
         });
 
