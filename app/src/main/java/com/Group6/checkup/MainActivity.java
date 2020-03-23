@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         doctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appSession.setCurrentUser("D001");
+                appSession.setCurrentUsername("D001");
                 appSession.setUserId(1);
                 startActivity(new Intent(MainActivity.this,DoctorActivity.class));
             }
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         patient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appSession.setCurrentUser("P001");
+                appSession.setCurrentUsername("P001");
                 appSession.setUserId(1);
                 startActivity(new Intent(MainActivity.this,PatientHomeActivity.class));
             }
