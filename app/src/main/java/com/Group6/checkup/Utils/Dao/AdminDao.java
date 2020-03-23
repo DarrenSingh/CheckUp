@@ -142,8 +142,8 @@ public class AdminDao extends Dao<Admin>{
 
 
         // Filter results WHERE "loginID" = 'A001'
-        String selection = DatabaseTable.AdminTable.LOGIN_ID + " = ?";
-        String[] selectionArgs = { object.getLoginID() };
+        String selection = DatabaseTable.AdminTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(object.getID()) };
 
         int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME,recordObject,selection,selectionArgs);
 

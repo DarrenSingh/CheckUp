@@ -4,6 +4,28 @@
     <string name="hey">Hello there!!</string>
     <string name="btn">Login Activity</string>
     <string name="msg">This is a short message.</string>
+    <string name="txt_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu posuere, ultricies quam vel, pulvinar nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel ultricies sem. Nulla facilisi.</string>
+    <string name="welcome">Welcome!</string>
+    <string name="instructionsOnLogin">Please Login to Continue</string>
+    <string name="userId">Enter user ID</string>
+    <string name="password">Password</string>
+    <string name="login">LOGIN</string>
+    <string name="welcomeDoctor">Welcome User!</string>
+    <string name="doctorImage">the doctor\'s image</string>
+    <string name="viewSchedule">View Appointment Schedule</string>
+    <string name="viewMessages">View Messages</string>
+    <string name="goToLogin">Return to Login</string>
+    <string name="appointmentSchedule">Appointment Schedule</string>
+    <string name="appointmentInfo">Select appointment from the list to view patient information</string>
+    <string name="patientInfoTitle">Patient Information</string>
+    <string name="back">back</string>
+    <string name="messages">Messages</string>
+    <string name="messageInstructions">select patient from dropdown and view patient complaints</string>
+    <string name="viewComplaint">View Complaint</string>
+    <string name="patientComplaint">Patient Complaint</string>
+    <string name="infoComplaint">Patient Information and Complaint</string>
+    <string name="solution">Solution</string>
+    <string name="postSolution">POST SOLUTION</string>
     <string name="image">An Image</string>
     <string name="btnSend">SEND</string>
     <string name="message_hint">Write a message</string>
@@ -34,5 +56,19 @@
     <string-array name="yes_or_No">
         <item>yes</item>
         <item>no</item>
+    </string-array>
+    <string-array name="appointments">
+        <item>appointment1</item>
+        <item>appointment2</item>
+        <item>appointment3</item>
+        <item>appointment4</item>
+        <item>appointment5</item>
+    </string-array>
+    <string-array name="patients">
+        <item>patient1</item>
+        <item>patient2</item>
+        <item>patient3</item>
+        <item>patient4</item>
+        <item>patient5</item>
     </string-array>
 </resources>

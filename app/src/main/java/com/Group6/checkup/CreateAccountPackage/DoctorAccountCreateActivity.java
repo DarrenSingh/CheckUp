@@ -44,7 +44,7 @@ public class DoctorAccountCreateActivity extends AppCompatActivity {
                 DoctorDao doctorDao = new DoctorDao(getApplicationContext());
 
                 //Searching and finding the data that has the same loginID.
-                if (etLoginID.getText().toString().charAt(0) == 'D') {
+                if (etLoginID.getText().toString().charAt(0) != 'D') {
                     etLoginID.setError("Patient Account has to start with letter 'D'.");
                 } else {
                     //LoginID existence validation

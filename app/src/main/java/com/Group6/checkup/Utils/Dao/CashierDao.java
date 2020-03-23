@@ -143,8 +143,8 @@ public class CashierDao extends Dao<Cashier> {
 
 
         // Filter results WHERE "loginID" = 'C001'
-        String selection = DatabaseTable.CashierTable.LOGIN_ID + " = ?";
-        String[] selectionArgs = { object.getLoginID() };
+        String selection = DatabaseTable.CashierTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(object.getID()) };
 
         int result = dbConnection.update(DatabaseTable.CashierTable.TABLE_NAME,recordObject,selection,selectionArgs);
 

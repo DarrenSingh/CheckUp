@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <!-- Icon -->
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="top"
+            app:srcCompat="@drawable/ic_account_circle_black_48dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+                <!--  Recipient   -->
+                <TextView
+                    android:id="@+id/text_message_recipient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="Dr. Last Name"/>
+
+                <!--  Subject  -->
+                <TextView
+                    android:id="@+id/text_message_subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Subject"/>
+
+                <!--  Body  -->
+                <TextView
+                    android:id="@+id/text_message_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:text="@string/txt_lorem_ipsum"/>
+            </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
