@@ -10,4 +10,6 @@
     <color name="crayolaCerulean">#1DACD6</color>
     <color name="skyBlue">#87CEEB</color>
     <color name="orange">#F0D43A</color>
+    <color name="lightBlue">#E9F4F8</color>
+    <color name="lightYellow">#FFFFCC</color>
 </resources>

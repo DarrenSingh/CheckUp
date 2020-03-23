@@ -11,48 +11,34 @@
         style="@style/subTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="261dp"
-        android:layout_marginRight="261dp"
-        android:layout_marginBottom="624dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="80dp"
         android:text="@string/hey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
+        style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
-        android:layout_marginLeft="173dp"
-        android:layout_marginTop="125dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginRight="150dp"
-        android:layout_marginBottom="285dp"
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
         android:text="@string/btn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv"
-        style="@style/buttonStyle"/>
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
+        style="@style/messageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
         android:layout_marginLeft="42dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="215dp"
-        android:layout_marginRight="215dp"
+        android:layout_marginTop="49dp"
         android:text="@string/msg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv" />
 
@@ -72,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:text="CASHIER"
+        android:text="Cashier"
         app:layout_constraintStart_toStartOf="@+id/btn_main_admin"
         app:layout_constraintTop_toBottomOf="@+id/btn_main_admin" />
 
@@ -81,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
-        android:text="DOCTOR"
+        android:text="Doctor"
         app:layout_constraintStart_toStartOf="@+id/btn_main_cashier"
         app:layout_constraintTop_toBottomOf="@+id/btn_main_cashier" />
 

@@ -11,10 +11,25 @@
         android:theme="@style/AppThemeBase">
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".loginActivity"></activity>
-            <activity android:name=".PatientComplaint"></activity>
-            <activity android:name=".DoctorMessages" />
-            <activity android:name=".DoctorAppointmentSchedule" />
-            <activity android:name=".DoctorActivity" />
+        <activity android:name=".PatientComplaint"></activity>
+        <activity android:name=".DoctorMessages" />
+        <activity android:name=".DoctorAppointmentSchedule" />
+        <activity android:name=".DoctorActivity" />
+        <activity android:name=".PaymentMessage"/>
+        <activity android:name=".CashierActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity"></activity>
+        <activity android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity" />
+        <activity android:name=".CreateAccountPackage.CashierAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.DoctorAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.PatientAccountCreateActivity" />
+        <activity android:name=".CreateAccountPackage.AdminAccountCreateActivity" />
+        <activity android:name=".ViewUserHistoryActivity" />
+        <activity android:name=".AppMaintenancePackage.AppMaintenanceActivity" />
+        <activity android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity" />
+        <activity android:name=".CreateAccountPackage.AccountTypeOptionActivity" />
+        <activity android:name=".AdminActivity"/>
         <activity android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -24,5 +39,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
