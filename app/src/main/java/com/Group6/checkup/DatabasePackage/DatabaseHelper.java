@@ -5,19 +5,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.Group6.checkup.Entities.Admin;
 import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.Entities.Doctor;
-import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.AdminDao;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
-import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 
 public class DatabaseHelper extends SQLiteOpenHelper {

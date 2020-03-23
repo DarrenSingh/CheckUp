@@ -166,8 +166,8 @@ public class PatientDao extends Dao<Patient>{
 
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = DatabaseTable.PatientTable.LOGIN_ID + " = ?";
-        String[] selectionArguments = { object.getLoginID() };
+        String selection = DatabaseTable.PatientTable._ID + " = ?";
+        String[] selectionArguments = { String.valueOf(object.getID()) };
 
         int result = dbConnection.update(DatabaseTable.PatientTable.TABLE_NAME,objectRecord,selection,selectionArguments);
 

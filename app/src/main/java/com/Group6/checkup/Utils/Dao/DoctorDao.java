@@ -101,9 +101,9 @@ public class DoctorDao extends Dao<Doctor> {
                     cursor.getString(3),
                     cursor.getString(4),
                     cursor.getString(5),
+                    cursor.getString(6),
                     cursor.getString(7),
-                    cursor.getString(9),
-                    cursor.getInt(10)
+                    cursor.getInt(8)
             );
 
 
@@ -116,6 +116,10 @@ public class DoctorDao extends Dao<Doctor> {
 
     @Override
     public boolean insert(Doctor object) {
+
+        //get writable database
+        SQLiteDatabase dbConnection = this.db.getWritableDatabase();
+
         ContentValues recordObject = new ContentValues();
 
         //populate entry with object attributes
@@ -128,8 +132,6 @@ public class DoctorDao extends Dao<Doctor> {
         recordObject.put(DatabaseTable.DoctorTable.EMAIL_ADDRESS,object.getEmailAddress());
         recordObject.put(DatabaseTable.DoctorTable.ADMIN_ID,object.getAdminID());
 
-        //get writable database
-        SQLiteDatabase dbConnection = this.db.getWritableDatabase();
 
         Long result = dbConnection.insert(DatabaseTable.DoctorTable.TABLE_NAME,null,recordObject);
 
@@ -156,8 +158,8 @@ public class DoctorDao extends Dao<Doctor> {
 
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = DatabaseTable.DoctorTable.LOGIN_ID + " = ?";
-        String[] selectionArgs = { object.getLoginID() };
+        String selection = DatabaseTable.DoctorTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(object.getID()) };
 
         int result = dbConnection.update(DatabaseTable.DoctorTable.TABLE_NAME,recordObject,selection,selectionArgs);
 
