@@ -10,15 +10,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select account type"
+        android:text="@string/text_selectAccountType"
         android:textAlignment="center"
-        android:textSize="40sp"></TextView>
+        android:textSize="40sp"
+        android:gravity="center_horizontal"></TextView>
 
     <Button
         android:id="@+id/btn_toAdminAccountCreateActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Administrator Account"
+        android:text="@string/button_adminAccountType"
         android:layout_marginTop="30dp"
         android:onClick="buttonClicked"
         android:textSize="30sp"></Button>
@@ -27,7 +28,7 @@
         android:id="@+id/btn_toPatientAccountCreateActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Patient Account"
+        android:text="@string/button_patientAccountType"
         android:layout_marginTop="30dp"
         android:onClick="buttonClicked"
         android:textSize="30sp"></Button>
@@ -36,7 +37,7 @@
         android:id="@+id/btn_toDoctorAccountCreateActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Doctor Account"
+        android:text="@string/button_doctorAccountType"
         android:layout_marginTop="30dp"
         android:onClick="buttonClicked"
         android:textSize="30sp"></Button>
@@ -45,7 +46,7 @@
         android:id="@+id/btn_toCashierAccountCreateActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cashier Account"
+        android:text="@string/button_cashierAccountType"
         android:layout_marginTop="30dp"
         android:onClick="buttonClicked"
         android:textSize="30sp"></Button>

@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:text="Doctor"
+        android:text="Cashier"
         app:layout_constraintStart_toStartOf="@+id/btn_main_admin"
         app:layout_constraintTop_toBottomOf="@+id/btn_main_admin" />
 
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
-        android:text="Cashier"
+        android:text="Doctor"
         app:layout_constraintStart_toStartOf="@+id/btn_main_cashier"
         app:layout_constraintTop_toBottomOf="@+id/btn_main_cashier" />
 

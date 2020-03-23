@@ -11,42 +11,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="First Name"
+        android:text="@string/text_firstName"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_adminFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="First Name"
+        android:hint="@string/text_firstName"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Last Name"
+        android:text="@string/text_lastName"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_adminLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Last Name"
+        android:hint="@string/text_lastName"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Login ID"
+        android:text="@string/text_loginID"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_adminLoginID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="loginID"
+        android:hint="@string/text_loginID"
         android:textSize="30sp"></EditText>
 
     <TextView
@@ -60,7 +60,7 @@
         android:id="@+id/editTxt_adminPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/text_password"
         android:textSize="30sp"></EditText>
 
     <Button
@@ -68,6 +68,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="CREATE"
+        android:text="@string/button_accountCreate"
         android:textSize="30sp"></Button>
 </LinearLayout>

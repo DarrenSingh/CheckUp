@@ -2,35 +2,30 @@ package com.Group6.checkup.CreateAccountPackage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.Group6.checkup.DatabasePackage.DatabaseHelper;
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Utils.Dao.DoctorDao;
+import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Session;
+
+import java.util.ArrayList;
 
 public class DoctorAccountCreateActivity extends AppCompatActivity {
     Button btnCreateAccount;
     EditText etFirstName, etLastName, etOfficeAddress, etPhoneNumber, etEmail, etLoginID, etPassword;
-    String firstName, lastName, officeAddress, phoneNumber, email, loginID, password;
-
-    SQLiteDatabase db;
-    DatabaseHelper dbh;
-    ContentValues doctorData;
+    SharedPreferences currentLogin;
+    ArrayList<String> currentLoginInfo, doctorAccountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_account_create);
-
-        dbh = new DatabaseHelper(this, DatabaseTable.DoctorTable.TABLE_NAME, DatabaseTable.DoctorTable.DATABASE_VERSION);
-        doctorData = new ContentValues();
 
         btnCreateAccount = findViewById(R.id.btn_createDoctorAccount);
 
@@ -46,33 +41,38 @@ public class DoctorAccountCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                firstName = etFirstName.getText().toString();
-                lastName = etLastName.getText().toString();
-                officeAddress = etOfficeAddress.getText().toString();
-                phoneNumber = etPhoneNumber.getText().toString();
-                email = etEmail.getText().toString();
-                loginID = etLoginID.getText().toString();
-                password = etPassword.getText().toString();
+                DoctorDao doctorDao = new DoctorDao(getApplicationContext());
 
-                //Insert to Database
-                db = dbh.getWritableDatabase();
+                //Searching and finding the data that has the same loginID.
+                if (etLoginID.getText().toString().charAt(0) == 'D') {
+                    etLoginID.setError("Patient Account has to start with letter 'D'.");
+                } else {
+                    //LoginID existence validation
+                    if (doctorDao.exists(etLoginID.getText().toString())) {
 
-                doctorData.put(DatabaseTable.DoctorTable.FIRST_NAME, firstName);
-                doctorData.put(DatabaseTable.DoctorTable.LAST_NAME, lastName);
-                doctorData.put(DatabaseTable.DoctorTable.OFFICE_ADDRESS, officeAddress);
-                doctorData.put(DatabaseTable.DoctorTable.PHONE_NUMBER, phoneNumber);
-                doctorData.put(DatabaseTable.DoctorTable.EMAIL_ADDRESS, email);
-                doctorData.put(DatabaseTable.DoctorTable.LOGIN_ID, loginID);
-                doctorData.put(DatabaseTable.DoctorTable.PASSWORD, password);
-                doctorData.put(DatabaseTable.DoctorTable.ADMIN_ID, 1);
+                        Toast.makeText(DoctorAccountCreateActivity.this, "Login ID taken", Toast.LENGTH_SHORT).show();
 
-                long newRowId = db.insert(DatabaseTable.DoctorTable.TABLE_NAME, null, doctorData);
-                if (newRowId == -1){
-                    Toast.makeText(getBaseContext(), "Failed", Toast.LENGTH_SHORT).show();
-                } else{
-                    Toast.makeText(getBaseContext(), "Saved", Toast.LENGTH_LONG).show();
+                    } else {
+
+                        boolean inserted = doctorDao.insert(new Doctor(
+                                etFirstName.getText().toString(),
+                                etLastName.getText().toString(),
+                                etOfficeAddress.getText().toString(),
+                                etLoginID.getText().toString(),
+                                etPassword.getText().toString(),
+                                etPhoneNumber.getText().toString(),
+                                etEmail.getText().toString(),
+                                new Session(getApplicationContext()).getUserId()
+                        ));
+
+                        //Give (un)successful prompt
+                        if (inserted)
+                            Toast.makeText(DoctorAccountCreateActivity.this, etLoginID.getText().toString() + " created", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(DoctorAccountCreateActivity.this, "Unable to Create Account", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
-
             }
         });
     }

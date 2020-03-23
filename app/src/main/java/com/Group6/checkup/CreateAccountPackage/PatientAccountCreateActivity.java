@@ -1,28 +1,30 @@
 package com.Group6.checkup.CreateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.PatientDao;
+import com.Group6.checkup.Utils.Session;
 
 public class PatientAccountCreateActivity extends AppCompatActivity {
 
     Button btnCreateAccount;
     Spinner spinnerYesOrNo;
     EditText etFirstName, etLastName, etAddress, etPhoneNumber, etEmail, etLoginID, etPassword, etHealthCardNumber;
-    String firstName, lastName, address, phoneNumber, email, loginID, password, healthCardNumber, msp;
+    String msp;
     boolean mspStatus;
+    int healthCardNumber = 0;
     String[] yesOrNo = {"yes", "no"};
 
     @Override
@@ -42,9 +44,12 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.editTxt_patientPassword);
         etHealthCardNumber = findViewById(R.id.editTxt_patientHealthCardNumber);
 
+        Log.e("HealthCareNumber",etHealthCardNumber.getText().toString());
+
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, yesOrNo);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerYesOrNo.setAdapter(adapter);
+
 
         spinnerYesOrNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -69,22 +74,56 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                firstName = etFirstName.getText().toString();
-                lastName = etLastName.getText().toString();
-                address = etAddress.getText().toString();
-                phoneNumber = etPhoneNumber.getText().toString();
-                email = etEmail.getText().toString();
-                loginID = etLoginID.getText().toString();
-                password = etPassword.getText().toString();
-                healthCardNumber = etHealthCardNumber.getText().toString();
-                msp = spinnerYesOrNo.getSelectedItem().toString();
-                if(msp.equals("yes")){
-                    mspStatus = true;
-                }else{
-                    mspStatus = false;
-                }
+                //Searching and finding the data that has the same loginID.
+                if (etLoginID.getText().toString().charAt(0) != 'P') {
+                    etLoginID.setError("Patient Account has to start with letter 'P'.");
+                } else {
 
-                //Insert to Database;
+                    PatientDao patientDao = new PatientDao(getApplicationContext());
+
+                    //LoginID existence validation
+                    if (patientDao.exists(etLoginID.getText().toString())) {
+                        etLoginID.setError("Login Id is already exists");
+                    } else {
+
+                        msp = spinnerYesOrNo.getSelectedItem().toString();
+
+                        if (msp.equals("yes")) {
+                            mspStatus = true;
+                        } else {
+                            mspStatus = false;
+                        }
+
+                        healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
+                                ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
+
+                        //TODO input adminID data from session
+                        //Creating patient Object.
+                        Patient newPatient = new Patient(
+                                etFirstName.getText().toString(),
+                                etLastName.getText().toString(),
+                                etAddress.getText().toString(),
+                                etLoginID.getText().toString(),
+                                etPassword.getText().toString(),
+                                mspStatus,
+                                etPhoneNumber.getText().toString(),
+                                healthCardNumber,
+                                etEmail.getText().toString(),
+                                new Session(getApplicationContext()).getUserId()
+                        );
+
+                        //Insert to Database;
+                        boolean inserted = patientDao.insert(newPatient);
+
+
+                        //Give (un)successful prompt
+                        if (inserted)
+                            Toast.makeText(PatientAccountCreateActivity.this, etLoginID.getText().toString() + " created", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(PatientAccountCreateActivity.this, "Unable to Create Account", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
             }
         });
     }

@@ -15,104 +15,104 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="First Name"
+        android:text="@string/text_firstName"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="First Name"
+        android:hint="@string/text_firstName"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Last Name"
+        android:text="@string/text_lastName"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Last Name"
+        android:hint="@string/text_lastName"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Address"
+        android:text="@string/text_address"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Address"
+        android:hint="@string/text_address"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Phone Number"
+        android:text="@string/text_phoneNumber"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phone Number"
+        android:hint="@string/text_phoneNumber"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Email"
+        android:text="@string/text_email"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/text_email"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Login ID"
+        android:text="@string/text_loginID"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientLoginID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="loginID"
+        android:hint="@string/text_loginID"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Password"
+        android:text="@string/text_password"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/text_password"
         android:textSize="30sp"></EditText>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Do you have a MSP coverage?"
+        android:text="@string/text_mspCoverageQuestion"
         android:textSize="20sp"
         android:layout_marginTop="30dp"></TextView>
     <Spinner
@@ -126,14 +126,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Health Card Number"
+        android:text="@string/text_healthCardNumber"
         android:textSize="20sp"></TextView>
 
     <EditText
         android:id="@+id/editTxt_patientHealthCardNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Health Card Number"
+        android:hint="@string/text_healthCardNumber"
         android:textSize="30sp"></EditText>
 
     <Button
@@ -141,7 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="CREATE"
+        android:text="@string/button_accountCreate"
         android:textSize="30sp"></Button>
 </LinearLayout>
 </ScrollView>
