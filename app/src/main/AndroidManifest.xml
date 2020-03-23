@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeBase">
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".loginActivity"></activity>
+        <activity android:name=".PatientComplaint"></activity>
+        <activity android:name=".DoctorMessages" />
+        <activity android:name=".DoctorAppointmentSchedule" />
+        <activity android:name=".DoctorActivity" />
         <activity android:name=".PaymentMessage"/>
         <activity android:name=".CashierActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity"></activity>
