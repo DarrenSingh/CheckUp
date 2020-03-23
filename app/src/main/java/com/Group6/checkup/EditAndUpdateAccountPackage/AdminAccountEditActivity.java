@@ -43,7 +43,6 @@ public class AdminAccountEditActivity extends AppCompatActivity {
 
         loginID = getIntent.getStringExtra("loginID");
 
-        //TODO handle exception
         adminAccount = adminDao.find(loginID);
 
         etFirstName.setText(adminAccount.getFirstName());

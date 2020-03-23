@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,21 +11,27 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.Utils.Dao.PatientDao;
+import com.Group6.checkup.Utils.Session;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class AccountProfileActivity extends AppCompatActivity {
 
-//    private Session appSession;
-//    private PatientDao patientDao;
-//    private Patient user;
+    private Session appSession;
+    private PatientDao patientDao;
+    private Patient currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_profile);
-//        appSession = new Session(this);
+        patientDao = new PatientDao(this);
+        appSession = new Session(this);
+
         //UI Components
         Button mBtnEditProfile = findViewById(R.id.btn_edit_profile);
         Button mBtnPaymentHistory = findViewById(R.id.btn_payment_history);
@@ -39,11 +44,10 @@ public class AccountProfileActivity extends AppCompatActivity {
 
         //Activity Logic
 
-//        patientDao = new PatientDao(getApplicationContext());
-//        user = patientDao.find(appSession.getCurrentUser());
-//        mTextViewFullName.setText(user.getFirstName() + " " + user.getLastName());
-//        mTextViewAddress.setText(user.getAddress());
-//        mTextViewMSP.setText(String.valueOf(user.getHealthCareCardNumber()));
+        currentUser = patientDao.find(appSession.getCurrentUsername());
+        mTextViewFullName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+        mTextViewAddress.setText(currentUser.getAddress());
+        mTextViewMSP.setText(String.valueOf(currentUser.getHealthCareCardNumber()));
 
         //TODO ListView Hashmap
             /*
@@ -69,7 +73,6 @@ public class AccountProfileActivity extends AppCompatActivity {
         mBtnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO start activity for result?
                 startActivity(new Intent(AccountProfileActivity.this,PatientEditProfileActivity.class));
             }
         });

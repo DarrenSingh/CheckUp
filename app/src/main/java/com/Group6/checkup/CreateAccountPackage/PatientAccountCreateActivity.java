@@ -97,7 +97,6 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                         healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
                                 ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
 
-                        //TODO input adminID data from session
                         //Creating patient Object.
                         Patient newPatient = new Patient(
                                 etFirstName.getText().toString(),

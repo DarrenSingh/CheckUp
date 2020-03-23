@@ -6,13 +6,13 @@ public class OnlineHelp {
     private int ID;
     private String messageTitle;
     private String message;
-    private String sentDateTime;
+    private long sentDateTime;
     private int patientID;
     private int doctorID;
     private int onlineHelpReplyID;
 
     //Constructors
-    public OnlineHelp(int ID, String messageTitle, String message, String sentDateTime, int patientID, int doctorID, int onlineHelpReplyID) {
+    public OnlineHelp(int ID, String messageTitle, String message, long sentDateTime, int patientID, int doctorID, int onlineHelpReplyID) {
         this.ID = ID;
         this.messageTitle = messageTitle;
         this.message = message;
@@ -22,7 +22,7 @@ public class OnlineHelp {
         this.onlineHelpReplyID = onlineHelpReplyID;
     }
 
-    public OnlineHelp(String messageTitle, String message, String sentDateTime, int patientID, int doctorID, int onlineHelpReplyID) {
+    public OnlineHelp(String messageTitle, String message, long sentDateTime, int patientID, int doctorID, int onlineHelpReplyID) {
         this.messageTitle = messageTitle;
         this.message = message;
         this.sentDateTime = sentDateTime;
@@ -31,7 +31,7 @@ public class OnlineHelp {
         this.onlineHelpReplyID = onlineHelpReplyID;
     }
 
-    public OnlineHelp(String messageTitle, String message, String sentDateTime, int patientID, int doctorID) {
+    public OnlineHelp(String messageTitle, String message, long sentDateTime, int patientID, int doctorID) {
         this.messageTitle = messageTitle;
         this.message = message;
         this.sentDateTime = sentDateTime;
@@ -64,11 +64,11 @@ public class OnlineHelp {
         this.message = message;
     }
 
-    public String getSentDateTime() {
+    public long getSentDateTime() {
         return sentDateTime;
     }
 
-    public void setSentDateTime(String sentDateTime) {
+    public void setSentDateTime(long sentDateTime) {
         this.sentDateTime = sentDateTime;
     }
 

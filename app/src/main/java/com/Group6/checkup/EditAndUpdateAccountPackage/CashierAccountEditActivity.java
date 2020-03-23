@@ -43,7 +43,6 @@ public class CashierAccountEditActivity extends AppCompatActivity {
 
         loginID = getIntent.getStringExtra("loginID");
 
-        //TODO handle exception
         cashierAccount = cashierDao.find(loginID);
 
         etFirstName.setText(cashierAccount.getFirstName());

@@ -8,14 +8,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.Utils.Dao.PatientDao;
+import com.Group6.checkup.Utils.Session;
+
 import org.w3c.dom.Text;
 
 public class PatientHomeActivity extends AppCompatActivity {
+    private Session appSession;
+    private PatientDao patientDao;
+    private Patient currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_home);
+        appSession = new Session(this);
+        patientDao = new PatientDao(this);
+
+        currentUser = patientDao.find(appSession.getCurrentUsername());
 
         //UI Components
         TextView mTextViewName = findViewById(R.id.text_patienthome_name);
@@ -28,8 +39,7 @@ public class PatientHomeActivity extends AppCompatActivity {
 
         //Activity Logic
 
-        //TODO get user from database, set full name
-        String fullName = "Full" + " " + "Name";
+        String fullName = currentUser.getFirstName() + " " + currentUser.getLastName();
 
         //TODO get user appointment from database, if any
         String upcomingAppointment = "Date";
@@ -65,9 +75,10 @@ public class PatientHomeActivity extends AppCompatActivity {
         mBtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Create new intent for LoginActivity.Class
-                //Intent intent = new Intent(PatientHomeActivity.this,);
-                //startActivity(intent);
+                appSession.setCurrentUsername(null);
+                appSession.setUserId(0);
+                Intent intent = new Intent(PatientHomeActivity.this,loginActivity.class);
+                startActivity(intent);
             }
         });
 
