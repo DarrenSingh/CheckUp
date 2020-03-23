@@ -25,17 +25,20 @@
         android:layout_marginTop="8dp">
 
         <TextView
+            android:id="@+id/text_edit_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="First Last Name"/>
 
         <TextView
+            android:id="@+id/text_edit_profile_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Address"/>
 
         <TextView
+            android:id="@+id/text_edit_profile_msp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

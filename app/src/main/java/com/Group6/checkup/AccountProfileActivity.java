@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,21 +18,32 @@ import java.util.List;
 
 public class AccountProfileActivity extends AppCompatActivity {
 
+//    private Session appSession;
+//    private PatientDao patientDao;
+//    private Patient user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_profile);
-
-
+//        appSession = new Session(this);
         //UI Components
         Button mBtnEditProfile = findViewById(R.id.btn_edit_profile);
         Button mBtnPaymentHistory = findViewById(R.id.btn_payment_history);
 
-        TextView mTextViewFullName = findViewById(R.id.text_patientprof_name);
-        TextView mTextViewAddress = findViewById(R.id.text_patientprof_address);
-        TextView mTextViewMSP = findViewById(R.id.text_patientprof_msp);
+        final TextView mTextViewFullName = findViewById(R.id.text_patientprof_name);
+        final TextView mTextViewAddress = findViewById(R.id.text_patientprof_address);
+        final TextView mTextViewMSP = findViewById(R.id.text_patientprof_msp);
 
         ListView mListViewInbox = findViewById(R.id.list_patient_inbox);
+
+        //Activity Logic
+
+//        patientDao = new PatientDao(getApplicationContext());
+//        user = patientDao.find(appSession.getCurrentUser());
+//        mTextViewFullName.setText(user.getFirstName() + " " + user.getLastName());
+//        mTextViewAddress.setText(user.getAddress());
+//        mTextViewMSP.setText(String.valueOf(user.getHealthCareCardNumber()));
 
         //TODO ListView Hashmap
             /*
@@ -83,4 +95,5 @@ public class AccountProfileActivity extends AppCompatActivity {
         });
 
     }
+
 }

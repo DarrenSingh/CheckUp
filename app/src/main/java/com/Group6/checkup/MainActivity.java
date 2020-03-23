@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         patient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                appSession.setCurrentUser("P002");
                 startActivity(new Intent(MainActivity.this,PatientHomeActivity.class));
             }
         });
