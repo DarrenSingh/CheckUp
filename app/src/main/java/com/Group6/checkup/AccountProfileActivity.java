@@ -24,23 +24,27 @@ public class AccountProfileActivity extends AppCompatActivity {
     private Session appSession;
     private PatientDao patientDao;
     private Patient currentUser;
+    private TextView mTextViewFullName;
+    private TextView mTextViewAddress;
+    private TextView mTextViewMSP;
+    private ListView mListViewInbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_profile);
-        patientDao = new PatientDao(this);
         appSession = new Session(this);
+        patientDao = new PatientDao(this);
 
         //UI Components
         Button mBtnEditProfile = findViewById(R.id.btn_edit_profile);
         Button mBtnPaymentHistory = findViewById(R.id.btn_payment_history);
 
-        final TextView mTextViewFullName = findViewById(R.id.text_patientprof_name);
-        final TextView mTextViewAddress = findViewById(R.id.text_patientprof_address);
-        final TextView mTextViewMSP = findViewById(R.id.text_patientprof_msp);
+        mTextViewFullName = findViewById(R.id.text_patientprof_name);
+        mTextViewAddress = findViewById(R.id.text_patientprof_address);
+        mTextViewMSP = findViewById(R.id.text_patientprof_msp);
 
-        ListView mListViewInbox = findViewById(R.id.list_patient_inbox);
+        mListViewInbox = findViewById(R.id.list_patient_inbox);
 
         //Activity Logic
 
@@ -73,7 +77,8 @@ public class AccountProfileActivity extends AppCompatActivity {
         mBtnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountProfileActivity.this,PatientEditProfileActivity.class));
+                Intent intent = new Intent(AccountProfileActivity.this,PatientEditProfileActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -99,4 +104,13 @@ public class AccountProfileActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Grab user and update text fields on activity resume
+        currentUser = patientDao.find(appSession.getCurrentUsername());
+        mTextViewFullName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
+        mTextViewAddress.setText(currentUser.getAddress());
+        mTextViewMSP.setText(String.valueOf(currentUser.getHealthCareCardNumber()));
+    }
 }

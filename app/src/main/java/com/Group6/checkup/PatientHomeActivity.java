@@ -75,9 +75,12 @@ public class PatientHomeActivity extends AppCompatActivity {
         mBtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //reset session info
                 appSession.setCurrentUsername(null);
                 appSession.setUserId(0);
                 Intent intent = new Intent(PatientHomeActivity.this,loginActivity.class);
+                //clear task back stack before and send user to login screen
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });

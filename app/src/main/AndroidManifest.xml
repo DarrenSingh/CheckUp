@@ -14,9 +14,9 @@
         <activity android:name=".SubmitPaymentActivity"/>
         <activity android:name=".PatientPaymentHistoryActivity" />
         <activity android:name=".NewMessageActivity" />
-        <activity android:name=".PatientEditProfileActivity" />
+        <activity android:name=".PatientEditProfileActivity"/>
         <activity android:name=".DoctorInfoActivity" />
-        <activity android:name=".AccountProfileActivity" />
+        <activity android:name=".AccountProfileActivity" android:launchMode="singleTask"/>
         <activity android:name=".PatientHomeActivity" />
         <activity android:name=".PatientComplaint"/>
         <activity android:name=".DoctorMessages" />

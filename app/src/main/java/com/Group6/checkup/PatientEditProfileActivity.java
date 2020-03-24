@@ -68,7 +68,8 @@ public class PatientEditProfileActivity extends AppCompatActivity {
                 currentUser.setAddress(mEditAddress.getText().toString());
                 if(patientDao.update(currentUser)){
                     Toast.makeText(PatientEditProfileActivity.this, "Profile Edited", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PatientEditProfileActivity.this,AccountProfileActivity.class));
+                    Intent intent = new Intent(PatientEditProfileActivity.this,AccountProfileActivity.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(PatientEditProfileActivity.this, "Unable to Edit", Toast.LENGTH_SHORT).show();
                 }
