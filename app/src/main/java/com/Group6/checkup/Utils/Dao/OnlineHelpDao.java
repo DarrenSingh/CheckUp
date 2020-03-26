@@ -45,7 +45,7 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
         // Filter results WHERE "title" = 'My Title'
-        String selection = DatabaseTable.OnlineHelpTable.PATIENT_ID + " = ?";
+        String selection = DatabaseTable.OnlineHelpTable._ID + " = ?";
 
         Cursor cursor = dbConnection.query(
                 DatabaseTable.OnlineHelpTable.TABLE_NAME,   // The table to query
@@ -189,8 +189,9 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
         recordObject.put(DatabaseTable.OnlineHelpTable.SENT_DATE_TIME,object.getSentDateTime());
         recordObject.put(DatabaseTable.OnlineHelpTable.PATIENT_ID,object.getPatientID());
         recordObject.put(DatabaseTable.OnlineHelpTable.DOCTOR_ID,object.getDoctorID());
-        recordObject.put(DatabaseTable.OnlineHelpTable.ONLINE_HELP_REPLY_ID,object.getOnlineHelpReplyID());
-
+        if(object.getOnlineHelpReplyID() != 0) {
+            recordObject.put(DatabaseTable.OnlineHelpTable.ONLINE_HELP_REPLY_ID, object.getOnlineHelpReplyID());
+        }
         //get writable database
         SQLiteDatabase dbConnection = this.db.getWritableDatabase();
 

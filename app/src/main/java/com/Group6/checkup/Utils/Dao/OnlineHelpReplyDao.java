@@ -117,7 +117,7 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
         recordObject.put(DatabaseTable.OnlineHelpReplyTable.REPLY_DATE_TIME, object.getDateTime());
         recordObject.put(DatabaseTable.OnlineHelpReplyTable.DOCTOR_ID, object.getDoctorID());
 
-        long result = dbConnection.insert(DatabaseTable.AdminTable.TABLE_NAME, null, recordObject);
+        long result = dbConnection.insert(DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null, recordObject);
 
         return result != -1;
     }

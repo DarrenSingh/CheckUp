@@ -152,6 +152,7 @@ public class InvoiceDao extends Dao<Invoice> {
         //populate entry with object attributes
         recordObject.put(DatabaseTable.InvoiceTable.PRICE,object.getPrice());
         recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_DUE,object.getPaymentDue());
+        recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_STATUS, object.getPaymentStatus());
         recordObject.put(DatabaseTable.InvoiceTable.INVOICE_DATE,object.getInvoiceDate());
         recordObject.put(DatabaseTable.InvoiceTable.PATIENT_ID,object.getPatientID());
         recordObject.put(DatabaseTable.InvoiceTable.CASHIER_ID,object.getCashierID());
