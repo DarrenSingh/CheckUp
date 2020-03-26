@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.Group6.checkup.Entities.Appointment;
 import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.Utils.Dao.AppointmentDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
 
@@ -18,6 +20,8 @@ public class PatientHomeActivity extends AppCompatActivity {
     private Session appSession;
     private PatientDao patientDao;
     private Patient currentUser;
+    private AppointmentDao appointmentDao;
+    private Appointment upcomingAppointments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

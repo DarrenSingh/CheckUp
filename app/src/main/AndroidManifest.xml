@@ -9,22 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".loginActivity"/>
-        <activity android:name=".SubmitPaymentActivity"/>
+        <activity android:name=".PatientViewMessageActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".loginActivity" />
+        <activity android:name=".SubmitPaymentActivity" />
         <activity android:name=".PatientPaymentHistoryActivity" />
         <activity android:name=".NewMessageActivity" />
-        <activity android:name=".PatientEditProfileActivity"/>
+        <activity android:name=".PatientEditProfileActivity" />
         <activity android:name=".DoctorInfoActivity" />
-        <activity android:name=".AccountProfileActivity" android:launchMode="singleTask"/>
+        <activity
+            android:name=".AccountProfileActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".PatientHomeActivity" />
-        <activity android:name=".PatientComplaint"/>
+        <activity android:name=".PatientComplaint" />
         <activity android:name=".DoctorMessages" />
         <activity android:name=".DoctorAppointmentSchedule" />
         <activity android:name=".DoctorActivity" />
-        <activity android:name=".PaymentMessage"/>
+        <activity android:name=".PaymentMessage" />
         <activity android:name=".CashierActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity"/>
+        <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity" />
@@ -35,8 +38,9 @@
         <activity android:name=".ViewUserHistoryActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity" />
         <activity android:name=".CreateAccountPackage.AccountTypeOptionActivity" />
-        <activity android:name=".AdminActivity"/>
-        <activity android:name=".SplashScreen"
+        <activity android:name=".AdminActivity" />
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,4 +49,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
