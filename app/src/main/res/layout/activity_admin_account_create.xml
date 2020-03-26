@@ -11,63 +11,90 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/text_firstName"
-        android:textSize="20sp"></TextView>
+        android:textColor="@color/black"
+        style="@style/normalTextView"/>
 
     <EditText
         android:id="@+id/editTxt_adminFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_firstName"
-        android:textSize="30sp"></EditText>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tools:ignore="autofill"
+        style="@style/normalTextView"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/text_lastName"
-        android:textSize="20sp"></TextView>
+        android:textColor="@color/black"
+        style="@style/normalTextView"/>
 
     <EditText
         android:id="@+id/editTxt_adminLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_lastName"
-        android:textSize="30sp"></EditText>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tools:ignore="autofill"
+        style="@style/normalTextView"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/text_loginID"
-        android:textSize="20sp"></TextView>
+        android:textColor="@color/black"
+        style="@style/normalTextView"/>
 
     <EditText
         android:id="@+id/editTxt_adminLoginID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_loginID"
-        android:textSize="30sp"></EditText>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tools:ignore="autofill"
+        style="@style/normalTextView"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="Password"
-        android:textSize="20sp"></TextView>
+        android:textColor="@color/black"
+        style="@style/normalTextView"/>
 
     <EditText
         android:id="@+id/editTxt_adminPassword"
+        style="@style/normalTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:hint="@string/text_password"
-        android:textSize="30sp"></EditText>
+        android:inputType="textPassword"
+        tools:ignore="autofill" />
 
     <Button
         android:id="@+id/btn_createAdminAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="@string/button_accountCreate"
-        android:textSize="30sp"></Button>
+        style="@style/buttonStyle"/>
 </LinearLayout>

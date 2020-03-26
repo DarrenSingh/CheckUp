@@ -28,21 +28,24 @@
             android:id="@+id/text_edit_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="First Last Name"/>
+            android:text="First Last Name"
+            style="@style/normalTextView"/>
 
         <TextView
             android:id="@+id/text_edit_profile_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Address"/>
+            android:text="Address"
+            style="@style/normalTextView"/>
 
         <TextView
             android:id="@+id/text_edit_profile_msp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="MSP Verification"/>
+            android:text="MSP Verification"
+            style="@style/normalTextView"/>
 
     </LinearLayout>
 
@@ -65,14 +68,16 @@
             android:layout_gravity="start"
             android:labelFor="@+id/edit_first_name"
             android:text="First Name*"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
+            android:textStyle="bold"
+            style="@style/normalTextView"/>
 
         <EditText
             android:id="@+id/edit_first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:minWidth="250dp"/>
+            android:minWidth="250dp"
+            style="@style/normalTextView"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,14 +86,16 @@
             android:layout_gravity="start"
             android:labelFor="@+id/edit_last_name"
             android:text="Last Name*"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
+            android:textStyle="bold"
+            style="@style/normalTextView"/>
 
         <EditText
             android:id="@+id/edit_last_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:minWidth="250dp"/>
+            android:minWidth="250dp"
+            style="@style/normalTextView"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,14 +104,16 @@
             android:layout_gravity="start"
             android:labelFor="@+id/edit_address"
             android:text="Address*"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
+            android:textStyle="bold"
+            style="@style/normalTextView"/>
 
         <EditText
             android:id="@+id/edit_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:minWidth="250dp"/>
+            android:minWidth="250dp"
+            style="@style/normalTextView"/>
 
     </LinearLayout>
 
@@ -114,7 +123,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_gravity="bottom|center"
-        android:text="Confirm"/>
+        android:text="Confirm"
+        style="@style/buttonStyle"/>
 
 
 

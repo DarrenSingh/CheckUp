@@ -16,19 +16,28 @@
     <style name="barText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">@font/oswald_bold</item>
+        <item name="android:fontFamily">@font/oswald_demi_bold</item>
     </style>
+
+    <!-- Style code for Headings  -->
+    <style name="Heading">
+        <item name="android:textSize">30sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/darkBlue</item>
+    </style>
+
 
     <!-- Style code for Subtitles  -->
     <style name="subTitleTextView">
-        <item name="android:textSize">20sp</item>
-        <item name="android:gravity">center</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <!-- Style code for normal text  -->
     <style name="normalTextView">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
     </style>
 
@@ -40,11 +49,11 @@
 
     <!-- Style code for button  -->
     <style name="buttonStyle">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:gravity">center</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">5dp</item>
         <item name="android:background">@drawable/my_button</item>
     </style>
 

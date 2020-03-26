@@ -11,54 +11,55 @@
 
     <TextView
         android:id="@+id/txt_accountType"
+        style="@style/Heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="start"
         android:layout_marginTop="70dp"
-        android:text="@string/title_adminActivityTitle"
-        android:textColor="#64B5F6"
-        android:textSize="30sp"></TextView>
+        android:text="@string/title_adminActivityTitle" />
 
     <TextView
+        style="@style/normalTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Welcome Administrator Name!"></TextView>
+        android:text="Welcome Administrator Name!" />
 
     <Button
         android:id="@+id/btn_toCreateAccountActivity"
+        style="@style/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="@string/button_createAccountOption"
-        android:textSize="20sp"></Button>
+        android:text="@string/button_createAccountOption" />
 
     <Button
         android:id="@+id/btn_toEditAndUpdateAccountActivity"
+        style="@style/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="@string/button_editUpdateAccountOption"
-        android:textSize="20sp"></Button>
+        android:text="@string/button_editUpdateAccountOption" />
 
     <Button
         android:id="@+id/btn_toViewUserHistoryActivity"
+        style="@style/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="@string/button_viewUserHistoryOption"
-        android:textSize="20sp"></Button>
+        android:text="@string/button_viewUserHistoryOption" />
 
     <Button
         android:id="@+id/btn_toReturnLogInActivity"
+        style="@style/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="@string/button_returnToLoginOption"
-        android:textSize="20sp"></Button>
+        android:text="@string/button_returnToLoginOption" />
 
 
 </LinearLayout>

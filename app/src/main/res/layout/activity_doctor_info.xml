@@ -26,8 +26,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:text="Dr. Name"
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            style="@style/subTitleTextView"/>
 
         <TextView
             android:id="@+id/text_address_doctor"
@@ -36,7 +35,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="4dp"
             android:text="Address"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/normalTextView"/>
 
         <TextView
             android:id="@+id/text_doctor_description"
@@ -46,7 +46,8 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:minLines="10"
-            android:text="Description" />
+            android:text="Description"
+            style="@style/normalTextView"/>
 
     </LinearLayout>
 
@@ -64,14 +65,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:minWidth="150dp"
-            android:text="Submit Inquiry" />
+            android:text="Submit Inquiry"
+            style="@style/buttonStyle"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="15dp"
             android:minWidth="150dp"
-            android:text="View Schedule" />
+            android:text="View Schedule"
+            style="@style/buttonStyle"/>
 
     </LinearLayout>
 

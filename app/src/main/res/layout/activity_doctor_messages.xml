@@ -12,11 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/messages"
-        android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/subTitleTextView"/>
 
     <TextView
         android:id="@+id/textView8"
@@ -26,7 +25,8 @@
         android:text="@string/messageInstructions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        style="@style/normalTextView"/>
 
     <Spinner
         android:id="@+id/spinner"
@@ -40,6 +40,7 @@
 
     <Button
         android:id="@+id/buttonBackMessages"
+        style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -52,13 +53,14 @@
 
     <Button
         android:id="@+id/buttonViewComplaint"
+        style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginLeft="98dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="132dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginRight="98dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginRight="45dp"
         android:text="@string/viewComplaint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonBackMessages"

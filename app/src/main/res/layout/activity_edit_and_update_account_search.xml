@@ -12,28 +12,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_loginID"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"></TextView>
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        style="@style/subTitleTextView"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTxt_accountSearch"
-        android:textSize="30sp"
-        ></EditText>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tools:ignore="autofill"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_accountSearch"
         android:text="@string/button_searchButton"
-        android:textSize="30sp"
-        ></Button>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        style="@style/buttonStyle"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView_accountSearch"
-        ></ListView>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/listView_accountSearch"/>
 
 
 </LinearLayout>

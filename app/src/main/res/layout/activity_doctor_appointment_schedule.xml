@@ -8,16 +8,15 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="335dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/appointmentSchedule"
-        android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Heading"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -28,7 +27,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        style="@style/normalTextView"/>
 
     <TextView
         android:id="@+id/textView6"
@@ -40,12 +40,11 @@
         android:layout_marginEnd="200dp"
         android:layout_marginRight="200dp"
         android:text="@string/patientInfoTitle"
-        android:textSize="18sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerAppointments" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAppointments"
+        style="@style/subTitleTextView"/>
 
     <TextView
         android:id="@+id/textViewPatientInformation"
@@ -59,7 +58,8 @@
         android:text="@string/txt_lorem_ipsum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        style="@style/normalTextView"/>
 
     <Button
         android:id="@+id/buttonBack"
@@ -73,7 +73,8 @@
         android:text="@string/back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerAppointments" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAppointments"
+        style="@style/buttonStyle"/>
 
     <Spinner
         android:id="@+id/spinnerAppointments"
@@ -83,5 +84,5 @@
         android:entries="@array/appointments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

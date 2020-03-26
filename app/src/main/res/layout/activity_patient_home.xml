@@ -13,7 +13,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:text="Hello,"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        style="@style/normalTextView"/>
 
     <TextView
         android:id="@+id/text_patienthome_name"
@@ -22,8 +23,8 @@
         android:layout_marginTop="4dp"
         android:layout_marginLeft="16dp"
         android:text="Patient Name"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        android:textColor="@color/black"
+        style="@style/subTitleTextView"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +32,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:text="Upcoming Appointment"/>
+        android:text="Upcoming Appointment"
+        style="@style/normalTextView"/>
 
 
     <TextView
@@ -40,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginLeft="16dp"
-        android:text="Fri, Feb 2 2020"/>
+        android:text="Fri, Feb 2 2020"
+        style="@style/normalTextView"/>
 
 
     <TextView
@@ -49,7 +52,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:text="Account Balance"/>
+        android:text="Account Balance"
+        style="@style/normalTextView"/>
 
 
     <TextView
@@ -58,7 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginLeft="16dp"
-        android:text=" $ 0.00"/>
+        android:text=" $ 0.00"
+        style="@style/normalTextView"/>
 
 
     <Button
@@ -67,7 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
         android:layout_gravity="center"
-        android:text="Locate a Doctor"/>
+        android:text="Locate a Doctor"
+        style="@style/buttonStyle"/>
 
     <Button
         android:id="@+id/btn_account_profile"
@@ -75,7 +81,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
-        android:text="Account Profile"/>
+        android:text="Account Profile"
+        style="@style/buttonStyle"/>
 
     <RelativeLayout
         android:orientation="vertical"
@@ -90,7 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="32dp"
-            android:text="Logout"/>
+            android:text="Logout"
+            style="@style/buttonStyle"/>
 
     </RelativeLayout>
 
