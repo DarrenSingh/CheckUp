@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient));
         }*/
 
-
-
         Button login = findViewById(R.id.button);
         Button admin = findViewById(R.id.btn_main_admin);
         Button cashier = findViewById(R.id.btn_main_cashier);

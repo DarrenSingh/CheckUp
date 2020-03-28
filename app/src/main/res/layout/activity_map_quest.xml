@@ -44,5 +44,14 @@
         android:background="@color/white"
         android:visibility="gone"/>
 
+    <ListView
+        android:id="@+id/list_nearby_doctors"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        tools:listitem="@layout/item_nearby_doctor"
+        android:visibility="gone"/>
+
 
 </RelativeLayout>

@@ -98,8 +98,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             //Create Doctor Users
             DoctorDao doctorDao = new DoctorDao(null);
-            doctorDao.insert(new Doctor("Micheal","Scarn","322 Sydney Way","D001","password","604-555-2144","scarn@medicine.com",1));
-            doctorDao.insert(new Doctor("Micheal","Jordan","23 Real Dr","D002","password","604-555-2143","jordan@medicine.com",1));
+            doctorDao.insert(new Doctor("Micheal","Scarn","15122 72 Ave, Surrey, BC V3S 2G2","D001","password","604-555-2144","scarn@medicine.com",1));
+            doctorDao.insert(new Doctor("Deandre","Jordan","6844 King George Blvd, Surrey, BC V3W 4Z9","D002","password","604-555-2143","jordan@medicine.com",1));
+            doctorDao.insert(new Doctor("Elaine","Jackson","615300 105 Avenue, Surrey, BC","D003","password","604-555-2543","elaine@medicine.com",1));
+            doctorDao.insert(new Doctor("Robin","Lopez","4731 King George Blvd, Surrey, BC V3W 4Z9","D004","password","604-555-2343","lopez@medicine.com",1));
 
             //Create Patient Users
             PatientDao patientDao = new PatientDao(null);
