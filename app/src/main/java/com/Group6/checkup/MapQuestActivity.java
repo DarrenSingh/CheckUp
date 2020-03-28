@@ -121,8 +121,12 @@ public class MapQuestActivity extends Activity {
                 mMapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull com.mapbox.mapboxsdk.geometry.LatLng point) {
-                        if(locationFound){
+                        if(locationFound && mListViewDoctors.getVisibility() == View.GONE){
+                            mListViewSearch.setVisibility(View.VISIBLE);
                             mListViewDoctors.setVisibility(View.VISIBLE);
+                        } else if (locationFound) {
+                            mListViewSearch.setVisibility(View.GONE);
+                            mListViewDoctors.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -135,8 +139,6 @@ public class MapQuestActivity extends Activity {
                 mListViewDoctors.setVisibility(View.GONE);
             }
         });
-
-
 
         mListViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -158,9 +160,9 @@ public class MapQuestActivity extends Activity {
                 resetSearchAheadList();
                 mMapboxMap.clear();
                 mMapboxMap.setCameraPosition(new CameraPosition.Builder()
-                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat)-0.05,Double.parseDouble(selectedLong))) // Sets the new camera position
-                        .zoom(10) // Sets the zoom to level 10
-                        .tilt(20) // Set the camera tilt to 20 degrees
+                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat)-0.08,Double.parseDouble(selectedLong))) // Sets the new camera position
+                        .zoom(9)
+                        .tilt(25)
                         .build());
                 addMarker(mMapboxMap);
                 //make api call
@@ -200,6 +202,7 @@ public class MapQuestActivity extends Activity {
             SearchAheadQuery searchAheadQuery = new SearchAheadQuery
                     .Builder(queryString, searchCollections)
                     .location(surreyBC)
+                    .limit(5)
                     .build();
 
             mSearchAheadServiceV3.predictResultsFromQuery(searchAheadQuery,
@@ -217,7 +220,7 @@ public class MapQuestActivity extends Activity {
 
                                 int size = (searchAheadResults.size() < 5) ? searchAheadResults.size() : 5;
 
-                                for (int i = 0;i < size ; i++) {
+                                for (int i = size-1;i >= 0 ; i--) {
                                     // create a hashmap
                                     HashMap<String, String> hashMap = new HashMap<>();
 
@@ -404,7 +407,7 @@ public class MapQuestActivity extends Activity {
 
 
         markerOptions.position(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat),Double.parseDouble(selectedLong)));
-        markerOptions.snippet("Current Location");
+        markerOptions.snippet("Selected Location");
         mapboxMap.addMarker(markerOptions);
     }
 

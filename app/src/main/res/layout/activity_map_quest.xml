@@ -12,42 +12,33 @@
         android:layout_height="match_parent"
         app:mapquest_app_key="igQMb7DGDB15GRJzt9JMUphxNtnXc1qO" />
 
-    <EditText
-        android:id="@+id/edit_search_location"
-        android:layout_width="350dp"
-        android:layout_height="56dp"
-        android:padding="8dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:maxLines="1"
-        android:hint="Enter Address"/>
-
-    <ImageView
-        android:id="@+id/img_search_location"
-        android:src="@drawable/ic_search_black_24dp"
-        android:layout_alignTop="@id/edit_search_location"
-        android:layout_alignRight="@id/edit_search_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="8dp"/>
-
     <ListView
         android:id="@+id/list_search_location"
-        android:layout_alignTop="@id/edit_search_location"
-        android:layout_width="350dp"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_above="@id/edit_search_location"
         android:layout_centerHorizontal="true"
         android:background="@color/white"
-        android:visibility="gone"/>
+        tools:listitem="@layout/item_search_result"
+        android:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/edit_search_location"
+        android:layout_width="348dp"
+        android:layout_height="56dp"
+        android:layout_above="@id/list_nearby_doctors"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:maxLines="1"
+        android:hint="Search Your Address, City, Postal Code"/>
 
     <ListView
         android:id="@+id/list_nearby_doctors"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="336dp"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         tools:listitem="@layout/item_nearby_doctor"
