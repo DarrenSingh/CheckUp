@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -15,11 +16,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import com.Group6.checkup.Entities.DistanceMatrixRequest;
+import com.Group6.checkup.Entities.DistanceMatrixResponse;
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
+import com.Group6.checkup.Utils.GsonDistanceMatrixRequest;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -35,11 +46,13 @@ import com.mapquest.android.searchahead.model.response.SearchAheadResponse;
 import com.mapquest.android.searchahead.model.response.SearchAheadResult;
 import com.mapquest.mapping.MapQuest;
 import com.mapquest.mapping.maps.MapView;
+import com.mapquest.mapping.styles.MapStyles;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.Group6.checkup.BuildConfig.API_KEY;
 
@@ -52,7 +65,9 @@ public class MapQuestActivity extends Activity {
     private MapboxMap mMapboxMap;
     private SearchAheadService mSearchAheadServiceV3;
     private List<HashMap<String, String>> searchResultsData = new ArrayList<>();;
-    private SimpleAdapter adapter;
+    private List<HashMap<String,String>> nearbyDoctorsData = new ArrayList<>();
+    private SimpleAdapter searchAdapter;
+    private SimpleAdapter doctorsAdapter;
 
     private boolean locationFound = false;
     private String selectedLat;
@@ -70,13 +85,6 @@ public class MapQuestActivity extends Activity {
         mListViewSearch = findViewById(R.id.list_search_location);
         mListViewDoctors = findViewById(R.id.list_nearby_doctors);
         mEditSearch = findViewById(R.id.edit_search_location);
-        mImageSearch = findViewById(R.id.img_search_location);
-
-        mImageSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
 
         mEditSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -89,7 +97,8 @@ public class MapQuestActivity extends Activity {
 
                 if( count == 0 || s.toString().trim().length() == 0){
                     locationFound = false;
-                    resetResultsList();
+                    resetSearchAheadList();
+                    resetDoctorsList();
                 }
 
                 if(!locationFound && s.length() > 2){
@@ -109,9 +118,25 @@ public class MapQuestActivity extends Activity {
             public void onMapReady(MapboxMap mapboxMap) {
                 mMapboxMap = mapboxMap;
                 mMapView.setStreetMode();
-
+                mMapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(@NonNull com.mapbox.mapboxsdk.geometry.LatLng point) {
+                        if(locationFound){
+                            mListViewDoctors.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             }
         });
+
+        mEditSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListViewDoctors.setVisibility(View.GONE);
+            }
+        });
+
+
 
         mListViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -129,7 +154,8 @@ public class MapQuestActivity extends Activity {
 
                 mEditSearch.setText(displayAddress.getText().toString());
                 mEditSearch.setSelection(displayAddress.getText().length());
-                resetResultsList();
+
+                resetSearchAheadList();
                 mMapboxMap.clear();
                 mMapboxMap.setCameraPosition(new CameraPosition.Builder()
                         .target(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat)-0.05,Double.parseDouble(selectedLong))) // Sets the new camera position
@@ -137,9 +163,12 @@ public class MapQuestActivity extends Activity {
                         .tilt(20) // Set the camera tilt to 20 degrees
                         .build());
                 addMarker(mMapboxMap);
-                displayNearbyDoctors(mListViewDoctors);
+                //make api call
+                 distanceMatrixNetworkCall();
+                    //return list
             }
         });
+
     }
 
     @Override
@@ -215,11 +244,11 @@ public class MapQuestActivity extends Activity {
 
                                 int[] to = {R.id.text_result_address, R.id.text_result_city,R.id.hidden_location_lat,R.id.hidden_location_long};
 
-                                adapter = new SimpleAdapter(getApplicationContext(), searchResultsData, R.layout.item_search_result, from, to);
-                                mListViewSearch.setAdapter(adapter);
+                                searchAdapter = new SimpleAdapter(getApplicationContext(), searchResultsData, R.layout.item_search_result, from, to);
+                                mListViewSearch.setAdapter(searchAdapter);
                                 mListViewSearch.setVisibility(View.VISIBLE);
                             } else {
-                                resetResultsList();
+                                resetSearchAheadList();
                             }
                         }
 
@@ -233,81 +262,141 @@ public class MapQuestActivity extends Activity {
         }
     }
 
-    private void resetResultsList(){
-        searchResultsData.clear();
-        adapter.notifyDataSetChanged();
+    private void resetSearchAheadList(){
+        if(!searchResultsData.isEmpty()) {
+            searchResultsData.clear();
+            searchAdapter.notifyDataSetChanged();
+        }
     }
 
-    private void displayNearbyDoctors(ListView mListView){
-        //TODO get doctor addresses
-        //Get current latlong
+    private void resetDoctorsList(){
+        if(!nearbyDoctorsData.isEmpty()){
+            nearbyDoctorsData.clear();
+            doctorsAdapter.notifyDataSetChanged();
+            mListViewDoctors.setVisibility(View.GONE);
+        }
+    }
+
+    private void distanceMatrixNetworkCall(){
+        //Get all addresses
+        List<String> addresses = new ArrayList<>();
+
+        //Get the address to find distances from first
+        addresses.add(selectedLat+","+selectedLong);
 
         //Get doctors
         List<Doctor> doctors = new DoctorDao(getApplicationContext()).findAll();
 
-        //Get all addresses
-//        List<String> addresses = new ArrayList<>();
-//
-//        for (int i = 0; i < doctors.size(); i++) {
-//            addresses.add(doctors.get(i).getOfficeAddress());
-//        }
-
-        //do an api call for distance matrix
-
-
-        //filter results into hashmap list
-        List<HashMap<String,String>> doctorData = new ArrayList<>();
-
+        //add all doctors office addresses from database
         for (int i = 0; i < doctors.size(); i++) {
-            // create a hashmap
-            HashMap<String, String> hashMap = new HashMap<>();
-
-            // convert image int to a string and place it into the hashmap with an images key
-            hashMap.put("id",String.valueOf(doctors.get(i).getID()));
-            hashMap.put("name","Dr. "+doctors.get(i).getFirstName()+" "+doctors.get(i).getLastName());
-            hashMap.put("address",doctors.get(i).getOfficeAddress());
-            hashMap.put("distance","0.0 km");
-
-            // add this hashmap to the list
-            doctorData.add(hashMap);
+            addresses.add(doctors.get(i).getOfficeAddress());
         }
 
-        String[] from = {
-                "id",
-                "name",
-                "address",
-                "distance"
-        };
+        //add the options for the request
+        Map<String,Boolean> options = new HashMap<>();
+        options.put("allToAll",false);
 
-        int[] to = {R.id.hidden_nearby_id,R.id.text_nearby_name,R.id.text_nearby_address,R.id.text_nearby_distance};
+        //create an object
+        DistanceMatrixRequest requestObj = new DistanceMatrixRequest(addresses,options);
 
-        //create a list adapter
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getApplicationContext(),doctorData,R.layout.item_nearby_doctor,from,to);
+        Gson gson = new Gson();
 
-        //apply list adapter
-        mListView.setAdapter(simpleAdapter);
-        mListView.setVisibility(View.VISIBLE);
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        //apply onclick listener
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        GsonDistanceMatrixRequest gsonRequest = new GsonDistanceMatrixRequest(requestObj
+                , new Response.Listener<DistanceMatrixResponse>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //on click send to doctor profile activity
-                TextView mTextViewId = view.findViewById(R.id.hidden_nearby_id);
-                TextView mTextViewName = view.findViewById(R.id.text_nearby_name);
-                TextView mTextViewAddress = view.findViewById(R.id.text_nearby_address);
+            public void onResponse(DistanceMatrixResponse response) {
 
-                Intent intent = new Intent(MapQuestActivity.this,DoctorInfoActivity.class);
+                //add doctors name address and distance to hashmap list for the nearby doctors list adapter
+                for (int i = 0; i < doctors.size(); i++) {
+                    // create a hashmap
+                    HashMap<String, String> hashMap = new HashMap<>();
 
-                //pass intent extra(doctorID)
-                intent.putExtra("doctorId",mTextViewId.getText().toString());
-                intent.putExtra("doctorName",mTextViewName.getText().toString());
-                intent.putExtra("doctorAddress",mTextViewAddress.getText().toString());
-                startActivity(intent);
+                    // convert image int to a string and place it into the hashmap with an images key
+                    hashMap.put("id",String.valueOf(doctors.get(i).getID()));
+                    hashMap.put("name","Dr. "+doctors.get(i).getFirstName()+" "+doctors.get(i).getLastName());
+                    hashMap.put("address",doctors.get(i).getOfficeAddress());
+                    hashMap.put("distance",String.valueOf(response.getDistance().get(i+1)));
 
+                    // add this hashmap to the list
+                    nearbyDoctorsData.add(hashMap);
+                }
+
+                displayNearbyDoctors(mListViewDoctors);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MapQuestActivity.this, "Unable to Retrieve Nearby Doctors", Toast.LENGTH_SHORT).show();
             }
         });
 
+        queue.add(gsonRequest);
+
+    }
+
+    private void displayNearbyDoctors(ListView mListView){
+
+        if(!nearbyDoctorsData.isEmpty()) {
+
+            insertion(nearbyDoctorsData);
+
+            for (HashMap i: nearbyDoctorsData) {
+
+                float distance = Float.parseFloat(i.get("distance").toString());
+                String convertedDistance;
+
+                if(distance < 1 ){
+                    //convert to m
+
+                    convertedDistance = String.format("%.0f",(distance*1000)) + " m";
+                } else{
+                    convertedDistance = String.format("%.1f",distance) + " km";
+                }
+
+                i.remove("distance");
+                i.put("distance",convertedDistance);
+
+            }
+
+            String[] from = {
+                    "id",
+                    "name",
+                    "address",
+                    "distance"
+            };
+
+            int[] to = {R.id.hidden_nearby_id, R.id.text_nearby_name, R.id.text_nearby_address, R.id.text_nearby_distance};
+
+            //create a list adapter
+            doctorsAdapter = new SimpleAdapter(getApplicationContext(), nearbyDoctorsData, R.layout.item_nearby_doctor, from, to);
+
+            //apply list adapter
+            mListView.setAdapter(doctorsAdapter);
+            mListView.setVisibility(View.VISIBLE);
+
+            //apply onclick listener to redirect to the selected doctors profile activity
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    //on click send to doctor profile activity
+                    TextView mTextViewId = view.findViewById(R.id.hidden_nearby_id);
+                    TextView mTextViewName = view.findViewById(R.id.text_nearby_name);
+                    TextView mTextViewAddress = view.findViewById(R.id.text_nearby_address);
+
+                    Intent intent = new Intent(MapQuestActivity.this, DoctorInfoActivity.class);
+
+                    //pass intent extra(doctorID)
+                    intent.putExtra("doctorId", mTextViewId.getText().toString());
+                    intent.putExtra("doctorName", mTextViewName.getText().toString());
+                    intent.putExtra("doctorAddress", mTextViewAddress.getText().toString());
+                    startActivity(intent);
+
+                }
+            });
+
+        }
     }
 
     private void addMarker(MapboxMap mapboxMap) {
@@ -315,7 +404,6 @@ public class MapQuestActivity extends Activity {
 
 
         markerOptions.position(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat),Double.parseDouble(selectedLong)));
-//        markerOptions.title("MapQuest");
         markerOptions.snippet("Current Location");
         mapboxMap.addMarker(markerOptions);
     }
@@ -326,6 +414,54 @@ public class MapQuestActivity extends Activity {
 
     }
 
+    private static void insertion(List<HashMap<String,String>> a) {
+
+        for(int i = 1; i < a.size(); i++){
+
+            // grab next comparison value
+            HashMap<String,String> nextInsertValue = a.get(i);
+
+            // place value into final its position
+            insertIntoIndex(nextInsertValue, a, 0, (i-1));
+
+        }
+    }
+
+    private static void insertIntoIndex(HashMap<String,String> nextToInsert, List<HashMap<String,String>> a,int sortStart,int sortEnd) {
+
+
+        // while we are within bounds of the sorted subarray and sub end pointer value is less than it's preceeding index value
+        // move preceeded value to pointer index
+        // move pointer index over to the left
+        // place nextToInsert into empty space
+
+        int index = sortEnd;
+
+        while (index >= sortStart && Float.parseFloat(a.get(index).get("distance")) > Float.parseFloat(nextToInsert.get("distance"))) {
+
+            a.remove(index+1);
+            a.add(index + 1,a.get(index));
+            index--;
+        }
+
+        a.remove(index+1);
+        a.add(index + 1,nextToInsert);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(locationFound){
+            mEditSearch.setText("");
+            resetSearchAheadList();
+            resetDoctorsList();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
+
+
+
 
 

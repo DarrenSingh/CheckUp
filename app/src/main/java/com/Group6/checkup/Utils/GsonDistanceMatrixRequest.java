@@ -25,14 +25,14 @@ public class GsonDistanceMatrixRequest<T> extends Request<T> {
     private final Response.Listener<T> listener;
 
     public GsonDistanceMatrixRequest(DistanceMatrixRequest requestObj, Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        super(Method.POST, "http://www.mapquestapi.com/directions/v2/routematrix", errorListener);
+        super(Method.POST, "http://www.mapquestapi.com/directions/v2/routematrix?key="+API_KEY, errorListener);
         this.requestObj = requestObj;
         this.listener = listener;
     }
 
     @Override
     public String getBodyContentType() {
-        return "application/json; " + getParamsEncoding();
+        return "application/json; charset=utf-8";
     }
 
     @Override
@@ -42,18 +42,19 @@ public class GsonDistanceMatrixRequest<T> extends Request<T> {
         return json.getBytes();
     }
 
-    @Override
-    protected Map<String, String> getParams() throws AuthFailureError {
-        Map<String, String> headers = new HashMap<>();
-        headers.put("key",API_KEY);
-        return headers;
-    }
-
-
-    @Override
-    protected String getParamsEncoding() {
-        return "charset=utf-8";
-    }
+//    @Override
+//    protected Map<String, String> getParams() throws AuthFailureError {
+//        Map<String, String> headers = new HashMap<String, String>();
+//        headers.put("key",API_KEY);
+//        return headers;
+//    }
+//
+//
+//
+//    @Override
+//    protected String getParamsEncoding() {
+//        return "utf-8";
+//    }
 
     @Override
     protected void deliverResponse(T response) {

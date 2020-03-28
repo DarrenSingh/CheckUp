@@ -1,20 +1,13 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.Group6.checkup.DatabasePackage.DatabaseHelper;
-import com.Group6.checkup.Entities.Appointment;
-import com.Group6.checkup.Entities.Invoice;
-import com.Group6.checkup.Entities.OnlineHelp;
-import com.Group6.checkup.Utils.Dao.AppointmentDao;
-import com.Group6.checkup.Utils.Dao.InvoiceDao;
-import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Session;
 
 
