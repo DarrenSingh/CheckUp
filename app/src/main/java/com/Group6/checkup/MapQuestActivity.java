@@ -3,6 +3,9 @@ package com.Group6.checkup;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,6 +34,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -161,13 +166,12 @@ public class MapQuestActivity extends Activity {
                 mMapboxMap.clear();
                 mMapboxMap.setCameraPosition(new CameraPosition.Builder()
                         .target(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat)-0.08,Double.parseDouble(selectedLong))) // Sets the new camera position
-                        .zoom(9)
-                        .tilt(25)
+                        .zoom(10)
+                        .tilt(20)
                         .build());
                 addMarker(mMapboxMap);
                 //make api call
                  distanceMatrixNetworkCall();
-                    //return list
             }
         });
 
@@ -322,11 +326,17 @@ public class MapQuestActivity extends Activity {
                     hashMap.put("address",doctors.get(i).getOfficeAddress());
                     hashMap.put("distance",String.valueOf(response.getDistance().get(i+1)));
 
+                    DistanceMatrixResponse.Location location = response.getLocations().get(i+1);
+                    hashMap.put("lat",String.valueOf(location.getLatLng().getLat()));
+                    hashMap.put("lng",String.valueOf(location.getLatLng().getLng()));
+
                     // add this hashmap to the list
                     nearbyDoctorsData.add(hashMap);
                 }
 
                 displayNearbyDoctors(mListViewDoctors);
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -379,6 +389,8 @@ public class MapQuestActivity extends Activity {
             mListView.setAdapter(doctorsAdapter);
             mListView.setVisibility(View.VISIBLE);
 
+            addDoctorsMarkers(this.mMapboxMap,nearbyDoctorsData);
+
             //apply onclick listener to redirect to the selected doctors profile activity
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -405,10 +417,30 @@ public class MapQuestActivity extends Activity {
     private void addMarker(MapboxMap mapboxMap) {
         MarkerOptions markerOptions = new MarkerOptions();
 
+        IconFactory iconFactory = IconFactory.getInstance(MapQuestActivity.this);
+        Icon icon = iconFactory.fromResource(R.drawable.mapquest_icon);
 
         markerOptions.position(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat),Double.parseDouble(selectedLong)));
         markerOptions.snippet("Selected Location");
+        markerOptions.setIcon(icon);
         mapboxMap.addMarker(markerOptions);
+    }
+
+    private void addDoctorsMarkers(MapboxMap mapboxMap, List<HashMap<String,String>> nearbyDoctorsData){
+
+        for (int i = 0; i < nearbyDoctorsData.size(); i++) {
+
+            MarkerOptions markerOptions = new MarkerOptions();
+
+            markerOptions.position(new com.mapbox.mapboxsdk.geometry.LatLng(
+                    Double.parseDouble(nearbyDoctorsData.get(i).get("lat")),
+                    Double.parseDouble(nearbyDoctorsData.get(i).get("lng")))
+            );
+            markerOptions.snippet(nearbyDoctorsData.get(i).get("name"));
+            mapboxMap.addMarker(markerOptions);
+
+        }
+
     }
 
     private void hideKeyboard(View view){

@@ -1,23 +1,21 @@
 package com.Group6.checkup.Entities;
 
+import android.view.Display;
+
 import java.util.List;
-import java.util.Map;
 
 public class DistanceMatrixResponse {
 
     private boolean allToAll;
     private List<Float> distance;
     private List<Float> time;
-//    private List<String> locations;
-//    private List<Map<String,Float>> displayLatLng;
-//    private Map<String,Float> lng;
-//    private Map<String,Float> lat;
+    private List<Location> locations;
 
-
-    public DistanceMatrixResponse(boolean allToAll, List<Float> distance, List<Float> time) {
+    public DistanceMatrixResponse(boolean allToAll, List<Float> distance, List<Float> time, List<Location> locations) {
         this.allToAll = allToAll;
         this.distance = distance;
         this.time = time;
+        this.locations = locations;
     }
 
     public boolean isAllToAll() {
@@ -42,6 +40,57 @@ public class DistanceMatrixResponse {
 
     public void setTime(List<Float> time) {
         this.time = time;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public class Location{
+
+        private LatLong latLng;
+
+        public Location(LatLong latLng) {
+            this.latLng = latLng;
+        }
+
+        public LatLong getLatLng() {
+            return latLng;
+        }
+
+        public void setLatLng(LatLong latLng) {
+            this.latLng = latLng;
+        }
+    }
+
+    public class LatLong{
+        float lng;
+        float lat;
+
+        public LatLong(float lng, float lat) {
+            this.lng = lng;
+            this.lat = lat;
+        }
+
+        public float getLng() {
+            return lng;
+        }
+
+        public void setLng(float lng) {
+            this.lng = lng;
+        }
+
+        public float getLat() {
+            return lat;
+        }
+
+        public void setLat(float lat) {
+            this.lat = lat;
+        }
     }
 
     //allToAll boolean

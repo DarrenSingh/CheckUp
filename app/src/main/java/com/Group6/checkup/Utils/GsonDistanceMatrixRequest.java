@@ -42,20 +42,6 @@ public class GsonDistanceMatrixRequest<T> extends Request<T> {
         return json.getBytes();
     }
 
-//    @Override
-//    protected Map<String, String> getParams() throws AuthFailureError {
-//        Map<String, String> headers = new HashMap<String, String>();
-//        headers.put("key",API_KEY);
-//        return headers;
-//    }
-//
-//
-//
-//    @Override
-//    protected String getParamsEncoding() {
-//        return "utf-8";
-//    }
-
     @Override
     protected void deliverResponse(T response) {
         this.listener.onResponse(response);
