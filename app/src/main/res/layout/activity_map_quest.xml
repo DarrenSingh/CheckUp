@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapQuestActivity">
+
+    <com.mapquest.mapping.maps.MapView
+        android:id="@+id/mapquestMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mapquest_app_key="igQMb7DGDB15GRJzt9JMUphxNtnXc1qO" />
+
+    <ListView
+        android:id="@+id/list_search_location"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/edit_search_location"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        tools:listitem="@layout/item_search_result"
+        android:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/edit_search_location"
+        android:layout_width="348dp"
+        android:layout_height="56dp"
+        android:layout_above="@id/list_nearby_doctors"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:maxLines="1"
+        android:hint="Search Your Address, City, Postal Code"/>
+
+    <ListView
+        android:id="@+id/list_nearby_doctors"
+        android:layout_width="match_parent"
+        android:layout_height="336dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        tools:listitem="@layout/item_nearby_doctor"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

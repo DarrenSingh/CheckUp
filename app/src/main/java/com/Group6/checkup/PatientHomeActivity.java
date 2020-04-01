@@ -63,8 +63,8 @@ public class PatientHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO Create new intent for LocateDoctorActivity.Class
-                //Intent intent = new Intent(PatientHomeActivity.this,);
-                //startActivity(intent);
+                Intent intent = new Intent(PatientHomeActivity.this,MapQuestActivity.class);
+                startActivity(intent);
             }
         });
 

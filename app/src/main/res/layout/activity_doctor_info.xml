@@ -18,9 +18,10 @@
             android:layout_height="150dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="64dp"
-            android:background="@color/colorAccent" />
+            android:src="@drawable/ic_account_circle_black_48dp"/>
 
         <TextView
+            android:id="@+id/text_doctor_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
@@ -30,7 +31,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <TextView
-            android:id="@+id/text_address_doctor"
+            android:id="@+id/text_doctor_profile_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
@@ -39,7 +40,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
-            android:id="@+id/text_doctor_description"
+            android:id="@+id/text_doctor_profile_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
