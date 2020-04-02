@@ -14,17 +14,17 @@
 
         <ImageView
             android:id="@+id/img_doctor_profile"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="64dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/ic_account_circle_black_48dp"/>
 
         <TextView
             android:id="@+id/text_doctor_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:text="Dr. Name"
             android:textStyle="bold"
@@ -34,47 +34,48 @@
             android:id="@+id/text_doctor_profile_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="4dp"
             android:text="Address"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
-        <TextView
-            android:id="@+id/text_doctor_profile_description"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_schedule_days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="16dp"
-            android:ellipsize="end"
-            android:minLines="10"
-            android:text="Description" />
+            android:orientation="horizontal"/>
+
+        <ListView
+            android:id="@+id/list_schedule_availability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
-        android:layout_alignParentBottom="true">
+<!--    <LinearLayout-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingTop="50dp"-->
+<!--        android:paddingBottom="50dp"-->
+<!--        android:layout_alignParentBottom="true">-->
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:minWidth="150dp"
-            android:text="Submit Inquiry" />
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:minWidth="150dp"-->
+<!--            android:text="Submit Inquiry" />-->
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:minWidth="150dp"
-            android:text="View Schedule" />
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:minWidth="150dp"-->
+<!--            android:text="View Schedule" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 
 </RelativeLayout>

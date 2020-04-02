@@ -79,7 +79,7 @@ public class DatabaseEntries {
     );
 
     //Appointment table creating query.
-    public static final String SQL_APPOINTMENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_APPOINTMENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s INTEGER NOT NULL, %s INTEGER NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (patientID) REFERENCES Patient (_id) ON UPDATE CASCADE ON DELETE NO ACTION, FOREIGN KEY (doctorID) REFERENCES Doctor (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.AppointmentTable.TABLE_NAME,
             DatabaseTable.AppointmentTable._ID,
             DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME,

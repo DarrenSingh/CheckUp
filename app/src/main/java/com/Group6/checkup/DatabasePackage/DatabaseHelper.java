@@ -110,8 +110,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             //Create Appointments
             AppointmentDao appointmentDao = new AppointmentDao(null);
-            appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1,1));
-            appointmentDao.insert(new Appointment(System.currentTimeMillis()-3000, 1,1));
+//            appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1,1));
+            appointmentDao.insert(new Appointment(1585846803000L,1,1));
+            appointmentDao.insert(new Appointment(1585854003000L,1,1));
+            appointmentDao.insert(new Appointment(1585861203000L,1,1));
+            appointmentDao.insert(new Appointment(1585933203000L,1,1));
+            appointmentDao.insert(new Appointment(1585940403000L,1,1));
+            appointmentDao.insert(new Appointment(1585947603000L,1,1));
+            appointmentDao.insert(new Appointment(1586023203000L,1,1));
+            appointmentDao.insert(new Appointment(1586019603000L,1,1));
+            appointmentDao.insert(new Appointment(1586037603000L,1,1));
+            appointmentDao.insert(new Appointment(1586034003000L,1,1));
+
+
+
+
+
+
+
+
+
+
+
 
             //Create Invoices
             InvoiceDao invoiceDao = new InvoiceDao(null);
