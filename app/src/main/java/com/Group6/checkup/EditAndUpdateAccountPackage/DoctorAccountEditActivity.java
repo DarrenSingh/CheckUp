@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 
 import java.util.ArrayList;
@@ -59,42 +60,78 @@ public class DoctorAccountEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Edit loginID validation
-                if (loginID.charAt(0) != 'D') {
-                    etLoginID.setError("Doctor Account has to start with letter 'D'.");
-
-                    if (doctorDao.exists(loginID)) {
-                        etLoginID.setError("Login ID is already exists");
-                    }
-
+                if (AccountValidation.isEmpty(etFirstName)) {
+                    etFirstName.setError("This field is required");
                 } else {
-
-                    firstName = etFirstName.getText().toString();
-                    lastName = etLastName.getText().toString();
-                    officeAddress = etOfficeAddress.getText().toString();
-                    phoneNumber = etPhoneNumber.getText().toString();
-                    email = etEmail.getText().toString();
-                    enteredLoginID = etLoginID.getText().toString();
-                    password = etPassword.getText().toString();
-
-                    doctorAccount.setFirstName(firstName);
-                    doctorAccount.setLastName(lastName);
-                    doctorAccount.setOfficeAddress(officeAddress);
-                    doctorAccount.setLoginID(loginID);
-                    doctorAccount.setPassword(password);
-                    doctorAccount.setPhoneNumber(phoneNumber);
-                    doctorAccount.setEmailAddress(email);
-
-                    //update database
-                    if(doctorDao.insert(doctorAccount)) {
-                        Toast.makeText(DoctorAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(DoctorAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
-                    } else {
-                        Toast.makeText(DoctorAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                    if (AccountValidation.nameValidation(etFirstName) == false) {
+                        etFirstName.setError("Invalid input");
                     }
                 }
+                if (AccountValidation.isEmpty(etLastName)) {
+                    etLastName.setError("This field is required");
+                } else {
+                    if (AccountValidation.nameValidation(etLastName) == false) {
+                        etLastName.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etOfficeAddress)) {
+                    etOfficeAddress.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etPhoneNumber)) {
+                    etPhoneNumber.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etEmail)) {
+                    etEmail.setError("This field is required");
+                } else {
+                    if (!AccountValidation.emailValidation((etEmail))) {
+                        etEmail.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etLoginID)) {
+                    etLoginID.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etPassword)) {
+                    etPassword.setError("This field is required");
+                }
+                if (!AccountValidation.isEmpty(etFirstName) && !AccountValidation.isEmpty(etLastName) && !AccountValidation.isEmpty(etLoginID) && !AccountValidation.isEmpty((etPassword)) &&
+                        AccountValidation.nameValidation(etFirstName) && AccountValidation.nameValidation(etLastName) && !AccountValidation.isEmpty(etOfficeAddress) && !AccountValidation.isEmpty(etPhoneNumber) &&
+                        !AccountValidation.isEmpty(etEmail) && AccountValidation.emailValidation(etEmail)) {
 
+                    //Edit loginID validation
+                    if (loginID.charAt(0) != 'D') {
+                        etLoginID.setError("Doctor Account has to start with letter 'D'.");
 
+                        if (doctorDao.exists(loginID)) {
+                            etLoginID.setError("Login ID is already exists");
+                        }
+
+                    } else {
+
+                        firstName = etFirstName.getText().toString();
+                        lastName = etLastName.getText().toString();
+                        officeAddress = etOfficeAddress.getText().toString();
+                        phoneNumber = etPhoneNumber.getText().toString();
+                        email = etEmail.getText().toString();
+                        enteredLoginID = etLoginID.getText().toString();
+                        password = etPassword.getText().toString();
+
+                        doctorAccount.setFirstName(firstName);
+                        doctorAccount.setLastName(lastName);
+                        doctorAccount.setOfficeAddress(officeAddress);
+                        doctorAccount.setLoginID(loginID);
+                        doctorAccount.setPassword(password);
+                        doctorAccount.setPhoneNumber(phoneNumber);
+                        doctorAccount.setEmailAddress(email);
+
+                        //update database
+                        if (doctorDao.update(doctorAccount)) {
+                            Toast.makeText(DoctorAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(DoctorAccountEditActivity.this, EditAndUpdateAccountSearchActivity.class));
+                        } else {
+                            Toast.makeText(DoctorAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
             }
         });
 
@@ -103,12 +140,13 @@ public class DoctorAccountEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(doctorDao.delete(loginID)) {
+                if (doctorDao.delete(loginID)) {
                     Toast.makeText(DoctorAccountEditActivity.this, "Account Deleted", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(DoctorAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                    startActivity(new Intent(DoctorAccountEditActivity.this, EditAndUpdateAccountSearchActivity.class));
                 } else {
                     Toast.makeText(DoctorAccountEditActivity.this, "Unable to Delete Account", Toast.LENGTH_SHORT).show();
-                }            }
+                }
+            }
         });
 
 

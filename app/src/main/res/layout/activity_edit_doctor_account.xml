@@ -14,6 +14,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/text_doctorAccountEdit"
+            android:textAlignment="center"
+            android:textSize="30sp"></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/text_firstName"
             android:textSize="20sp"></TextView>
@@ -23,7 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_firstName"
-            android:textSize="30sp"></EditText>
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -37,7 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_lastName"
-            android:textSize="30sp"></EditText>
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -51,7 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_officeAddress"
-            android:textSize="30sp"></EditText>
+            android:inputType="text"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -65,7 +79,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_phoneNumber"
-            android:textSize="30sp"></EditText>
+            android:inputType="phone"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -79,7 +95,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_email"
-            android:textSize="30sp"></EditText>
+            android:inputType="textEmailAddress"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -93,7 +111,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_loginID"
-            android:textSize="30sp"></EditText>
+            android:inputType="text"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -107,7 +127,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_password"
-            android:textSize="30sp"></EditText>
+            android:inputType="textPassword"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <Button
             android:id="@+id/btn_editDoctorAccount"
@@ -124,7 +146,7 @@
             android:layout_marginTop="30dp"
             android:text="@string/button_delete"
             android:textSize="30sp"></Button>
-        
+
     </LinearLayout>
 
 </ScrollView>

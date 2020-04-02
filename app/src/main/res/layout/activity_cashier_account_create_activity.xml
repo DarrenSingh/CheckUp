@@ -10,6 +10,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/text_cashierAccountCreation"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/text_firstName"
         android:textSize="20sp"></TextView>
@@ -19,7 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_firstName"
-        android:textSize="30sp"></EditText>
+        android:inputType="textPersonName"
+        android:textSize="30sp"
+        android:importantForAutofill="no"></EditText>
 
     <TextView
         android:layout_width="match_parent"
@@ -33,7 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_lastName"
-        android:textSize="30sp"></EditText>
+        android:inputType="textPersonName"
+        android:textSize="30sp"
+        android:importantForAutofill="no"></EditText>
 
     <TextView
         android:layout_width="match_parent"
@@ -47,7 +58,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_loginID"
-        android:textSize="30sp"></EditText>
+        android:inputType="text"
+        android:textSize="30sp"
+        android:importantForAutofill="no"></EditText>
 
     <TextView
         android:layout_width="match_parent"
@@ -61,7 +74,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_password"
-        android:textSize="30sp"></EditText>
+        android:inputType="textPassword"
+        android:textSize="30sp"
+        android:importantForAutofill="no"></EditText>
 
     <Button
         android:id="@+id/btn_createCashierAccount"

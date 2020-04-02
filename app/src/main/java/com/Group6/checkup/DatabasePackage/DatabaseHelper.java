@@ -1,5 +1,6 @@
 package com.Group6.checkup.DatabasePackage;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,10 +12,12 @@ import androidx.annotation.Nullable;
 import com.Group6.checkup.Entities.Admin;
 import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.Entities.Doctor;
+import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.AdminDao;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
+import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -102,6 +105,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //            onlineHelpDao.insert(new OnlineHelp("Test Message1","Lorem Ipsum","Jan 23, 2020",1,1));
 //            onlineHelpDao.insert(new OnlineHelp("Test Message2","Lorem Ipsum","Jan 24, 2020",1,1));
 //            onlineHelpDao.insert(new OnlineHelp("Test Message3","Lorem Ipsum","Jan 27, 2020",1,1));
+
 
             return null;
         }

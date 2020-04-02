@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 
 public class PatientAccountEditActivity extends AppCompatActivity {
@@ -21,8 +22,8 @@ public class PatientAccountEditActivity extends AppCompatActivity {
     Button btnEditAccount, btnDeleteAccount;
     Spinner spinnerYesOrNo;
     EditText etFirstName, etLastName, etAddress, etPhoneNumber, etEmail, etLoginID, etPassword, etHealthCardNumber;
-    String firstName, lastName, address, phoneNumber, email, loginID, password, rowID, enteredLoginID;
-    boolean msp;
+    String firstName, lastName, address, phoneNumber, email, loginID, password, rowID, enteredLoginID, msp;
+    boolean mspStatus;
     int healthCardNumber;
     String[] yesOrNo = {"yes", "no"};
     Intent getIntent;
@@ -63,12 +64,17 @@ public class PatientAccountEditActivity extends AppCompatActivity {
         etEmail.setText(patientAccount.getEmailAddress());
         etLoginID.setText(patientAccount.getLoginID());
         etPassword.setText(patientAccount.getPassword());
+        mspStatus = patientAccount.getMspStatus();
         etHealthCardNumber.setText(String.valueOf(patientAccount.getHealthCareCardNumber()));
 
         ArrayAdapter adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, yesOrNo);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerYesOrNo.setAdapter(adapter);
-
+        if(mspStatus == true){
+            spinnerYesOrNo.setSelection(0);
+        }else{
+            spinnerYesOrNo.setSelection(1);
+        }
         spinnerYesOrNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -82,6 +88,7 @@ public class PatientAccountEditActivity extends AppCompatActivity {
                     healthCardNumber = 0;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Toast.makeText(getBaseContext(), "Please choose MSP Status", Toast.LENGTH_SHORT).show();
@@ -92,43 +99,95 @@ public class PatientAccountEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                firstName = etFirstName.getText().toString();
-                lastName = etLastName.getText().toString();
-                address = etAddress.getText().toString();
-                phoneNumber = etPhoneNumber.getText().toString();
-                email = etEmail.getText().toString();
-                enteredLoginID = etLoginID.getText().toString();
-                password = etPassword.getText().toString();
-                // set healthcare number to null if no value input
-                healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
-                        ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
-                msp = (spinnerYesOrNo.getSelectedItem().toString() == "yes");
+                msp = spinnerYesOrNo.getSelectedItem().toString();
 
-                patientAccount.setFirstName(firstName);
-                patientAccount.setLastName(lastName);
-                patientAccount.setAddress(address);
-                patientAccount.setPhoneNumber(phoneNumber);
-                patientAccount.setEmailAddress(email);
-                patientAccount.setLoginID(loginID);
-                patientAccount.setPassword(password);
-                patientAccount.setHealthCareCardNumber(healthCardNumber);
-                patientAccount.setMspStatus(msp);
+                if (msp.equals("yes")) {
+                    mspStatus = true;
+                } else {
+                    mspStatus = false;
+                }
 
-
-                //Edit loginID validation
-                if (loginID.charAt(0) != 'P') {
-                    etLoginID.setError("Patient Account has to start with letter 'P'.");
-
-                    if (patientDao.exists(loginID)) {
-                        etLoginID.setError("Login ID is already exists");
+                if (AccountValidation.isEmpty(etFirstName)) {
+                    etFirstName.setError("This field is required");
+                } else {
+                    if (AccountValidation.nameValidation(etFirstName) == false) {
+                        etFirstName.setError("Invalid input");
                     }
-                } else{
-                    //update database
-                    if(patientDao.insert(patientAccount)) {
-                        Toast.makeText(PatientAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(PatientAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                }
+                if (AccountValidation.isEmpty(etLastName)) {
+                    etLastName.setError("This field is required");
+                } else {
+                    if (AccountValidation.nameValidation(etLastName) == false) {
+                        etLastName.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etAddress)) {
+                    etAddress.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etPhoneNumber)) {
+                    etPhoneNumber.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etEmail)) {
+                    etEmail.setError("This field is required");
+                } else {
+                    if (!AccountValidation.emailValidation((etEmail))) {
+                        etEmail.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etLoginID)) {
+                    etLoginID.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etPassword)) {
+                    etPassword.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etHealthCardNumber)){
+                    etHealthCardNumber.setError("This field is required");
+                }
+                if(mspStatus == true && AccountValidation.isEmpty(etHealthCardNumber)){
+                    etHealthCardNumber.setError("This field is required");
+                }
+                if (!AccountValidation.isEmpty(etFirstName) && !AccountValidation.isEmpty(etLastName) && !AccountValidation.isEmpty(etLoginID) && !AccountValidation.isEmpty((etPassword)) &&
+                        AccountValidation.nameValidation(etFirstName) && AccountValidation.nameValidation(etLastName) && !AccountValidation.isEmpty(etAddress) && !AccountValidation.isEmpty(etPhoneNumber) &&
+                        !AccountValidation.isEmpty(etEmail) && AccountValidation.emailValidation(etEmail) && ((mspStatus == true  && !AccountValidation.isEmpty(etHealthCardNumber)) || mspStatus == false)) {
+
+                    firstName = etFirstName.getText().toString();
+                    lastName = etLastName.getText().toString();
+                    address = etAddress.getText().toString();
+                    phoneNumber = etPhoneNumber.getText().toString();
+                    email = etEmail.getText().toString();
+                    enteredLoginID = etLoginID.getText().toString();
+                    password = etPassword.getText().toString();
+                    // set healthcare number to null if no value input
+                    healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
+                            ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
+                    mspStatus = (spinnerYesOrNo.getSelectedItem().toString() == "yes");
+
+                    patientAccount.setFirstName(firstName);
+                    patientAccount.setLastName(lastName);
+                    patientAccount.setAddress(address);
+                    patientAccount.setPhoneNumber(phoneNumber);
+                    patientAccount.setEmailAddress(email);
+                    patientAccount.setLoginID(loginID);
+                    patientAccount.setPassword(password);
+                    patientAccount.setHealthCareCardNumber(healthCardNumber);
+                    patientAccount.setMspStatus(mspStatus);
+
+
+                    //Edit loginID validation
+                    if (loginID.charAt(0) != 'P') {
+                        etLoginID.setError("Patient Account has to start with letter 'P'.");
+
+                        if (patientDao.exists(loginID)) {
+                            etLoginID.setError("Login ID is already exists");
+                        }
                     } else {
-                        Toast.makeText(PatientAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                        //update database
+                        if (patientDao.update(patientAccount)) {
+                            Toast.makeText(PatientAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(PatientAccountEditActivity.this, EditAndUpdateAccountSearchActivity.class));
+                        } else {
+                            Toast.makeText(PatientAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -139,9 +198,9 @@ public class PatientAccountEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(patientDao.delete(loginID)) {
+                if (patientDao.delete(loginID)) {
                     Toast.makeText(PatientAccountEditActivity.this, "Account Deleted", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PatientAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                    startActivity(new Intent(PatientAccountEditActivity.this, EditAndUpdateAccountSearchActivity.class));
                 } else {
                     Toast.makeText(PatientAccountEditActivity.this, "Unable to Delete Account", Toast.LENGTH_SHORT).show();
                 }

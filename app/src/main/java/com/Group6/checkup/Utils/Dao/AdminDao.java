@@ -122,7 +122,6 @@ public class AdminDao extends Dao<Admin>{
 
         long result = dbConnection.insert(DatabaseTable.AdminTable.TABLE_NAME, null, recordObject);
 
-
         return (result >= 0) ? true : false;
     }
 
