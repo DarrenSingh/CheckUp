@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,7 +45,6 @@ public class DoctorInfoActivity extends AppCompatActivity {
     List<Appointment> appointments;
     int currentMonth;
     int currentDate;
-    Date currentTime;
     int selected = -1;
 
     @Override
@@ -59,7 +57,7 @@ public class DoctorInfoActivity extends AppCompatActivity {
         doctorId = Integer.parseInt(previousIntent.getStringExtra("doctorId"));
 
         availabilityData = new ArrayList<>();
-        currentTime = new Date(System.currentTimeMillis());
+        Date currentTime = new Date(System.currentTimeMillis());
         currentMonth = currentTime.getMonth();
         currentDate = currentTime.getDate();
 
@@ -162,6 +160,8 @@ public class DoctorInfoActivity extends AppCompatActivity {
         //create a new date recycler list view adapter, passing the onDateClick lister we created
         dateRecyclerViewAdapter = new DateRecyclerViewAdapter(dateListener);
 
+        initializeAvailabilityData();
+
         //set the adapter to the recycler list view component
         mRecyclerDateList.setAdapter(dateRecyclerViewAdapter);
 
@@ -174,6 +174,36 @@ public class DoctorInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initializeAvailabilityData(){
+
+            dateRecyclerViewAdapter.hasBeenSelected = true;
+            dateRecyclerViewAdapter.previouslySelected = selected;
+            selected = 0;
+            dateRecyclerViewAdapter.selected = 0;
+
+        //create a new list of booked items
+        List<Integer> booked = new ArrayList<>();
+
+        //get the date of the currently selected date from the list
+        Date todaysDate = new Date(System.currentTimeMillis());
+
+        //loop through the appointments
+        for (int i = 0; i < this.appointments.size(); i++) {
+
+            //get appointment date
+            Date appointmentDate = new Date(this.appointments.get(i).getAppointmentDateTime());
+
+            //if the month and date of the appointment are the same as the selected date
+            if (appointmentDate.getMonth() == todaysDate.getMonth()
+                    && appointmentDate.getDate() == todaysDate.getDate()) {
+                //add appointment to booked list
+                booked.add(appointmentDate.getHours());
+            }
+        }
+
+        resetAvailabilityData(todaysDate,availabilityData,booked);
 
     }
 
@@ -216,9 +246,6 @@ public class DoctorInfoActivity extends AppCompatActivity {
         }
 
     }
-
-
-
 
     public static class ConfirmBookingDialogFragment extends DialogFragment {
 
