@@ -68,5 +68,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.setForeignKeyConstraintsEnabled(true);
         }
     }
-
 }

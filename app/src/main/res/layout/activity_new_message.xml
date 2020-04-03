@@ -23,10 +23,10 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
 
         <TextView
+            android:id="@+id/text_recipient_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:labelFor="@+id/edit_first_name"
             android:text="Dr. Ross Gellar"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 

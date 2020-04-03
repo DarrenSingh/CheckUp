@@ -53,6 +53,9 @@
     <string name="text_address">Address</string>
     <string name="text_mspCoverageQuestion">Do you have a MSP coverage?</string>
     <string name="text_healthCardNumber">Health Card Number</string>
+    <string name="text_booking_confirmation">Would you like to book an appointment on %s at %s?</string>
+    <string name="btn_booking_confirm">Confirm</string>
+    <string name="btn_booking_cancel">Cancel</string>
     <string-array name="yes_or_No">
         <item>yes</item>
         <item>no</item>
