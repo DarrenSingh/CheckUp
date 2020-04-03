@@ -3,8 +3,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="4dp"
-    android:id="@+id/layout_linear_date">
+    android:padding="4dp">
 
     <TextView
         android:id="@+id/text_schedule_date"

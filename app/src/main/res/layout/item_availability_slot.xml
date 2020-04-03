@@ -11,6 +11,8 @@
         android:paddingLeft="32dp"
         android:layout_weight="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textSize="16sp"
+        android:textColor="@color/black"
         android:text="Time" />
 
     <TextView
@@ -21,7 +23,8 @@
         android:paddingRight="32dp"
         android:layout_weight="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textSize="14dp"
+        android:textSize="14sp"
+        android:textColor="@color/black"
         android:text="Availability" />
 
 </LinearLayout>
