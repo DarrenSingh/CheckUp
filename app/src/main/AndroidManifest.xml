@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConfirmAppointmentActivity"></activity>
-        <activity
+      
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:name=".MapQuestActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
+              <activity
             android:name=".MapQuestActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".PatientViewMessageActivity" />
