@@ -16,9 +16,6 @@
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <activity android:name=".MapQuestActivity"
             android:windowSoftInputMode="adjustResize"></activity>
-              <activity
-            android:name=".MapQuestActivity"
-            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".PatientViewMessageActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".loginActivity" />
