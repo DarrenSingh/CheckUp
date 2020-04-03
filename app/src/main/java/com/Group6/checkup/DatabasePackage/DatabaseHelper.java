@@ -9,23 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.Entities.Admin;
-import com.Group6.checkup.Entities.Appointment;
-import com.Group6.checkup.Entities.Cashier;
-import com.Group6.checkup.Entities.Doctor;
-import com.Group6.checkup.Entities.Invoice;
-import com.Group6.checkup.Entities.OnlineHelp;
-import com.Group6.checkup.Entities.OnlineHelpReply;
-import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.R;
-import com.Group6.checkup.Utils.Dao.AdminDao;
-import com.Group6.checkup.Utils.Dao.AppointmentDao;
-import com.Group6.checkup.Utils.Dao.CashierDao;
-import com.Group6.checkup.Utils.Dao.DoctorDao;
-import com.Group6.checkup.Utils.Dao.InvoiceDao;
-import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
-import com.Group6.checkup.Utils.Dao.OnlineHelpReplyDao;
-import com.Group6.checkup.Utils.Dao.PatientDao;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 

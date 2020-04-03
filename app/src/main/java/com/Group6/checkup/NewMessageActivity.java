@@ -2,13 +2,23 @@ package com.Group6.checkup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.Group6.checkup.Entities.OnlineHelp;
+import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
+import com.Group6.checkup.Utils.Session;
+
 public class NewMessageActivity extends AppCompatActivity {
+
+    private Session appSession;
+    private OnlineHelpDao onlineHelpDao;
+    private OnlineHelp onlineHelp;
+    int doctorId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,25 +31,40 @@ public class NewMessageActivity extends AppCompatActivity {
         Button mBtnSend = findViewById(R.id.btn_send_message);
 
         //Activity Logic
+        Intent getIntent = getIntent();
+        //pass intent with doctorID from other activity
+        doctorId = Integer.parseInt(getIntent.getStringExtra("doctorId"));
+
 
         //UI Event Listeners
         mBtnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //TODO logic adding message to the database
                 //create new msg object
+                onlineHelp = new OnlineHelp(
+                        mEditSubject.getText().toString(),
+                        mEditMessage.getText().toString(),
+                        System.currentTimeMillis(),
+                        appSession.getUserId(),
+                        doctorId
+                );
 
-                //set msg attributes using UI Component values
-
+                //TODO check for foreign key error
                 //make message entry in database using the message object
+                boolean result = onlineHelpDao.insert(onlineHelp);
 
                 //display success message
-                Toast.makeText(NewMessageActivity.this, "Message Sent", Toast.LENGTH_SHORT).show();
+                if(result) {
+                    Toast.makeText(NewMessageActivity.this, "Message Sent", Toast.LENGTH_SHORT).show();
 
-                //clear edit text fields
-                mEditSubject.setText("");
-                mEditMessage.setText("");
+                    //set msg attributes using UI Component values
+                    mEditSubject.setText("");
+                    mEditMessage.setText("");
+
+                } else {
+                    Toast.makeText(NewMessageActivity.this, "Unable to sent message", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

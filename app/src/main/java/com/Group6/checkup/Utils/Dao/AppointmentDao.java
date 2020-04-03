@@ -191,7 +191,7 @@ public class AppointmentDao extends Dao<Appointment> {
         recordObject.put(DatabaseTable.AppointmentTable.PATIENT_ID, object.getPatientID());
         recordObject.put(DatabaseTable.AppointmentTable.DOCTOR_ID, object.getDoctorID());
 
-        long result = dbConnection.insert(DatabaseTable.AdminTable.TABLE_NAME, null, recordObject);
+        long result = dbConnection.insert(DatabaseTable.AppointmentTable.TABLE_NAME, null, recordObject);
 
         return result != -1;
     }

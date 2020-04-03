@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.Group6.checkup">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,22 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".loginActivity"/>
-        <activity android:name=".SubmitPaymentActivity"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:name=".MapQuestActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".PatientViewMessageActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".loginActivity" />
+        <activity android:name=".SubmitPaymentActivity" />
         <activity android:name=".PatientPaymentHistoryActivity" />
         <activity android:name=".NewMessageActivity" />
         <activity android:name=".PatientEditProfileActivity" />
         <activity android:name=".DoctorInfoActivity" />
-        <activity android:name=".AccountProfileActivity" />
+        <activity
+            android:name=".AccountProfileActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".PatientHomeActivity" />
-        <activity android:name=".PatientComplaint"/>
+        <activity android:name=".PatientComplaint" />
         <activity android:name=".DoctorMessages" />
         <activity android:name=".DoctorAppointmentSchedule" />
         <activity android:name=".DoctorActivity" />
-        <activity android:name=".PaymentMessage"/>
+        <activity android:name=".PaymentMessage" />
         <activity android:name=".CashierActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity"/>
+        <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity" />
@@ -35,8 +44,9 @@
         <activity android:name=".ViewUserHistoryActivity" />
         <activity android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity" />
         <activity android:name=".CreateAccountPackage.AccountTypeOptionActivity" />
-        <activity android:name=".AdminActivity"/>
-        <activity android:name=".SplashScreen"
+        <activity android:name=".AdminActivity" />
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,4 +55,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

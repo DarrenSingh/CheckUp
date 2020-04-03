@@ -10,10 +10,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.Group6.checkup.Entities.DistanceMatrixRequest;
+import com.Group6.checkup.Entities.DistanceMatrixResponse;
+import com.Group6.checkup.Utils.GsonDistanceMatrixRequest;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class SubmitPaymentActivity extends AppCompatActivity {
 
     EditText mEditPaymentAmount;
     TextView mTextViewBalance;
+    DistanceMatrixResponse test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

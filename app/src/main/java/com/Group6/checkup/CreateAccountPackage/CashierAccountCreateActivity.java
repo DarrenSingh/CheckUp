@@ -45,7 +45,6 @@ public class CashierAccountCreateActivity extends AppCompatActivity {
                         etLoginID.setError("Login Id is already exists");
                     } else {
 
-                        //TODO insert adminID from session info
                         //creating new Cashier account object.
                         Cashier newCashierAccount = new Cashier(
                                 etFirstName.getText().toString(),
