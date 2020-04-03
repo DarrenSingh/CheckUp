@@ -214,31 +214,40 @@ public class MapQuestActivity extends Activity {
 
                         @Override
                         public void onSuccess(@NonNull SearchAheadResponse searchAheadResponse) {
-                            Log.i("MAPQUEST", "Search Ahead V3 Success - Response: " + searchAheadResponse);
 
+                            //Get search results from the request response
                             List<SearchAheadResult> searchAheadResults = searchAheadResponse.getResults();
 
+                            //if we have requests
                             if(searchAheadResults.size() > 0) {
 
+                                //clear the current data to display
                                 searchResultsData.clear();
 
-                                int size = (searchAheadResults.size() < 5) ? searchAheadResults.size() : 5;
+                                try{
 
-                                for (int i = size-1;i >= 0 ; i--) {
-                                    // create a hashmap
-                                    HashMap<String, String> hashMap = new HashMap<>();
+                                    int size = (searchAheadResults.size() < 5) ? searchAheadResults.size() : 5;
 
-                                    AddressProperties addressProperties = searchAheadResults.get(i).getPlace().getAddressProperties();
+                                    for (int i = size-1;i >= 0 ; i--) {
+                                        // create a hashmap
+                                        HashMap<String, String> hashMap = new HashMap<>();
 
-                                    // convert image int to a string and place it into the hashmap with an images key
-                                    hashMap.put("address", searchAheadResults.get(i).getName());
-                                    hashMap.put("city", addressProperties.getCity() + ", " + addressProperties.getStateCode());
-                                    hashMap.put("lat", String.valueOf(searchAheadResults.get(i).getPlace().getLatLng().getLatitude()));
-                                    hashMap.put("long", String.valueOf(searchAheadResults.get(i).getPlace().getLatLng().getLongitude()));
+                                        AddressProperties addressProperties = searchAheadResults.get(i).getPlace().getAddressProperties();
+
+                                        // convert image int to a string and place it into the hashmap with an images key
+                                        hashMap.put("address", searchAheadResults.get(i).getName());
+                                        hashMap.put("city", addressProperties.getCity() + ", " + addressProperties.getStateCode());
+                                        hashMap.put("lat", String.valueOf(searchAheadResults.get(i).getPlace().getLatLng().getLatitude()));
+                                        hashMap.put("long", String.valueOf(searchAheadResults.get(i).getPlace().getLatLng().getLongitude()));
 
 
-                                    // add this hashmap to the list
-                                    searchResultsData.add(hashMap);
+                                        // add this hashmap to the list
+                                        searchResultsData.add(hashMap);
+                                    }
+
+                                    //handle null pointer exception on address properties
+                                } catch(NullPointerException e){
+                                    e.printStackTrace();
                                 }
 
                                 //adapter inputs
