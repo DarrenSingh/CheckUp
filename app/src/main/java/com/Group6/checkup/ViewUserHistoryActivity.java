@@ -3,12 +3,44 @@ package com.Group6.checkup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ListView;
+
+import com.Group6.checkup.Entities.OnlineHelp;
+import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
+
+import java.util.List;
 
 public class ViewUserHistoryActivity extends AppCompatActivity {
+
+    String loginID;
+    OnlineHelpDao onlineHelpDao;
+    List<OnlineHelp> onlineHelp;
+    ListView lv = findViewById(R.id.history);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_user_history);
+
+        onlineHelpDao = new OnlineHelpDao(this);
+        switch (loginID.charAt(0)){
+            case 'P':
+                messagesFromDoctors();
+                break;
+            case 'D':
+                messagesFromPatients();
+                break;
+
+        }
+    }
+
+    public void messagesFromDoctors(){
+        onlineHelp = onlineHelpDao.patientHistory(loginID);
+        lv.setAdapter(new UserHistoryAdapter(ViewUserHistoryActivity.this,onlineHelp));
+    }
+
+    public void messagesFromPatients(){
+        onlineHelp = onlineHelpDao.doctorHistory(loginID);
+        lv.setAdapter(new UserHistoryAdapter(ViewUserHistoryActivity.this,onlineHelp));
     }
 }

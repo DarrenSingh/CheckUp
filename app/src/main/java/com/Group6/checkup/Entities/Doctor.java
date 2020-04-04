@@ -13,6 +13,7 @@ public class Doctor {
     private String emailAddress;
     private int adminID;
 
+
     //Constructors
     public Doctor(int ID, String firstName, String lastName, String officeAddress, String loginID, String password, String phoneNumber, String emailAddress, int adminID) {
         this.ID = ID;
@@ -36,6 +37,8 @@ public class Doctor {
         this.emailAddress = emailAddress;
         this.adminID = adminID;
     }
+
+    public Doctor() {}
 
     //Getters & Setters
     public int getID() {
@@ -109,7 +112,4 @@ public class Doctor {
     public void setAdminID(int adminID) {
         this.adminID = adminID;
     }
-
-
-
 }

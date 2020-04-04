@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.Group6.checkup.DatabasePackage.DatabaseTable;
 import com.Group6.checkup.Entities.Invoice;
+import com.Group6.checkup.Entities.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -205,5 +206,57 @@ public class InvoiceDao extends Dao<Invoice> {
         int result = dbConnection.delete(DatabaseTable.InvoiceTable.TABLE_NAME,selection,searchId);
 
         return result > 0;
+    }
+
+    public List<Patient> pendingPayment(){
+        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseTable.PatientTable.FIRST_NAME + ", "
+                 + DatabaseTable.PatientTable.LAST_NAME + ", " + DatabaseTable.InvoiceTable.PATIENT_ID +
+                " FROM " + DatabaseTable.PatientTable.TABLE_NAME + " p " +
+                " JOIN " + DatabaseTable.InvoiceTable.TABLE_NAME + " i "
+                + " ON i." + DatabaseTable.InvoiceTable.PATIENT_ID + " = p." +
+                DatabaseTable.PatientTable._ID + " WHERE " +
+                DatabaseTable.InvoiceTable.PAYMENT_STATUS + " = 'pending'";
+
+        Cursor c = dbConnection.rawQuery(query,null);
+
+        List<Patient> pendingList = new ArrayList<Patient>();
+
+        while (c.moveToNext()){
+            Patient pList = new Patient();
+            pList.setFirstName(c.getString(0));
+            pList.setLastName(c.getString(1));
+
+            Invoice invoice = new Invoice();
+            invoice.setPatientID(c.getInt(2));
+
+            pList.setInvoice(invoice);
+
+            pendingList.add(pList);
+
+            }
+        c.close();
+        return pendingList;
+    }
+
+    public Invoice getPrice(String id){
+        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
+
+        String query = "SELECT " + DatabaseTable.InvoiceTable.PRICE + " FROM " +
+                        DatabaseTable.InvoiceTable.TABLE_NAME + " WHERE " +
+                        DatabaseTable.InvoiceTable.PATIENT_ID + " =?";
+
+        Cursor cursor = dbConnection.rawQuery(query, new String[]{String.valueOf(DatabaseTable.InvoiceTable.PATIENT_ID)});
+        Invoice recordObject = null;
+        try {
+            if (cursor.moveToFirst()) {
+                // read column data
+                recordObject.setPrice(cursor.getDouble(0));
+            }
+        } finally {
+            cursor.close();
+        }
+        return recordObject;
     }
 }

@@ -37,6 +37,8 @@ public class Invoice {
         this.appointmentID = appointmentID;
     }
 
+    public Invoice() { }
+
     //Getters & Setters
     public int getID() {
         return ID;
@@ -106,7 +108,5 @@ public class Invoice {
         return appointmentID;
     }
 
-    public void setAppointmentID(int appointmentID) {
-        this.appointmentID = appointmentID;
-    }
+    public void setAppointmentID(int appointmentID) { this.appointmentID = appointmentID; }
 }

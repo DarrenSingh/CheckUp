@@ -10,6 +10,8 @@ public class OnlineHelp {
     private int patientID;
     private int doctorID;
     private int onlineHelpReplyID;
+    private Doctor doctor;
+    private Patient patient;
 
     //Constructors
     public OnlineHelp(int ID, String messageTitle, String message, String sentDateTime, int patientID, int doctorID, int onlineHelpReplyID) {
@@ -38,6 +40,8 @@ public class OnlineHelp {
         this.patientID = patientID;
         this.doctorID = doctorID;
     }
+
+    public OnlineHelp() { }
 
     //Getters & Setters
     public int getID() {
@@ -95,4 +99,12 @@ public class OnlineHelp {
     public void setOnlineHelpReplyID(int onlineHelpReplyID) {
         this.onlineHelpReplyID = onlineHelpReplyID;
     }
+
+    public Doctor getDoctor() { return doctor; }
+
+    public void setDoctor(Doctor doctor) { this.doctor = doctor; }
+
+    public Patient getPatient() { return patient; }
+
+    public void setPatient(Patient patient) { this.patient = patient; }
 }

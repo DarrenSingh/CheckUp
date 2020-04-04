@@ -117,8 +117,8 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
         recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE_TITLE, object.getMessageTitle());
         recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
         recordObject.put(DatabaseTable.PaymentNotificationTable.SENT_DATE_TIME, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.CASHIER_ID, object.getMessage());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.PATIENT_ID, object.getMessage());
 
         long result = dbConnection.insert(DatabaseTable.PaymentNotificationTable.TABLE_NAME, null, recordObject);
 
