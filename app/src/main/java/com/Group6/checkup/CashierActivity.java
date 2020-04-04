@@ -1,21 +1,12 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CashierActivity extends AppCompatActivity {
 

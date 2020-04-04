@@ -3,14 +3,10 @@ package com.Group6.checkup;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -22,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.Group6.checkup.Entities.DistanceMatrixRequest;
 import com.Group6.checkup.Entities.DistanceMatrixResponse;
@@ -51,7 +46,6 @@ import com.mapquest.android.searchahead.model.response.SearchAheadResponse;
 import com.mapquest.android.searchahead.model.response.SearchAheadResult;
 import com.mapquest.mapping.MapQuest;
 import com.mapquest.mapping.maps.MapView;
-import com.mapquest.mapping.styles.MapStyles;
 
 import java.util.ArrayList;
 import java.util.Arrays;

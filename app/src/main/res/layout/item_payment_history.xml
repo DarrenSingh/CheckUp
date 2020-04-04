@@ -43,6 +43,12 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:text="$ 0.00"/>
 
+        <TextView
+            android:id="@+id/hidden_history_invoice_id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
 

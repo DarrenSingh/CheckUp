@@ -1,7 +1,5 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +10,9 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.Group6.checkup.Entities.Doctor;
-import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
@@ -21,8 +20,6 @@ import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

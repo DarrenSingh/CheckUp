@@ -1,11 +1,5 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,10 +12,17 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.Group6.checkup.Entities.Appointment;
-import com.Group6.checkup.Utils.Dao.AppointmentDao;
-import com.Group6.checkup.Utils.Session;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.Group6.checkup.Entities.Appointment;
+import com.Group6.checkup.Entities.Invoice;
+import com.Group6.checkup.Utils.Dao.AppointmentDao;
+import com.Group6.checkup.Utils.Dao.InvoiceDao;
+import com.Group6.checkup.Utils.Session;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -265,34 +266,48 @@ public class DoctorInfoActivity extends AppCompatActivity {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY");
             SimpleDateFormat hourFormat = new SimpleDateFormat("h:mm a");
+
+
  ;
             String dateString = dateFormat.format(date);
             String hourString = hourFormat.format(date);
-//
-//            MessageFormat text = new MessageFormat());
-//
-//            String textFormat = text.format(dateString,hourString);
 
-            String textFormatted = String.format(getResources().getString(R.string.text_booking_confirmation).toString(), dateString,hourString);
-
+            String textFormatted = String.format(getResources().getString(R.string.text_booking_confirmation), dateString,hourString);
 
             builder.setMessage(textFormatted)
                     .setPositiveButton(R.string.btn_booking_confirm, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
                             appointmentDao = new AppointmentDao(getContext());
-                            appointmentDao.insert(appointment);
-                            startActivity(new Intent(getContext(),PatientHomeActivity.class));
-                            Toast.makeText(getContext(), "Confirmed", Toast.LENGTH_SHORT).show();
+                            long appointmentId = appointmentDao.insertWithResult(appointment);
+                            Intent intent = new Intent(getContext(),SubmitPaymentActivity.class);
+
+                            InvoiceDao invoiceDao = new InvoiceDao(getContext());
+                            Invoice invoice = new Invoice(
+                                    19.99,
+                                    "April,23,2020",
+                                    "unpaid",
+                                    System.currentTimeMillis(),
+                                    appointment.getPatientID(),
+                                    1,
+                                    appointment.getDoctorID(),
+                                    (int)appointmentId
+                            );
+
+                            long insertedRow = invoiceDao.insertWithResult(invoice);
+
+                            if(insertedRow > -1){
+                                intent.putExtra("invoiceId",String.valueOf(insertedRow));
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getContext(), "Unable to book at this moment", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     })
                     .setNegativeButton(R.string.btn_booking_cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
-                            Toast.makeText(getContext(), "Dismissed", Toast.LENGTH_SHORT).show();
                         }
                     });
-            // Create the AlertDialog object and return it
             return builder.create();
         }
     }

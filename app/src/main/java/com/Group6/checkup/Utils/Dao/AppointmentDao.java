@@ -107,7 +107,7 @@ public class AppointmentDao extends Dao<Appointment> {
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
 
-        // Filter results WHERE "loginID" = 'A001'
+        // Filter results WHERE "ID" = '1'
         String selection = DatabaseTable.AppointmentTable._ID + " = ?";
 
         Cursor cursor = dbConnection.query(
@@ -117,7 +117,7 @@ public class AppointmentDao extends Dao<Appointment> {
                 patientId,
                 null,
                 null,
-                null
+                DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " DESC"
         );
         if(cursor.getCount() < 0)
             throw new SQLiteException("No database entries");
@@ -194,6 +194,20 @@ public class AppointmentDao extends Dao<Appointment> {
         long result = dbConnection.insert(DatabaseTable.AppointmentTable.TABLE_NAME, null, recordObject);
 
         return result != -1;
+    }
+
+    public long insertWithResult(Appointment object) {
+
+        ContentValues recordObject = new ContentValues();
+        SQLiteDatabase dbConnection = db.getWritableDatabase();
+
+        recordObject.put(DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME, object.getAppointmentDateTime());
+        recordObject.put(DatabaseTable.AppointmentTable.PATIENT_ID, object.getPatientID());
+        recordObject.put(DatabaseTable.AppointmentTable.DOCTOR_ID, object.getDoctorID());
+
+        long result = dbConnection.insert(DatabaseTable.AppointmentTable.TABLE_NAME, null, recordObject);
+
+        return result;
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.Group6.checkup;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -78,10 +75,6 @@ public class DateRecyclerViewAdapter extends RecyclerView.Adapter<DateRecyclerVi
             }
         }
 
-
-
-        //if there has been an initial selection
-            //if the view is the same as the previously selected remove underline
     }
 
     @Override

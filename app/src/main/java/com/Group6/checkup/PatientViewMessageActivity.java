@@ -1,16 +1,15 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.OnlineHelpReply;
-import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Dao.OnlineHelpReplyDao;
 

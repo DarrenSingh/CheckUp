@@ -119,7 +119,7 @@ public class InvoiceDao extends Dao<Invoice> {
                 patientId,          // The values for the WHERE clause
                 null,                   // don't group the rows
                 null,                   // don't filter by row groups
-                null               // The sort order
+                DatabaseTable.InvoiceTable.PAYMENT_STATUS +" DESC"   // The sort order
         );
 
         List<Invoice> invoiceList = new ArrayList<>();
@@ -144,6 +144,7 @@ public class InvoiceDao extends Dao<Invoice> {
         return invoiceList;
     }
 
+
     @Override
     public boolean insert(Invoice object) {
 
@@ -165,6 +166,28 @@ public class InvoiceDao extends Dao<Invoice> {
         Long result = dbConnection.insert(DatabaseTable.InvoiceTable.TABLE_NAME,null,recordObject);
 
         return result != -1;
+    }
+
+    public long insertWithResult(Invoice object){
+
+        ContentValues recordObject = new ContentValues();
+
+        //populate entry with object attributes
+        recordObject.put(DatabaseTable.InvoiceTable.PRICE,object.getPrice());
+        recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_DUE,object.getPaymentDue());
+        recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_STATUS, object.getPaymentStatus());
+        recordObject.put(DatabaseTable.InvoiceTable.INVOICE_DATE,object.getInvoiceDate());
+        recordObject.put(DatabaseTable.InvoiceTable.PATIENT_ID,object.getPatientID());
+        recordObject.put(DatabaseTable.InvoiceTable.CASHIER_ID,object.getCashierID());
+        recordObject.put(DatabaseTable.InvoiceTable.DOCTOR_ID,object.getDoctorID());
+        recordObject.put(DatabaseTable.InvoiceTable.APPOINTMENT_ID,object.getAppointmentID());
+
+        //get writable database
+        SQLiteDatabase dbConnection = this.db.getWritableDatabase();
+
+        Long result = dbConnection.insert(DatabaseTable.InvoiceTable.TABLE_NAME,null,recordObject);
+
+        return result;
     }
 
     @Override
@@ -207,4 +230,5 @@ public class InvoiceDao extends Dao<Invoice> {
 
         return result > 0;
     }
+
 }

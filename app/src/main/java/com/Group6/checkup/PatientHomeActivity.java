@@ -1,27 +1,34 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.Group6.checkup.Entities.Appointment;
+import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.AppointmentDao;
+import com.Group6.checkup.Utils.Dao.InvoiceDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
 
-import org.w3c.dom.Text;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class PatientHomeActivity extends AppCompatActivity {
     private Session appSession;
     private PatientDao patientDao;
     private Patient currentUser;
     private AppointmentDao appointmentDao;
-    private Appointment upcomingAppointments;
+    private InvoiceDao invoiceDao;
+    private List<Appointment> appointments;
+    private List<Invoice> invoices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +36,9 @@ public class PatientHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_home);
         appSession = new Session(this);
         patientDao = new PatientDao(this);
+        appointmentDao = new AppointmentDao(this);
+        invoiceDao = new InvoiceDao(this);
 
-        currentUser = patientDao.find(appSession.getCurrentUsername());
 
         //UI Components
         TextView mTextViewName = findViewById(R.id.text_patienthome_name);
@@ -43,18 +51,40 @@ public class PatientHomeActivity extends AppCompatActivity {
 
         //Activity Logic
 
+        //Set User Name
+        currentUser = patientDao.find(appSession.getCurrentUsername());
         String fullName = currentUser.getFirstName() + " " + currentUser.getLastName();
 
-        //TODO get user appointment from database, if any
-        String upcomingAppointment = "Date";
+        //Set Next Appointment
+        try {
 
-        //TODO get user balance from database
-        String accountBalance = "$" + "Amount";
+            appointments = appointmentDao.findAllByPatient(String.valueOf(appSession.getUserId()));
+            //TODO get user appointment from database, if any
+            Date date = new Date(appointments.get(0).getAppointmentDateTime());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY @ h:mm a");
+            String upcomingAppointment = dateFormat.format(date);
+            mTextViewAppointment.setText(upcomingAppointment);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        //Set Account Balance
+        invoices = invoiceDao.findAllByPatient(String.valueOf(appSession.getUserId()));
+
+        double balanceOwing = 0.00;
+
+        for (int i = 0; i < invoices.size(); i++) {
+            balanceOwing += invoices.get(i).getPrice();
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("###.##");
+        String accountBalance = "$" + decimalFormat.format(balanceOwing);
 
 
         //Set Component Text
         mTextViewName.setText(fullName);
-        mTextViewAppointment.setText(upcomingAppointment);
         mTextViewBalance.setText(accountBalance);
 
 

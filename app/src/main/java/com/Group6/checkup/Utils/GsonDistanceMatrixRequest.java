@@ -12,8 +12,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.Group6.checkup.BuildConfig.API_KEY;
 

@@ -1,8 +1,6 @@
 package com.Group6.checkup.DatabasePackage;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.Group6.checkup.Entities.Admin;
 import com.Group6.checkup.Entities.Appointment;
@@ -48,7 +46,6 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... voids) {
 
-
             //Create Admin Users
             this.adminDao.insert(new Admin("Super","User", "A001", "root"));
 
@@ -70,8 +67,10 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
             this.appointmentDao.insert(new Appointment(System.currentTimeMillis()-3000, 1,1));
 
             //Create Invoices
-            this.invoiceDao.insert(new Invoice(29.99, "May,20,2020", "paid", System.currentTimeMillis(), 1, 1, 1, 1));
-            this.invoiceDao.insert(new Invoice(19.99, "May,23,2020", "paid", System.currentTimeMillis(), 1, 1, 1, 2));
+            this.invoiceDao.insert(new Invoice(29.99, "May,20,2020", "unpaid", System.currentTimeMillis(), 1, 1, 1, 1));
+            this.invoiceDao.insert(new Invoice(19.99, "May,23,2020", "unpaid", System.currentTimeMillis(), 1, 1, 1, 2));
+            this.invoiceDao.insert(new Invoice(19.99, "April,23,2020", "unpaid", System.currentTimeMillis(), 1, 1, 1, 2));
+            this.invoiceDao.insert(new Invoice(29.99, "April,28,2020", "unpaid", System.currentTimeMillis(), 1, 1, 1, 2));
 
             //Create Online Help
             this.onlineHelpDao.insert(new OnlineHelp("Test Message1","Lorem Ipsum",System.currentTimeMillis()-8000,1,1));
@@ -79,8 +78,6 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
 
             //Create Online Help
             this.onlineHelpReplyDao.insert(new OnlineHelpReply("Test Reply","Lorem Ipsum",System.currentTimeMillis(),2));
-
-            Log.e("DATABASE HELPER","SEEDING COMPLETE");
 
             return null;
 

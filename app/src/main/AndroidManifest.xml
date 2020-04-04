@@ -26,7 +26,7 @@
         <activity android:name=".DoctorInfoActivity" />
         <activity
             android:name=".AccountProfileActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"/>
         <activity android:name=".PatientHomeActivity" />
         <activity android:name=".PatientComplaint" />
         <activity android:name=".DoctorMessages" />

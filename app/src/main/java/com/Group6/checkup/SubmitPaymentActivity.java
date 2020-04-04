@@ -1,7 +1,5 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,29 +8,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.Group6.checkup.Entities.DistanceMatrixRequest;
-import com.Group6.checkup.Entities.DistanceMatrixResponse;
-import com.Group6.checkup.Utils.GsonDistanceMatrixRequest;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.Group6.checkup.Entities.Invoice;
+import com.Group6.checkup.Utils.Dao.InvoiceDao;
+
+import java.text.DecimalFormat;
 
 public class SubmitPaymentActivity extends AppCompatActivity {
 
     EditText mEditPaymentAmount;
     TextView mTextViewBalance;
-    DistanceMatrixResponse test;
+    Invoice currentInvoice;
+    InvoiceDao invoiceDao;
+    DecimalFormat decimalFormat;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_payment);
+        invoiceDao = new InvoiceDao(this);
 
         //UI Components
         mTextViewBalance = findViewById(R.id.text_payment_owing);
@@ -40,21 +36,20 @@ public class SubmitPaymentActivity extends AppCompatActivity {
         Button mBtnPayNow = findViewById(R.id.btn_pay_now);
         Button mBtnPayLater = findViewById(R.id.btn_pay_later);
 
+        decimalFormat = new DecimalFormat("###.##");
 
         //TODO SubmitPaymentActivity Logic
+        Intent intent = getIntent();
 
-        //TODO make DB call for account balance
-        String amountOwning = "0.00";
+        if(intent.hasExtra("invoiceId")){
 
-        //set textview to outstanding balance
-        mTextViewBalance.setText("$" + amountOwning);
+            currentInvoice = invoiceDao.find(intent.getStringExtra("invoiceId"));
 
-        //check redirected from appointment scheduling activity
-            //mBtnPayLater.setVisibility(View.INVISIBLE);
+            //set textview to outstanding balance
+            String amount = "$" + decimalFormat.format(currentInvoice.getPrice());
+            mTextViewBalance.setText(amount);
 
-
-
-
+        }
 
         //UI Event Listeners
         mBtnPayNow.setOnClickListener(new View.OnClickListener() {
@@ -65,25 +60,47 @@ public class SubmitPaymentActivity extends AppCompatActivity {
                 try{
 
                     //try to parse EditText text into a float
-                    Float paymentAmount = Float.parseFloat(mEditPaymentAmount.getText().toString());
+                    Double paymentAmount = Double.parseDouble(mEditPaymentAmount.getText().toString());
 
                     //check if the value is greater than 0
-                    if(Float.parseFloat(mEditPaymentAmount.getText().toString()) <= 0){
+                    if(Double.parseDouble(mEditPaymentAmount.getText().toString()) <= 0.00){
 
                         //Notify user payment must be greater than 0
                         Toast.makeText(SubmitPaymentActivity.this, "Amount must be more than $0.00", Toast.LENGTH_SHORT).show();
+                    } else if(Math.round(Double.parseDouble(mEditPaymentAmount.getText().toString())) > currentInvoice.getPrice()) {
+                        Toast.makeText(SubmitPaymentActivity.this, "Amount cannot be greater than " + currentInvoice.getPrice(), Toast.LENGTH_SHORT).show();
+
                     } else {
 
                         //Notify user of the payment acceptance
                         Toast.makeText(SubmitPaymentActivity.this, "Payment of "+paymentAmount.toString()+" Processed", Toast.LENGTH_SHORT).show();
                         //TODO remove payment amount from account balance in the DB
+
+                        double newBalance = currentInvoice.getPrice() - paymentAmount;
+
+                        if(newBalance <= 0.00){
+                            newBalance = 0.00F;
+                            currentInvoice.setPaymentStatus("paid");
+                        }
+
+                        currentInvoice.setPrice(newBalance);
+                        invoiceDao.update(currentInvoice);
+
+                        mTextViewBalance.setText("$" + decimalFormat.format(currentInvoice.getPrice()));
+
+                        //define home activity intent
+                        Intent intent = new Intent(SubmitPaymentActivity.this,PatientHomeActivity.class);
+                        //start activity
+                        startActivity(intent);
+
+
                     }
+
 
                 }catch(NumberFormatException e){
                     // Notify user payment amount must be entered
                     Toast.makeText(SubmitPaymentActivity.this, "Enter a Payment Amount", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
