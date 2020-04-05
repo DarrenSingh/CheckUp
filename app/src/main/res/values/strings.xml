@@ -81,6 +81,7 @@
     <string name="text_cashierAccountEdit">Cashier Account Edit</string>
     <string name="text_doctorAccountEdit">Doctor Account Edit</string>
     <string name="text_patientAccountEdit">Patient Account Edit</string>
+    <string name="text_solution_posted">Previously Posted Solution</string>
     <string-array name="yes_or_No">
         <item>yes</item>
         <item>no</item>

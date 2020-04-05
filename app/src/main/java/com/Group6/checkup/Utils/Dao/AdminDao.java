@@ -167,4 +167,18 @@ public class AdminDao extends Dao<Admin>{
         return (result > 0) ? true : false;
     }
 
+    public int insertWithResult(Admin object) {
+
+        ContentValues recordObject = new ContentValues();
+        SQLiteDatabase dbConnection = db.getWritableDatabase();
+
+        recordObject.put(DatabaseTable.AdminTable.FIRST_NAME, object.getFirstName());
+        recordObject.put(DatabaseTable.AdminTable.LAST_NAME, object.getLastName());
+        recordObject.put(DatabaseTable.AdminTable.LOGIN_ID, object.getLoginID());
+        recordObject.put(DatabaseTable.AdminTable.PASSWORD, object.getPassword());
+
+        long result = dbConnection.insert(DatabaseTable.AdminTable.TABLE_NAME, null, recordObject);
+
+        return(int)result;
+    }
 }

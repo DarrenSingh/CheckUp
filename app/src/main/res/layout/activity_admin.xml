@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="buttonClicked"
-        android:text="@string/button_returnToLoginOption"
+        android:text="@string/text_logout"
         android:textSize="20sp"></Button>
 
 

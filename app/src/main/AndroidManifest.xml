@@ -18,7 +18,9 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".PatientViewMessageActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".loginActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".SubmitPaymentActivity" />
         <activity android:name=".PatientPaymentHistoryActivity" />
         <activity android:name=".NewMessageActivity" />
@@ -30,24 +32,44 @@
         <activity
             android:name=".PatientHomeActivity"
             android:launchMode="singleTask"/>
-        <activity android:name=".PatientComplaint" />
-        <activity android:name=".DoctorMessages" />
+        <activity android:name=".PatientComplaint"/>
+        <activity
+            android:name=".DoctorMessages"
+            android:launchMode="singleTask"/>
         <activity android:name=".DoctorAppointmentSchedule" />
-        <activity android:name=".DoctorActivity" />
+        <activity
+            android:name=".DoctorActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".PaymentMessage" />
-        <activity android:name=".CashierActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity" />
-        <activity android:name=".CreateAccountPackage.CashierAccountCreateActivity" />
-        <activity android:name=".CreateAccountPackage.DoctorAccountCreateActivity" />
-        <activity android:name=".CreateAccountPackage.PatientAccountCreateActivity" />
-        <activity android:name=".CreateAccountPackage.AdminAccountCreateActivity" />
+        <activity
+            android:name=".CashierActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity" />
+        <activity
+            android:name=".CreateAccountPackage.CashierAccountCreateActivity" />
+        <activity
+            android:name=".CreateAccountPackage.DoctorAccountCreateActivity" />
+        <activity
+            android:name=".CreateAccountPackage.PatientAccountCreateActivity" />
+        <activity
+            android:name=".CreateAccountPackage.AdminAccountCreateActivity" />
         <activity android:name=".ViewUserHistoryActivity" />
-        <activity android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity" />
-        <activity android:name=".CreateAccountPackage.AccountTypeOptionActivity" />
-        <activity android:name=".AdminActivity" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".CreateAccountPackage.AccountTypeOptionActivity"
+            android:launchMode="singleTask" />
+
+        <activity android:name=".AdminActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

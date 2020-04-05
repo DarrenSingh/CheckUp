@@ -1,6 +1,5 @@
 package com.Group6.checkup.DatabasePackage;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;

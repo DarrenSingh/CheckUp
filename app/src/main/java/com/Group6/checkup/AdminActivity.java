@@ -26,7 +26,7 @@ public class AdminActivity extends AppCompatActivity {
         } else if(view.getId() == R.id.btn_toViewUserHistoryActivity){
             startActivity(new Intent(AdminActivity.this, ViewUserHistoryActivity.class));
         } else if(view.getId() == R.id.btn_toReturnLogInActivity){
-            startActivity(new Intent(AdminActivity.this, MainActivity.class));
+            startActivity(new Intent(AdminActivity.this, LoginActivity.class));
         }
     }
 }

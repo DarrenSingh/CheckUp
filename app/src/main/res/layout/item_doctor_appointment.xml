@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/customCardView"
+    android:layout_margin="10dp"
+    android:id="@+id/list_card_view"
+    app:cardBackgroundColor="@color/lightBlue">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/image"
+        app:srcCompat="@drawable/user" />
+
+    <TextView
+        android:id="@+id/text_appointment_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hey"
+        android:layout_marginLeft="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_gravity="left"
+        style="@style/subTitleTextView"/>
+
+    <TextView
+        android:id="@+id/text_appointment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hey"
+        android:layout_gravity="bottom|center"
+        style="@style/subTitleTextView"/>
+
+</androidx.cardview.widget.CardView>

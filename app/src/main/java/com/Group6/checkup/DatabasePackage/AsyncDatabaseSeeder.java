@@ -51,27 +51,27 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
     protected Void doInBackground(Void... voids) {
 
             //Create Admin Users
-            this.adminDao.insert(new Admin("Super","User", "A001", "root"));
+            int adminId =this.adminDao.insertWithResult(new Admin("Super","User", "A001", "root"));
 
             //Create Cashier Users
-            this.cashierDao.insert(new Cashier("Rachel","Green","C001","password",1));
-            this.cashierDao.insert(new Cashier("Monica","Gellar","C002","password",1));
+            this.cashierDao.insert(new Cashier("Rachel", "Green", "C001", "password", adminId));
+            this.cashierDao.insert(new Cashier("Monica", "Gellar", "C002", "password", adminId));
 
             //Create Doctor Users
-            this.doctorDao.insert(new Doctor("Micheal","Scarn","15122 72 Ave, Surrey, BC V3S 2G2","D001","password","604-555-2144","scarn@medicine.com",1));
-            this.doctorDao.insert(new Doctor("Deandre","Jordan","6844 King George Blvd, Surrey, BC V3W 4Z9","D002","password","604-555-2143","jordan@medicine.com",1));
-            this.doctorDao.insert(new Doctor("Elaine","Jackson","615300 105 Avenue, Surrey, BC","D003","password","604-555-2543","elaine@medicine.com",1));
-            this.doctorDao.insert(new Doctor("Robin","Lopez","4731 King George Blvd, Surrey, BC V3W 4Z9","D004","password","604-555-2343","lopez@medicine.com",1));
+            this.doctorDao.insert(new Doctor("Micheal", "Scarn", "15122 72 Ave, Surrey, BC V3S 2G2", "D001", "password", "604-555-2144", "scarn@medicine.com", adminId));
+            this.doctorDao.insert(new Doctor("Deandre", "Jordan", "6844 King George Blvd, Surrey, BC V3W 4Z9", "D002", "password", "604-555-2143", "jordan@medicine.com", adminId));
+            this.doctorDao.insert(new Doctor("Elaine", "Jackson", "615300 105 Avenue, Surrey, BC", "D003", "password", "604-555-2543", "elaine@medicine.com", adminId));
+            this.doctorDao.insert(new Doctor("Robin", "Lopez", "4731 King George Blvd, Surrey, BC V3W 4Z9", "D004", "password", "604-555-2343", "lopez@medicine.com", adminId));
 
             //Create Patient Users
-            this.patientDao.insert(new Patient("Jane","Doe","1234 Fake St","P001","password",true,"604-555-1234",123000998,"janedoe@mail.com",1));
-            this.patientDao.insert(new Patient("John","Doe","123 Fake St","P002","password1",true,"604-555-1234",123000999,"johndoe@mail.com",1));
+            this.patientDao.insert(new Patient("Jane", "Doe", "1234 Fake St", "P001", "password", true, "604-555-1234", 123000998, "janedoe@mail.com", adminId));
+            this.patientDao.insert(new Patient("John", "Doe", "123 Fake St", "P002", "password1", true, "604-555-1234", 123000999, "johndoe@mail.com", adminId));
 
             //Create Appointments
-            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1,1));
-            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1,2));
-            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1,4));
-            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 2,3));
+            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1, 1));
+            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1, 2));
+            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1, 4));
+            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 2, 3));
 
             //Create Invoices
             this.invoiceDao.insert(new Invoice(29.99, "May,20,2020", "unpaid", System.currentTimeMillis(), 1, 1, 1, 1));
@@ -80,17 +80,17 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
             this.invoiceDao.insert(new Invoice(29.99, "April,28,2020", "unpaid", System.currentTimeMillis(), 2, 1, 3, 2));
 
             //Create Payment Notifications
-            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance","Lorem Ipsum $0.00",System.currentTimeMillis()+1000000L,1,1));
-            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance #2","Lorem Ipsum $9.99",System.currentTimeMillis()+10800000L,1,2));
-            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance #2","Lorem Ipsum $9.99",System.currentTimeMillis()+54000000L,1,2));
+            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance", "Lorem Ipsum $0.00", System.currentTimeMillis() + 1000000L, 1, 1));
+            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance #2", "Lorem Ipsum $9.99", System.currentTimeMillis() + 10800000L, 1, 2));
+            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance #2", "Lorem Ipsum $9.99", System.currentTimeMillis() + 54000000L, 1, 2));
 
             //Create Online Help
-            this.onlineHelpDao.insert(new OnlineHelp("Test Message1","Lorem Ipsum",System.currentTimeMillis(),1,1));
-            this.onlineHelpDao.insert(new OnlineHelp("Test Message1","Lorem Ipsum",System.currentTimeMillis()+54000000L,1,4));
-            this.onlineHelpDao.insert(new OnlineHelp("Test Message2","Lorem Ipsum",System.currentTimeMillis()+3600000L,1,2,1));
+            this.onlineHelpDao.insert(new OnlineHelp("Test Message1", "Lorem Ipsum", System.currentTimeMillis(), 1, 1));
+            this.onlineHelpDao.insert(new OnlineHelp("Test Message1", "Lorem Ipsum", System.currentTimeMillis() + 54000000L, 1, 4));
+            this.onlineHelpDao.insert(new OnlineHelp("Test Message2", "Lorem Ipsum", System.currentTimeMillis() + 3600000L, 1, 2, 1));
 
             //Create Online Help
-            this.onlineHelpReplyDao.insert(new OnlineHelpReply("Test Reply","Lorem Ipsum",System.currentTimeMillis(),2));
+            this.onlineHelpReplyDao.insert(new OnlineHelpReply("Test Reply", "Lorem Ipsum", System.currentTimeMillis(), 2));
 
         return null;
 
