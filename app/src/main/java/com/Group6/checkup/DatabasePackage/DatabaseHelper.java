@@ -1,16 +1,12 @@
 package com.Group6.checkup.DatabasePackage;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
-
-import com.Group6.checkup.R;
-
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -69,3 +65,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 }
+

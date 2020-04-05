@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 
 
@@ -54,25 +55,48 @@ public class CashierAccountEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                cashierAccount.setFirstName(etFirstName.getText().toString());
-                cashierAccount.setLastName(etLastName.getText().toString());
-                cashierAccount.setLoginID(etLoginID.getText().toString());
-                cashierAccount.setPassword(etPassword.getText().toString());
-
-                //Edit loginID validation
-                if (loginID.charAt(0) != 'C') {
-                    etLoginID.setError("Cashier Account has to start with letter 'C'.");
-
-                    if (cashierDao.exists(etLoginID.getText().toString())) {
-                        etLoginID.setError("Login ID is already exists");
-                    }
+                if (AccountValidation.isEmpty(etFirstName)) {
+                    etFirstName.setError("This field is required");
                 } else {
-                    //update database
-                    if(cashierDao.insert(cashierAccount)) {
-                        Toast.makeText(CashierAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(CashierAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                    if (AccountValidation.nameValidation(etFirstName) == false) {
+                        etFirstName.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etLastName)) {
+                    etLastName.setError("This field is required");
+                } else {
+                    if (AccountValidation.nameValidation(etLastName) == false) {
+                        etLastName.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etLoginID)) {
+                    etLoginID.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etPassword)) {
+                    etPassword.setError("This field is required");
+                }
+                if (!AccountValidation.isEmpty(etFirstName) && !AccountValidation.isEmpty(etLastName) && !AccountValidation.isEmpty(etLoginID) && !AccountValidation.isEmpty((etPassword)) && AccountValidation.nameValidation(etFirstName) && AccountValidation.nameValidation(etLastName)) {
+
+                    cashierAccount.setFirstName(etFirstName.getText().toString());
+                    cashierAccount.setLastName(etLastName.getText().toString());
+                    cashierAccount.setLoginID(etLoginID.getText().toString());
+                    cashierAccount.setPassword(etPassword.getText().toString());
+
+                    //Edit loginID validation
+                    if (loginID.charAt(0) != 'C') {
+                        etLoginID.setError("Cashier Account has to start with letter 'C'.");
+
+                        if (cashierDao.exists(etLoginID.getText().toString())) {
+                            etLoginID.setError("Login ID is already exists");
+                        }
                     } else {
-                        Toast.makeText(CashierAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                        //update database
+                        if (cashierDao.update(cashierAccount)) {
+                            Toast.makeText(CashierAccountEditActivity.this, "Account Updated", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(CashierAccountEditActivity.this, EditAndUpdateAccountSearchActivity.class));
+                        } else {
+                            Toast.makeText(CashierAccountEditActivity.this, "Unable to Update Account", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
@@ -83,9 +107,9 @@ public class CashierAccountEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(cashierDao.delete(loginID)) {
+                if (cashierDao.delete(loginID)) {
                     Toast.makeText(CashierAccountEditActivity.this, "Account Deleted", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(CashierAccountEditActivity.this,EditAndUpdateAccountSearchActivity.class));
+                    startActivity(new Intent(CashierAccountEditActivity.this, EditAndUpdateAccountSearchActivity.class));
                 } else {
                     Toast.makeText(CashierAccountEditActivity.this, "Unable to Delete Account", Toast.LENGTH_SHORT).show();
                 }

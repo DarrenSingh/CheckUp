@@ -73,7 +73,14 @@
     <string name="text_greeting">Hello,</string>
     <string name="title_upcoming_appointment">Upcoming Appointment</string>
     <string name="title_account_balance">Account Balance</string>
-
+    <string name="text_adminAccountCreation">Admin Account Creation</string>
+    <string name="text_cashierAccountCreation">Cashier Account Creation</string>
+    <string name="text_doctorAccountCreation">Doctor Account Creation</string>
+    <string name="text_patientAccountCreation">Patient Account Creation</string>
+    <string name="text_adminAccountEdit">Admin Account Edit</string>
+    <string name="text_cashierAccountEdit">Cashier Account Edit</string>
+    <string name="text_doctorAccountEdit">Doctor Account Edit</string>
+    <string name="text_patientAccountEdit">Patient Account Edit</string>
     <string-array name="yes_or_No">
         <item>yes</item>
         <item>no</item>
