@@ -34,15 +34,13 @@
             android:id="@+id/text_edit_profile_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Address"/>
+            android:layout_marginTop="4dp" />
 
         <TextView
             android:id="@+id/text_edit_profile_msp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="MSP Verification"/>
+            android:layout_marginTop="4dp"/>
 
     </LinearLayout>
 
@@ -80,7 +78,6 @@
             android:layout_marginTop="16dp"
             android:layout_gravity="start"
             android:labelFor="@+id/edit_last_name"
-            android:text="Last Name*"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
 
         <EditText
@@ -96,7 +93,6 @@
             android:layout_marginTop="16dp"
             android:layout_gravity="start"
             android:labelFor="@+id/edit_address"
-            android:text="Address*"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
 
         <EditText

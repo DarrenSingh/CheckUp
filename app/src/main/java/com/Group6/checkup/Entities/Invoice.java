@@ -37,6 +37,16 @@ public class Invoice {
         this.appointmentID = appointmentID;
     }
 
+    public Invoice(double price, String paymentDue, String paymentStatus, long invoiceDate, int patientID, int doctorID, int appointmentID) {
+        this.price = price;
+        this.paymentDue = paymentDue;
+        this.paymentStatus = paymentStatus;
+        this.invoiceDate = invoiceDate;
+        this.patientID = patientID;
+        this.doctorID = doctorID;
+        this.appointmentID = appointmentID;
+    }
+
     //Getters & Setters
     public int getID() {
         return ID;

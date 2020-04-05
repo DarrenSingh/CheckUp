@@ -54,7 +54,6 @@ public class PatientAccountEditActivity extends AppCompatActivity {
 
         loginID = getIntent.getStringExtra("loginID");
 
-        //TODO handle exception
         patientAccount = patientDao.find(loginID);
 
         etFirstName.setText(patientAccount.getFirstName());

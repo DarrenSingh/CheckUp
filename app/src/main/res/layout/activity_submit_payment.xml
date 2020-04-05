@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="Amount Due"/>
+        android:text="@string/text_amount_due"/>
 
     <TextView
         android:id="@+id/text_payment_owing"
@@ -23,8 +23,7 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:text="$0.00"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
     <EditText
         android:id="@+id/edit_payment_amount"
@@ -34,7 +33,7 @@
         android:layout_marginTop="96dp"
         android:inputType="numberDecimal"
         android:minWidth="200dp"
-        android:hint="Payment Amount"
+        android:hint="@string/edit_payment_hint"
         android:gravity="center"/>
 
     <Button
@@ -46,7 +45,7 @@
         android:minWidth="100dp"
         android:background="@color/colorPrimary"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
-        android:text="Pay Now"/>
+        android:text="@string/btn_pay_now"/>
 
     <Button
         android:id="@+id/btn_pay_later"
@@ -54,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:minWidth="100dp"
-        android:text="Pay Later"
+        android:text="@string/btn_pay_later"
         android:backgroundTintMode="screen"/>
 
 </LinearLayout>

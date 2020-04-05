@@ -137,8 +137,6 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
                             etLoginID.setError("Login Id is already exists");
                         } else {
 
-
-
                             healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
                                     ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
 
@@ -159,7 +157,6 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
 
                             //Insert to Database;
                             boolean inserted = patientDao.insert(newPatient);
-
 
                             //Give (un)successful prompt
                             if (inserted) {

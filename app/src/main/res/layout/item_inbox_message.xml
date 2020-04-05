@@ -7,7 +7,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
 
@@ -16,7 +16,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="top"
-            app:srcCompat="@drawable/ic_account_circle_black_48dp" />
+            android:src="@drawable/ic_account_circle_black_48dp" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -26,14 +26,25 @@
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
 
+                <TextView
+                    android:id="@+id/hidden_message_id"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/hidden_message_type"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"/>
+
                 <!--  Recipient   -->
                 <TextView
                     android:id="@+id/text_message_recipient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:text="Dr. Last Name"/>
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                 <!--  Subject  -->
                 <TextView
@@ -44,8 +55,7 @@
                     android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    android:text="Subject"/>
+                    android:ellipsize="end" />
 
                 <!--  Body  -->
                 <TextView

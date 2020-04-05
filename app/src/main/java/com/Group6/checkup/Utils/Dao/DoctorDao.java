@@ -78,6 +78,43 @@ public class DoctorDao extends Dao<Doctor> {
         return recordObject;
 
     }
+    public Doctor findByID(String... id) {
+
+        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
+
+        // Filter results WHERE "loginID" = 'D001'
+        String selection = DatabaseTable.DoctorTable._ID + " = ?";
+
+        Cursor cursor = dbConnection.query(
+                DatabaseTable.DoctorTable.TABLE_NAME,   // The table to query
+                null,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                id,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null               // The sort order
+        );
+
+        if(cursor.getCount() < 0)
+            throw new SQLiteException("No such entry");
+
+        cursor.move(1);
+
+        Doctor recordObject = new Doctor(
+                cursor.getInt(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5),
+                cursor.getString(6),
+                cursor.getString(7),
+                cursor.getInt(8)
+        );
+
+        return recordObject;
+
+    }
 
     @Override
     public List<Doctor> findAll() {

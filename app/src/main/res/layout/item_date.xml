@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/text_schedule_date"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:gravity="center_horizontal|center_vertical"/>
+
+    <View
+        android:id="@+id/view_selected_date"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        android:visibility="invisible"/>
+
+</LinearLayout>
