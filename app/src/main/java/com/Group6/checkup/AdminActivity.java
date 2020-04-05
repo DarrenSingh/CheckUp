@@ -1,13 +1,12 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.Group6.checkup.CreateAccountPackage.AccountTypeOptionActivity;
-import com.Group6.checkup.DatabasePackage.DatabaseHelper;
 import com.Group6.checkup.EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity;
 
 public class AdminActivity extends AppCompatActivity {

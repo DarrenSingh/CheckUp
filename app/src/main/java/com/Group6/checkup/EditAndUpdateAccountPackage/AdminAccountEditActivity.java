@@ -13,8 +13,6 @@ import com.Group6.checkup.Entities.Admin;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.Dao.AdminDao;
 
-import java.util.ArrayList;
-
 public class AdminAccountEditActivity extends AppCompatActivity {
 
     Button btnEditAccount, btnDeleteAccount;

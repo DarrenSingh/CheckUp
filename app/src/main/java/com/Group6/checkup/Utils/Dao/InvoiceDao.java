@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 
 import com.Group6.checkup.DatabasePackage.DatabaseTable;
 import com.Group6.checkup.Entities.Invoice;
-import com.Group6.checkup.Entities.Patient;
 
 import java.util.ArrayList;
 import java.util.List;

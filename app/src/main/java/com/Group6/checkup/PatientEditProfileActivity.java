@@ -1,15 +1,12 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PatientEditProfileActivity extends AppCompatActivity {
 

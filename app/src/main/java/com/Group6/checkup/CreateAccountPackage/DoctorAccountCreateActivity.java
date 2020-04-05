@@ -1,7 +1,5 @@
 package com.Group6.checkup.CreateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.Group6.checkup.Utils.Dao.DoctorDao;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Session;
 
 import java.util.ArrayList;

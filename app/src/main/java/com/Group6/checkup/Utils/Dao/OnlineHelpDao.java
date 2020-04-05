@@ -8,9 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.Nullable;
 
 import com.Group6.checkup.DatabasePackage.DatabaseTable;
-import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Entities.OnlineHelp;
-import com.Group6.checkup.Entities.Patient;
 
 import java.util.ArrayList;
 import java.util.List;

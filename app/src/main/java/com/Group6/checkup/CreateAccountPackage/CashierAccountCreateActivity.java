@@ -1,16 +1,16 @@
 package com.Group6.checkup.CreateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.Group6.checkup.Entities.Cashier;
-import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Session;
 
 public class CashierAccountCreateActivity extends AppCompatActivity {

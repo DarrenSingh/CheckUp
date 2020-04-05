@@ -5,18 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserHistoryAdapter extends BaseAdapter {

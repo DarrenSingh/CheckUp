@@ -1,8 +1,8 @@
 package com.Group6.checkup;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class DoctorInfoActivity extends AppCompatActivity {
 
