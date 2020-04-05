@@ -202,7 +202,30 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
 
     @Override
     public boolean update(OnlineHelp object) {
-        return false;
+
+        SQLiteDatabase dbConnection = this.db.getWritableDatabase();
+
+        //create entry
+        ContentValues recordObject = new ContentValues();
+
+        //populate entry with object attributes
+        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_TITLE,object.getMessageTitle());
+        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_CONTENT,object.getMessage());
+        recordObject.put(DatabaseTable.OnlineHelpTable.SENT_DATE_TIME,object.getSentDateTime());
+        recordObject.put(DatabaseTable.OnlineHelpTable.PATIENT_ID,object.getPatientID());
+        recordObject.put(DatabaseTable.OnlineHelpTable.DOCTOR_ID,object.getDoctorID());
+        recordObject.put(DatabaseTable.OnlineHelpTable.ONLINE_HELP_REPLY_ID, object.getOnlineHelpReplyID());
+
+
+
+        // Filter results WHERE "ID" = '*'
+        String selection = DatabaseTable.OnlineHelpTable._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(object.getID()) };
+
+        int result = dbConnection.update(DatabaseTable.OnlineHelpTable.TABLE_NAME,recordObject,selection,selectionArgs);
+
+
+        return (result > 0) ? true : false;
     }
 
     @Override

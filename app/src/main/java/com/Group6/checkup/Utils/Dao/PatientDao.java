@@ -82,6 +82,47 @@ public class PatientDao extends Dao<Patient>{
         return patientRecord;
     }
 
+
+    public Patient findById(String... patientId) {
+
+        SQLiteDatabase dbConnection = db.getReadableDatabase();
+
+
+        // Filter results WHERE "loginId" = 'searchId'
+        String selection = DatabaseTable.PatientTable._ID + " = ?";
+
+        Cursor cursor = dbConnection.query(
+                DatabaseTable.PatientTable.TABLE_NAME,   // The table to query
+                null,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                patientId,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null               // The sort order
+        );
+
+        if(cursor.getCount() < 0)
+            throw new SQLiteException("No such entry");
+
+        cursor.move(1);
+
+        Patient patientRecord = new Patient(
+                cursor.getInt(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5),
+                Boolean.parseBoolean(cursor.getString(6)),
+                cursor.getString(7),
+                cursor.getInt(8),
+                cursor.getString(9),
+                cursor.getInt(10)
+        );
+
+        return patientRecord;
+    }
+
     @Override
     public List<Patient> findAll() {
         SQLiteDatabase dbConnection = db.getReadableDatabase();

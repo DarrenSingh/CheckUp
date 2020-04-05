@@ -162,4 +162,36 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
 
         return result > 0;
     }
+
+    public int getLastRow() {
+
+        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
+
+
+        Cursor cursor = dbConnection.rawQuery("SELECT MAX("+DatabaseTable.OnlineHelpReplyTable._ID+") FROM " + DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null);
+
+        if(cursor.getCount() < 0)
+            throw new SQLiteException("No database entries");
+
+        cursor.move(1);
+
+        return cursor.getInt(0);
+    }
+
+    public int insertWithResult(OnlineHelpReply object) {
+
+        SQLiteDatabase dbConnection = db.getWritableDatabase();
+
+        ContentValues recordObject = new ContentValues();
+
+        //populate entry with object attributes
+        recordObject.put(DatabaseTable.OnlineHelpReplyTable.REPLY_MESSAGE_TITLE, object.getMessageTitle());
+        recordObject.put(DatabaseTable.OnlineHelpReplyTable.REPLY_MESSAGE_CONTENT, object.getMessageContent());
+        recordObject.put(DatabaseTable.OnlineHelpReplyTable.REPLY_DATE_TIME, object.getDateTime());
+        recordObject.put(DatabaseTable.OnlineHelpReplyTable.DOCTOR_ID, object.getDoctorID());
+
+        long result = dbConnection.insert(DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null, recordObject);
+
+        return (int)result;
+    }
 }

@@ -156,8 +156,8 @@ public class AppointmentDao extends Dao<Appointment> {
                 selection,              // The columns for the WHERE clause
                 doctorId,
                 null,
-                null,null
-//                DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " DESC"
+                null,
+                DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " ASC"
         );
         if(cursor.getCount() < 0)
             throw new SQLiteException("No database entries");

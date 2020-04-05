@@ -7,11 +7,11 @@
     tools:context=".PatientComplaint">
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/patient_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="@string/patientComplaint"
+        android:layout_marginTop="16dp"
+        android:text="patient name"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/message_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -27,17 +27,18 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_name"
+        tools:text="title" />
 
     <TextView
-        android:id="@+id/textViewPatientInformation"
+        android:id="@+id/patient_message"
         android:layout_width="277dp"
         android:layout_height="159dp"
         android:layout_marginTop="9dp"
         android:text="@string/txt_lorem_ipsum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/message_title" />
 
     <TextView
         android:id="@+id/textView12"
@@ -49,7 +50,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPatientInformation" />
+        app:layout_constraintTop_toBottomOf="@+id/patient_message" />
 
     <EditText
         android:id="@+id/editTextDoctorSolution"
