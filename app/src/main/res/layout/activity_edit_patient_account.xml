@@ -5,143 +5,168 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditAndUpdateAccountPackage.PatientAccountEditActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_firstName"
-        android:textSize="20sp"></TextView>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editTxt_editPatientFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_firstName"
-        android:textSize="30sp"></EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/text_patientAccountEdit"
+            android:textAlignment="center"
+            android:textSize="30sp"></TextView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_lastName"
-        android:textSize="20sp"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_firstName"
+            android:textSize="20sp"></TextView>
 
-    <EditText
-        android:id="@+id/editTxt_editPatientLastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_lastName"
-        android:textSize="30sp"></EditText>
+        <EditText
+            android:id="@+id/editTxt_editPatientFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_firstName"
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_address"
-        android:textSize="20sp"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_lastName"
+            android:textSize="20sp"></TextView>
 
-    <EditText
-        android:id="@+id/editTxt_editPatientAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_address"
-        android:textSize="30sp"></EditText>
+        <EditText
+            android:id="@+id/editTxt_editPatientLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_lastName"
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_phoneNumber"
-        android:textSize="20sp"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_address"
+            android:textSize="20sp"></TextView>
 
-    <EditText
-        android:id="@+id/editTxt_editPatientPhoneNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_phoneNumber"
-        android:textSize="30sp"></EditText>
+        <EditText
+            android:id="@+id/editTxt_editPatientAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_address"
+            android:inputType="text"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_email"
-        android:textSize="20sp"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_phoneNumber"
+            android:textSize="20sp"></TextView>
 
-    <EditText
-        android:id="@+id/editTxt_editPatientEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_email"
-        android:textSize="30sp"></EditText>
+        <EditText
+            android:id="@+id/editTxt_editPatientPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_phoneNumber"
+            android:inputType="phone"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_loginID"
-        android:textSize="20sp"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_email"
+            android:textSize="20sp"></TextView>
 
-    <EditText
-        android:id="@+id/editTxt_editPatientLoginID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_loginID"
-        android:textSize="30sp"></EditText>
+        <EditText
+            android:id="@+id/editTxt_editPatientEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_email"
+            android:inputType="textEmailAddress"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_password"
-        android:textSize="20sp"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_loginID"
+            android:textSize="20sp"></TextView>
 
-    <EditText
-        android:id="@+id/editTxt_editPatientPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_password"
-        android:textSize="30sp"></EditText>
+        <EditText
+            android:id="@+id/editTxt_editPatientLoginID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_loginID"
+            android:inputType="text"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_mspCoverageQuestion"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"></TextView>
-    <Spinner
-        android:id="@+id/spinner_editPatientMSPStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/yes_or_No"
-        ></Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_password"
+            android:textSize="20sp"></TextView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/text_healthCardNumber"
-        android:textSize="20sp"></TextView>
+        <EditText
+            android:id="@+id/editTxt_editPatientPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_password"
+            android:inputType="textPassword"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
-    <EditText
-        android:id="@+id/editTxt_editPatientHealthCardNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_healthCardNumber"
-        android:textSize="30sp"></EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_mspCoverageQuestion"
+            android:textSize="20sp"></TextView>
 
-    <Button
-        android:id="@+id/btn_editPatientAccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/button_edit"
-        android:textSize="30sp"></Button>
+        <Spinner
+            android:id="@+id/spinner_editPatientMSPStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/yes_or_No"></Spinner>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/text_healthCardNumber"
+            android:textSize="20sp"></TextView>
+
+        <EditText
+            android:id="@+id/editTxt_editPatientHealthCardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_healthCardNumber"
+            android:inputType="number"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
+
+        <Button
+            android:id="@+id/btn_editPatientAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/button_edit"
+            android:textSize="30sp"></Button>
 
         <Button
             android:id="@+id/btn_deletePatientAccount"

@@ -5,12 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateAccountPackage.DoctorAccountCreateActivity">
+
     <LinearLayout
+        android:id="@+id/linearLayout_doctorAccountCreate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout_doctorAccountCreate"
-        >
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/text_doctorAccountCreation"
+            android:textAlignment="center"
+            android:textSize="30sp"></TextView>
 
         <TextView
             android:layout_width="match_parent"
@@ -24,7 +32,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_firstName"
-            android:textSize="30sp"></EditText>
+            android:inputType="textPersonName"
+            tools:autofillHints="false"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -38,7 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_lastName"
-            android:textSize="30sp"></EditText>
+            android:inputType="textPersonName"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -52,7 +65,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_officeAddress"
-            android:textSize="30sp"></EditText>
+            android:inputType="text"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -66,6 +81,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_phoneNumber"
+            android:importantForAutofill="no"
+            android:inputType="number|phone"
             android:textSize="30sp"></EditText>
 
         <TextView
@@ -80,7 +97,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_email"
-            android:textSize="30sp"></EditText>
+            android:inputType="textEmailAddress"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -94,7 +113,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_loginID"
-            android:textSize="30sp"></EditText>
+            android:inputType="text"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <TextView
             android:layout_width="match_parent"
@@ -108,7 +129,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text_password"
-            android:textSize="30sp"></EditText>
+            android:inputType="textPassword"
+            android:textSize="30sp"
+            android:importantForAutofill="no"></EditText>
 
         <Button
             android:id="@+id/btn_createDoctorAccount"

@@ -1,5 +1,6 @@
 package com.Group6.checkup.CreateAccountPackage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
 
@@ -44,7 +46,7 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.editTxt_patientPassword);
         etHealthCardNumber = findViewById(R.id.editTxt_patientHealthCardNumber);
 
-        Log.e("HealthCareNumber",etHealthCardNumber.getText().toString());
+        Log.e("HealthCareNumber", etHealthCardNumber.getText().toString());
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, yesOrNo);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
@@ -74,54 +76,99 @@ public class PatientAccountCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Searching and finding the data that has the same loginID.
-                if (etLoginID.getText().toString().charAt(0) != 'P') {
-                    etLoginID.setError("Patient Account has to start with letter 'P'.");
+                msp = spinnerYesOrNo.getSelectedItem().toString();
+
+                if (msp.equals("yes")) {
+                    mspStatus = true;
                 } else {
+                    mspStatus = false;
+                }
 
-                    PatientDao patientDao = new PatientDao(getApplicationContext());
+                if (AccountValidation.isEmpty(etFirstName)) {
+                    etFirstName.setError("This field is required");
+                } else {
+                    if (AccountValidation.nameValidation(etFirstName) == false) {
+                        etFirstName.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etLastName)) {
+                    etLastName.setError("This field is required");
+                } else {
+                    if (AccountValidation.nameValidation(etLastName) == false) {
+                        etLastName.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etAddress)) {
+                    etAddress.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etPhoneNumber)) {
+                    etPhoneNumber.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etEmail)) {
+                    etEmail.setError("This field is required");
+                } else {
+                    if (!AccountValidation.emailValidation((etEmail))) {
+                        etEmail.setError("Invalid input");
+                    }
+                }
+                if (AccountValidation.isEmpty(etLoginID)) {
+                    etLoginID.setError("This field is required");
+                }
+                if (AccountValidation.isEmpty(etPassword)) {
+                    etPassword.setError("This field is required");
+                }
+                if(mspStatus == true && AccountValidation.isEmpty(etHealthCardNumber)){
+                        etHealthCardNumber.setError("This field is required");
+                }
 
-                    //LoginID existence validation
-                    if (patientDao.exists(etLoginID.getText().toString())) {
-                        etLoginID.setError("Login Id is already exists");
+                if (!AccountValidation.isEmpty(etFirstName) && !AccountValidation.isEmpty(etLastName) && !AccountValidation.isEmpty(etLoginID) && !AccountValidation.isEmpty((etPassword)) &&
+                        AccountValidation.nameValidation(etFirstName) && AccountValidation.nameValidation(etLastName) && !AccountValidation.isEmpty(etAddress) && !AccountValidation.isEmpty(etPhoneNumber) &&
+                        !AccountValidation.isEmpty(etEmail) && AccountValidation.emailValidation(etEmail) && ((mspStatus == true  && !AccountValidation.isEmpty(etHealthCardNumber)) || mspStatus == false)) {
+
+                    //Searching and finding the data that has the same loginID.
+                    if (etLoginID.getText().toString().charAt(0) != 'P') {
+                        etLoginID.setError("Patient Account has to start with letter 'P'.");
                     } else {
 
-                        msp = spinnerYesOrNo.getSelectedItem().toString();
+                        PatientDao patientDao = new PatientDao(getApplicationContext());
 
-                        if (msp.equals("yes")) {
-                            mspStatus = true;
+                        //LoginID existence validation
+                        if (patientDao.exists(etLoginID.getText().toString())) {
+                            etLoginID.setError("Login Id is already exists");
                         } else {
-                            mspStatus = false;
+
+
+
+                            healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
+                                    ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
+
+                            //TODO input adminID data from session
+                            //Creating patient Object.
+                            Patient newPatient = new Patient(
+                                    etFirstName.getText().toString(),
+                                    etLastName.getText().toString(),
+                                    etAddress.getText().toString(),
+                                    etLoginID.getText().toString(),
+                                    etPassword.getText().toString(),
+                                    mspStatus,
+                                    etPhoneNumber.getText().toString(),
+                                    healthCardNumber,
+                                    etEmail.getText().toString(),
+                                    new Session(getApplicationContext()).getUserId()
+                            );
+
+                            //Insert to Database;
+                            boolean inserted = patientDao.insert(newPatient);
+
+
+                            //Give (un)successful prompt
+                            if (inserted) {
+                                Toast.makeText(PatientAccountCreateActivity.this, etLoginID.getText().toString() + " created", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getBaseContext(), AccountTypeOptionActivity.class));
+                            } else
+                                Toast.makeText(PatientAccountCreateActivity.this, "Unable to Create Account", Toast.LENGTH_SHORT).show();
+
                         }
-
-                        healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
-                                ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
-
-                        //TODO input adminID data from session
-                        //Creating patient Object.
-                        Patient newPatient = new Patient(
-                                etFirstName.getText().toString(),
-                                etLastName.getText().toString(),
-                                etAddress.getText().toString(),
-                                etLoginID.getText().toString(),
-                                etPassword.getText().toString(),
-                                mspStatus,
-                                etPhoneNumber.getText().toString(),
-                                healthCardNumber,
-                                etEmail.getText().toString(),
-                                new Session(getApplicationContext()).getUserId()
-                        );
-
-                        //Insert to Database;
-                        boolean inserted = patientDao.insert(newPatient);
-
-
-                        //Give (un)successful prompt
-                        if (inserted)
-                            Toast.makeText(PatientAccountCreateActivity.this, etLoginID.getText().toString() + " created", Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(PatientAccountCreateActivity.this, "Unable to Create Account", Toast.LENGTH_SHORT).show();
-
                     }
                 }
             }
