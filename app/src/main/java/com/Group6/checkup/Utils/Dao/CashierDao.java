@@ -76,6 +76,7 @@ public class CashierDao extends Dao<Cashier> {
         return recordObject;
     }
 
+
     @Override
     public List<Cashier> findAll() {
 
@@ -163,4 +164,37 @@ public class CashierDao extends Dao<Cashier> {
         return (result > 0) ? true : false;
     }
 
+    public Cashier findByID(String... cashierId) {
+
+        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
+
+        // Filter results WHERE "loginID" = 'A001'
+        String selection = DatabaseTable.CashierTable._ID + " = ?";
+
+        Cursor cursor = dbConnection.query(
+                DatabaseTable.CashierTable.TABLE_NAME,   // The table to query
+                null,             // array of columns to return - null to get all
+                selection,              // The columns for the WHERE clause
+                cashierId,
+                null,
+                null,
+                null
+        );
+
+        if(cursor.getCount() < 0)
+            throw new SQLiteException("No such entry");
+
+        cursor.move(1);
+
+        Cashier recordObject = new Cashier(
+                cursor.getInt(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getInt(5)
+        );
+
+        return recordObject;
+    }
 }

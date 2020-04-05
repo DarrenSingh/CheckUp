@@ -12,8 +12,7 @@
         android:layout_weight="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textSize="16sp"
-        android:textColor="@color/black"
-        android:text="Time" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/text_availability_status"
@@ -24,8 +23,7 @@
         android:layout_weight="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textSize="14sp"
-        android:textColor="@color/black"
-        android:text="Availability" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/hidden_availability_epoch"

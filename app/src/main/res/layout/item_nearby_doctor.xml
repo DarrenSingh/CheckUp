@@ -20,8 +20,7 @@
         android:id="@+id/text_nearby_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Small"
-        android:text="Dr. Micheal Scarn"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Small" />
 
     <!--  Office Address  -->
     <TextView
@@ -29,8 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:text="1342 Fake St"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <!--  Distance  -->
     <TextView
@@ -39,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:textColor="#393939"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:text="2.0 km"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
 </LinearLayout>

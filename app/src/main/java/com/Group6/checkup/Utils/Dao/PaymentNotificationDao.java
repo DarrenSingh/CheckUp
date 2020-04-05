@@ -14,9 +14,9 @@ import com.Group6.checkup.Entities.PaymentNotification;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentNotificatonDao extends Dao<PaymentNotification>{
+public class PaymentNotificationDao extends Dao<PaymentNotification>{
 
-    public PaymentNotificatonDao(@Nullable Context context) {
+    public PaymentNotificationDao(@Nullable Context context) {
         super(context);
     }
 
@@ -68,7 +68,7 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
                 cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getString(2),
-                cursor.getString(3),
+                cursor.getLong(3),
                 cursor.getInt(4),
                 cursor.getInt(5)
         );
@@ -96,7 +96,45 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getString(3),
+                    cursor.getLong(3),
+                    cursor.getInt(4),
+                    cursor.getInt(5)
+            );
+
+            recordObjectList.add(recordObject);
+
+        }
+
+        return recordObjectList;
+    }
+
+    public List<PaymentNotification> findAllByPatient(String... patientId) {
+        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
+
+        String selection = DatabaseTable.PaymentNotificationTable.PATIENT_ID + " = ?";
+
+        Cursor cursor = dbConnection.query(
+                DatabaseTable.PaymentNotificationTable.TABLE_NAME,   // The table to query
+                null,             // array of columns to return - null to get all
+                selection,              // The columns for the WHERE clause
+                patientId,
+                null,
+                null,
+                null
+        );
+
+        if(cursor.getCount() < 0)
+            throw new SQLiteException("No database entries");
+
+        List<PaymentNotification> recordObjectList = new ArrayList<>();
+
+        while(cursor.moveToNext()){
+
+            PaymentNotification recordObject = new PaymentNotification(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getLong(3),
                     cursor.getInt(4),
                     cursor.getInt(5)
             );
@@ -116,9 +154,9 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
 
         recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE_TITLE, object.getMessageTitle());
         recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.SENT_DATE_TIME, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.SENT_DATE_TIME, object.getSentDateTime());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.PATIENT_ID, object.getPatientID());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.CASHIER_ID, object.getCashierID());
 
         long result = dbConnection.insert(DatabaseTable.PaymentNotificationTable.TABLE_NAME, null, recordObject);
 
@@ -136,9 +174,9 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
         //populate entry with object attributes
         recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE_TITLE, object.getMessageTitle());
         recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.SENT_DATE_TIME, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
-        recordObject.put(DatabaseTable.PaymentNotificationTable.NOTIFICATION_MESSAGE, object.getMessage());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.SENT_DATE_TIME, object.getSentDateTime());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.PATIENT_ID, object.getPatientID());
+        recordObject.put(DatabaseTable.PaymentNotificationTable.CASHIER_ID, object.getCashierID());
 
 
         // Filter results WHERE "loginID" = 'A001'

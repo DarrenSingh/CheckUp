@@ -19,7 +19,7 @@
             android:layout_gravity="start"
             android:layout_marginTop="32dp"
             android:labelFor="@+id/edit_first_name"
-            android:text="Recipient"
+            android:text="@string/title_recipient"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
 
         <TextView
@@ -27,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Dr. Ross Gellar"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
 
@@ -37,7 +36,7 @@
             android:layout_marginTop="64dp"
             android:layout_gravity="start"
             android:labelFor="@+id/edit_send_subject"
-            android:text="Subject*"
+            android:text="@string/title_subject"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
 
         <EditText
@@ -52,7 +51,7 @@
             android:layout_marginTop="16dp"
             android:layout_gravity="start"
             android:labelFor="@+id/edit_send_message"
-            android:text="Message*"
+            android:text="@string/title_message"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"/>
 
         <EditText
@@ -67,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="300dp"
-            android:text="Please enter the details of your inquiry. The Doctor will respond as soon as possible"
+            android:text="@string/text_message_details"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
         <Button

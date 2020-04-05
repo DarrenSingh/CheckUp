@@ -35,14 +35,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="150dp"
-                android:text="Edit Profile"/>
+                android:text="@string/btn_edit_profile"/>
 
             <Button
                 android:id="@+id/btn_payment_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="150dp"
-                android:text="Payment History"/>
+                android:text="@string/btn_payment_history"/>
 
         </LinearLayout>
 
@@ -56,22 +56,19 @@
             <TextView
                 android:id="@+id/text_patientprof_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First Last Name"/>
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/text_patientprof_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Address"/>
+                android:layout_marginTop="4dp"/>
 
             <TextView
                 android:id="@+id/text_patientprof_msp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="MSP Verification"/>
+                android:layout_marginTop="4dp"/>
 
         </LinearLayout>
 
@@ -83,7 +80,7 @@
             android:layout_marginBottom="8dp"
             android:layout_alignParentBottom="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="Inbox"/>
+            android:text="@string/txt_inbox"/>
 
         <View
             android:layout_width="match_parent"

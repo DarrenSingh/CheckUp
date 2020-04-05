@@ -25,8 +25,7 @@
             android:id="@+id/text_help_recipient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:text="Jane Doe"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
     </LinearLayout>
 
@@ -55,15 +54,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:text="Subject"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
             <TextView
                 android:id="@+id/text_help_body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:text="@string/txt_lorem_ipsum"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 
             </LinearLayout>
@@ -92,15 +89,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:text="Subject"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
             <TextView
                 android:id="@+id/text_reply_body"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:text="@string/txt_lorem_ipsum"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 
         </LinearLayout>

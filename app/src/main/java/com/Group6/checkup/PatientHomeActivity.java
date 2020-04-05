@@ -29,6 +29,9 @@ public class PatientHomeActivity extends AppCompatActivity {
     private InvoiceDao invoiceDao;
     private List<Appointment> appointments;
     private List<Invoice> invoices;
+    TextView mTextViewName;
+    TextView mTextViewAppointment;
+    TextView mTextViewBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,9 @@ public class PatientHomeActivity extends AppCompatActivity {
 
 
         //UI Components
-        TextView mTextViewName = findViewById(R.id.text_patienthome_name);
-        TextView mTextViewAppointment = findViewById(R.id.text_upcoming_appointment);
-        TextView mTextViewBalance = findViewById(R.id.text_account_balance);
+        mTextViewName = findViewById(R.id.text_patienthome_name);
+        mTextViewAppointment = findViewById(R.id.text_upcoming_appointment);
+        mTextViewBalance = findViewById(R.id.text_account_balance);
 
         Button mBtnLocateDoctor = findViewById(R.id.btn_locate_doctor);
         Button mBtnProfile = findViewById(R.id.btn_account_profile);
@@ -55,35 +58,14 @@ public class PatientHomeActivity extends AppCompatActivity {
         currentUser = patientDao.find(appSession.getCurrentUsername());
         String fullName = currentUser.getFirstName() + " " + currentUser.getLastName();
 
-        //Set Next Appointment
-        try {
-
-            appointments = appointmentDao.findAllByPatient(String.valueOf(appSession.getUserId()));
-            Date date = new Date(appointments.get(0).getAppointmentDateTime());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY @ h:mm a");
-            String upcomingAppointment = dateFormat.format(date);
-            mTextViewAppointment.setText(upcomingAppointment);
-
-        }catch (Exception e){
-            mTextViewAppointment.setText("No upcoming appointments");
-            e.printStackTrace();
-        }
-
-
         //Set Account Balance
-        invoices = invoiceDao.findAllByPatient(String.valueOf(appSession.getUserId()));
+        String accountBalance = getAccountBalance();
 
-        double balanceOwing = 0.00;
-
-        for (int i = 0; i < invoices.size(); i++) {
-            balanceOwing += invoices.get(i).getPrice();
-        }
-
-        DecimalFormat decimalFormat = new DecimalFormat("###.##");
-        String accountBalance = "$" + decimalFormat.format(balanceOwing);
-
+        //Set Next Appointment
+        String nextAppointment = getNextAppointment();
 
         //Set Component Text
+        mTextViewAppointment.setText(nextAppointment);
         mTextViewName.setText(fullName);
         mTextViewBalance.setText(accountBalance);
 
@@ -118,6 +100,49 @@ public class PatientHomeActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //get latest data form database
+        mTextViewAppointment.setText(getNextAppointment());
+        mTextViewBalance.setText(getAccountBalance());
+    }
+
+    private String getAccountBalance(){
+        //Set Account Balance
+        invoices = invoiceDao.findAllByPatient(String.valueOf(appSession.getUserId()));
+
+        double balanceOwing = 0.00;
+
+        for (int i = 0; i < invoices.size(); i++) {
+            balanceOwing += invoices.get(i).getPrice();
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("###.##");
+        String accountBalance = "$" + decimalFormat.format(balanceOwing);
+
+        return accountBalance;
+    }
+
+    private String getNextAppointment(){
+
+        String upcomingAppointment;
+
+        try {
+
+            appointments = appointmentDao.findAllByPatient(String.valueOf(appSession.getUserId()));
+            Date date = new Date(appointments.get(0).getAppointmentDateTime());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY @ h:mm a");
+            upcomingAppointment = dateFormat.format(date);
+
+        }catch (Exception e){
+           upcomingAppointment = "No upcoming appointments";
+            e.printStackTrace();
+        }
+
+        return upcomingAppointment;
     }
 }

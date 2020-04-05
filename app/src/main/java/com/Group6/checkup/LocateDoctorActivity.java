@@ -24,6 +24,7 @@ import com.Group6.checkup.Entities.DistanceMatrixResponse;
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.GsonDistanceMatrixRequest;
+import com.Group6.checkup.Utils.Sort;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -135,7 +136,6 @@ public class LocateDoctorActivity extends Activity {
                 });
             }
         });
-
 
         //create and set on click listener that will move the map position to the selected address marker
         mListViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -360,7 +360,7 @@ public class LocateDoctorActivity extends Activity {
 
         if(!nearbyDoctorsData.isEmpty()) {
 
-            sortDataByDistance(nearbyDoctorsData);
+            Sort.byKeyValue(nearbyDoctorsData,"distance",float.class,Sort.ASCENDING);
 
             for (HashMap i: nearbyDoctorsData) {
 
@@ -456,36 +456,6 @@ public class LocateDoctorActivity extends Activity {
     private void hideKeyboard(View view){
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-    }
-
-    //insertion sort algorithm to sort the doctors data list by their distances
-    private static void sortDataByDistance(List<HashMap<String,String>> a) {
-
-        for(int i = 1; i < a.size(); i++){
-
-            // grab next comparison value
-            HashMap<String,String> nextInsertValue = a.get(i);
-
-            // place value into final its position
-            insertIntoIndex(nextInsertValue, a, 0, (i-1));
-
-        }
-    }
-    //insertion sort helper method
-    private static void insertIntoIndex(HashMap<String,String> nextToInsert, List<HashMap<String,String>> a,int sortStart,int sortEnd) {
-
-        int index = sortEnd;
-
-        while (index >= sortStart && Float.parseFloat(a.get(index).get("distance")) > Float.parseFloat(nextToInsert.get("distance"))) {
-
-            a.remove(index+1);
-            a.add(index + 1,a.get(index));
-            index--;
-        }
-
-        a.remove(index+1);
-        a.add(index + 1,nextToInsert);
 
     }
 
