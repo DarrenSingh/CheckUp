@@ -68,7 +68,7 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
                 cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getString(2),
-                cursor.getString(3),
+                cursor.getLong(3),
                 cursor.getInt(4),
                 cursor.getInt(5)
         );
@@ -96,7 +96,7 @@ public class PaymentNotificatonDao extends Dao<PaymentNotification>{
                     cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getString(3),
+                    cursor.getLong(3),
                     cursor.getInt(4),
                     cursor.getInt(5)
             );

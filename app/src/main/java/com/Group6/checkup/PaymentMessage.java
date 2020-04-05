@@ -23,7 +23,6 @@ public class PaymentMessage extends AppCompatActivity {
 
     PaymentNotificatonDao payDao;
     InvoiceDao invoiceDao;
-    Invoice invoice;
     Intent intent;
     String date ;
 
@@ -37,9 +36,10 @@ public class PaymentMessage extends AppCompatActivity {
         final EditText msg = findViewById(R.id.et_msg);
         Button btn = findViewById(R.id.btn_send);
 
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        date = df.format(c);
+        //remove
+       // Date c = Calendar.getInstance().getTime();
+        //SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        //date = df.format(c);
 
 
         payDao = new PaymentNotificatonDao(this);
@@ -48,11 +48,30 @@ public class PaymentMessage extends AppCompatActivity {
             String id = intent.getStringExtra("id");
             String name = intent.getStringExtra("name");
 
-            invoice = invoiceDao.find(String.valueOf(invoice.getID()));
-            String price = String.valueOf(invoiceDao.getPrice(id));
+            // grab invoice object
+            String price = String.valueOf(invoiceDao.find(id).getPrice());
+            //get price form object
+
+            // grab invoice date from object
+            //Date c = Calendar.getInstance().getTime();
+            //SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            //date = df.format(c);
+            date = String.valueOf(invoiceDao.find(id).getInvoiceDate());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+            Date d = null;
+            try {
+                d = sdf.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(d);
+            calendar.add(Calendar.DAY_OF_YEAR, 10);
+
+
             patient_name.setText(name);
-            msg.setText("Dear patient, your account is overdue $" + price +
-                    " The payment is due by " + date + '\n');
+            msg.setText("Dear " + name + ", your account is overdue $" + price +
+                    " The payment is due by " + calendar + '\n');
         }
 
 
@@ -64,7 +83,7 @@ public class PaymentMessage extends AppCompatActivity {
                int cId = 0;
                String title = "Payment Overdue Reminder";
 
-                payDao.insert(new PaymentNotification(title,message,date,pId,cId));
+                payDao.insert(new PaymentNotification(title,message,System.currentTimeMillis(),pId,cId));
 
                 payment_message.append(message);
             }

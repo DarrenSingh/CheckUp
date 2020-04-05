@@ -30,17 +30,25 @@ public class ViewUserHistoryActivity extends AppCompatActivity {
             case 'D':
                 messagesFromPatients();
                 break;
+            case 'A':
+                messageForAdmin();
+                break;
 
         }
     }
 
     public void messagesFromDoctors(){
-        onlineHelp = onlineHelpDao.patientHistory(loginID);
+        onlineHelp = onlineHelpDao.findAllByPatient(loginID);
         lv.setAdapter(new UserHistoryAdapter(ViewUserHistoryActivity.this,onlineHelp));
     }
 
     public void messagesFromPatients(){
-        onlineHelp = onlineHelpDao.doctorHistory(loginID);
+        onlineHelp = onlineHelpDao.findAllByDoctor(loginID);
+        lv.setAdapter(new UserHistoryAdapter(ViewUserHistoryActivity.this,onlineHelp));
+    }
+
+    public void messageForAdmin(){
+        onlineHelp = onlineHelpDao.findAll();
         lv.setAdapter(new UserHistoryAdapter(ViewUserHistoryActivity.this,onlineHelp));
     }
 }

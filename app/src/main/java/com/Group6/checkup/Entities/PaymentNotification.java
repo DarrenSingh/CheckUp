@@ -6,12 +6,12 @@ public class PaymentNotification {
     private int ID;
     private String messageTitle;
     private String message;
-    private String SentDateTime;
+    private long SentDateTime;
     private int patientID;
     private int cashierID;
 
     //Constructors
-    public PaymentNotification(int ID, String messageTitle, String message, String sentDateTime, int patientID, int cashierID) {
+    public PaymentNotification(int ID, String messageTitle, String message, long sentDateTime, int patientID, int cashierID) {
         this.ID = ID;
         this.messageTitle = messageTitle;
         this.message = message;
@@ -20,7 +20,7 @@ public class PaymentNotification {
         this.cashierID = cashierID;
     }
 
-    public PaymentNotification(String messageTitle, String message, String sentDateTime, int patientID, int cashierID) {
+    public PaymentNotification(String messageTitle, String message, long sentDateTime, int patientID, int cashierID) {
         this.messageTitle = messageTitle;
         this.message = message;
         SentDateTime = sentDateTime;
@@ -53,11 +53,11 @@ public class PaymentNotification {
         this.message = message;
     }
 
-    public String getSentDateTime() {
+    public long getSentDateTime() {
         return SentDateTime;
     }
 
-    public void setSentDateTime(String sentDateTime) {
+    public void setSentDateTime(long sentDateTime) {
         SentDateTime = sentDateTime;
     }
 
