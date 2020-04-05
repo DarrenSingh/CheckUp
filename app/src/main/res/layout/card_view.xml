@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/user" />
 
     <TextView
-        android:id="@+id/patient_name"
+        android:id="@+id/text_overdue_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hey"
