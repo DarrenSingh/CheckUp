@@ -35,7 +35,6 @@ import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapquest.android.commoncore.log.L;
 import com.mapquest.android.commoncore.model.LatLng;
 import com.mapquest.android.searchahead.IllegalQueryParameterException;
 import com.mapquest.android.searchahead.SearchAheadService;
@@ -55,7 +54,7 @@ import java.util.Map;
 
 import static com.Group6.checkup.BuildConfig.API_KEY;
 
-public class MapQuestActivity extends Activity {
+public class LocateDoctorActivity extends Activity {
     private EditText mEditSearch;
     private ImageView mImageSearch;
     private ListView mListViewSearch;
@@ -85,6 +84,7 @@ public class MapQuestActivity extends Activity {
         mListViewDoctors = findViewById(R.id.list_nearby_doctors);
         mEditSearch = findViewById(R.id.edit_search_location);
 
+        //add a text changed listener to provide up to date search predictions
         mEditSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -111,12 +111,16 @@ public class MapQuestActivity extends Activity {
             }
         });
 
+        //create MapQuest map view
         mMapView.onCreate(savedInstanceState);
+        //gets the asynchronous map
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
                 mMapboxMap = mapboxMap;
                 mMapView.setStreetMode();
+
+                //set a on map click listener to hide the
                 mMapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull com.mapbox.mapboxsdk.geometry.LatLng point) {
@@ -132,13 +136,8 @@ public class MapQuestActivity extends Activity {
             }
         });
 
-        mEditSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListViewDoctors.setVisibility(View.GONE);
-            }
-        });
 
+        //create and set on click listener that will move the map position to the selected address marker
         mListViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -187,6 +186,7 @@ public class MapQuestActivity extends Activity {
     protected void onSaveInstanceState(Bundle outState)
     { super.onSaveInstanceState(outState); mMapView.onSaveInstanceState(outState); }
 
+    //search ahead predictions displayed
     private void searchQuery(String query){
         mSearchAheadServiceV3 = new SearchAheadService(this, API_KEY);
 
@@ -268,10 +268,11 @@ public class MapQuestActivity extends Activity {
                         }
                     });
         } catch (IllegalQueryParameterException e) {
-            L.e("Error performing search", e);
+            Log.e("Error performing search", e.getMessage());
         }
     }
 
+    //resets the search ahead list
     private void resetSearchAheadList(){
         if(!searchResultsData.isEmpty()) {
             searchResultsData.clear();
@@ -279,6 +280,7 @@ public class MapQuestActivity extends Activity {
         }
     }
 
+    //resets the doctors list
     private void resetDoctorsList(){
         if(!nearbyDoctorsData.isEmpty()){
             nearbyDoctorsData.clear();
@@ -287,6 +289,7 @@ public class MapQuestActivity extends Activity {
         }
     }
 
+    //MapQuest route matrix api call made to return the distances of all doctor addresses in relation to the user
     private void distanceMatrixNetworkCall(){
         //Get all addresses
         List<String> addresses = new ArrayList<>();
@@ -344,7 +347,7 @@ public class MapQuestActivity extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MapQuestActivity.this, "Unable to Retrieve Nearby Doctors", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LocateDoctorActivity.this, "Unable to Retrieve Nearby Doctors", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -352,11 +355,12 @@ public class MapQuestActivity extends Activity {
 
     }
 
+    //displays the list of nearby doctors
     private void displayNearbyDoctors(ListView mListView){
 
         if(!nearbyDoctorsData.isEmpty()) {
 
-            insertion(nearbyDoctorsData);
+            sortDataByDistance(nearbyDoctorsData);
 
             for (HashMap i: nearbyDoctorsData) {
 
@@ -403,7 +407,7 @@ public class MapQuestActivity extends Activity {
                     TextView mTextViewName = view.findViewById(R.id.text_nearby_name);
                     TextView mTextViewAddress = view.findViewById(R.id.text_nearby_address);
 
-                    Intent intent = new Intent(MapQuestActivity.this, DoctorInfoActivity.class);
+                    Intent intent = new Intent(LocateDoctorActivity.this, DoctorInfoActivity.class);
 
                     //pass intent extra(doctorID)
                     intent.putExtra("doctorId", mTextViewId.getText().toString());
@@ -417,10 +421,11 @@ public class MapQuestActivity extends Activity {
         }
     }
 
+    //adds selected location marker
     private void addMarker(MapboxMap mapboxMap) {
         MarkerOptions markerOptions = new MarkerOptions();
 
-        IconFactory iconFactory = IconFactory.getInstance(MapQuestActivity.this);
+        IconFactory iconFactory = IconFactory.getInstance(LocateDoctorActivity.this);
         Icon icon = iconFactory.fromResource(R.drawable.mapquest_icon);
 
         markerOptions.position(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat),Double.parseDouble(selectedLong)));
@@ -429,6 +434,7 @@ public class MapQuestActivity extends Activity {
         mapboxMap.addMarker(markerOptions);
     }
 
+    //adds nearby doctors location markers
     private void addDoctorsMarkers(MapboxMap mapboxMap, List<HashMap<String,String>> nearbyDoctorsData){
 
         for (int i = 0; i < nearbyDoctorsData.size(); i++) {
@@ -446,13 +452,15 @@ public class MapQuestActivity extends Activity {
 
     }
 
+    //hides the soft keyboard
     private void hideKeyboard(View view){
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
     }
 
-    private static void insertion(List<HashMap<String,String>> a) {
+    //insertion sort algorithm to sort the doctors data list by their distances
+    private static void sortDataByDistance(List<HashMap<String,String>> a) {
 
         for(int i = 1; i < a.size(); i++){
 
@@ -464,14 +472,8 @@ public class MapQuestActivity extends Activity {
 
         }
     }
-
+    //insertion sort helper method
     private static void insertIntoIndex(HashMap<String,String> nextToInsert, List<HashMap<String,String>> a,int sortStart,int sortEnd) {
-
-
-        // while we are within bounds of the sorted subarray and sub end pointer value is less than it's preceeding index value
-        // move preceeded value to pointer index
-        // move pointer index over to the left
-        // place nextToInsert into empty space
 
         int index = sortEnd;
 
@@ -487,6 +489,7 @@ public class MapQuestActivity extends Activity {
 
     }
 
+    //overrides the back button to remove any text in the search bar if present
     @Override
     public void onBackPressed() {
         if(locationFound){

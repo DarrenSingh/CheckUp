@@ -25,7 +25,6 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity {
     private Session appSession;
     private InvoiceDao invoiceDao;
     private List<Invoice> invoiceList;
-    private ListView mListview;
     private TextView mTextViewOwing;
 
     @Override
@@ -38,18 +37,17 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity {
 
         //UI Components
         mTextViewOwing = findViewById(R.id.text_history_owing);
-        mListview = findViewById(R.id.list_invoice_history);
+        ListView mListView = findViewById(R.id.list_invoice_history);
 
-        //TODO com.Group6.checkup.Patient payment history logic
         //get all invoices by patient id
         invoiceList = invoiceDao.findAllByPatient(String.valueOf(appSession.getUserId()));
 
-        //TODO ListView Hashmap
-        populateListview(invoiceList, mListview,mTextViewOwing);
+        populateListView(invoiceList, mListView,mTextViewOwing);
 
     }
 
-    private void populateListview(List<Invoice> invoiceList, ListView listView,TextView mTextViewOwing){
+    private void populateListView(List<Invoice> invoiceList, ListView listView, TextView mTextViewOwing){
+
 
         List<HashMap<String,String>> inboxData = new ArrayList<>();
         DecimalFormat decimalFormat = new DecimalFormat("###.##");

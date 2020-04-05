@@ -48,20 +48,19 @@ public class AccountProfileActivity extends AppCompatActivity {
         mTextViewFullName = findViewById(R.id.text_patientprof_name);
         mTextViewAddress = findViewById(R.id.text_patientprof_address);
         mTextViewMSP = findViewById(R.id.text_patientprof_msp);
-
         mListViewInbox = findViewById(R.id.list_patient_inbox);
 
         //Activity Logic
-
         currentUser = patientDao.find(appSession.getCurrentUsername());
         mTextViewFullName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
         mTextViewAddress.setText(currentUser.getAddress());
         mTextViewMSP.setText(String.valueOf(currentUser.getHealthCareCardNumber()));
 
+        //Obtain the online help items for this user
         OnlineHelpDao onlineHelpDao = new OnlineHelpDao(this);
-
         List<OnlineHelp> onlineHelps = onlineHelpDao.findAllByPatient(String.valueOf(appSession.getUserId()));
 
+        //Populate the inbox with messages from the database
         populateListView(onlineHelps,mListViewInbox);
 
         //UI Event Listeners
@@ -81,7 +80,6 @@ public class AccountProfileActivity extends AppCompatActivity {
         });
 
 
-        //TODO Inbox item onItemClickListener
         mListViewInbox.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,17 +87,16 @@ public class AccountProfileActivity extends AppCompatActivity {
                 TextView messageId = view.findViewById(R.id.text_message_id);
                 TextView recipient = view.findViewById(R.id.text_message_recipient);
 
+                //create intent
                 Intent intent = new Intent(getApplicationContext(),PatientViewMessageActivity.class);
+
+                //put message object id
                 intent.putExtra("messageId",messageId.getText().toString());
+                //put recipient Name
                 intent.putExtra("recipient",recipient.getText().toString());
+
                 startActivity(intent);
 
-
-                Toast.makeText(AccountProfileActivity.this, messageId.getText().toString(), Toast.LENGTH_SHORT).show();
-
-                    //create intent
-                    //put message object
-                    //start activity
             }
         });
 
@@ -123,6 +120,7 @@ public class AccountProfileActivity extends AppCompatActivity {
             // create a hashmap
             HashMap<String, String> hashMap = new HashMap<>();
 
+            //get the doctor who sent the msg by row id
             Doctor sender = new DoctorDao(this).findByID(String.valueOf(onlineHelpList.get(i).getDoctorID()));
 
             // convert image int to a string and place it into the hashmap with an images key
@@ -135,7 +133,6 @@ public class AccountProfileActivity extends AppCompatActivity {
             inboxData.add(hashMap);
         }
 
-        //TODO List from adapter (hashmap keys)
         String[] from = {
                 "id",
                 "from",
@@ -143,8 +140,6 @@ public class AccountProfileActivity extends AppCompatActivity {
                 "body"
         };
 
-        //TODO List to adapter (R.id.* from layout file)
-        //TODO create inbox list layout file
         int[] to = {R.id.text_message_id,R.id.text_message_recipient,R.id.text_message_subject,R.id.text_message_description};
 
         //ListView Adapter

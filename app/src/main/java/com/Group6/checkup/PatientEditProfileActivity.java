@@ -28,10 +28,6 @@ public class PatientEditProfileActivity extends AppCompatActivity {
         appSession = new Session(this);
         patientDao = new PatientDao(this);
 
-
-
-        //TODO com.Group6.checkup.Patient Edit profile logic
-
         //UI Components
         TextView mTextViewName = findViewById(R.id.text_edit_profile_name);
         TextView mTextViewAddress = findViewById(R.id.text_edit_profile_address);
@@ -55,7 +51,6 @@ public class PatientEditProfileActivity extends AppCompatActivity {
         mEditFirstName.setText(currentUser.getFirstName());
         mEditLastName.setText(currentUser.getLastName());
         mEditAddress.setText(currentUser.getAddress());
-
 
         //UI Event Listeners
         mBtnConfirmChanges.setOnClickListener(new View.OnClickListener() {

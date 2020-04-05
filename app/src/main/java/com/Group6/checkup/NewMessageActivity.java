@@ -54,7 +54,6 @@ public class NewMessageActivity extends AppCompatActivity {
                         doctorId
                 );
 
-                //TODO check for foreign key error
                 //make message entry in database using the message object
                 boolean result = onlineHelpDao.insert(onlineHelp);
 

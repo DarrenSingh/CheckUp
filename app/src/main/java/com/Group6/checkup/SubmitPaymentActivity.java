@@ -38,11 +38,13 @@ public class SubmitPaymentActivity extends AppCompatActivity {
 
         decimalFormat = new DecimalFormat("###.##");
 
-        //TODO SubmitPaymentActivity Logic
+        //get intent
         Intent intent = getIntent();
 
+        //check the intent for a invoice id value that was passed
         if(intent.hasExtra("invoiceId")){
 
+            //get the invoice from the database
             currentInvoice = invoiceDao.find(intent.getStringExtra("invoiceId"));
 
             //set textview to outstanding balance
@@ -67,14 +69,12 @@ public class SubmitPaymentActivity extends AppCompatActivity {
 
                         //Notify user payment must be greater than 0
                         Toast.makeText(SubmitPaymentActivity.this, "Amount must be more than $0.00", Toast.LENGTH_SHORT).show();
-                    } else if(Math.round(Double.parseDouble(mEditPaymentAmount.getText().toString())) > currentInvoice.getPrice()) {
+                    } else if(Math.round(Double.parseDouble(mEditPaymentAmount.getText().toString())) > Math.round(currentInvoice.getPrice())) {
                         Toast.makeText(SubmitPaymentActivity.this, "Amount cannot be greater than " + currentInvoice.getPrice(), Toast.LENGTH_SHORT).show();
-
                     } else {
 
                         //Notify user of the payment acceptance
                         Toast.makeText(SubmitPaymentActivity.this, "Payment of "+paymentAmount.toString()+" Processed", Toast.LENGTH_SHORT).show();
-                        //TODO remove payment amount from account balance in the DB
 
                         double newBalance = currentInvoice.getPrice() - paymentAmount;
 
@@ -88,14 +88,14 @@ public class SubmitPaymentActivity extends AppCompatActivity {
 
                         mTextViewBalance.setText("$" + decimalFormat.format(currentInvoice.getPrice()));
 
+                        Toast.makeText(SubmitPaymentActivity.this, "$"+paymentAmount+" Paid", Toast.LENGTH_SHORT).show();
+
                         //define home activity intent
                         Intent intent = new Intent(SubmitPaymentActivity.this,PatientHomeActivity.class);
                         //start activity
                         startActivity(intent);
 
-
                     }
-
 
                 }catch(NumberFormatException e){
                     // Notify user payment amount must be entered
@@ -108,7 +108,6 @@ public class SubmitPaymentActivity extends AppCompatActivity {
         mBtnPayLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO add owing amount to account balance in the DB
 
                 //define home activity intent
                 Intent intent = new Intent(SubmitPaymentActivity.this,PatientHomeActivity.class);

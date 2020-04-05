@@ -59,13 +59,13 @@ public class PatientHomeActivity extends AppCompatActivity {
         try {
 
             appointments = appointmentDao.findAllByPatient(String.valueOf(appSession.getUserId()));
-            //TODO get user appointment from database, if any
             Date date = new Date(appointments.get(0).getAppointmentDateTime());
             SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY @ h:mm a");
             String upcomingAppointment = dateFormat.format(date);
             mTextViewAppointment.setText(upcomingAppointment);
 
         }catch (Exception e){
+            mTextViewAppointment.setText("No upcoming appointments");
             e.printStackTrace();
         }
 
@@ -92,8 +92,7 @@ public class PatientHomeActivity extends AppCompatActivity {
         mBtnLocateDoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Create new intent for LocateDoctorActivity.Class
-                Intent intent = new Intent(PatientHomeActivity.this,MapQuestActivity.class);
+                Intent intent = new Intent(PatientHomeActivity.this, LocateDoctorActivity.class);
                 startActivity(intent);
             }
         });

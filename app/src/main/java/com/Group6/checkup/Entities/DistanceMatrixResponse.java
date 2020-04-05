@@ -1,16 +1,16 @@
 package com.Group6.checkup.Entities;
 
-import android.view.Display;
-
 import java.util.List;
 
 public class DistanceMatrixResponse {
 
+    //Attributes
     private boolean allToAll;
     private List<Float> distance;
     private List<Float> time;
     private List<Location> locations;
 
+    //Constructors
     public DistanceMatrixResponse(boolean allToAll, List<Float> distance, List<Float> time, List<Location> locations) {
         this.allToAll = allToAll;
         this.distance = distance;
@@ -18,6 +18,7 @@ public class DistanceMatrixResponse {
         this.locations = locations;
     }
 
+    //Getters & Setters
     public boolean isAllToAll() {
         return allToAll;
     }
@@ -50,7 +51,10 @@ public class DistanceMatrixResponse {
         this.locations = locations;
     }
 
-    public class Location{
+    //Helper Classes
+
+    //Location class to parse distance matrix response json location objects
+    public class Location {
 
         private LatLong latLng;
 
@@ -67,7 +71,8 @@ public class DistanceMatrixResponse {
         }
     }
 
-    public class LatLong{
+    //LatLong class to parse distance matrix response json latLong objects
+    public class LatLong {
         float lng;
         float lat;
 
@@ -93,19 +98,4 @@ public class DistanceMatrixResponse {
         }
     }
 
-    //allToAll boolean
-    //distance list<float>
-    //locations list<map>
-        //dragPoint
-        //
-        //
-        //
-    //time float
-    //manyToOne boolean
-    //info list<map>
-        //statuscode string,int
-        //copyright list<map>
-            //imageAltText <string,string>
-            //imageUrl <string,string>
-            //text <string,string>
 }

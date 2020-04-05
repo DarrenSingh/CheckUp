@@ -63,8 +63,7 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
             this.patientDao.insert(new Patient("John","Doe","123 Fake St","P002","password1",true,"604-555-1234",123000999,"johndoe@mail.com",1));
 
             //Create Appointments
-            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1,1));
-            this.appointmentDao.insert(new Appointment(System.currentTimeMillis()-3000, 1,1));
+//            this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 1,1));
 
             //Create Invoices
             this.invoiceDao.insert(new Invoice(29.99, "May,20,2020", "unpaid", System.currentTimeMillis(), 1, 1, 1, 1));
