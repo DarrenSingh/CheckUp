@@ -47,5 +47,4 @@
         android:layout_gravity="top"
         tools:listitem="@layout/item_payment_history"/>
 
-
 </LinearLayout>

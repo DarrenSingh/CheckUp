@@ -14,8 +14,6 @@ import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 
-import java.util.ArrayList;
-
 public class DoctorAccountEditActivity extends AppCompatActivity {
     Button btnEditAccount, btnDeleteAccount;
     EditText etFirstName, etLastName, etOfficeAddress, etPhoneNumber, etEmail, etLoginID, etPassword;

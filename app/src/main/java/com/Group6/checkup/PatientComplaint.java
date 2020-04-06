@@ -18,6 +18,8 @@ import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Dao.OnlineHelpReplyDao;
 import com.Group6.checkup.Utils.Session;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class PatientComplaint extends AppCompatActivity {
 
     DoctorDao doctorDao;

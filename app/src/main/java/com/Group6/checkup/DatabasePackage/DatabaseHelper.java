@@ -7,6 +7,21 @@ import android.os.Build;
 
 import androidx.annotation.Nullable;
 
+import com.Group6.checkup.Entities.Admin;
+import com.Group6.checkup.Entities.Appointment;
+import com.Group6.checkup.Entities.Cashier;
+import com.Group6.checkup.Entities.Doctor;
+import com.Group6.checkup.Entities.Invoice;
+import com.Group6.checkup.Entities.OnlineHelp;
+import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.Utils.Dao.AdminDao;
+import com.Group6.checkup.Utils.Dao.AppointmentDao;
+import com.Group6.checkup.Utils.Dao.CashierDao;
+import com.Group6.checkup.Utils.Dao.DoctorDao;
+import com.Group6.checkup.Utils.Dao.InvoiceDao;
+import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
+import com.Group6.checkup.Utils.Dao.PatientDao;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static DatabaseHelper sInstance;
@@ -63,5 +78,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.setForeignKeyConstraintsEnabled(true);
         }
     }
+
+    private class DatabaseSeedAsync extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            //Create Admin Users
+            AdminDao adminDao = new AdminDao(null);
+            adminDao.insert(new Admin("Super","User", "A001", "root"));
+
+            //Create Cashier Users
+            CashierDao cashierDao = new CashierDao(null);
+            cashierDao.insert(new Cashier(1,"Rachel","Green","C001","password",1));
+
+            //Create Doctor Users
+            DoctorDao doctorDao = new DoctorDao(null);
+            doctorDao.insert(new Doctor(1,"Micheal","Scarn","322 Sydney Way","D001","password","604-555-2144","scarn@medicine.com",1));
+
+            //Create Patient Users
+            PatientDao patientDao = new PatientDao(null);
+            patientDao.insert(new Patient(1,"Jane","Doe","1234 Fake St","P001","password",true,"604-555-1234",123000998,"janedoe@mail.com",1));
+            patientDao.insert(new Patient(2,"John","Doe","123 Fake St","P002","password1",true,"604-555-1234",123000999,"johndoe@mail.com",1));
+
+
+            InvoiceDao invoiceDao = new InvoiceDao(null);
+            invoiceDao.insert(new Invoice(25,"May,05,2019","unpaid",System.currentTimeMillis(),1,1,1,1));
+            invoiceDao.insert(new Invoice(25,"May,05,2019","unpaid",System.currentTimeMillis(),2,1,1,1));
+
+            AppointmentDao appointmentDao = new AppointmentDao(null);
+            appointmentDao.insert(new Appointment(System.currentTimeMillis(),1,1));
+            //Create Messages
+            OnlineHelpDao onlineHelpDao = new OnlineHelpDao(null);
+            //TODO look into foreign key constraint error
+            onlineHelpDao.insert(new OnlineHelp("Test Message1","Lorem Ipsum","Jan 23, 2020",1,1));
+            onlineHelpDao.insert(new OnlineHelp("Test Message2","Lorem Ipsum","Jan 24, 2020",1,1));
+//            onlineHelpDao.insert(new OnlineHelp("Test Message3","Lorem Ipsum","Jan 27, 2020",1,1));
+
+            return null;
+        }
+    }
+
+
 }
 

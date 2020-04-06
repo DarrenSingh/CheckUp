@@ -1,7 +1,5 @@
 package com.Group6.checkup.EditAndUpdateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,14 +11,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.Group6.checkup.CreateAccountPackage.CashierAccountCreateActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.Dao.AdminDao;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
-
-import java.util.ArrayList;
 
 public class EditAndUpdateAccountSearchActivity extends AppCompatActivity {
 

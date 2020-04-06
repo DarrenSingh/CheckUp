@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     style="@style/customCardView"
     android:layout_margin="10dp"
-    android:id="@+id/list_card_view"
-    app:cardBackgroundColor="@color/lightBlue">
+    android:id="@+id/list_card_view">
 
     <ImageView
         android:id="@+id/imageView"
@@ -17,14 +16,15 @@
         app:srcCompat="@drawable/user" />
 
     <TextView
-        android:id="@+id/patient_name"
+        android:id="@+id/text_overdue_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hey"
         android:layout_marginLeft="70dp"
         android:layout_marginStart="70dp"
         android:layout_gravity="center_vertical"
-        style="@style/subTitleTextView"/>
+        android:textColor="@color/black"
+        style="@style/normalTextView"/>
 
 
 </androidx.cardview.widget.CardView>

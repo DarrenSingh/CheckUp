@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class DoctorInfoActivity extends AppCompatActivity {
 
     Session appSession;

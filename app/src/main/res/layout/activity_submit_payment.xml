@@ -13,8 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="@string/text_amount_due"/>
+        android:text="@string/text_amount_due"
+        android:textColor="@color/black"
+        style="@style/normalTextView"/>
 
     <TextView
         android:id="@+id/text_payment_owing"
@@ -23,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+        style="@style/subTitleTextView"/>
 
     <EditText
         android:id="@+id/edit_payment_amount"
@@ -34,7 +35,8 @@
         android:inputType="numberDecimal"
         android:minWidth="200dp"
         android:hint="@string/edit_payment_hint"
-        android:gravity="center"/>
+        android:gravity="center"
+        style="@style/normalTextView"/>
 
     <Button
         android:id="@+id/btn_pay_now"
@@ -43,6 +45,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="64dp"
         android:minWidth="100dp"
+        android:textColor="@color/white"
         android:background="@color/colorPrimary"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
         android:text="@string/btn_pay_now"/>
@@ -52,8 +55,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="15dp"
         android:minWidth="100dp"
         android:text="@string/btn_pay_later"
-        android:backgroundTintMode="screen"/>
+        android:backgroundTintMode="screen"
+        style="@style/buttonStyle"/>
 
 </LinearLayout>

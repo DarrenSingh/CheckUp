@@ -39,6 +39,8 @@ public class OnlineHelp {
         this.doctorID = doctorID;
     }
 
+    public OnlineHelp() { }
+
     //Getters & Setters
     public int getID() {
         return ID;
@@ -95,4 +97,5 @@ public class OnlineHelp {
     public void setOnlineHelpReplyID(int onlineHelpReplyID) {
         this.onlineHelpReplyID = onlineHelpReplyID;
     }
+
 }

@@ -239,4 +239,5 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
 
         return (result > 0) ? true : false;
     }
+
 }

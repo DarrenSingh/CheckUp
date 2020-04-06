@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="@string/text_greeting"/>
+        style="@style/normalTextView"/>
 
     <TextView
         android:id="@+id/text_patienthome_name"
@@ -22,7 +21,9 @@
         android:layout_marginTop="4dp"
         android:layout_marginLeft="16dp"
         android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        android:text="Patient Name"
+        android:textColor="@color/black"
+        style="@style/subTitleTextView"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:text="@string/title_upcoming_appointment"/>
+        android:text="@string/title_upcoming_appointment"
+        style="@style/normalTextView"/>
 
 
     <TextView
@@ -38,7 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="16dp"
+        android:text="Fri, Feb 2 2020"
+        style="@style/normalTextView"/>
 
 
     <TextView
@@ -47,7 +51,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:text="@string/title_account_balance"/>
+        android:text="@string/title_account_balance"
+        style="@style/normalTextView"/>
 
 
     <TextView
@@ -55,7 +60,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="16dp"
+        style="@style/normalTextView"/>
 
 
     <Button
@@ -64,7 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
         android:layout_gravity="center"
-        android:text="@string/text_locate_doctor"/>
+        android:text="@string/text_locate_doctor"
+        style="@style/buttonStyle"/>
 
     <Button
         android:id="@+id/btn_account_profile"
@@ -72,7 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
-        android:text="@string/text_account_profile"/>
+        android:text="@string/text_account_profile"
+        style="@style/buttonStyle"/>
 
     <RelativeLayout
         android:orientation="vertical"
@@ -87,7 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="32dp"
-            android:text="@string/text_logout"/>
+            android:text="@string/text_logout"
+            style="@style/buttonStyle"/>
 
     </RelativeLayout>
 

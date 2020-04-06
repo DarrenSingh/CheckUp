@@ -23,8 +23,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/text_firstName"
-            android:textSize="20sp"></TextView>
+            android:textColor="@color/black"
+            style="@style/normalTextView"/>
 
         <EditText
             android:id="@+id/editTxt_editCashierFirstName"
@@ -33,14 +36,21 @@
             android:hint="@string/text_firstName"
             android:inputType="textPersonName"
             android:textSize="30sp"
-            android:importantForAutofill="no"></EditText>
+            android:importantForAutofill="no"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            tools:ignore="autofill"
+            style="@style/normalTextView"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/text_lastName"
-            android:textSize="20sp"></TextView>
+            android:textColor="@color/black"
+            style="@style/normalTextView"/>
 
         <EditText
             android:id="@+id/editTxt_editCashierLastName"
@@ -49,14 +59,21 @@
             android:hint="@string/text_lastName"
             android:inputType="textPersonName"
             android:textSize="30sp"
-            android:importantForAutofill="no"></EditText>
+            android:importantForAutofill="no"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            tools:ignore="autofill"
+            style="@style/normalTextView"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/text_loginID"
-            android:textSize="20sp"></TextView>
+            android:textColor="@color/black"
+            style="@style/normalTextView"/>
 
         <EditText
             android:id="@+id/editTxt_editCashierLoginID"
@@ -65,39 +82,55 @@
             android:hint="@string/text_loginID"
             android:inputType="text"
             android:textSize="30sp"
-            android:importantForAutofill="no"></EditText>
+            android:importantForAutofill="no"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            tools:ignore="autofill"
+            style="@style/normalTextView"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/text_password"
-            android:textSize="20sp"></TextView>
+            android:textColor="@color/black"
+            style="@style/normalTextView"/>
 
         <EditText
             android:id="@+id/editTxt_editCashierPassword"
+            style="@style/normalTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:hint="@string/text_password"
             android:inputType="textPassword"
             android:textSize="30sp"
-            android:importantForAutofill="no"></EditText>
+            android:importantForAutofill="no"
+            tools:ignore="autofill" />
 
         <Button
             android:id="@+id/btn_editCashierAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/button_edit"
-            android:textSize="30sp"></Button>
+            style="@style/buttonStyle"/>
 
         <Button
             android:id="@+id/btn_deleteCashierAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/button_delete"
-            android:textSize="30sp"></Button>
+            style="@style/buttonStyle"/>
 
 
     </LinearLayout>

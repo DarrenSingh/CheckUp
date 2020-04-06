@@ -116,7 +116,5 @@ public class Invoice {
         return appointmentID;
     }
 
-    public void setAppointmentID(int appointmentID) {
-        this.appointmentID = appointmentID;
-    }
+    public void setAppointmentID(int appointmentID) { this.appointmentID = appointmentID; }
 }

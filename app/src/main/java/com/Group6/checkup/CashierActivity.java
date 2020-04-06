@@ -8,32 +8,82 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.Group6.checkup.Entities.Invoice;
+import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.Utils.Dao.InvoiceDao;
+import com.Group6.checkup.Utils.Dao.PatientDao;
+
 public class CashierActivity extends AppCompatActivity {
 
-    String[] attractions = {"Louis Litt",
-            "Harvey Specter","Donna Paulsen"};
+    InvoiceDao invoiceDao;
+    PatientDao patientDao;
+    List<Invoice> invoices;
+    List<HashMap<String,String>> overdueInvoicesData;
+    ListView listView;
+    OverdueInvoicesAdapter invoiceAdapter;
+    Intent intent;
 
-    private PatientAdapter pAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier);
 
-        this.setTitle("Welcome Shivangi!");
+        //initialize daos
+        invoiceDao = new InvoiceDao(this);
+        patientDao = new PatientDao(this);
 
-        ListView listView = findViewById(R.id.list_view);
+        //get all invoices
+        invoices = invoiceDao.findAll();
 
-        pAdapter = new PatientAdapter(CashierActivity.this,attractions);
-        listView.setAdapter(pAdapter);
+        //create new array for adapter
+        overdueInvoicesData = new ArrayList<>();
+
+        //loop through
+        for (int j = 0; j < invoices.size() ; j++) {
+
+            if(invoices.get(j).getPaymentStatus().equals("unpaid")){
+
+                HashMap<String,String> map = new HashMap<>();
+
+                Invoice invoice = invoices.get(j);
+                Patient associatedPatient = patientDao.findById(String.valueOf(invoice.getPatientID()));
+
+                map.put("patientName", associatedPatient.getFirstName()
+                        + " "
+                        + associatedPatient.getLastName()
+                );
+
+                map.put("invoiceId",String.valueOf(invoice.getID()));
+
+                overdueInvoicesData.add(map);
+            }
+        }
+
+        listView = findViewById(R.id.list_view);
+
+        String[] from = {"patientName"};
+        int[] to = {R.id.text_overdue_patient};
+
+        invoiceAdapter = new OverdueInvoicesAdapter(this,overdueInvoicesData,R.layout.card_view,from,to);
+
+        listView.setAdapter(invoiceAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent in = new Intent(CashierActivity.this,PaymentMessage.class);
-                in.putExtra("name" , attractions[position]);
-                startActivity(in);
+
+                //create intent
+                intent = new Intent(CashierActivity.this,PaymentMessage.class);
+
+                //pass values to intent from list item to intent
+                intent.putExtra("invoiceId", String.valueOf(invoiceAdapter.data.get(position).get("invoiveId")));
+                intent.putExtra("patientName" ,String.valueOf(invoiceAdapter.data.get(position).get("patientName")));
+
+                //start activity
+                startActivity(intent);
             }
         });
 
     }
+
 }

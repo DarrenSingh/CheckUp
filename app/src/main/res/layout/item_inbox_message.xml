@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -44,7 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    android:textColor="@color/black"
+                    style="@style/normalTextView"/>
 
                 <!--  Subject  -->
                 <TextView
@@ -52,10 +54,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
                     android:maxLines="1"
-                    android:ellipsize="end" />
+                    style="@style/subTitleTextView" />
 
                 <!--  Body  -->
                 <TextView
@@ -63,10 +63,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:maxLines="2"
                     android:ellipsize="end"
-                    android:text="@string/txt_lorem_ipsum"/>
+                    android:text="@string/txt_lorem_ipsum"
+                    style="@style/normalTextView"/>
             </LinearLayout>
 
     </LinearLayout>

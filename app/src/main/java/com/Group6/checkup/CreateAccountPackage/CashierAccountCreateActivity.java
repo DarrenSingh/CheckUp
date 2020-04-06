@@ -13,6 +13,7 @@ import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Session;
 
 public class CashierAccountCreateActivity extends AppCompatActivity {

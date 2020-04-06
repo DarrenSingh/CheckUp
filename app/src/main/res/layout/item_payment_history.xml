@@ -18,9 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:paddingRight="16dp"
-            android:textStyle="bold"
+            android:textSize="18sp"
             android:textColor="#292929"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
+             style="@style/subTitleTextView"/>
 
         <!--  Type  -->
         <TextView
@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            style="@style/normalTextView"/>
 
         <!--  Payment Amount -->
         <TextView
@@ -38,7 +39,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+            android:textSize="18sp"
+            android:textColor="#292929"
+            style="@style/subTitleTextView" />
 
         <TextView
             android:id="@+id/hidden_history_invoice_id"

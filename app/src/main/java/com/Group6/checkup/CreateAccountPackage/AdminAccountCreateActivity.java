@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.Group6.checkup.DatabasePackage.DatabaseHelper;
 import com.Group6.checkup.DatabasePackage.DatabaseTable;
 import com.Group6.checkup.Entities.Admin;

@@ -1,4 +1,3 @@
-
 package com.Group6.checkup;
 
 import android.content.Intent;
@@ -21,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class DoctorMessages extends AppCompatActivity {
 

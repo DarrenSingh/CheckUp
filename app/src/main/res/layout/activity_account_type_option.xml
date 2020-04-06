@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:text="@string/text_selectAccountType"
         android:textAlignment="center"
-        android:textSize="40sp"
-        android:gravity="center_horizontal"></TextView>
+        android:textSize="35sp"
+        android:gravity="center_horizontal"
+        style="@style/Heading"/>
 
     <Button
         android:id="@+id/btn_toAdminAccountCreateActivity"
@@ -21,8 +22,10 @@
         android:layout_height="wrap_content"
         android:text="@string/button_adminAccountType"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:onClick="buttonClicked"
-        android:textSize="30sp"></Button>
+        style="@style/buttonStyle"/>
 
     <Button
         android:id="@+id/btn_toPatientAccountCreateActivity"
@@ -30,8 +33,10 @@
         android:layout_height="wrap_content"
         android:text="@string/button_patientAccountType"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:onClick="buttonClicked"
-        android:textSize="30sp"></Button>
+        style="@style/buttonStyle"/>
 
     <Button
         android:id="@+id/btn_toDoctorAccountCreateActivity"
@@ -39,8 +44,10 @@
         android:layout_height="wrap_content"
         android:text="@string/button_doctorAccountType"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:onClick="buttonClicked"
-        android:textSize="30sp"></Button>
+        style="@style/buttonStyle"/>
 
     <Button
         android:id="@+id/btn_toCashierAccountCreateActivity"
@@ -48,6 +55,8 @@
         android:layout_height="wrap_content"
         android:text="@string/button_cashierAccountType"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:onClick="buttonClicked"
-        android:textSize="30sp"></Button>
+        style="@style/buttonStyle"/>
 </LinearLayout>

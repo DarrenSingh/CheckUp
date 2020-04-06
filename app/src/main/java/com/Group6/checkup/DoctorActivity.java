@@ -12,6 +12,8 @@ import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Session;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class DoctorActivity extends AppCompatActivity {
     DoctorDao doctorDao;
     Doctor currentUser;

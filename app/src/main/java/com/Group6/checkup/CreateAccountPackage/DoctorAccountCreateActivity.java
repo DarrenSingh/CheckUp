@@ -14,6 +14,7 @@ import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.R;
+import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Session;
 
 import java.util.ArrayList;

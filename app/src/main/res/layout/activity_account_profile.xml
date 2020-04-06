@@ -9,29 +9,30 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="630dp"
         android:layout_weight="4">
 
         <ImageView
             android:id="@+id/img_profile_picture"
-            android:src="@drawable/ic_account_circle_black_48dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="48dp"
+            android:layout_width="109dp"
+            android:layout_height="110dp"
             android:layout_marginLeft="48dp"
-            android:contentDescription="Profile Picture"/>
+            android:layout_marginTop="48dp"
+            android:contentDescription="Profile Picture"
+            android:src="@drawable/ic_account_circle_black_48dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:layout_marginLeft="56dp"
             android:layout_alignLeft="@id/img_profile_picture"
+            android:layout_marginLeft="56dp"
+            android:layout_marginTop="52dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_edit_profile"
+                style="@style/buttonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="150dp"
@@ -39,6 +40,7 @@
 
             <Button
                 android:id="@+id/btn_payment_history"
+                style="@style/buttonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="150dp"
@@ -47,28 +49,31 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginTop="158dp"
-            android:layout_alignLeft="@id/img_profile_picture">
+            android:layout_alignLeft="@id/img_profile_picture"
+            android:layout_marginTop="170dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/text_patientprof_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                style="@style/normalTextView"/>
 
             <TextView
                 android:id="@+id/text_patientprof_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp"
+                style="@style/normalTextView"/>
 
             <TextView
                 android:id="@+id/text_patientprof_msp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginTop="4dp"
+                style="@style/normalTextView"/>
 
         </LinearLayout>
 
@@ -76,17 +81,20 @@
             android:id="@+id/title_inbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
             android:layout_alignParentBottom="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="@string/txt_inbox"/>
+            android:text="@string/txt_inbox"
+            android:textColor="@color/black"
+            style="@style/subTitleTextView"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"/>
+            android:background="@color/colorPrimaryDark" />
 
     </RelativeLayout>
 
