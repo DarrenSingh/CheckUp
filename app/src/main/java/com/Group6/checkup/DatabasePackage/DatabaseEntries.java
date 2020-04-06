@@ -13,7 +13,7 @@ public class DatabaseEntries {
     );
 
     //Patient table creating query.
-    public static final String SQL_PATIENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER NOT NULL, FOREIGN KEY (adminID) REFERENCES Admin (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
+    public static final String SQL_PATIENT_TABLE_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s ( %s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s INTEGER, FOREIGN KEY (adminID) REFERENCES Admin (_id) ON UPDATE CASCADE ON DELETE NO ACTION)",
             DatabaseTable.PatientTable.TABLE_NAME,
             DatabaseTable.PatientTable._ID,
             DatabaseTable.PatientTable.FIRST_NAME,

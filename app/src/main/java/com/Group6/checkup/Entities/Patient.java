@@ -13,7 +13,6 @@ public class Patient {
     private int healthCareCardNumber;
     private String emailAddress;
     private int adminID;
-    private Invoice invoice;
 
     public Patient(int ID, String firstName, String lastName, String address, String loginID, String password, boolean mspStatus, String phoneNumber, int healthCareCardNumber, String emailAddress, int adminID) {
         this.ID = ID;
@@ -147,11 +146,4 @@ public class Patient {
         this.adminID = adminID;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
 }

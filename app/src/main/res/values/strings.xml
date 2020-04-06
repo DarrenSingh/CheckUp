@@ -2,7 +2,6 @@
     <string name="app_name">CheckUp</string>
     <string name="logo">DPI LOGO</string>
     <string name="hey">Hello there!!</string>
-    <string name="referTo">To</string>
     <string name="btn">Login Activity</string>
     <string name="msg">This is a short message.</string>
     <string name="txt_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu posuere, ultricies quam vel, pulvinar nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel ultricies sem. Nulla facilisi.</string>
@@ -101,4 +100,6 @@
         <item>patient4</item>
         <item>patient5</item>
     </string-array>
+    <string name="signUp">Don\'t have an account?</string>
+    <string name="signup">SIGN UP</string>
 </resources>

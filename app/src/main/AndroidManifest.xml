@@ -23,6 +23,7 @@
             android:launchMode="singleTask" />
         <activity android:name=".SubmitPaymentActivity" />
         <activity android:name=".PatientPaymentHistoryActivity" />
+        <activity android:name=".LoginPatientAccountCreateActivity" />
         <activity android:name=".NewMessageActivity" />
         <activity android:name=".PatientEditProfileActivity" />
         <activity android:name=".DoctorInfoActivity" />
