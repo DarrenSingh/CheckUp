@@ -31,6 +31,16 @@ public class LoginActivity extends AppCompatActivity {
         final EditText editText_id = findViewById(R.id.editText_id);
         final EditText editText_password = findViewById(R.id.editText_password);
         Button button_login = findViewById(R.id.button_login);
+        Button sign_up = findViewById(R.id.sign_up);
+
+        Intent intent = getIntent();
+        if(intent != null){
+            String login_value = intent.getStringExtra("loginIDvalue");
+
+            //set the ID created as a prompt in the login EditText box
+            editText_id.setText(login_value);
+        }
+
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +130,13 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please Enter Valid User ID", Toast.LENGTH_LONG).show();
                 }
 
+            }
+        });
+
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, LoginPatientAccountCreateActivity.class));
             }
         });
 

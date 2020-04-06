@@ -178,7 +178,9 @@ public class PatientDao extends Dao<Patient>{
         objectRecord.put(DatabaseTable.PatientTable.PHONE_NUMBER,object.getPhoneNumber());
         objectRecord.put(DatabaseTable.PatientTable.HEALTH_CARE_CARD_NUMBER,object.getHealthCareCardNumber());
         objectRecord.put(DatabaseTable.PatientTable.EMAIL_ADDRESS,object.getEmailAddress());
-        objectRecord.put(DatabaseTable.PatientTable.ADMIN_ID,object.getAdminID());
+        if(object.getAdminID() > 0){
+            objectRecord.put(DatabaseTable.PatientTable.ADMIN_ID,object.getAdminID());
+        }
 
         Long result = dbConnection.insert(DatabaseTable.PatientTable.TABLE_NAME,null,objectRecord);
 
