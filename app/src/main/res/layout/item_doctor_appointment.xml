@@ -22,8 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/hey"
         android:layout_marginLeft="70dp"
-        android:layout_marginStart="70dp"
-        android:layout_gravity="left"
+        android:layout_gravity="left|center_vertical"
         style="@style/subTitleTextView"/>
 
     <TextView
@@ -32,6 +31,6 @@
         android:layout_height="wrap_content"
         android:text="@string/hey"
         android:layout_gravity="bottom|center"
-        style="@style/subTitleTextView"/>
+        style="@style/normalTextView"/>
 
 </androidx.cardview.widget.CardView>

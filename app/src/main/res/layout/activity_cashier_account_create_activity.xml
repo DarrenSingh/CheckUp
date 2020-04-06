@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:text="@string/text_cashierAccountCreation"
         android:textAlignment="center"
-        android:textSize="30sp"
         android:gravity="center_horizontal"></TextView>
     <TextView
         android:layout_width="match_parent"
@@ -30,7 +29,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/text_firstName"
         android:inputType="textPersonName"
-        android:textSize="30sp"
         android:importantForAutofill="no"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -53,7 +51,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/text_lastName"
         android:inputType="textPersonName"
-        android:textSize="30sp"
         android:importantForAutofill="no"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -76,7 +73,6 @@
         android:layout_height="wrap_content"
         android:hint="@string/text_loginID"
         android:inputType="text"
-        android:textSize="30sp"
         android:importantForAutofill="no"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -102,7 +98,6 @@
         android:layout_marginRight="10dp"
         android:hint="@string/text_password"
         android:inputType="textPassword"
-        android:textSize="30sp"
         android:importantForAutofill="no"
         tools:ignore="autofill" />
 

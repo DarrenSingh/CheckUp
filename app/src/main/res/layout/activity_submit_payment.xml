@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:textStyle="bold"
-        style="@style/subTitleTextView"/>
+        style="@style/Heading"/>
 
     <EditText
         android:id="@+id/edit_payment_amount"
@@ -40,25 +40,22 @@
 
     <Button
         android:id="@+id/btn_pay_now"
-        android:layout_width="wrap_content"
+        android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="64dp"
         android:minWidth="100dp"
-        android:textColor="@color/white"
-        android:background="@color/colorPrimary"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
+        style="@style/buttonStyle"
         android:text="@string/btn_pay_now"/>
 
     <Button
         android:id="@+id/btn_pay_later"
-        android:layout_width="wrap_content"
+        android:layout_width="104dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:minWidth="100dp"
         android:text="@string/btn_pay_later"
-        android:backgroundTintMode="screen"
-        style="@style/buttonStyle"/>
+        style="@style/buttonStyle"
+        android:background="@color/white" />
 
 </LinearLayout>

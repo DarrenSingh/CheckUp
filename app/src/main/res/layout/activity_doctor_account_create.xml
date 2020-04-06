@@ -17,8 +17,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/text_doctorAccountCreation"
-            android:textAlignment="center"
-            android:textSize="30sp"></TextView>
+            android:textAlignment="center"></TextView>
 
         <TextView
             android:layout_width="match_parent"
@@ -37,7 +36,6 @@
             android:hint="@string/text_firstName"
             android:inputType="textPersonName"
             tools:autofillHints="false"
-            android:textSize="30sp"
             android:importantForAutofill="no"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -60,7 +58,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/text_lastName"
             android:inputType="textPersonName"
-            android:textSize="30sp"
             android:importantForAutofill="no"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -83,7 +80,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/text_officeAddress"
             android:inputType="text"
-            android:textSize="30sp"
             android:importantForAutofill="no"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -107,7 +103,6 @@
             android:hint="@string/text_phoneNumber"
             android:importantForAutofill="no"
             android:inputType="number|phone"
-            android:textSize="30sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             tools:ignore="autofill"
@@ -132,7 +127,6 @@
             android:layout_marginRight="10dp"
             android:hint="@string/text_email"
             android:inputType="textEmailAddress"
-            android:textSize="30sp"
             android:importantForAutofill="no"
             tools:ignore="autofill" />
 
@@ -152,7 +146,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/text_loginID"
             android:inputType="text"
-            android:textSize="30sp"
             android:importantForAutofill="no"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -178,7 +171,6 @@
             android:layout_marginRight="10dp"
             android:hint="@string/text_password"
             android:inputType="textPassword"
-            android:textSize="30sp"
             android:importantForAutofill="no"
             tools:ignore="autofill" />
 

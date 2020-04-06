@@ -65,16 +65,17 @@ public class UserHistoryAdapter extends BaseAdapter {
         if (onlineHelpsDao.findAllByPatient().equals(onlineHelpsDao)) {
             name.setText(pt);
             message.setText(help.getMessage());
-            time.setText(help.getSentDateTime());
+            //TODO fix sentdatetime is a long must convert to date first
+//            time.setText(help.getSentDateTime());
 
         } else if (onlineHelpsDao.findAllByDoctor().equals(onlineHelpsDao)) {
             name.setText(dt);
             message.setText(help.getMessage());
-            time.setText(help.getSentDateTime());
+//            time.setText(help.getSentDateTime());
         }else {
             name.setText(participants);
             message.setText(help.getMessage());
-            time.setText(help.getSentDateTime());
+//            time.setText(help.getSentDateTime());
         }
 
 

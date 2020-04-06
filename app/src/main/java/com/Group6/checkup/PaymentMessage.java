@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Entities.PaymentNotification;
 import com.Group6.checkup.Utils.Dao.InvoiceDao;
-import com.Group6.checkup.Utils.Dao.PaymentNotificatonDao;
+import com.Group6.checkup.Utils.Dao.PaymentNotificationDao;
 import com.Group6.checkup.Utils.Session;
 
 import java.text.ParseException;
@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class PaymentMessage extends AppCompatActivity {
 
-    PaymentNotificatonDao paymentDao;
+    PaymentNotificationDao paymentDao;
     InvoiceDao invoiceDao;
     Intent intent;
     String date ;
@@ -33,7 +33,7 @@ public class PaymentMessage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_message);
         appSession = new Session(this);
-        paymentDao = new PaymentNotificatonDao(this);
+        paymentDao = new PaymentNotificationDao(this);
 
 
         final TextView patient_name = findViewById(R.id.patient_name);

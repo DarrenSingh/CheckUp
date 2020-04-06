@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class DoctorMessages extends AppCompatActivity {
 
     private PatientDao patientDao;

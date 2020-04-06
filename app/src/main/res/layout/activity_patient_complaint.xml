@@ -23,7 +23,7 @@
         android:id="@+id/message_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
         android:text="@string/infoComplaint"
         android:textStyle="bold"
         android:textColor="@color/black"

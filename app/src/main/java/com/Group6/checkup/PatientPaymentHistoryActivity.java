@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class PatientPaymentHistoryActivity extends AppCompatActivity {
     private Session appSession;
     private InvoiceDao invoiceDao;

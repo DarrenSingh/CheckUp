@@ -10,8 +10,6 @@ import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 
 import java.util.List;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class ViewUserHistoryActivity extends AppCompatActivity {
 
     String loginID;

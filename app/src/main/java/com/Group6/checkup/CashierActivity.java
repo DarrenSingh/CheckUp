@@ -13,6 +13,10 @@ import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.InvoiceDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class CashierActivity extends AppCompatActivity {
 
     InvoiceDao invoiceDao;

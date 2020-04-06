@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        style="@style/normalTextView"/>
+        android:text="@string/text_greeting"
+        style="@style/subTitleTextView"/>
 
     <TextView
         android:id="@+id/text_patienthome_name"
@@ -23,14 +24,15 @@
         android:textStyle="bold"
         android:text="Patient Name"
         android:textColor="@color/black"
-        style="@style/subTitleTextView"/>
+        style="@style/Heading"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textStyle="bold"
+        android:textColor="@color/darkGrey"
         android:text="@string/title_upcoming_appointment"
         style="@style/normalTextView"/>
 
@@ -41,7 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginLeft="16dp"
-        android:text="Fri, Feb 2 2020"
         style="@style/normalTextView"/>
 
 
@@ -50,7 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textStyle="bold"
+        android:textColor="@color/darkGrey"
         android:text="@string/title_account_balance"
         style="@style/normalTextView"/>
 
@@ -66,7 +68,7 @@
 
     <Button
         android:id="@+id/btn_locate_doctor"
-        android:layout_width="wrap_content"
+        android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
         android:layout_gravity="center"
@@ -75,7 +77,7 @@
 
     <Button
         android:id="@+id/btn_account_profile"
-        android:layout_width="wrap_content"
+        android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
@@ -91,7 +93,7 @@
 
         <Button
             android:id="@+id/btn_home_logout"
-            android:layout_width="wrap_content"
+            android:layout_width="104dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="32dp"
