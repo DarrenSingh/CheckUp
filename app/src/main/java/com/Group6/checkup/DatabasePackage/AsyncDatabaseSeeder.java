@@ -33,6 +33,8 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
     private PatientDao patientDao;
     private PaymentNotificationDao paymentNotificationDao;
 
+    private long monthToMilliseconds = 2592000000L;
+
     public AsyncDatabaseSeeder() {
 
         adminDao = new AdminDao(null);
@@ -74,19 +76,16 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
             this.appointmentDao.insert(new Appointment(System.currentTimeMillis(), 2, 3));
 
             //Create Invoices
-            this.invoiceDao.insert(new Invoice(29.99, "May,20,2020", "unpaid", System.currentTimeMillis(), 1, 1, 1, 1));
-            this.invoiceDao.insert(new Invoice(19.99, "May,23,2020", "unpaid", System.currentTimeMillis(), 1, 2, 2, 2));
-            this.invoiceDao.insert(new Invoice(19.99, "April,23,2020", "unpaid", System.currentTimeMillis(), 1, 1, 4, 2));
-            this.invoiceDao.insert(new Invoice(29.99, "April,28,2020", "unpaid", System.currentTimeMillis(), 2, 1, 3, 2));
+            this.invoiceDao.insert(new Invoice(19.99,System.currentTimeMillis()+monthToMilliseconds, "unpaid", System.currentTimeMillis(), 1, 1, 1, 1));
+            this.invoiceDao.insert(new Invoice(24.99,System.currentTimeMillis()-9000, "unpaid", System.currentTimeMillis(), 1, 2, 2, 2));
+            this.invoiceDao.insert(new Invoice(19.99,System.currentTimeMillis(),  "unpaid", System.currentTimeMillis(), 1, 1, 4, 2));
+            this.invoiceDao.insert(new Invoice(29.99, System.currentTimeMillis()+monthToMilliseconds, "unpaid", System.currentTimeMillis(), 2, 1, 3, 2));
 
             //Create Payment Notifications
-            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance", "Lorem Ipsum $0.00", System.currentTimeMillis() + 1000000L, 1, 1));
-            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance #2", "Lorem Ipsum $9.99", System.currentTimeMillis() + 10800000L, 1, 2));
-            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance #2", "Lorem Ipsum $9.99", System.currentTimeMillis() + 54000000L, 1, 2));
+            this.paymentNotificationDao.insert(new PaymentNotification("Unpaid Balance", "Lorem Ipsum $0.00", System.currentTimeMillis(), 1, 1));
 
             //Create Online Help
             this.onlineHelpDao.insert(new OnlineHelp("Test Message1", "Lorem Ipsum", System.currentTimeMillis(), 1, 1));
-            this.onlineHelpDao.insert(new OnlineHelp("Test Message1", "Lorem Ipsum", System.currentTimeMillis() + 54000000L, 1, 4));
             this.onlineHelpDao.insert(new OnlineHelp("Test Message2", "Lorem Ipsum", System.currentTimeMillis() + 3600000L, 1, 2, 1));
 
             //Create Online Help

@@ -281,10 +281,12 @@ public class DoctorInfoActivity extends AppCompatActivity {
                             long appointmentId = appointmentDao.insertWithResult(appointment);
                             Intent intent = new Intent(getContext(),SubmitPaymentActivity.class);
 
+                            long monthToMilliseconds = 2592000000L;
+
                             InvoiceDao invoiceDao = new InvoiceDao(getContext());
                             Invoice invoice = new Invoice(
                                     19.99,
-                                    "April,23,2020",
+                                    System.currentTimeMillis()+monthToMilliseconds,
                                     "unpaid",
                                     System.currentTimeMillis(),
                                     appointment.getPatientID(),

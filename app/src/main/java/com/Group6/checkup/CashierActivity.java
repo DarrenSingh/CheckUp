@@ -45,19 +45,22 @@ public class CashierActivity extends AppCompatActivity {
         //loop through
         for (int j = 0; j < invoices.size() ; j++) {
 
-            if(invoices.get(j).getPaymentStatus().equals("unpaid")){
+            Invoice currentInvoice = invoices.get(j);
+
+           if(currentInvoice.getPaymentStatus().equals("unpaid")
+                   && currentInvoice.getPaymentDue() > System.currentTimeMillis()){
 
                 HashMap<String,String> map = new HashMap<>();
 
-                Invoice invoice = invoices.get(j);
-                Patient associatedPatient = patientDao.findById(String.valueOf(invoice.getPatientID()));
+
+                Patient associatedPatient = patientDao.findById(String.valueOf(currentInvoice.getPatientID()));
 
                 map.put("patientName", associatedPatient.getFirstName()
                         + " "
                         + associatedPatient.getLastName()
                 );
 
-                map.put("invoiceId",String.valueOf(invoice.getID()));
+                map.put("invoiceId",String.valueOf(currentInvoice.getID()));
 
                 overdueInvoicesData.add(map);
             }
@@ -80,7 +83,7 @@ public class CashierActivity extends AppCompatActivity {
                 intent = new Intent(CashierActivity.this,PaymentMessage.class);
 
                 //pass values to intent from list item to intent
-                intent.putExtra("invoiceId", String.valueOf(invoiceAdapter.data.get(position).get("invoiveId")));
+                intent.putExtra("invoiceId", String.valueOf(invoiceAdapter.data.get(position).get("invoiceId")));
                 intent.putExtra("patientName" ,String.valueOf(invoiceAdapter.data.get(position).get("patientName")));
 
                 //start activity

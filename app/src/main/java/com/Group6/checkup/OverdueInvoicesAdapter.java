@@ -6,14 +6,15 @@ import android.view.ViewGroup;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class OverdueInvoicesAdapter extends SimpleAdapter {
 
-    List<? extends Map<String, ?>> data;
+    List<HashMap<String, String>> data;
 
-    public OverdueInvoicesAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
+    public OverdueInvoicesAdapter(Context context, List<HashMap<String, String>> data, int resource, String[] from, int[] to) {
         super(context, data, resource, from, to);
         this.data = data;
     }

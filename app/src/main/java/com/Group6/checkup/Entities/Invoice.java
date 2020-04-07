@@ -5,7 +5,7 @@ public class Invoice {
     //Attributes
     private int ID;
     private double price;
-    private String paymentDue;
+    private long paymentDue;
     private String paymentStatus;
     private long invoiceDate;
     private int patientID;
@@ -14,7 +14,7 @@ public class Invoice {
     private int appointmentID;
 
     //Constructors
-    public Invoice(int ID, double price, String paymentDue, String paymentStatus, long invoiceDate, int patientID, int cashierID, int doctorID, int appointmentID) {
+    public Invoice(int ID, double price, long paymentDue, String paymentStatus, long invoiceDate, int patientID, int cashierID, int doctorID, int appointmentID) {
         this.ID = ID;
         this.price = price;
         this.paymentDue = paymentDue;
@@ -26,7 +26,7 @@ public class Invoice {
         this.appointmentID = appointmentID;
     }
 
-    public Invoice(double price, String paymentDue, String paymentStatus, long invoiceDate, int patientID, int cashierID, int doctorID, int appointmentID) {
+    public Invoice(double price, long paymentDue, String paymentStatus, long invoiceDate, int patientID, int cashierID, int doctorID, int appointmentID) {
         this.price = price;
         this.paymentDue = paymentDue;
         this.paymentStatus = paymentStatus;
@@ -37,7 +37,7 @@ public class Invoice {
         this.appointmentID = appointmentID;
     }
 
-    public Invoice(double price, String paymentDue, String paymentStatus, long invoiceDate, int patientID, int doctorID, int appointmentID) {
+    public Invoice(double price, long paymentDue, String paymentStatus, long invoiceDate, int patientID, int doctorID, int appointmentID) {
         this.price = price;
         this.paymentDue = paymentDue;
         this.paymentStatus = paymentStatus;
@@ -64,11 +64,11 @@ public class Invoice {
         this.price = price;
     }
 
-    public String getPaymentDue() {
+    public long getPaymentDue() {
         return paymentDue;
     }
 
-    public void setPaymentDue(String paymentDue) {
+    public void setPaymentDue(long paymentDue) {
         this.paymentDue = paymentDue;
     }
 

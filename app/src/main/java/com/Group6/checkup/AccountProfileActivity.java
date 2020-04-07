@@ -165,7 +165,7 @@ public class AccountProfileActivity extends AppCompatActivity {
             // convert image int to a string and place it into the hashmap with an images key
             hashMap.put("type","payment");
             hashMap.put("id",String.valueOf(paymentNotifications.get(i).getID()));
-            hashMap.put("time",String.valueOf(onlineHelpList.get(i).getSentDateTime()));
+            hashMap.put("time",String.valueOf(paymentNotifications.get(i).getSentDateTime()));
             hashMap.put("from",sender.getFirstName()+" "+sender.getLastName());
             hashMap.put("title", paymentNotifications.get(i).getMessageTitle());
             hashMap.put("body", (paymentNotifications.get(i).getMessage()));
