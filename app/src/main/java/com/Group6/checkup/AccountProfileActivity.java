@@ -62,7 +62,14 @@ public class AccountProfileActivity extends AppCompatActivity {
         currentUser = patientDao.find(appSession.getCurrentUsername());
         mTextViewFullName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
         mTextViewAddress.setText(currentUser.getAddress());
-        mTextViewMSP.setText(String.valueOf(currentUser.getHealthCareCardNumber()));
+
+        //check if user has healthcare
+        if(currentUser.getHealthCareCardNumber() == 0) {
+            mTextViewMSP.setText(R.string.text_no_healthcare);
+        } else {
+            String healthNo = "Health#: "+String.valueOf(currentUser.getHealthCareCardNumber());
+            mTextViewMSP.setText(healthNo);
+        }
 
         //Obtain the online help items for this user
         List<OnlineHelp> onlineHelps = onlineHelpDao.findAllByPatient(String.valueOf(appSession.getUserId()));
@@ -128,7 +135,14 @@ public class AccountProfileActivity extends AppCompatActivity {
         currentUser = patientDao.find(appSession.getCurrentUsername());
         mTextViewFullName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
         mTextViewAddress.setText(currentUser.getAddress());
-        mTextViewMSP.setText(String.valueOf(currentUser.getHealthCareCardNumber()));
+        
+        //check if user has healthcare
+        if(currentUser.getHealthCareCardNumber() == 0) {
+            mTextViewMSP.setText(R.string.text_no_healthcare);
+        } else {
+            String healthNo = "Health#: "+String.valueOf(currentUser.getHealthCareCardNumber());
+            mTextViewMSP.setText(healthNo);
+        }
     }
 
     private void populateListView(List<OnlineHelp> onlineHelpList, List<PaymentNotification> paymentNotifications, ListView listView){
@@ -165,7 +179,7 @@ public class AccountProfileActivity extends AppCompatActivity {
             // convert image int to a string and place it into the hashmap with an images key
             hashMap.put("type","payment");
             hashMap.put("id",String.valueOf(paymentNotifications.get(i).getID()));
-            hashMap.put("time",String.valueOf(onlineHelpList.get(i).getSentDateTime()));
+            hashMap.put("time",String.valueOf(paymentNotifications.get(i).getSentDateTime()));
             hashMap.put("from",sender.getFirstName()+" "+sender.getLastName());
             hashMap.put("title", paymentNotifications.get(i).getMessageTitle());
             hashMap.put("body", (paymentNotifications.get(i).getMessage()));

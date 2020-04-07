@@ -62,7 +62,7 @@ public class InvoiceDao extends Dao<Invoice> {
         Invoice recordObject = new Invoice(
                 cursor.getInt(0),
                 cursor.getDouble(1),
-                cursor.getString(2),
+                cursor.getLong(2),
                 cursor.getString(3),
                 cursor.getLong(4),
                 cursor.getInt(5),
@@ -91,7 +91,7 @@ public class InvoiceDao extends Dao<Invoice> {
             Invoice recordObject = new Invoice(
                     cursor.getInt(0),
                     cursor.getDouble(1),
-                    cursor.getString(2),
+                    cursor.getLong(2),
                     cursor.getString(3),
                     cursor.getLong(4),
                     cursor.getInt(5),
@@ -129,7 +129,7 @@ public class InvoiceDao extends Dao<Invoice> {
             Invoice recordObject = new Invoice(
                     cursor.getInt(0),
                     cursor.getDouble(1),
-                    cursor.getString(2),
+                    cursor.getLong(2),
                     cursor.getString(3),
                     cursor.getLong(4),
                     cursor.getInt(5),

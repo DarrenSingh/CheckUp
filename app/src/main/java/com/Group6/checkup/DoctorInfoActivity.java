@@ -1,6 +1,7 @@
 package com.Group6.checkup;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
+import android.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ public class DoctorInfoActivity extends AppCompatActivity {
     int doctorId;
     String doctorName;
     String doctorAddress;
+    Context mContext;
     RecyclerView mRecyclerDateList;
     ListView mListViewAvailability;
     DateRecyclerViewAdapter dateRecyclerViewAdapter;
@@ -53,6 +55,7 @@ public class DoctorInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_info);
         appSession = new Session(this);
+        mContext = this;
 
         Intent previousIntent = getIntent();
         doctorId = Integer.parseInt(previousIntent.getStringExtra("doctorId"));
@@ -101,8 +104,10 @@ public class DoctorInfoActivity extends AppCompatActivity {
                     Appointment appointment = new Appointment(appointmentDateTime,appSession.getUserId(),doctorId);
                     //pass appointment to the dialogue menu
 
-                    DialogFragment fragment = new ConfirmBookingDialogFragment(appointment);
-                    fragment.show(getSupportFragmentManager(), "appointment");
+                    //create the booking dialog fragment
+                    DialogFragment fragment = new ConfirmBookingDialogFragment(mContext,appointment);
+                    //display the dialog fragment
+                    fragment.show(getFragmentManager(), "appointment");
 
                 }
             }
@@ -248,67 +253,4 @@ public class DoctorInfoActivity extends AppCompatActivity {
 
     }
 
-    public static class ConfirmBookingDialogFragment extends DialogFragment {
-
-        AppointmentDao appointmentDao;
-        Appointment appointment;
-
-        public ConfirmBookingDialogFragment(Appointment appointment) {
-            this.appointment = appointment;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-            Date date = new Date(appointment.getAppointmentDateTime());
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY");
-            SimpleDateFormat hourFormat = new SimpleDateFormat("h:mm a");
-
-
- ;
-            String dateString = dateFormat.format(date);
-            String hourString = hourFormat.format(date);
-
-            String textFormatted = String.format(getResources().getString(R.string.text_booking_confirmation), dateString,hourString);
-
-            builder.setMessage(textFormatted)
-                    .setPositiveButton(R.string.btn_booking_confirm, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            appointmentDao = new AppointmentDao(getContext());
-                            long appointmentId = appointmentDao.insertWithResult(appointment);
-                            Intent intent = new Intent(getContext(),SubmitPaymentActivity.class);
-
-                            InvoiceDao invoiceDao = new InvoiceDao(getContext());
-                            Invoice invoice = new Invoice(
-                                    19.99,
-                                    "April,23,2020",
-                                    "unpaid",
-                                    System.currentTimeMillis(),
-                                    appointment.getPatientID(),
-                                    1,
-                                    appointment.getDoctorID(),
-                                    (int)appointmentId
-                            );
-
-                            long insertedRow = invoiceDao.insertWithResult(invoice);
-
-                            if(insertedRow > -1){
-                                intent.putExtra("invoiceId",String.valueOf(insertedRow));
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(getContext(), "Unable to book at this moment", Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    })
-                    .setNegativeButton(R.string.btn_booking_cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    });
-            return builder.create();
-        }
-    }
 }

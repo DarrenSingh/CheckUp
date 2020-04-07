@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,8 @@ public class PaymentMessage extends AppCompatActivity {
     Intent intent;
     String date ;
     Session appSession;
+    String id;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class PaymentMessage extends AppCompatActivity {
         setContentView(R.layout.activity_payment_message);
         appSession = new Session(this);
         paymentDao = new PaymentNotificationDao(this);
+        invoiceDao = new InvoiceDao(this);
 
 
         final TextView patient_name = findViewById(R.id.patient_name);
@@ -46,8 +50,8 @@ public class PaymentMessage extends AppCompatActivity {
         intent = getIntent();
 
         if(intent != null){
-            String id = intent.getStringExtra("invoiceId");
-            String name = intent.getStringExtra("patientName");
+             id = intent.getStringExtra("invoiceId");
+             name = intent.getStringExtra("patientName");
 
 
             // grab invoice object
@@ -57,38 +61,33 @@ public class PaymentMessage extends AppCompatActivity {
             String price = String.valueOf(invoice.getPrice());
 
             // grab invoice date from object
-            date = String.valueOf(invoice.getInvoiceDate());
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+            Date d = new Date(invoice.getPaymentDue());
 
-            Date d = null;
-            try {
-                d = sdf.parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(d);
-            calendar.add(Calendar.DAY_OF_YEAR, 10);
-
+            date = sdf.format(d);
 
             patient_name.setText(name);
             msg.setText("Dear " + name + ", your account is overdue $" + price +
-                    " The payment is due by " + calendar + '\n');
+                    " The payment was due by " + date + '\n' + "Please make your payment" );
+
+
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   String message = msg.getText().toString();
+                   int cId = appSession.getUserId();
+                   String title = "Payment Overdue Reminder";
+
+                    paymentDao.insert(new PaymentNotification(title,message,System.currentTimeMillis(),Integer.parseInt(id),cId));
+
+                    payment_message.append(message);
+
+                    Toast.makeText(PaymentMessage.this, "Message Sent", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PaymentMessage.this,CashierActivity.class));
+                }
+            });
+
         }
 
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               String message = msg.getText().toString();
-               int pId = Integer.parseInt(intent.getStringExtra("id"));
-               int cId = appSession.getUserId();
-               String title = "Payment Overdue Reminder";
-
-                paymentDao.insert(new PaymentNotification(title,message,System.currentTimeMillis(),pId,cId));
-
-                payment_message.append(message);
-            }
-        });
     }
 }
