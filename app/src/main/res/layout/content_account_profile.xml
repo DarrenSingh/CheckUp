@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_account_profile">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".AccountProfileActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="630dp"
+            android:layout_weight="4">
+
+            <ImageView
+                android:id="@+id/img_profile_picture"
+                android:layout_width="109dp"
+                android:layout_height="110dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="48dp"
+                android:contentDescription="Profile Picture"
+                android:src="@drawable/ic_account_circle_black_48dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/img_profile_picture"
+                android:layout_marginLeft="56dp"
+                android:layout_marginTop="52dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_edit_profile"
+                    style="@style/buttonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="165dp"
+                    android:text="Edit Profile" />
+
+                <Button
+                    android:id="@+id/btn_payment_history"
+                    style="@style/buttonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:minWidth="165dp"
+                    android:text="Payment History" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignLeft="@id/img_profile_picture"
+                android:layout_marginTop="170dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_patientprof_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Last Name"
+                    style="@style/normalTextView"/>
+
+                <TextView
+                    android:id="@+id/text_patientprof_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Address"
+                    style="@style/normalTextView"/>
+
+                <TextView
+                    android:id="@+id/text_patientprof_msp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="MSP Verification"
+                    style="@style/normalTextView"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/title_inbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Inbox"
+                android:textColor="@color/black"
+                style="@style/subTitleTextView"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimaryDark" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/list_patient_inbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_weight="5"
+            tools:listitem="@layout/item_inbox_message"/>
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

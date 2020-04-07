@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_new_message">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:context=".NewMessageActivity">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="32dp"
+                android:textSize="13sp"
+                android:labelFor="@+id/edit_first_name"
+                android:text="Recipient"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"
+                style="@style/normalTextView"/>
+
+            <TextView
+                style="@style/subTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:labelFor="@+id/edit_first_name"
+                android:text="Dr. Ross Geller"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textSize="22sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:layout_gravity="start"
+                android:labelFor="@+id/edit_send_subject"
+                android:textSize="13sp"
+                android:text="Subject*"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/edit_send_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="250dp"
+                style="@style/normalTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="start"
+                android:labelFor="@+id/edit_send_message"
+                android:textSize="13sp"
+                android:text="Message*"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Header"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/edit_send_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="300dp"
+                android:inputType="textMultiLine"
+                android:minLines="12"
+                style="@style/messageTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="300dp"
+                android:text="Please enter the details of your inquiry. The Doctor will respond as soon as possible"
+                style="@style/normalTextView"/>
+
+            <Button
+                android:id="@+id/btn_send_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                android:text="Send"
+                style="@style/buttonStyle"/>
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

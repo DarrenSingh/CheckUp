@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 appSession.setCurrentUsername("D001");
                 appSession.setUserId(1);
-                startActivity(new Intent(MainActivity.this,DoctorActivity.class));
+                startActivity(new Intent(MainActivity.this, DoctorActivity.class));
             }
         });
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 appSession.setCurrentUsername("P001");
                 appSession.setUserId(1);
-                startActivity(new Intent(MainActivity.this,PatientHomeActivity.class));
+                startActivity(new Intent(MainActivity.this, PatientHomeActivity.class));
             }
         });
   
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 appSession.setCurrentUsername("A001");
                 appSession.setUserId(1);
-                startActivity(new Intent(MainActivity.this,AdminActivity.class));
+                startActivity(new Intent(MainActivity.this, AdminActivity.class));
             }
         });
 

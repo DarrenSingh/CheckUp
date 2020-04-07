@@ -7,12 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
+import com.Group6.checkup.Utils.Session;
 
 import java.util.List;
 
 public class ViewUserHistoryActivity extends AppCompatActivity {
 
     String loginID;
+    private Session s;
     OnlineHelpDao onlineHelpDao;
     List<OnlineHelp> onlineHelp;
     ListView lv = findViewById(R.id.history);
@@ -23,6 +25,12 @@ public class ViewUserHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_user_history);
 
         onlineHelpDao = new OnlineHelpDao(this);
+        s = new Session(this);
+
+        loginID = String.valueOf(s.getUserId());
+
+       // loginID = "P001";
+
         switch (loginID.charAt(0)){
             case 'P':
                 messagesFromDoctors();

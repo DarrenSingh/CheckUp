@@ -1,178 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditAndUpdateAccountPackage.DoctorAccountEditActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
+    <include
+        layout="@layout/app_bar_doctor_account_edit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_firstName"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_navigation"
+        app:menu="@menu/activity_navigation_drawer" />
 
-        <EditText
-            android:id="@+id/editTxt_editDoctorFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_firstName"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            style="@style/normalTextView"
-            tools:ignore="autofill"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_lastName"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_editDoctorLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_lastName"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            style="@style/normalTextView"
-            tools:ignore="autofill"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_officeAddress"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_editDoctorAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_officeAddress"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            style="@style/normalTextView"
-            tools:ignore="autofill"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_phoneNumber"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_editDoctorPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_phoneNumber"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            style="@style/normalTextView"
-            tools:ignore="autofill"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_email"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_editDoctorEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_email"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            style="@style/normalTextView"
-            tools:ignore="autofill"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_loginID"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_editDoctorLoginID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_loginID"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            style="@style/normalTextView"
-            tools:ignore="autofill"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_password"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_editDoctorPassword"
-            style="@style/normalTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="@string/text_password"
-            android:inputType="textPassword"
-            tools:ignore="autofill" />
-
-        <Button
-            android:id="@+id/btn_editDoctorAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/button_edit"
-            style="@style/buttonStyle"/>
-
-        <Button
-            android:id="@+id/btn_deleteDoctorAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/button_delete"
-            style="@style/buttonStyle"/>
-        
-    </LinearLayout>
-
-</ScrollView>
+</androidx.drawerlayout.widget.DrawerLayout>

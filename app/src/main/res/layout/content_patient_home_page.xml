@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="60dp"
+    android:orientation="vertical"
+    tools:context=".PatientHomeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Hello,"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        style="@style/normalTextView"/>
+
+    <TextView
+        android:id="@+id/text_patienthome_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:text="Patient Name"
+        android:textColor="@color/black"
+        style="@style/subTitleTextView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:text="Upcoming Appointment"
+        style="@style/normalTextView"/>
+
+
+    <TextView
+        android:id="@+id/text_upcoming_appointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:text="Fri, Feb 2 2020"
+        style="@style/normalTextView"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:text="Account Balance"
+        style="@style/normalTextView"/>
+
+
+    <TextView
+        android:id="@+id/text_account_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:text=" $ 0.00"
+        style="@style/normalTextView"/>
+
+
+    <Button
+        android:id="@+id/btn_locate_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:layout_gravity="center"
+        android:text="Locate a Doctor"
+        style="@style/buttonStyle"/>
+
+    <Button
+        android:id="@+id/btn_account_profile"
+        style="@style/buttonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:text="Account Profile" />
+
+
+</LinearLayout>

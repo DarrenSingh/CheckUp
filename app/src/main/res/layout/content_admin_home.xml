@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="70dp"
+    tools:context=".AdminActivity">
+
+    <TextView
+        android:id="@+id/txt_accountType"
+        style="@style/Heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_marginTop="70dp"
+        android:text="@string/title_adminActivityTitle" />
+
+    <TextView
+        style="@style/normalTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Welcome Administrator Name!" />
+
+    <Button
+        android:id="@+id/btn_toCreateAccountActivity"
+        style="@style/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="buttonClicked"
+        android:text="@string/button_createAccountOption" />
+
+    <Button
+        android:id="@+id/btn_toEditAndUpdateAccountActivity"
+        style="@style/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="buttonClicked"
+        android:text="@string/button_editUpdateAccountOption" />
+
+
+</LinearLayout>
