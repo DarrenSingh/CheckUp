@@ -1,6 +1,7 @@
 package com.Group6.checkup;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
+import android.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +38,7 @@ public class DoctorInfoActivity extends AppCompatActivity {
     int doctorId;
     String doctorName;
     String doctorAddress;
+    Context mContext;
     RecyclerView mRecyclerDateList;
     ListView mListViewAvailability;
     DateRecyclerViewAdapter dateRecyclerViewAdapter;
@@ -53,6 +55,7 @@ public class DoctorInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_info);
         appSession = new Session(this);
+        mContext = this;
 
         Intent previousIntent = getIntent();
         doctorId = Integer.parseInt(previousIntent.getStringExtra("doctorId"));
@@ -102,9 +105,9 @@ public class DoctorInfoActivity extends AppCompatActivity {
                     //pass appointment to the dialogue menu
 
                     //create the booking dialog fragment
-                    DialogFragment fragment = new ConfirmBookingDialogFragment(getApplicationContext(),appointment);
+                    DialogFragment fragment = new ConfirmBookingDialogFragment(mContext,appointment);
                     //display the dialog fragment
-                    fragment.show(getSupportFragmentManager(), "appointment");
+                    fragment.show(getFragmentManager(), "appointment");
 
                 }
             }

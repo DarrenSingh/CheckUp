@@ -1,5 +1,6 @@
 package com.Group6.checkup;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,12 +9,14 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
+import android.app.DialogFragment;
 
 import com.Group6.checkup.Entities.Appointment;
 import com.Group6.checkup.Entities.Invoice;
+import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.AppointmentDao;
 import com.Group6.checkup.Utils.Dao.InvoiceDao;
+import com.Group6.checkup.Utils.Dao.PatientDao;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,9 +26,15 @@ public class ConfirmBookingDialogFragment extends DialogFragment {
     Context context;
     AppointmentDao appointmentDao;
     Appointment appointment;
+    PatientDao patientDao;
 
+    public ConfirmBookingDialogFragment() {
+    }
+
+    @SuppressLint("ValidFragment")
     public ConfirmBookingDialogFragment(Context context, Appointment appointment) {
         this.appointment = appointment;
+        this.context = context;
     }
 
     @Override
@@ -49,37 +58,45 @@ public class ConfirmBookingDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.btn_booking_confirm, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         appointmentDao = new AppointmentDao(context);
+                        patientDao = new PatientDao(context);
+
                         InvoiceDao invoiceDao = new InvoiceDao(context);
 
                         //insert the appointment and return the row id
                         long appointmentId = appointmentDao.insertWithResult(appointment);
+                        Patient patient = patientDao.findById(String.valueOf(appointment.getPatientID()));
+                        if(patient.getHealthCareCardNumber() == 0) {
 
-                        //create a new intent
-                        Intent intent = new Intent(context,SubmitPaymentActivity.class);
+                            //create a new intent
+                            Intent intent = new Intent(context, SubmitPaymentActivity.class);
 
-                        long monthToMilliseconds = 2592000000L;
+                            long monthToMilliseconds = 2592000000L;
 
+                            //create new invoice object
+                            Invoice invoice = new Invoice(
+                                    19.99,
+                                    //set due date to 1 month from time created
+                                    System.currentTimeMillis() + monthToMilliseconds,
+                                    "unpaid",
+                                    System.currentTimeMillis(),
+                                    appointment.getPatientID(),
+                                    1,
+                                    appointment.getDoctorID(),
+                                    (int) appointmentId
+                            );
 
-                        //create new invoice object
-                        Invoice invoice = new Invoice(
-                                19.99,
-                                //set due date to 1 month from time created
-                                System.currentTimeMillis()+monthToMilliseconds,
-                                "unpaid",
-                                System.currentTimeMillis(),
-                                appointment.getPatientID(),
-                                1,
-                                appointment.getDoctorID(),
-                                (int)appointmentId
-                        );
+                            long insertedRow = invoiceDao.insertWithResult(invoice);
 
-                        long insertedRow = invoiceDao.insertWithResult(invoice);
-
-                        if(insertedRow > -1){
-                            intent.putExtra("invoiceId",String.valueOf(insertedRow));
-                            startActivity(intent);
+                            if (insertedRow > -1) {
+                                intent.putExtra("invoiceId", String.valueOf(insertedRow));
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(context, "Unable to book at this moment", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(getContext(), "Unable to book at this moment", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, PatientHomeActivity.class);
+                            Toast.makeText(context, "Appointment Booked", Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
                         }
 
                     }

@@ -62,7 +62,14 @@ public class AccountProfileActivity extends AppCompatActivity {
         currentUser = patientDao.find(appSession.getCurrentUsername());
         mTextViewFullName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
         mTextViewAddress.setText(currentUser.getAddress());
-        mTextViewMSP.setText(String.valueOf(currentUser.getHealthCareCardNumber()));
+
+        //check if user has healthcare
+        if(currentUser.getHealthCareCardNumber() == 0) {
+            mTextViewMSP.setText(R.string.text_no_healthcare);
+        } else {
+            String healthNo = "Health#: "+String.valueOf(currentUser.getHealthCareCardNumber());
+            mTextViewMSP.setText(healthNo);
+        }
 
         //Obtain the online help items for this user
         List<OnlineHelp> onlineHelps = onlineHelpDao.findAllByPatient(String.valueOf(appSession.getUserId()));
@@ -128,7 +135,14 @@ public class AccountProfileActivity extends AppCompatActivity {
         currentUser = patientDao.find(appSession.getCurrentUsername());
         mTextViewFullName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
         mTextViewAddress.setText(currentUser.getAddress());
-        mTextViewMSP.setText(String.valueOf(currentUser.getHealthCareCardNumber()));
+        
+        //check if user has healthcare
+        if(currentUser.getHealthCareCardNumber() == 0) {
+            mTextViewMSP.setText(R.string.text_no_healthcare);
+        } else {
+            String healthNo = "Health#: "+String.valueOf(currentUser.getHealthCareCardNumber());
+            mTextViewMSP.setText(healthNo);
+        }
     }
 
     private void populateListView(List<OnlineHelp> onlineHelpList, List<PaymentNotification> paymentNotifications, ListView listView){

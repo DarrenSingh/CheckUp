@@ -84,7 +84,7 @@ public class LocateDoctorActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MapQuest.start(getApplicationContext());
-        setContentView(R.layout.activity_map_quest);
+        setContentView(R.layout.activity_locate_doctor);
 
         //UI Components
         mMapView = findViewById(R.id.mapquestMapView);
