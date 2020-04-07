@@ -1,8 +1,12 @@
 package com.Group6.checkup;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -56,6 +60,9 @@ import java.util.Map;
 import static com.Group6.checkup.BuildConfig.API_KEY;
 
 public class LocateDoctorActivity extends Activity {
+
+    private boolean hasNetworkConnection;
+
     private EditText mEditSearch;
     private ImageView mImageSearch;
     private ListView mListViewSearch;
@@ -85,94 +92,27 @@ public class LocateDoctorActivity extends Activity {
         mListViewDoctors = findViewById(R.id.list_nearby_doctors);
         mEditSearch = findViewById(R.id.edit_search_location);
 
-        //add a text changed listener to provide up to date search predictions
-        mEditSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if( count == 0 || s.toString().trim().length() == 0){
-                    locationFound = false;
-                    resetSearchAheadList();
-                    resetDoctorsList();
-                }
-
-                if(!locationFound && s.length() > 2){
-                    searchQuery(mEditSearch.getText().toString());
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         //create MapQuest map view
         mMapView.onCreate(savedInstanceState);
-        //gets the asynchronous map
-        mMapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                mMapboxMap = mapboxMap;
-                mMapView.setStreetMode();
 
-                //set a on map click listener to hide the
-                mMapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(@NonNull com.mapbox.mapboxsdk.geometry.LatLng point) {
-                        if(locationFound && mListViewDoctors.getVisibility() == View.GONE){
-                            mListViewSearch.setVisibility(View.VISIBLE);
-                            mListViewDoctors.setVisibility(View.VISIBLE);
-                        } else if (locationFound) {
-                            mListViewSearch.setVisibility(View.GONE);
-                            mListViewDoctors.setVisibility(View.GONE);
-                        }
-                    }
-                });
-            }
-        });
 
-        //create and set on click listener that will move the map position to the selected address marker
-        mListViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView displayAddress = view.findViewById(R.id.text_result_address);
-                TextView latitude = view.findViewById(R.id.hidden_location_lat);
-                TextView longitude = view.findViewById(R.id.hidden_location_long);
-
-                //hide keyboard
-                hideKeyboard(mEditSearch);
-
-                selectedLat = latitude.getText().toString();
-                selectedLong = longitude.getText().toString();
-                locationFound = true;
-
-                mEditSearch.setText(displayAddress.getText().toString());
-                mEditSearch.setSelection(displayAddress.getText().length());
-
-                resetSearchAheadList();
-                mMapboxMap.clear();
-                mMapboxMap.setCameraPosition(new CameraPosition.Builder()
-                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat)-0.08,Double.parseDouble(selectedLong))) // Sets the new camera position
-                        .zoom(10)
-                        .tilt(20)
-                        .build());
-                addMarker(mMapboxMap);
-                //make api call
-                 distanceMatrixNetworkCall();
-            }
-        });
-
+        if(HasNetworkConnection()) {
+            loadMap();
+        } else {
+            displayNetworkDialog();
+        }
     }
 
     @Override
-    public void onResume()
-    { super.onResume(); mMapView.onResume(); }
+    public void onResume() {
+        super.onResume();
+        if (HasNetworkConnection()) {
+            loadMap();
+        } else {
+            displayNetworkDialog();
+        }
+        mMapView.onResume();
+    }
 
     @Override
     public void onPause()
@@ -459,6 +399,108 @@ public class LocateDoctorActivity extends Activity {
 
     }
 
+    private void displayNetworkDialog(){
+
+        Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
+        FragmentManager manager = getFragmentManager();
+        DialogFragment fragment = new NetworkConnectionDialogFragment(this);
+
+        fragment.show(manager,"networkConnection");
+
+    }
+
+    private boolean HasNetworkConnection(){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+       return hasNetworkConnection = networkInfo != null && networkInfo.isConnectedOrConnecting();
+    };
+
+    private void loadMap(){
+
+        //add a text changed listener to provide up to date search predictions
+        mEditSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (count == 0 || s.toString().trim().length() == 0) {
+                    locationFound = false;
+                    resetSearchAheadList();
+                    resetDoctorsList();
+                }
+
+                if (!locationFound && s.length() > 2) {
+                    searchQuery(mEditSearch.getText().toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        //gets the asynchronous map
+        mMapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                mMapboxMap = mapboxMap;
+                mMapView.setStreetMode();
+
+                //set a on map click listener to hide the
+                mMapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(@NonNull com.mapbox.mapboxsdk.geometry.LatLng point) {
+                        if (locationFound && mListViewDoctors.getVisibility() == View.GONE) {
+                            mListViewSearch.setVisibility(View.VISIBLE);
+                            mListViewDoctors.setVisibility(View.VISIBLE);
+                        } else if (locationFound) {
+                            mListViewSearch.setVisibility(View.GONE);
+                            mListViewDoctors.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+        });
+
+        //create and set on click listener that will move the map position to the selected address marker
+        mListViewSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView displayAddress = view.findViewById(R.id.text_result_address);
+                TextView latitude = view.findViewById(R.id.hidden_location_lat);
+                TextView longitude = view.findViewById(R.id.hidden_location_long);
+
+                //hide keyboard
+                hideKeyboard(mEditSearch);
+
+                selectedLat = latitude.getText().toString();
+                selectedLong = longitude.getText().toString();
+                locationFound = true;
+
+                mEditSearch.setText(displayAddress.getText().toString());
+                mEditSearch.setSelection(displayAddress.getText().length());
+
+                resetSearchAheadList();
+                mMapboxMap.clear();
+                mMapboxMap.setCameraPosition(new CameraPosition.Builder()
+                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat) - 0.08, Double.parseDouble(selectedLong))) // Sets the new camera position
+                        .zoom(10)
+                        .tilt(20)
+                        .build());
+                addMarker(mMapboxMap);
+                //make api call
+                distanceMatrixNetworkCall();
+            }
+        });
+    }
+
     //overrides the back button to remove any text in the search bar if present
     @Override
     public void onBackPressed() {
@@ -470,6 +512,10 @@ public class LocateDoctorActivity extends Activity {
             super.onBackPressed();
         }
     }
+
+
+
+
 }
 
 
