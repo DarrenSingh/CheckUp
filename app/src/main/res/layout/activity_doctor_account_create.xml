@@ -1,188 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccountPackage.DoctorAccountCreateActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
-        android:id="@+id/linearLayout_doctorAccountCreate"
+    <include
+        layout="@layout/app_bar_doctor_account_create"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/text_doctorAccountCreation"
-            android:textAlignment="center"></TextView>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_navigation"
+        app:menu="@menu/activity_navigation_drawer" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_firstName"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_doctorFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_firstName"
-            android:inputType="textPersonName"
-            tools:autofillHints="false"
-            android:importantForAutofill="no"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            tools:ignore="autofill"
-            style="@style/normalTextView"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_lastName"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_doctorLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_lastName"
-            android:inputType="textPersonName"
-            android:importantForAutofill="no"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            tools:ignore="autofill"
-            style="@style/normalTextView"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_officeAddress"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_doctorAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_officeAddress"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            tools:ignore="autofill"
-            style="@style/normalTextView"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_phoneNumber"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_doctorPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_phoneNumber"
-            android:importantForAutofill="no"
-            android:inputType="number|phone"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            tools:ignore="autofill"
-            style="@style/normalTextView"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_email"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_doctorEmail"
-            style="@style/normalTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="@string/text_email"
-            android:inputType="textEmailAddress"
-            android:importantForAutofill="no"
-            tools:ignore="autofill" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_loginID"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_doctorLoginID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/text_loginID"
-            android:inputType="text"
-            android:importantForAutofill="no"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            tools:ignore="autofill"
-            style="@style/normalTextView"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/text_password"
-            android:textColor="@color/black"
-            style="@style/normalTextView"/>
-
-        <EditText
-            android:id="@+id/editTxt_doctorPassword"
-            style="@style/normalTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="@string/text_password"
-            android:inputType="textPassword"
-            android:importantForAutofill="no"
-            tools:ignore="autofill" />
-
-        <Button
-            android:id="@+id/btn_createDoctorAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="@string/button_accountCreate"
-            style="@style/buttonStyle"/>
-    </LinearLayout>
-</ScrollView>
+</androidx.drawerlayout.widget.DrawerLayout>

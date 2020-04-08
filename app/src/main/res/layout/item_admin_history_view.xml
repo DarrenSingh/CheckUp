@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <!--  Sender   -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:gravity=""
+                    android:textColor="@color/black"
+                    android:text="@string/title_from"
+                    android:layout_weight="3"
+                    android:maxLines="1"
+
+                    android:textSize="12sp"
+                    style="@style/subTitleTextView"/>
+
+                <!--  Subject  -->
+                <TextView
+                    android:id="@+id/text_admin_history_sender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="4dp"
+                    android:maxLines="1"
+                    android:text="Hello"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    style="@style/normalTextView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+                <!--  Sender   -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:gravity=""
+                    android:textColor="@color/black"
+                    android:text="@string/title_subject"
+                    android:layout_weight="3"
+                    android:maxLines="1"
+                    android:textSize="12sp"
+                    style="@style/subTitleTextView"/>
+
+                <!--  Subject  -->
+                <TextView
+                    android:id="@+id/text_admin_history_subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="Hello"
+                    android:paddingLeft="4dp"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    style="@style/normalTextView" />
+
+        </LinearLayout>
+
+        <!--  Body  -->
+        <TextView
+            android:id="@+id/text_admin_history_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:layout_marginTop="8dp"
+
+            android:textSize="12sp"
+            android:text="@string/txt_lorem_ipsum"
+            style="@style/normalTextView"/>
+
+    </LinearLayout>
+
+    <!-- Icon -->
+    <TextView
+        android:id="@+id/text_admin_history_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center_vertical|end"
+        android:paddingRight="16dp"
+        android:maxLines="2"
+        android:text="@string/text_date"/>
+
+
+</LinearLayout>

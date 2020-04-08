@@ -8,22 +8,25 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.Group6.checkup.Entities.Doctor;
+import com.Group6.checkup.Entities.Message;
 import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
+import com.Group6.checkup.Utils.Dao.PatientDao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class UserHistoryAdapter extends BaseAdapter {
 
-    List<OnlineHelp> onlineHelps;
-    List<Patient> patients;
-    List<Doctor> doctors;
+    List<Message> onlineHelps;
     Context context;
-    OnlineHelpDao onlineHelpsDao;
+
     private static LayoutInflater inflater=null;
 
-    public UserHistoryAdapter(Context context, List<OnlineHelp> list){
+    public UserHistoryAdapter(Context context, List<Message> list){
         this.context = context;
         this.onlineHelps = list;
         inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,39 +48,35 @@ public class UserHistoryAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        OnlineHelp help = onlineHelps.get(position);
-        Patient p = patients.get(position);
-        Doctor d = doctors.get(position);
+        Message help = onlineHelps.get(position);
+
+        //find patient in list via id
         if(convertView == null){
-            convertView = inflater.inflate( R.layout.card_view,null);
+            convertView = inflater.inflate( R.layout.item_admin_history_view,null);
         }
 
-        String participants = "Patient: " + p.getFirstName() + " " + p.getLastName() +
-                " Doctor: " + d.getFirstName() + " " + d.getLastName();
+        TextView sender = convertView.findViewById(R.id.text_admin_history_sender);
+        TextView subject = convertView.findViewById(R.id.text_admin_history_subject);
+        TextView body = convertView.findViewById(R.id.text_admin_history_body);
+        TextView time = convertView.findViewById(R.id.text_admin_history_date);
 
-        String pt = p.getFirstName() + " " + p.getLastName();
-        String dt = d.getFirstName() + " " + d.getLastName();
+        Date d = new Date(help.getTimestamp());
+        String senderId = String.valueOf(help.getSenderID());
 
-        TextView name = convertView.findViewById(R.id.user_name);
-        TextView message = convertView.findViewById(R.id.h_message);
-        TextView time = convertView.findViewById(R.id.time);
-
-        if (onlineHelpsDao.findAllByPatient().equals(onlineHelpsDao)) {
-            name.setText(pt);
-            message.setText(help.getMessage());
-            //TODO fix sentdatetime is a long must convert to date first
-//            time.setText(help.getSentDateTime());
-
-        } else if (onlineHelpsDao.findAllByDoctor().equals(onlineHelpsDao)) {
-            name.setText(dt);
-            message.setText(help.getMessage());
-//            time.setText(help.getSentDateTime());
-        }else {
-            name.setText(participants);
-            message.setText(help.getMessage());
-//            time.setText(help.getSentDateTime());
+        if(help.isReply()){
+            //get doctor from OnlineHelpReply dao usingsender id
+            Patient patient = new PatientDao(context).findById(senderId);
+            senderId = patient.getLoginID();
+        } else{
+            //get patient from OnlineHelpReply dao usingsender id
+            Doctor doctor = new DoctorDao(context).findByID(senderId);
+            senderId = doctor.getLoginID();
         }
 
+        sender.setText(senderId);
+        subject.setText(help.getSubject());
+        body.setText(help.getBody());
+        time.setText(new SimpleDateFormat("MM/dd/YYYY\nhh:mm a").format(d));
 
         return convertView;
     }

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_patient_account_edit">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EditAndUpdateAccountPackage.PatientAccountEditActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_firstName"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_firstName"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"
+                tools:ignore="autofill"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_lastName"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_lastName"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"
+                tools:ignore="autofill"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_address"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_address"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"
+                tools:ignore="autofill"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_phoneNumber"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_phoneNumber"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"
+                tools:ignore="autofill"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_email"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_email"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"
+                tools:ignore="autofill"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_loginID"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientLoginID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_loginID"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"
+                tools:ignore="autofill"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_password"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientPassword"
+                style="@style/normalTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/text_password"
+                android:inputType="textPassword"
+                tools:ignore="autofill" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_mspCoverageQuestion"
+                android:textColor="@color/black"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"/>
+            <Spinner
+                android:id="@+id/spinner_editPatientMSPStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/yes_or_No"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_healthCardNumber"
+                android:textColor="@color/black"
+                style="@style/normalTextView"/>
+
+            <EditText
+                android:id="@+id/editTxt_editPatientHealthCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_healthCardNumber"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                style="@style/normalTextView"
+                tools:ignore="autofill"/>
+
+            <Button
+                android:id="@+id/btn_editPatientAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/button_edit"
+                style="@style/buttonStyle"/>
+
+            <Button
+                android:id="@+id/btn_deletePatientAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/button_delete"
+                style="@style/buttonStyle"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

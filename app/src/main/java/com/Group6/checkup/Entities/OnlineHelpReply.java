@@ -1,68 +1,56 @@
 package com.Group6.checkup.Entities;
 
-public class OnlineHelpReply {
-
-    //Attributes
-    private int ID;
-    private String messageTitle;
-    private String messageContent;
-    private long dateTime;
-    private int doctorID;
+public class OnlineHelpReply extends  Message{
 
     //Constructors
     public OnlineHelpReply(int ID, String messageTitle, String message, long dateTime, int doctorID) {
-        this.ID = ID;
-        this.messageTitle = messageTitle;
-        this.messageContent = message;
-        this.dateTime = dateTime;
-        this.doctorID = doctorID;
+        super(ID,messageTitle,message,dateTime,doctorID);
+        this.isReply = true;
     }
 
     public OnlineHelpReply(String messageTitle, String message, long dateTime, int doctorID) {
-        this.messageTitle = messageTitle;
-        this.messageContent = message;
-        this.dateTime = dateTime;
-        this.doctorID = doctorID;
+        super(messageTitle,message,dateTime,doctorID);
+        this.isReply = true;
     }
 
     //Getters & Setters
     public int getID() {
-        return ID;
+        return id;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
     public String getMessageTitle() {
-        return messageTitle;
+        return subject;
     }
 
     public void setMessageTitle(String messageTitle) {
-        this.messageTitle = messageTitle;
+        this.subject = messageTitle;
     }
 
     public String getMessageContent() {
-        return messageContent;
+        return body;
     }
 
     public void setMessageContent(String messageContent) {
-        this.messageContent = messageContent;
+        this.body = messageContent;
     }
 
     public long getDateTime() {
-        return dateTime;
+        return timestamp;
     }
 
     public void setDateTime(long dateTime) {
-        this.dateTime = dateTime;
+        this.timestamp = dateTime;
     }
 
     public int getDoctorID() {
-        return doctorID;
+        return senderID;
     }
 
     public void setDoctorID(int doctorID) {
-        this.doctorID = doctorID;
+        this.senderID = doctorID;
     }
 }

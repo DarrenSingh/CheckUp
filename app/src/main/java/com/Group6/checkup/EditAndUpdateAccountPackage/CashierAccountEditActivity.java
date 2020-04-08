@@ -2,21 +2,32 @@ package com.Group6.checkup.EditAndUpdateAccountPackage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.Group6.checkup.AdminActivity;
 import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.CashierDao;
+import com.Group6.checkup.AdminViewHistoryActivity;
+import com.Group6.checkup.LoginActivity;
+import com.google.android.material.navigation.NavigationView;
 
+public class CashierAccountEditActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-public class CashierAccountEditActivity extends AppCompatActivity {
-
+    DrawerLayout drawer;
+    Toolbar toolbar;
+    NavigationView navigationView;
     Button btnEditAccount, btnDeleteAccount;
     EditText etFirstName, etLastName, etLoginID, etPassword;
     String firstName, lastName, loginID, password, rowID, adminID, enteredLoginID;
@@ -24,11 +35,17 @@ public class CashierAccountEditActivity extends AppCompatActivity {
     CashierDao cashierDao;
     Cashier cashierAccount;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_cashier_account);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+
+        toggleSetUp();
+        this.setTitle("Edit Cashier Account");
 
 
         etFirstName = findViewById(R.id.editTxt_editCashierFirstName);
@@ -116,6 +133,49 @@ public class CashierAccountEditActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    public void toggleSetUp(){
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void onBackPressed() {
+        drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        //here is the main place where we need to work on.
+        int id=item.getItemId();
+        switch (id){
+
+            case R.id.nav_home:
+                Intent h= new Intent(CashierAccountEditActivity.this, AdminActivity.class);
+                startActivity(h);
+                break;
+            case R.id.nav_history:
+                Intent g= new Intent(CashierAccountEditActivity.this, AdminViewHistoryActivity.class);
+                startActivity(g);
+                break;
+            case R.id.nav_logout:
+                Intent s= new Intent(CashierAccountEditActivity.this, LoginActivity.class);
+                startActivity(s);
+                break;
+
+        }
+
+        drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

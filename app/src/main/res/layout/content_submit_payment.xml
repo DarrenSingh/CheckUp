@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/app_bar_submit_payment">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        tools:context=".SubmitPaymentActivity">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:text="Amount Due"
+            style="@style/normalTextView"/>
+
+        <TextView
+            android:id="@+id/text_payment_owing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:text="$0.00"
+            style="@style/subTitleTextView"/>
+
+        <EditText
+            android:id="@+id/edit_payment_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="96dp"
+            android:inputType="numberDecimal"
+            android:minWidth="200dp"
+            android:hint="Payment Amount"
+            android:gravity="center"
+            style="@style/normalTextView"/>
+
+        <Button
+            android:id="@+id/btn_pay_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="64dp"
+            android:minWidth="100dp"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"
+            android:text="Pay Now" />
+
+        <Button
+            android:id="@+id/btn_pay_later"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:minWidth="100dp"
+            android:text="Pay Later"
+            android:backgroundTintMode="screen"
+            style="@style/buttonStyle"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

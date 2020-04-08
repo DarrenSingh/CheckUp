@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-      
+
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <activity android:name=".LocateDoctorActivity"
             android:windowSoftInputMode="adjustResize"></activity>
@@ -21,56 +21,118 @@
         <activity
             android:name=".LoginActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".SubmitPaymentActivity" />
-        <activity android:name=".PatientPaymentHistoryActivity" />
+
         <activity android:name=".LoginPatientAccountCreateActivity" />
-        <activity android:name=".NewMessageActivity" />
-        <activity android:name=".PatientEditProfileActivity" />
-        <activity android:name=".DoctorInfoActivity" />
         <activity
-            android:name=".AccountProfileActivity"
-            android:launchMode="singleTask"/>
-        <activity
-            android:name=".PatientHomeActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".PatientComplaint"/>
-        <activity
-            android:name=".DoctorMessages"
-            android:launchMode="singleTask"/>
-        <activity android:name=".DoctorAppointmentSchedule" />
-        <activity
-            android:name=".DoctorActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".PaymentMessage" />
-        <activity
-            android:name=".CashierActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity" />
-        <activity
-            android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity" />
-        <activity
-            android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity" />
-        <activity
-            android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity" />
-        <activity
-            android:name=".CreateAccountPackage.CashierAccountCreateActivity" />
-        <activity
-            android:name=".CreateAccountPackage.DoctorAccountCreateActivity" />
-        <activity
-            android:name=".CreateAccountPackage.PatientAccountCreateActivity" />
-        <activity
-            android:name=".CreateAccountPackage.AdminAccountCreateActivity" />
-        <activity android:name=".ViewUserHistoryActivity" />
+            android:name=".EditAndUpdateAccountPackage.PatientAccountEditActivity"
+            android:label="@string/title_activity_patient_account_edit2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity"
-            android:launchMode="singleTask" />
+            android:label="@string/title_activity_edit_and_update_account_search2"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.DoctorAccountEditActivity"
+            android:label="@string/title_activity_doctor_account_edit2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.CashierAccountEditActivity"
+            android:label="@string/title_activity_cashier_account_edit2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditAndUpdateAccountPackage.AdminAccountEditActivity"
+            android:label="@string/title_activity_admin_account_edit2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateAccountPackage.PatientAccountCreateActivity"
+            android:label="@string/title_activity_patient_account_create2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateAccountPackage.DoctorAccountCreateActivity"
+            android:label="@string/title_activity_doctor_account_create2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateAccountPackage.CashierAccountCreateActivity"
+            android:label="@string/title_activity_cashier_account_create2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CreateAccountPackage.AdminAccountCreateActivity"
+            android:label="@string/title_activity_admin_account_create2"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreateAccountPackage.AccountTypeOptionActivity"
-            android:launchMode="singleTask" />
-
-        <activity android:name=".AdminActivity"
-            android:launchMode="singleTask" />
+            android:label="@string/title_activity_account_type_option2"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubmitPaymentActivity"
+            android:label="@string/title_activity_submit_payment2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PatientPaymentHistoryActivity"
+            android:label="@string/title_activity_patient_payment_history2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PatientEditProfileActivity"
+            android:label="@string/title_activity_patient_edit_profile2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PatientComplaint"
+            android:label="@string/title_activity_patient_complaint2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DoctorMessages"
+            android:label="@string/title_activity_doctor_messages2"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewMessageActivity"
+            android:label="@string/title_activity_new_message2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DoctorInfoActivity"
+            android:label="@string/title_activity_doctor_info2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DoctorAppointmentSchedule"
+            android:label="@string/title_activity_doctor_appointment_schedule2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PaymentMessage"
+            android:label="@string/title_activity_payment_message2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewPendingPayments"
+            android:label="@string/title_activity_view_pending_payments2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AccountProfileActivity"
+            android:label="@string/title_activity_account_profile2"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PatientHomeActivity"
+            android:label="@string/title_activity_patient_home_page"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AdminActivity"
+            android:label="@string/title_activity_admin_home"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CashierActivity"
+            android:label="@string/title_activity_cashier_home_page"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DoctorActivity"
+            android:label="@string/title_activity_navigation"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AdminViewHistoryActivity" />
+        <activity android:name=".PatientAppointmentHistoryActivity" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -81,5 +143,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
