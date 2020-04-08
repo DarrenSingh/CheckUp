@@ -131,7 +131,7 @@
             android:label="@string/title_activity_navigation"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Adapters.AdminViewHistoryActivity" />
+        <activity android:name=".AdminViewHistoryActivity" />
         <activity android:name=".PatientAppointmentHistoryActivity" />
         <activity
             android:name=".SplashScreen"

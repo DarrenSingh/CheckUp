@@ -23,7 +23,7 @@ import com.Group6.checkup.LoginActivity;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.PatientDao;
-import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
+import com.Group6.checkup.AdminViewHistoryActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class PatientAccountEditActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{

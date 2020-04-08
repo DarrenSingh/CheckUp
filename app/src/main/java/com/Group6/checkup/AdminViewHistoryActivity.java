@@ -1,14 +1,14 @@
-package com.Group6.checkup.Adapters;
+package com.Group6.checkup;
 
 import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.Group6.checkup.Adapters.UserHistoryAdapter;
 import com.Group6.checkup.Entities.Message;
 import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.OnlineHelpReply;
-import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Dao.OnlineHelpReplyDao;
 import com.Group6.checkup.Utils.Session;

@@ -85,24 +85,6 @@
     <string name="text_patientAccountEdit">Patient Account Edit</string>
     <string name="text_solution_posted">Previously Posted Solution</string>
     <string name="text_no_healthcare">No HealthCare #</string>
-    <string-array name="yes_or_No">
-        <item>yes</item>
-        <item>no</item>
-    </string-array>
-    <string-array name="appointments">
-        <item>appointment1</item>
-        <item>appointment2</item>
-        <item>appointment3</item>
-        <item>appointment4</item>
-        <item>appointment5</item>
-    </string-array>
-    <string-array name="patients">
-        <item>patient1</item>
-        <item>patient2</item>
-        <item>patient3</item>
-        <item>patient4</item>
-        <item>patient5</item>
-    </string-array>
     <string name="signUp">Don\'t have an account?</string>
     <string name="signup">SIGN UP</string>
     <string name="title_activity_navigation">NavigationActivity</string>
@@ -112,7 +94,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_history">History</string>
     <string name="menu_logout">Log Out</string>
@@ -144,9 +125,25 @@
     <string name="title_activity_admin_account_edit2">AdminAccountEditActivity2</string>
     <string name="title_activity_cashier_account_edit2">CashierAccountEditActivity2</string>
     <string name="title_activity_doctor_account_edit2">DoctorAccountEditActivity2</string>
-    <string name="title_activity_edit_and_update_account_search2">
-        EditAndUpdateAccountSearchActivity2
-    </string>
+    <string name="title_activity_edit_and_update_account_search2">EditAndUpdateAccountSearchActivity2</string>
     <string name="title_activity_patient_account_edit2">PatientAccountEditActivity2</string>
     <string name="text_date">MM/DD/YYYY @ 00:00</string>
+    <string-array name="yes_or_No">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
+    <string-array name="appointments">
+        <item>appointment1</item>
+        <item>appointment2</item>
+        <item>appointment3</item>
+        <item>appointment4</item>
+        <item>appointment5</item>
+    </string-array>
+    <string-array name="patients">
+        <item>patient1</item>
+        <item>patient2</item>
+        <item>patient3</item>
+        <item>patient4</item>
+        <item>patient5</item>
+    </string-array>
 </resources>

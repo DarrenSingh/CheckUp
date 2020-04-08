@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
 import com.Group6.checkup.Entities.Appointment;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.AppointmentDao;

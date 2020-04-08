@@ -21,7 +21,7 @@ import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Session;
-import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
+import com.Group6.checkup.AdminViewHistoryActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class CashierAccountCreateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
