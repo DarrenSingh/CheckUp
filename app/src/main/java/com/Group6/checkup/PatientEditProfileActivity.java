@@ -20,7 +20,7 @@ import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
 import com.google.android.material.navigation.NavigationView;
 
-public class PatientEditProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PatientEditProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     // Private Attributes
     DrawerLayout drawer;
@@ -82,9 +82,9 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Nav
                 currentUser.setFirstName(mEditFirstName.getText().toString());
                 currentUser.setLastName(mEditLastName.getText().toString());
                 currentUser.setAddress(mEditAddress.getText().toString());
-                if(patientDao.update(currentUser)){
+                if (patientDao.update(currentUser)) {
                     Toast.makeText(PatientEditProfileActivity.this, "Profile Edited", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(PatientEditProfileActivity.this,AccountProfileActivity.class);
+                    Intent intent = new Intent(PatientEditProfileActivity.this, AccountProfileActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PatientEditProfileActivity.this, "Unable to Edit", Toast.LENGTH_SHORT).show();
@@ -93,7 +93,7 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Nav
         });
     }
 
-    public void toggleSetUp(){
+    public void toggleSetUp() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -114,19 +114,19 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Nav
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_home:
-                Intent h= new Intent(PatientEditProfileActivity.this, PatientHomeActivity.class);
+                Intent h = new Intent(PatientEditProfileActivity.this, PatientHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientEditProfileActivity.this, PatientAppointmentHistoryActivity.class);
+                Intent g = new Intent(PatientEditProfileActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(PatientEditProfileActivity.this,LoginActivity.class);
+                Intent s = new Intent(PatientEditProfileActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

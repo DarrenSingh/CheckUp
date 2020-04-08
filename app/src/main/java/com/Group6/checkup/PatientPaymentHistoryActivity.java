@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PatientPaymentHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PatientPaymentHistoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session appSession;
     private InvoiceDao invoiceDao;
@@ -59,14 +59,14 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity implements 
         //get all invoices by patient id
         invoiceList = invoiceDao.findAllByPatient(String.valueOf(appSession.getUserId()));
 
-        populateListView(invoiceList, mListView,mTextViewOwing);
+        populateListView(invoiceList, mListView, mTextViewOwing);
 
     }
 
-    private void populateListView(List<Invoice> invoiceList, ListView listView, TextView mTextViewOwing){
+    private void populateListView(List<Invoice> invoiceList, ListView listView, TextView mTextViewOwing) {
 
 
-        List<HashMap<String,String>> inboxData = new ArrayList<>();
+        List<HashMap<String, String>> inboxData = new ArrayList<>();
         DecimalFormat decimalFormat = new DecimalFormat("###.##");
         double owingBalance = 0.00;
 
@@ -81,8 +81,8 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity implements 
 
 
             // convert image int to a string and place it into the hashmap with an images key
-            hashMap.put("date",formattedDate);
-            hashMap.put("amount", "$"+decimalFormat.format(invoiceList.get(i).getPrice()));
+            hashMap.put("date", formattedDate);
+            hashMap.put("amount", "$" + decimalFormat.format(invoiceList.get(i).getPrice()));
             hashMap.put("status", (invoiceList.get(i).getPaymentStatus()));
             hashMap.put("id", (String.valueOf(invoiceList.get(i).getID())));
 
@@ -91,7 +91,7 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity implements 
             owingBalance += invoiceList.get(i).getPrice();
         }
 
-        mTextViewOwing.setText("$"+decimalFormat.format(owingBalance));
+        mTextViewOwing.setText("$" + decimalFormat.format(owingBalance));
 
 
         String[] from = {
@@ -101,10 +101,10 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity implements 
                 "id"
         };
 
-        int[] to = {R.id.text_payment_date,R.id.text_payment_amount,R.id.text_payment_type,R.id.hidden_history_invoice_id};
+        int[] to = {R.id.text_payment_date, R.id.text_payment_amount, R.id.text_payment_type, R.id.hidden_history_invoice_id};
 
         //ListView Adapter
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this,inboxData,R.layout.item_payment_history,from,to);
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, inboxData, R.layout.item_payment_history, from, to);
         listView.setAdapter(simpleAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -113,14 +113,14 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity implements 
 
                 TextView invoiceId = view.findViewById(R.id.hidden_history_invoice_id);
 
-                Intent intent = new Intent(PatientPaymentHistoryActivity.this,SubmitPaymentActivity.class);
-                intent.putExtra("invoiceId",invoiceId.getText().toString());
+                Intent intent = new Intent(PatientPaymentHistoryActivity.this, SubmitPaymentActivity.class);
+                intent.putExtra("invoiceId", invoiceId.getText().toString());
                 startActivity(intent);
             }
         });
     }
 
-    public void toggleSetUp(){
+    public void toggleSetUp() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -142,19 +142,19 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity implements 
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_home:
-                Intent h= new Intent(PatientPaymentHistoryActivity.this, PatientHomeActivity.class);
+                Intent h = new Intent(PatientPaymentHistoryActivity.this, PatientHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientPaymentHistoryActivity.this, PatientAppointmentHistoryActivity.class);
+                Intent g = new Intent(PatientPaymentHistoryActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(PatientPaymentHistoryActivity.this,LoginActivity.class);
+                Intent s = new Intent(PatientPaymentHistoryActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

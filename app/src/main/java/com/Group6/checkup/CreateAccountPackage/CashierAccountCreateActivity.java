@@ -14,14 +14,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.Group6.checkup.AdminActivity;
+import com.Group6.checkup.AdminHomeActivity;
 import com.Group6.checkup.Entities.Cashier;
 import com.Group6.checkup.LoginActivity;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Session;
-import com.Group6.checkup.AdminViewHistoryActivity;
+import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class CashierAccountCreateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -141,7 +141,7 @@ public class CashierAccountCreateActivity extends AppCompatActivity implements N
         switch (id){
 
             case R.id.nav_home:
-                Intent h= new Intent(CashierAccountCreateActivity.this, AdminActivity.class);
+                Intent h= new Intent(CashierAccountCreateActivity.this, AdminHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:

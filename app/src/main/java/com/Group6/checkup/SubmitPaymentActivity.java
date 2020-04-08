@@ -21,7 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.text.DecimalFormat;
 
-public class SubmitPaymentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class SubmitPaymentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     DrawerLayout drawer;
@@ -59,7 +59,7 @@ public class SubmitPaymentActivity extends AppCompatActivity implements Navigati
         Intent intent = getIntent();
 
         //check the intent for a invoice id value that was passed
-        if(intent.hasExtra("invoiceId")){
+        if (intent.hasExtra("invoiceId")) {
 
             //get the invoice from the database
             currentInvoice = invoiceDao.find(intent.getStringExtra("invoiceId"));
@@ -76,26 +76,26 @@ public class SubmitPaymentActivity extends AppCompatActivity implements Navigati
             public void onClick(View v) {
 
                 //catch if mEditPaymentAmount value throws NumberFormatException
-                try{
+                try {
 
                     //try to parse EditText text into a float
                     Double paymentAmount = Double.parseDouble(mEditPaymentAmount.getText().toString());
 
                     //check if the value is greater than 0
-                    if(Double.parseDouble(mEditPaymentAmount.getText().toString()) <= 0.00){
+                    if (Double.parseDouble(mEditPaymentAmount.getText().toString()) <= 0.00) {
 
                         //Notify user payment must be greater than 0
                         Toast.makeText(SubmitPaymentActivity.this, "Amount must be more than $0.00", Toast.LENGTH_SHORT).show();
-                    } else if(Math.round(Double.parseDouble(mEditPaymentAmount.getText().toString())) > Math.round(currentInvoice.getPrice())) {
+                    } else if (Math.round(Double.parseDouble(mEditPaymentAmount.getText().toString())) > Math.round(currentInvoice.getPrice())) {
                         Toast.makeText(SubmitPaymentActivity.this, "Amount cannot be greater than " + currentInvoice.getPrice(), Toast.LENGTH_SHORT).show();
                     } else {
 
                         //Notify user of the payment acceptance
-                        Toast.makeText(SubmitPaymentActivity.this, "Payment of "+paymentAmount.toString()+" Processed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SubmitPaymentActivity.this, "Payment of " + paymentAmount.toString() + " Processed", Toast.LENGTH_SHORT).show();
 
                         double newBalance = currentInvoice.getPrice() - paymentAmount;
 
-                        if(newBalance <= 0.00){
+                        if (newBalance <= 0.00) {
                             newBalance = 0.00F;
                             currentInvoice.setPaymentStatus("paid");
                         }
@@ -105,16 +105,16 @@ public class SubmitPaymentActivity extends AppCompatActivity implements Navigati
 
                         mTextViewBalance.setText("$" + decimalFormat.format(currentInvoice.getPrice()));
 
-                        Toast.makeText(SubmitPaymentActivity.this, "$"+paymentAmount+" Paid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SubmitPaymentActivity.this, "$" + paymentAmount + " Paid", Toast.LENGTH_SHORT).show();
 
                         //define home activity intent
-                        Intent intent = new Intent(SubmitPaymentActivity.this,PatientHomeActivity.class);
+                        Intent intent = new Intent(SubmitPaymentActivity.this, PatientHomeActivity.class);
                         //start activity
                         startActivity(intent);
 
                     }
 
-                }catch(NumberFormatException e){
+                } catch (NumberFormatException e) {
                     // Notify user payment amount must be entered
                     Toast.makeText(SubmitPaymentActivity.this, "Enter a Payment Amount", Toast.LENGTH_SHORT).show();
                 }
@@ -136,7 +136,7 @@ public class SubmitPaymentActivity extends AppCompatActivity implements Navigati
 
     }
 
-    public void toggleSetUp(){
+    public void toggleSetUp() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -157,19 +157,19 @@ public class SubmitPaymentActivity extends AppCompatActivity implements Navigati
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_home:
-                Intent h= new Intent(SubmitPaymentActivity.this, PatientHomeActivity.class);
+                Intent h = new Intent(SubmitPaymentActivity.this, PatientHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(SubmitPaymentActivity.this, PatientAppointmentHistoryActivity.class);
+                Intent g = new Intent(SubmitPaymentActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(SubmitPaymentActivity.this,LoginActivity.class);
+                Intent s = new Intent(SubmitPaymentActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

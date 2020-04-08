@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.OnlineHelpReply;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
                 null               //sort order
         );
 
-        return (cursor.getCount() > 0) ? true : false;
+        return cursor.getCount() > 0;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
                 null
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);
@@ -70,39 +70,43 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
                 cursor.getInt(4)
         );
 
-        return recordObject;    }
+        return recordObject;
+    }
 
     @Override
     public List<OnlineHelpReply> findAll() {
 
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
-
-
-        Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null);
-
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
-
-
         List<OnlineHelpReply> recordObjectList = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        try {
+
+            Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null);
+
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
 
-            OnlineHelpReply recordObject = new OnlineHelpReply(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getLong(3),
-                    cursor.getInt(4)
-            );
+            while (cursor.moveToNext()) {
 
+                OnlineHelpReply recordObject = new OnlineHelpReply(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getLong(3),
+                        cursor.getInt(4)
+                );
 
-            recordObjectList.add(recordObject);
+                recordObjectList.add(recordObject);
 
+            }
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
-        return recordObjectList;    }
+        return recordObjectList;
+    }
 
     @Override
     public boolean insert(OnlineHelpReply object) {
@@ -137,12 +141,11 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
         recordObject.put(DatabaseTable.OnlineHelpReplyTable.DOCTOR_ID, object.getDoctorID());
 
 
-
         // Filter results WHERE "_ID" = 'n'
         String selection = DatabaseTable.OnlineHelpReplyTable._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(object.getID()) };
+        String[] selectionArgs = {String.valueOf(object.getID())};
 
-        int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME,recordObject,selection,selectionArgs);
+        int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME, recordObject, selection, selectionArgs);
 
         return result > 0;
     }
@@ -167,15 +170,21 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
 
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
+        try {
 
-        Cursor cursor = dbConnection.rawQuery("SELECT MAX("+DatabaseTable.OnlineHelpReplyTable._ID+") FROM " + DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null);
+            Cursor cursor = dbConnection.rawQuery("SELECT MAX(" + DatabaseTable.OnlineHelpReplyTable._ID + ") FROM " + DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null);
 
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
-        cursor.move(1);
+            cursor.move(1);
 
-        return cursor.getInt(0);
+            return cursor.getInt(0);
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public int insertWithResult(OnlineHelpReply object) {
@@ -192,6 +201,6 @@ public class OnlineHelpReplyDao extends Dao<OnlineHelpReply> {
 
         long result = dbConnection.insert(DatabaseTable.OnlineHelpReplyTable.TABLE_NAME, null, recordObject);
 
-        return (int)result;
+        return (int) result;
     }
 }

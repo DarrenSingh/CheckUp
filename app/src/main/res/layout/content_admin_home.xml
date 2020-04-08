@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="60dp"
     android:orientation="vertical"
-    tools:context=".AdminActivity">
+    tools:context=".AdminHomeActivity">
 
     <TextView
         style="@style/subTitleTextView"
@@ -17,12 +17,13 @@
         android:text="@string/text_greeting" />
 
     <TextView
+        android:id="@+id/text_admin_full_name"
         style="@style/Heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Welcome Administrator Name!" />
+        android:text="@string/text_firstName" />
 
     <Button
         android:id="@+id/btn_toCreateAccountActivity"

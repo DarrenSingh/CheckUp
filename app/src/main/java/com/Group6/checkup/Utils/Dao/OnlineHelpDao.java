@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.OnlineHelp;
 
 import java.util.ArrayList;
@@ -37,11 +37,11 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
                 null               // The sort order
         );
 
-        return (cursor.getCount() > 0) ? true : false;
+        return cursor.getCount() > 0;
     }
 
     @Override
-    public OnlineHelp find(String...id) {
+    public OnlineHelp find(String... id) {
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
         // Filter results WHERE "title" = 'My Title'
@@ -73,7 +73,7 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
         return recordObject;
     }
 
-    public List<OnlineHelp> findAllByDoctor(String... doctorId){
+    public List<OnlineHelp> findAllByDoctor(String... doctorId) {
 
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
@@ -92,7 +92,7 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
 
         List<OnlineHelp> onlineHelpList = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             OnlineHelp recordObject = new OnlineHelp(
                     cursor.getInt(0),
@@ -111,7 +111,7 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
         return onlineHelpList;
     }
 
-    public List<OnlineHelp> findAllByPatient(String... patientId){
+    public List<OnlineHelp> findAllByPatient(String... patientId) {
 
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
@@ -130,7 +130,7 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
 
         List<OnlineHelp> onlineHelpList = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             OnlineHelp recordObject = new OnlineHelp(
                     cursor.getInt(0),
@@ -160,7 +160,7 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
 
         List<OnlineHelp> onlineHelpList = new ArrayList<>();
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             OnlineHelp recordObject = new OnlineHelp(
                     cursor.getInt(0),
@@ -184,20 +184,20 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
         ContentValues recordObject = new ContentValues();
 
         //populate entry with object attributes
-        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_TITLE,object.getMessageTitle());
-        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_CONTENT,object.getMessage());
-        recordObject.put(DatabaseTable.OnlineHelpTable.SENT_DATE_TIME,object.getSentDateTime());
-        recordObject.put(DatabaseTable.OnlineHelpTable.PATIENT_ID,object.getPatientID());
-        recordObject.put(DatabaseTable.OnlineHelpTable.DOCTOR_ID,object.getDoctorID());
-        if(object.getOnlineHelpReplyID() != 0) {
+        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_TITLE, object.getMessageTitle());
+        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_CONTENT, object.getMessage());
+        recordObject.put(DatabaseTable.OnlineHelpTable.SENT_DATE_TIME, object.getSentDateTime());
+        recordObject.put(DatabaseTable.OnlineHelpTable.PATIENT_ID, object.getPatientID());
+        recordObject.put(DatabaseTable.OnlineHelpTable.DOCTOR_ID, object.getDoctorID());
+        if (object.getOnlineHelpReplyID() != 0) {
             recordObject.put(DatabaseTable.OnlineHelpTable.ONLINE_HELP_REPLY_ID, object.getOnlineHelpReplyID());
         }
         //get writable database
         SQLiteDatabase dbConnection = this.db.getWritableDatabase();
 
-        Long result = dbConnection.insert(DatabaseTable.OnlineHelpTable.TABLE_NAME,null,recordObject);
+        Long result = dbConnection.insert(DatabaseTable.OnlineHelpTable.TABLE_NAME, null, recordObject);
 
-        return (result == -1) ? false : true;
+        return result != -1;
     }
 
     @Override
@@ -209,23 +209,22 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
         ContentValues recordObject = new ContentValues();
 
         //populate entry with object attributes
-        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_TITLE,object.getMessageTitle());
-        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_CONTENT,object.getMessage());
-        recordObject.put(DatabaseTable.OnlineHelpTable.SENT_DATE_TIME,object.getSentDateTime());
-        recordObject.put(DatabaseTable.OnlineHelpTable.PATIENT_ID,object.getPatientID());
-        recordObject.put(DatabaseTable.OnlineHelpTable.DOCTOR_ID,object.getDoctorID());
+        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_TITLE, object.getMessageTitle());
+        recordObject.put(DatabaseTable.OnlineHelpTable.MESSAGE_CONTENT, object.getMessage());
+        recordObject.put(DatabaseTable.OnlineHelpTable.SENT_DATE_TIME, object.getSentDateTime());
+        recordObject.put(DatabaseTable.OnlineHelpTable.PATIENT_ID, object.getPatientID());
+        recordObject.put(DatabaseTable.OnlineHelpTable.DOCTOR_ID, object.getDoctorID());
         recordObject.put(DatabaseTable.OnlineHelpTable.ONLINE_HELP_REPLY_ID, object.getOnlineHelpReplyID());
-
 
 
         // Filter results WHERE "ID" = '*'
         String selection = DatabaseTable.OnlineHelpTable._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(object.getID()) };
+        String[] selectionArgs = {String.valueOf(object.getID())};
 
-        int result = dbConnection.update(DatabaseTable.OnlineHelpTable.TABLE_NAME,recordObject,selection,selectionArgs);
+        int result = dbConnection.update(DatabaseTable.OnlineHelpTable.TABLE_NAME, recordObject, selection, selectionArgs);
 
 
-        return (result > 0) ? true : false;
+        return result > 0;
     }
 
     @Override
@@ -235,9 +234,9 @@ public class OnlineHelpDao extends Dao<OnlineHelp> {
 
         String selection = DatabaseTable.OnlineHelpTable._ID + " = ?";
 
-        int result = dbConnection.delete(DatabaseTable.OnlineHelpTable.TABLE_NAME,selection,messageId);
+        int result = dbConnection.delete(DatabaseTable.OnlineHelpTable.TABLE_NAME, selection, messageId);
 
-        return (result > 0) ? true : false;
+        return result > 0;
     }
 
 }

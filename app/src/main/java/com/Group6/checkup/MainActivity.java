@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.Group6.checkup.DatabasePackage.DatabaseHelper;
+import com.Group6.checkup.Database.DatabaseHelper;
 import com.Group6.checkup.Utils.Session;
 
 
@@ -15,12 +15,12 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbh;
     Session appSession;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         appSession = new Session(this);
-  
+
         //allow database to create & seed
         dbh = DatabaseHelper.getInstance(this);
 
@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         Button cashier = findViewById(R.id.btn_main_cashier);
         Button doctor = findViewById(R.id.btn_main_doctor);
         Button patient = findViewById(R.id.btn_main_patient);
-  
-         login.setOnClickListener(new View.OnClickListener() {
+
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 appSession.setCurrentUsername("D001");
                 appSession.setUserId(1);
-                startActivity(new Intent(MainActivity.this, DoctorActivity.class));
+                startActivity(new Intent(MainActivity.this, DoctorHomeActivity.class));
             }
         });
 
@@ -60,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PatientHomeActivity.class));
             }
         });
-  
+
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 appSession.setCurrentUsername("A001");
                 appSession.setUserId(1);
-                startActivity(new Intent(MainActivity.this, AdminActivity.class));
+                startActivity(new Intent(MainActivity.this, AdminHomeActivity.class));
             }
         });
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 appSession.setCurrentUsername("C001");
                 appSession.setUserId(1);
-                startActivity(new Intent(MainActivity.this, CashierActivity.class));
+                startActivity(new Intent(MainActivity.this, CashierHomeActivity.class));
             }
         });
 

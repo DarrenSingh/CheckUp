@@ -23,6 +23,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:text="Amount Due"
+            android:textSize="16sp"
             style="@style/normalTextView"/>
 
         <TextView
@@ -31,8 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_gravity="center"
+            android:textSize="34sp"
             android:text="$0.00"
-            style="@style/subTitleTextView"/>
+            style="@style/Heading"/>
 
         <EditText
             android:id="@+id/edit_payment_amount"

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.Appointment;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class AppointmentDao extends Dao<Appointment> {
                 null
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);
@@ -78,28 +78,36 @@ public class AppointmentDao extends Dao<Appointment> {
     @Override
     public List<Appointment> findAll() {
 
-        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
-
-
-        Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.AdminTable.TABLE_NAME, null);
-
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
-
 
         List<Appointment> recordObjectList = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        try {
 
-            Appointment recordObject = new Appointment(
-                    cursor.getInt(0),
-                    cursor.getLong(1),
-                    cursor.getInt(2),
-                    cursor.getInt(3)
-            );
+            SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
-            recordObjectList.add(recordObject);
 
+            Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.AdminTable.TABLE_NAME, null);
+
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
+
+
+            while (cursor.moveToNext()) {
+
+                Appointment recordObject = new Appointment(
+                        cursor.getInt(0),
+                        cursor.getLong(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3)
+                );
+
+                recordObjectList.add(recordObject);
+
+            }
+
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
         return recordObjectList;
@@ -107,38 +115,41 @@ public class AppointmentDao extends Dao<Appointment> {
 
     public List<Appointment> findAllByPatient(String orderBy, String... patientId) {
 
-        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
-
-
-        // Filter results WHERE "ID" = '1'
-        String selection = DatabaseTable.AppointmentTable.PATIENT_ID + " = ?";
-
-        Cursor cursor = dbConnection.query(
-                DatabaseTable.AppointmentTable.TABLE_NAME,   // The table to query
-                null,             // array of columns to return - null to get all
-                selection,              // The columns for the WHERE clause
-                patientId,
-                null,
-                null,
-                DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " " + orderBy
-        );
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
-
-
         List<Appointment> recordObjectList = new ArrayList<>();
+        try {
+            SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
-        while(cursor.moveToNext()){
 
-            Appointment recordObject = new Appointment(
-                    cursor.getInt(0),
-                    cursor.getLong(1),
-                    cursor.getInt(2),
-                    cursor.getInt(3)
+            // Filter results WHERE "ID" = '1'
+            String selection = DatabaseTable.AppointmentTable.PATIENT_ID + " = ?";
+
+            Cursor cursor = dbConnection.query(
+                    DatabaseTable.AppointmentTable.TABLE_NAME,   // The table to query
+                    null,             // array of columns to return - null to get all
+                    selection,              // The columns for the WHERE clause
+                    patientId,
+                    null,
+                    null,
+                    DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " " + orderBy
             );
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
-            recordObjectList.add(recordObject);
 
+            while (cursor.moveToNext()) {
+
+                Appointment recordObject = new Appointment(
+                        cursor.getInt(0),
+                        cursor.getLong(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3)
+                );
+
+                recordObjectList.add(recordObject);
+
+            }
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
         return recordObjectList;
@@ -148,37 +159,42 @@ public class AppointmentDao extends Dao<Appointment> {
     public List<Appointment> findAllByDoctor(String... doctorId) {
 
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
-
-
-        // Filter results WHERE "loginID" = 'A001'
-        String selection = DatabaseTable.AppointmentTable.DOCTOR_ID + " = ?";
-
-        Cursor cursor = dbConnection.query(
-                DatabaseTable.AppointmentTable.TABLE_NAME,   // The table to query
-                null,             // array of columns to return - null to get all
-                selection,              // The columns for the WHERE clause
-                doctorId,
-                null,
-                null,
-                DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " ASC"
-        );
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
-
-
         List<Appointment> recordObjectList = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        try {
 
-            Appointment recordObject = new Appointment(
-                    cursor.getInt(0),
-                    cursor.getLong(1),
-                    cursor.getInt(2),
-                    cursor.getInt(3)
+
+            // Filter results WHERE "loginID" = 'A001'
+            String selection = DatabaseTable.AppointmentTable.DOCTOR_ID + " = ?";
+
+            Cursor cursor = dbConnection.query(
+                    DatabaseTable.AppointmentTable.TABLE_NAME,   // The table to query
+                    null,             // array of columns to return - null to get all
+                    selection,              // The columns for the WHERE clause
+                    doctorId,
+                    null,
+                    null,
+                    DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " ASC"
             );
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
-            recordObjectList.add(recordObject);
 
+            while (cursor.moveToNext()) {
+
+                Appointment recordObject = new Appointment(
+                        cursor.getInt(0),
+                        cursor.getLong(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3)
+                );
+
+                recordObjectList.add(recordObject);
+
+            }
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
         return recordObjectList;
@@ -227,10 +243,9 @@ public class AppointmentDao extends Dao<Appointment> {
         recordObject.put(DatabaseTable.AppointmentTable.DOCTOR_ID, object.getDoctorID());
 
 
-
         // Filter results WHERE "loginID" = 'A001'
         String selection = DatabaseTable.AppointmentTable._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(object.getID()) };
+        String[] selectionArgs = {String.valueOf(object.getID())};
 
         int result = dbConnection.update(
                 DatabaseTable.AppointmentTable.TABLE_NAME,
@@ -249,7 +264,7 @@ public class AppointmentDao extends Dao<Appointment> {
 
         String selection = DatabaseTable.AppointmentTable._ID + " = ?";
 
-        int result = dbConnection.delete(DatabaseTable.AppointmentTable.TABLE_NAME,selection,searchId);
+        int result = dbConnection.delete(DatabaseTable.AppointmentTable.TABLE_NAME, selection, searchId);
 
         return result > 0;
     }

@@ -5,11 +5,9 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.Group6.checkup.Adapters.AppointmentHistoryAdapter;
 import com.Group6.checkup.Entities.Appointment;
-import com.Group6.checkup.Entities.Message;
 import com.Group6.checkup.Utils.Dao.AppointmentDao;
-import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
-import com.Group6.checkup.Utils.Dao.OnlineHelpReplyDao;
 import com.Group6.checkup.Utils.Session;
 
 import java.util.ArrayList;
@@ -50,9 +48,9 @@ public class PatientAppointmentHistoryActivity extends AppCompatActivity {
 //        appointmentsForPatient();
 //    }
 
-    public void appointmentsForPatient(){
-        appointments = appointmentDao.findAllByPatient(AppointmentDao.DESC,loginID);
+    public void appointmentsForPatient() {
+        appointments = appointmentDao.findAllByPatient(AppointmentDao.DESC, loginID);
 
-        lv.setAdapter(new AppointmentHistoryAdapter(this,appointments));
+        lv.setAdapter(new AppointmentHistoryAdapter(this, appointments));
     }
 }

@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import com.Group6.checkup.Entities.DistanceMatrixRequest;
 import com.Group6.checkup.Entities.DistanceMatrixResponse;
 import com.Group6.checkup.Entities.Doctor;
+import com.Group6.checkup.Fragments.NetworkConnectionDialogFragment;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.GsonDistanceMatrixRequest;
 import com.Group6.checkup.Utils.Sort;
@@ -70,8 +71,8 @@ public class LocateDoctorActivity extends Activity {
     private MapView mMapView;
     private MapboxMap mMapboxMap;
     private SearchAheadService mSearchAheadServiceV3;
-    private List<HashMap<String, String>> searchResultsData = new ArrayList<>();;
-    private List<HashMap<String,String>> nearbyDoctorsData = new ArrayList<>();
+    private List<HashMap<String, String>> searchResultsData = new ArrayList<>();
+    private List<HashMap<String, String>> nearbyDoctorsData = new ArrayList<>();
     private SimpleAdapter searchAdapter;
     private SimpleAdapter doctorsAdapter;
 
@@ -96,7 +97,7 @@ public class LocateDoctorActivity extends Activity {
         mMapView.onCreate(savedInstanceState);
 
 
-        if(HasNetworkConnection()) {
+        if (HasNetworkConnection()) {
             loadMap();
         } else {
             displayNetworkDialog();
@@ -115,27 +116,33 @@ public class LocateDoctorActivity extends Activity {
     }
 
     @Override
-    public void onPause()
-    { super.onPause(); mMapView.onPause(); }
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
 
     @Override
-    protected void onDestroy()
-    { super.onDestroy(); mMapView.onDestroy(); }
+    protected void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState)
-    { super.onSaveInstanceState(outState); mMapView.onSaveInstanceState(outState); }
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mMapView.onSaveInstanceState(outState);
+    }
 
     //search ahead predictions displayed
-    private void searchQuery(String query){
+    private void searchQuery(String query) {
         mSearchAheadServiceV3 = new SearchAheadService(this, API_KEY);
 
         String queryString = query;
 
-        LatLng surreyBC = new LatLng(49.104599F,-122.823509F);
+        LatLng surreyBC = new LatLng(49.104599F, -122.823509F);
 
         List searchCollections = Arrays.asList(SearchCollection.AIRPORT, SearchCollection.ADMINAREA,
-                SearchCollection.ADDRESS,SearchCollection.FRANCHISE,SearchCollection.POI);
+                SearchCollection.ADDRESS, SearchCollection.FRANCHISE, SearchCollection.POI);
         try {
             SearchAheadQuery searchAheadQuery = new SearchAheadQuery
                     .Builder(queryString, searchCollections)
@@ -153,16 +160,16 @@ public class LocateDoctorActivity extends Activity {
                             List<SearchAheadResult> searchAheadResults = searchAheadResponse.getResults();
 
                             //if we have requests
-                            if(searchAheadResults.size() > 0) {
+                            if (searchAheadResults.size() > 0) {
 
                                 //clear the current data to display
                                 searchResultsData.clear();
 
-                                try{
+                                try {
 
                                     int size = (searchAheadResults.size() < 5) ? searchAheadResults.size() : 5;
 
-                                    for (int i = size-1;i >= 0 ; i--) {
+                                    for (int i = size - 1; i >= 0; i--) {
                                         // create a hashmap
                                         HashMap<String, String> hashMap = new HashMap<>();
 
@@ -180,7 +187,7 @@ public class LocateDoctorActivity extends Activity {
                                     }
 
                                     //handle null pointer exception on address properties
-                                } catch(NullPointerException e){
+                                } catch (NullPointerException e) {
                                     e.printStackTrace();
                                 }
 
@@ -192,7 +199,7 @@ public class LocateDoctorActivity extends Activity {
                                         "long"
                                 };
 
-                                int[] to = {R.id.text_result_address, R.id.text_result_city,R.id.hidden_location_lat,R.id.hidden_location_long};
+                                int[] to = {R.id.text_result_address, R.id.text_result_city, R.id.hidden_location_lat, R.id.hidden_location_long};
 
                                 searchAdapter = new SimpleAdapter(getApplicationContext(), searchResultsData, R.layout.item_search_result, from, to);
                                 mListViewSearch.setAdapter(searchAdapter);
@@ -213,16 +220,16 @@ public class LocateDoctorActivity extends Activity {
     }
 
     //resets the search ahead list
-    private void resetSearchAheadList(){
-        if(!searchResultsData.isEmpty()) {
+    private void resetSearchAheadList() {
+        if (!searchResultsData.isEmpty()) {
             searchResultsData.clear();
             searchAdapter.notifyDataSetChanged();
         }
     }
 
     //resets the doctors list
-    private void resetDoctorsList(){
-        if(!nearbyDoctorsData.isEmpty()){
+    private void resetDoctorsList() {
+        if (!nearbyDoctorsData.isEmpty()) {
             nearbyDoctorsData.clear();
             doctorsAdapter.notifyDataSetChanged();
             mListViewDoctors.setVisibility(View.GONE);
@@ -230,12 +237,12 @@ public class LocateDoctorActivity extends Activity {
     }
 
     //MapQuest route matrix api call made to return the distances of all doctor addresses in relation to the user
-    private void distanceMatrixNetworkCall(){
+    private void distanceMatrixNetworkCall() {
         //Get all addresses
         List<String> addresses = new ArrayList<>();
 
         //Get the address to find distances from first
-        addresses.add(selectedLat+","+selectedLong);
+        addresses.add(selectedLat + "," + selectedLong);
 
         //Get doctors
         List<Doctor> doctors = new DoctorDao(getApplicationContext()).findAll();
@@ -246,11 +253,11 @@ public class LocateDoctorActivity extends Activity {
         }
 
         //add the options for the request
-        Map<String,Boolean> options = new HashMap<>();
-        options.put("allToAll",false);
+        Map<String, Boolean> options = new HashMap<>();
+        options.put("allToAll", false);
 
         //create an object
-        DistanceMatrixRequest requestObj = new DistanceMatrixRequest(addresses,options);
+        DistanceMatrixRequest requestObj = new DistanceMatrixRequest(addresses, options);
 
         Gson gson = new Gson();
 
@@ -267,14 +274,14 @@ public class LocateDoctorActivity extends Activity {
                     HashMap<String, String> hashMap = new HashMap<>();
 
                     // convert image int to a string and place it into the hashmap with an images key
-                    hashMap.put("id",String.valueOf(doctors.get(i).getID()));
-                    hashMap.put("name","Dr. "+doctors.get(i).getFirstName()+" "+doctors.get(i).getLastName());
-                    hashMap.put("address",doctors.get(i).getOfficeAddress());
-                    hashMap.put("distance",String.valueOf(response.getDistance().get(i+1)));
+                    hashMap.put("id", String.valueOf(doctors.get(i).getID()));
+                    hashMap.put("name", "Dr. " + doctors.get(i).getFirstName() + " " + doctors.get(i).getLastName());
+                    hashMap.put("address", doctors.get(i).getOfficeAddress());
+                    hashMap.put("distance", String.valueOf(response.getDistance().get(i + 1)));
 
-                    DistanceMatrixResponse.Location location = response.getLocations().get(i+1);
-                    hashMap.put("lat",String.valueOf(location.getLatLng().getLat()));
-                    hashMap.put("lng",String.valueOf(location.getLatLng().getLng()));
+                    DistanceMatrixResponse.Location location = response.getLocations().get(i + 1);
+                    hashMap.put("lat", String.valueOf(location.getLatLng().getLat()));
+                    hashMap.put("lng", String.valueOf(location.getLatLng().getLng()));
 
                     // add this hashmap to the list
                     nearbyDoctorsData.add(hashMap);
@@ -296,27 +303,27 @@ public class LocateDoctorActivity extends Activity {
     }
 
     //displays the list of nearby doctors
-    private void displayNearbyDoctors(ListView mListView){
+    private void displayNearbyDoctors(ListView mListView) {
 
-        if(!nearbyDoctorsData.isEmpty()) {
+        if (!nearbyDoctorsData.isEmpty()) {
 
-            Sort.byKeyValue(nearbyDoctorsData,"distance",float.class,Sort.ASCENDING);
+            Sort.byKeyValue(nearbyDoctorsData, "distance", float.class, Sort.ASCENDING);
 
-            for (HashMap i: nearbyDoctorsData) {
+            for (HashMap i : nearbyDoctorsData) {
 
                 float distance = Float.parseFloat(i.get("distance").toString());
                 String convertedDistance;
 
-                if(distance < 1 ){
+                if (distance < 1) {
                     //convert to m
 
-                    convertedDistance = String.format("%.0f",(distance*1000)) + " m";
-                } else{
-                    convertedDistance = String.format("%.1f",distance) + " km";
+                    convertedDistance = String.format("%.0f", (distance * 1000)) + " m";
+                } else {
+                    convertedDistance = String.format("%.1f", distance) + " km";
                 }
 
                 i.remove("distance");
-                i.put("distance",convertedDistance);
+                i.put("distance", convertedDistance);
 
             }
 
@@ -336,7 +343,7 @@ public class LocateDoctorActivity extends Activity {
             mListView.setAdapter(doctorsAdapter);
             mListView.setVisibility(View.VISIBLE);
 
-            addDoctorsMarkers(this.mMapboxMap,nearbyDoctorsData);
+            addDoctorsMarkers(this.mMapboxMap, nearbyDoctorsData);
 
             //apply onclick listener to redirect to the selected doctors profile activity
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -368,14 +375,14 @@ public class LocateDoctorActivity extends Activity {
         IconFactory iconFactory = IconFactory.getInstance(LocateDoctorActivity.this);
         Icon icon = iconFactory.fromResource(R.drawable.mapquest_icon);
 
-        markerOptions.position(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat),Double.parseDouble(selectedLong)));
+        markerOptions.position(new com.mapbox.mapboxsdk.geometry.LatLng(Double.parseDouble(selectedLat), Double.parseDouble(selectedLong)));
         markerOptions.snippet("Selected Location");
         markerOptions.setIcon(icon);
         mapboxMap.addMarker(markerOptions);
     }
 
     //adds nearby doctors location markers
-    private void addDoctorsMarkers(MapboxMap mapboxMap, List<HashMap<String,String>> nearbyDoctorsData){
+    private void addDoctorsMarkers(MapboxMap mapboxMap, List<HashMap<String, String>> nearbyDoctorsData) {
 
         for (int i = 0; i < nearbyDoctorsData.size(); i++) {
 
@@ -393,31 +400,31 @@ public class LocateDoctorActivity extends Activity {
     }
 
     //hides the soft keyboard
-    private void hideKeyboard(View view){
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+    private void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
     }
 
-    private void displayNetworkDialog(){
+    private void displayNetworkDialog() {
 
         Toast.makeText(this, "No Network Connection", Toast.LENGTH_SHORT).show();
         FragmentManager manager = getFragmentManager();
         DialogFragment fragment = new NetworkConnectionDialogFragment(this);
 
-        fragment.show(manager,"networkConnection");
+        fragment.show(manager, "networkConnection");
 
     }
 
-    private boolean HasNetworkConnection(){
+    private boolean HasNetworkConnection() {
 
-        ConnectivityManager connectivityManager = (ConnectivityManager)this.getSystemService(CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-       return hasNetworkConnection = networkInfo != null && networkInfo.isConnectedOrConnecting();
-    };
+        return hasNetworkConnection = networkInfo != null && networkInfo.isConnectedOrConnecting();
+    }
 
-    private void loadMap(){
+    private void loadMap() {
 
         //add a text changed listener to provide up to date search predictions
         mEditSearch.addTextChangedListener(new TextWatcher() {
@@ -504,7 +511,7 @@ public class LocateDoctorActivity extends Activity {
     //overrides the back button to remove any text in the search bar if present
     @Override
     public void onBackPressed() {
-        if(locationFound){
+        if (locationFound) {
             mEditSearch.setText("");
             resetSearchAheadList();
             resetDoctorsList();
@@ -512,8 +519,6 @@ public class LocateDoctorActivity extends Activity {
             super.onBackPressed();
         }
     }
-
-
 
 
 }

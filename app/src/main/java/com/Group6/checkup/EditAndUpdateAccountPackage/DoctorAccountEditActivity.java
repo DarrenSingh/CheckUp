@@ -14,8 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.Group6.checkup.AdminActivity;
-import com.Group6.checkup.AdminViewHistoryActivity;
+import com.Group6.checkup.AdminHomeActivity;
+import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.LoginActivity;
 import com.Group6.checkup.R;
@@ -198,7 +198,7 @@ public class DoctorAccountEditActivity extends AppCompatActivity implements Navi
         switch (id){
 
             case R.id.nav_home:
-                Intent h= new Intent(DoctorAccountEditActivity.this, AdminActivity.class);
+                Intent h= new Intent(DoctorAccountEditActivity.this, AdminHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:

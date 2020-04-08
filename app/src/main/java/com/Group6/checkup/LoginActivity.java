@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         Button sign_up = findViewById(R.id.sign_up);
 
         Intent intent = getIntent();
-        if(intent != null){
+        if (intent != null) {
             String login_value = intent.getStringExtra("loginIDvalue");
 
             //set the ID created as a prompt in the login EditText box
@@ -50,23 +50,23 @@ public class LoginActivity extends AppCompatActivity {
                 String password = editText_password.getText().toString();
                 String empty = "";
 
-                if(id.equals(empty)){
-                    Toast.makeText(LoginActivity.this, "Please Enter User Id",Toast.LENGTH_LONG).show();
+                if (id.equals(empty)) {
+                    Toast.makeText(LoginActivity.this, "Please Enter User Id", Toast.LENGTH_LONG).show();
 
-                }else if(password.equals(empty)){
-                    Toast.makeText(LoginActivity.this, "Please Enter User Password",Toast.LENGTH_LONG).show();
+                } else if (password.equals(empty)) {
+                    Toast.makeText(LoginActivity.this, "Please Enter User Password", Toast.LENGTH_LONG).show();
 
-                }else if(id.charAt(0)=='D'||id.charAt(0)=='P'||id.charAt(0)=='A'||id.charAt(0)=='C') {
+                } else if (id.charAt(0) == 'D' || id.charAt(0) == 'P' || id.charAt(0) == 'A' || id.charAt(0) == 'C') {
 
                     //logic for comparing doctor id and password with the database before logging into the doctor activity
                     if (id.charAt(0) == 'D') {
                         DoctorDao dao = new DoctorDao(LoginActivity.this);
-                        if(dao.exists(editText_id.getText().toString())) {
+                        if (dao.exists(editText_id.getText().toString())) {
                             Doctor user = dao.find(editText_id.getText().toString());
                             if (password.equals(user.getPassword())) {
                                 appSession.setCurrentUsername(user.getLoginID());
                                 appSession.setUserId(user.getID());
-                                startActivity(new Intent(LoginActivity.this, DoctorActivity.class));
+                                startActivity(new Intent(LoginActivity.this, DoctorHomeActivity.class));
                             } else {
                                 //code for account not existing
                                 Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_LONG).show();
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (password.equals(user.getPassword())) {
                                 appSession.setCurrentUsername(user.getLoginID());
                                 appSession.setUserId(user.getID());
-                                startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                                startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
                             } else {
                                 //code for account not existing
                                 Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_LONG).show();
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (password.equals(user.getPassword())) {
                                 appSession.setCurrentUsername(user.getLoginID());
                                 appSession.setUserId(user.getID());
-                                startActivity(new Intent(LoginActivity.this, CashierActivity.class));
+                                startActivity(new Intent(LoginActivity.this, CashierHomeActivity.class));
                             } else {
                                 //code for account not existing
                                 Toast.makeText(LoginActivity.this, "Invalid Username or Password", Toast.LENGTH_LONG).show();
@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
 
-                }else{
+                } else {
                     Toast.makeText(LoginActivity.this, "Please Enter Valid User ID", Toast.LENGTH_LONG).show();
                 }
 
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, LoginPatientAccountCreateActivity.class));
+                startActivity(new Intent(LoginActivity.this, LoginRegisterationActivity.class));
             }
         });
 

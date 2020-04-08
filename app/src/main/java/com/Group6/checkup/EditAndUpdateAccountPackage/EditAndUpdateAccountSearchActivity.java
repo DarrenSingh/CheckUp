@@ -18,8 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.Group6.checkup.AdminActivity;
-import com.Group6.checkup.AdminViewHistoryActivity;
+import com.Group6.checkup.AdminHomeActivity;
+import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.Dao.AdminDao;
 import com.Group6.checkup.Utils.Dao.CashierDao;
@@ -138,6 +138,12 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity implem
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listView.setAdapter(null);
+    }
+
     public void toggleSetUp(){
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -163,7 +169,7 @@ public class EditAndUpdateAccountSearchActivity extends AppCompatActivity implem
         switch (id){
 
             case R.id.nav_home:
-                Intent h= new Intent(EditAndUpdateAccountSearchActivity.this, AdminActivity.class);
+                Intent h= new Intent(EditAndUpdateAccountSearchActivity.this, AdminHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:

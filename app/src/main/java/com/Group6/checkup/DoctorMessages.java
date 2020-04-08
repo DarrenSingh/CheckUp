@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.Group6.checkup.Adapters.PatientAdapter;
 import com.Group6.checkup.Entities.OnlineHelp;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
@@ -27,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DoctorMessages extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class DoctorMessages extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     Toolbar toolbar;
@@ -37,6 +38,7 @@ public class DoctorMessages extends AppCompatActivity implements NavigationView.
     private OnlineHelpDao onlineHelpDao;
 
     private PatientAdapter pAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,31 +60,31 @@ public class DoctorMessages extends AppCompatActivity implements NavigationView.
         List<OnlineHelp> patientMessages = onlineHelpDao.findAllByDoctor(String.valueOf(new Session(this).getUserId()));
 
         //create list<Map>
-        List<Map<String,String>> messagesData = new ArrayList<>();
+        List<Map<String, String>> messagesData = new ArrayList<>();
 
         //loop through messsages
-        for (int i = 0; i < patientMessages.size() ; i++) {
+        for (int i = 0; i < patientMessages.size(); i++) {
 
             //create a hashmap
-            Map<String,String> map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
 
             //get patient name
             Patient appointmentOwner = patientDao.findById(String.valueOf(patientMessages.get(i).getPatientID()));
             String patientName = appointmentOwner.getFirstName() + " " + appointmentOwner.getLastName();
 
             //place
-            map.put("messageId",String.valueOf(patientMessages.get(i).getID()));
-            map.put("patientName",patientName);
+            map.put("messageId", String.valueOf(patientMessages.get(i).getID()));
+            map.put("patientName", patientName);
 
             messagesData.add(map);
         }
 
-        String[] from = {"patientName","messageId"};
+        String[] from = {"patientName", "messageId"};
 
         //textmessage patient stands for name, hidden message stands for message id
-        int[] to = {R.id.text_message_patient_name ,R.id.hidden_message_id};
+        int[] to = {R.id.text_message_patient_name, R.id.hidden_message_id};
 
-        SimpleAdapter adapter = new SimpleAdapter(this,messagesData,R.layout.item_doctor_message,from,to);
+        SimpleAdapter adapter = new SimpleAdapter(this, messagesData, R.layout.item_doctor_message, from, to);
 
         listView.setAdapter(adapter);
 
@@ -92,9 +94,9 @@ public class DoctorMessages extends AppCompatActivity implements NavigationView.
                 TextView textView = view.findViewById(R.id.hidden_message_id);
                 TextView patientNameTextView = view.findViewById(R.id.text_message_patient_name);
 
-                Intent in = new Intent(DoctorMessages.this,PatientComplaint.class);
-                in.putExtra("messageId" ,textView.getText().toString());
-                in.putExtra("patientName",patientNameTextView.getText().toString());
+                Intent in = new Intent(DoctorMessages.this, DoctorHelpReplyActivity.class);
+                in.putExtra("messageId", textView.getText().toString());
+                in.putExtra("patientName", patientNameTextView.getText().toString());
                 startActivity(in);
             }
         });
@@ -102,14 +104,13 @@ public class DoctorMessages extends AppCompatActivity implements NavigationView.
 
     }
 
-    public void toggleSetUp(){
+    public void toggleSetUp() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
     }
-
 
 
     public void onBackPressed() {
@@ -125,19 +126,15 @@ public class DoctorMessages extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_home:
-                Intent h= new Intent(DoctorMessages.this, DoctorActivity.class);
+                Intent h = new Intent(DoctorMessages.this, DoctorHomeActivity.class);
                 startActivity(h);
                 break;
-            case R.id.nav_history:
-                Intent g= new Intent(DoctorMessages.this, AdminViewHistoryActivity.class);
-                startActivity(g);
-                break;
             case R.id.nav_logout:
-                Intent s= new Intent(DoctorMessages.this, LoginActivity.class);
+                Intent s = new Intent(DoctorMessages.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

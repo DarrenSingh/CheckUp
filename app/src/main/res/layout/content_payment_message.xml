@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".PaymentMessage">
+        tools:context=".PaymentMessageActivity">
 
         <LinearLayout
             android:id="@+id/linear_layout_payment"
@@ -60,18 +60,12 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/payment_txt"
-            style="@style/messageTextView"
-            android:layout_width="396dp"
-            android:layout_height="413dp"
-            android:layout_margin="10dp"
-            android:padding="5dp" />
-
         <EditText
             android:id="@+id/et_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:minHeight="300dp"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/message_hint"

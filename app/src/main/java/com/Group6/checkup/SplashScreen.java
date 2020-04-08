@@ -23,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
         /* Animation will load the animation effect created in the
           transition.xml file*/
         Animation animation = AnimationUtils.loadAnimation
-                (this,R.anim.transition);
+                (this, R.anim.transition);
         logo.startAnimation(animation);
 
         //Timertask to end the SplashScreen activity and start MainActivity.
@@ -32,13 +32,13 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 finish();
                 startActivity(new Intent(SplashScreen.this,
-                        MainActivity.class));
+                        LoginActivity.class));
             }
         };
 
         // timer will schedule the MainActivity after a delay of 5seconds.
         Timer time = new Timer();
-        time.schedule(task,5000);
+        time.schedule(task, 2500);
 
     }
 }

@@ -42,7 +42,6 @@ public class PatientViewMessageActivity extends AppCompatActivity {
         paymentNotificationDao = new PaymentNotificationDao(this);
 
 
-
         mTextViewRecipient = findViewById(R.id.text_help_recipient);
         mTextViewHelpSubject = findViewById(R.id.text_help_subject);
         mTextViewHelpBody = findViewById(R.id.text_help_body);
@@ -51,13 +50,13 @@ public class PatientViewMessageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if(intent.hasExtra("onlineHelpId")) {
+        if (intent.hasExtra("onlineHelpId")) {
 
             String messageId = intent.getStringExtra("onlineHelpId");
 
             message = onlineHelpDao.find(messageId);
 
-            if(onlineHelpReplyDao.exists(String.valueOf(message.getOnlineHelpReplyID()))){
+            if (onlineHelpReplyDao.exists(String.valueOf(message.getOnlineHelpReplyID()))) {
 
                 reply = onlineHelpReplyDao.find(String.valueOf(message.getOnlineHelpReplyID()));
 
@@ -71,7 +70,7 @@ public class PatientViewMessageActivity extends AppCompatActivity {
             mTextViewHelpSubject.setText(message.getMessageTitle());
             mTextViewHelpBody.setText(message.getMessage());
 
-        } else if(intent.hasExtra("paymentNotificationId")){
+        } else if (intent.hasExtra("paymentNotificationId")) {
 
             String messageId = intent.getStringExtra("paymentNotificationId");
 
@@ -84,7 +83,6 @@ public class PatientViewMessageActivity extends AppCompatActivity {
         String recipient = intent.getStringExtra("recipient");
 
         mTextViewRecipient.setText(recipient);
-
 
 
     }

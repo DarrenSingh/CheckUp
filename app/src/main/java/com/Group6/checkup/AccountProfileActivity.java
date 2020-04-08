@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AccountProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class AccountProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Session appSession;
     private PatientDao patientDao;
@@ -84,10 +84,10 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
         mTextViewAddress.setText(currentUser.getAddress());
 
         //check if user has healthcare
-        if(currentUser.getHealthCareCardNumber() == 0) {
+        if (currentUser.getHealthCareCardNumber() == 0) {
             mTextViewMSP.setText(R.string.text_no_healthcare);
         } else {
-            String healthNo = "Health#: "+String.valueOf(currentUser.getHealthCareCardNumber());
+            String healthNo = "Health#: " + currentUser.getHealthCareCardNumber();
             mTextViewMSP.setText(healthNo);
         }
 
@@ -98,13 +98,13 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
         List<PaymentNotification> paymentNotifications = paymentNotificationDao.findAllByPatient(String.valueOf(appSession.getUserId()));
 
         //Populate the inbox with messages from the database
-        populateListView(onlineHelps,paymentNotifications,mListViewInbox);
+        populateListView(onlineHelps, paymentNotifications, mListViewInbox);
 
         //UI Event Listeners
         mBtnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountProfileActivity.this,PatientEditProfileActivity.class);
+                Intent intent = new Intent(AccountProfileActivity.this, PatientEditProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -112,7 +112,7 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
         mBtnPaymentHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountProfileActivity.this,PatientPaymentHistoryActivity.class));
+                startActivity(new Intent(AccountProfileActivity.this, PatientPaymentHistoryActivity.class));
             }
         });
 
@@ -126,13 +126,13 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
                 TextView recipient = view.findViewById(R.id.text_message_recipient);
 
                 //create intent
-                Intent intent = new Intent(getApplicationContext(),PatientViewMessageActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PatientViewMessageActivity.class);
 
-                if(messageType.getText().toString().equals("help")) {
+                if (messageType.getText().toString().equals("help")) {
                     //put onlineHelp object id
                     intent.putExtra("onlineHelpId", messageId.getText().toString());
 
-                } else if(messageType.getText().toString().equals("payment")){
+                } else if (messageType.getText().toString().equals("payment")) {
                     //put paymentNotification object id
                     intent.putExtra("paymentNotificationId", messageId.getText().toString());
 
@@ -157,17 +157,17 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
         mTextViewAddress.setText(currentUser.getAddress());
 
         //check if user has healthcare
-        if(currentUser.getHealthCareCardNumber() == 0) {
+        if (currentUser.getHealthCareCardNumber() == 0) {
             mTextViewMSP.setText(R.string.text_no_healthcare);
         } else {
-            String healthNo = "Health#: "+String.valueOf(currentUser.getHealthCareCardNumber());
+            String healthNo = "Health#: " + currentUser.getHealthCareCardNumber();
             mTextViewMSP.setText(healthNo);
         }
     }
 
-    private void populateListView(List<OnlineHelp> onlineHelpList, List<PaymentNotification> paymentNotifications, ListView listView){
+    private void populateListView(List<OnlineHelp> onlineHelpList, List<PaymentNotification> paymentNotifications, ListView listView) {
 
-        List<HashMap<String,String>> inboxData = new ArrayList<>();
+        List<HashMap<String, String>> inboxData = new ArrayList<>();
 
         for (int i = 0; i < onlineHelpList.size(); i++) {
             // create a hashmap
@@ -177,10 +177,10 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
             Doctor sender = new DoctorDao(this).findByID(String.valueOf(onlineHelpList.get(i).getDoctorID()));
 
             // convert image int to a string and place it into the hashmap with an images key
-            hashMap.put("type","help");
-            hashMap.put("id",String.valueOf(onlineHelpList.get(i).getID()));
-            hashMap.put("time",String.valueOf(onlineHelpList.get(i).getSentDateTime()));
-            hashMap.put("from",sender.getFirstName()+" "+sender.getLastName());
+            hashMap.put("type", "help");
+            hashMap.put("id", String.valueOf(onlineHelpList.get(i).getID()));
+            hashMap.put("time", String.valueOf(onlineHelpList.get(i).getSentDateTime()));
+            hashMap.put("from", sender.getFirstName() + " " + sender.getLastName());
             hashMap.put("title", onlineHelpList.get(i).getMessageTitle());
             hashMap.put("body", (onlineHelpList.get(i).getMessage()));
 
@@ -188,7 +188,7 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
             inboxData.add(hashMap);
         }
 
-        for (int i = 0; i < paymentNotifications.size() ; i++) {
+        for (int i = 0; i < paymentNotifications.size(); i++) {
 
             // create a hashmap
             HashMap<String, String> hashMap = new HashMap<>();
@@ -197,10 +197,10 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
             Cashier sender = new CashierDao(this).findByID(String.valueOf(paymentNotifications.get(i).getCashierID()));
 
             // convert image int to a string and place it into the hashmap with an images key
-            hashMap.put("type","payment");
-            hashMap.put("id",String.valueOf(paymentNotifications.get(i).getID()));
-            hashMap.put("time",String.valueOf(paymentNotifications.get(i).getSentDateTime()));
-            hashMap.put("from",sender.getFirstName()+" "+sender.getLastName());
+            hashMap.put("type", "payment");
+            hashMap.put("id", String.valueOf(paymentNotifications.get(i).getID()));
+            hashMap.put("time", String.valueOf(paymentNotifications.get(i).getSentDateTime()));
+            hashMap.put("from", sender.getFirstName() + " " + sender.getLastName());
             hashMap.put("title", paymentNotifications.get(i).getMessageTitle());
             hashMap.put("body", (paymentNotifications.get(i).getMessage()));
 
@@ -209,7 +209,7 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
 
         }
 
-        Sort.byKeyValue(inboxData,"time",long.class,Sort.DESCENDING);
+        Sort.byKeyValue(inboxData, "time", long.class, Sort.DESCENDING);
 
         String[] from = {
                 "type",
@@ -219,15 +219,15 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
                 "body"
         };
 
-        int[] to = {R.id.hidden_message_type,R.id.hidden_message_id,R.id.text_message_recipient,R.id.text_message_subject,R.id.text_message_description};
+        int[] to = {R.id.hidden_message_type, R.id.hidden_message_id, R.id.text_message_recipient, R.id.text_message_subject, R.id.text_message_description};
 
         //ListView Adapter
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this,inboxData,R.layout.item_inbox_message,from,to);
+        SimpleAdapter simpleAdapter = new SimpleAdapter(this, inboxData, R.layout.item_inbox_message, from, to);
         listView.setAdapter(simpleAdapter);
     }
 
     // setting the toggle for display
-    public void toggleSetUp(){
+    public void toggleSetUp() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -249,19 +249,19 @@ public class AccountProfileActivity extends AppCompatActivity implements Navigat
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_home:
-                Intent h= new Intent(AccountProfileActivity.this, PatientHomeActivity.class);
+                Intent h = new Intent(AccountProfileActivity.this, PatientHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(AccountProfileActivity.this, PatientAppointmentHistoryActivity.class);
+                Intent g = new Intent(AccountProfileActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(AccountProfileActivity.this,LoginActivity.class);
+                Intent s = new Intent(AccountProfileActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

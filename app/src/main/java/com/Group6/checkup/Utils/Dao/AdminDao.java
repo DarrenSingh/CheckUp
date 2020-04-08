@@ -8,13 +8,13 @@ import android.database.sqlite.SQLiteException;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.Admin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminDao extends Dao<Admin>{
+public class AdminDao extends Dao<Admin> {
 
     public AdminDao(@Nullable Context context) {
         super(context);
@@ -39,7 +39,7 @@ public class AdminDao extends Dao<Admin>{
         );
 
 
-        return (cursor.getCount() > 0) ? true : false;
+        return cursor.getCount() > 0;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class AdminDao extends Dao<Admin>{
                 null
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);
@@ -79,32 +79,33 @@ public class AdminDao extends Dao<Admin>{
     @Override
     public List<Admin> findAll() {
 
+        List<Admin> recordObjectList = new ArrayList<>();
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
+        try {
 
-        Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.AdminTable.TABLE_NAME, null);
+            Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.AdminTable.TABLE_NAME, null);
 
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
-
-
-        List<Admin> recordObjectList = new ArrayList<>();
-
-        while(cursor.moveToNext()){
-
-            Admin recordObject = new Admin(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4)
-            );
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
 
-            recordObjectList.add(recordObject);
+            while (cursor.moveToNext()) {
 
+                Admin recordObject = new Admin(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4)
+                );
+
+                recordObjectList.add(recordObject);
+            }
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
-
 
         return recordObjectList;
     }
@@ -122,7 +123,7 @@ public class AdminDao extends Dao<Admin>{
 
         long result = dbConnection.insert(DatabaseTable.AdminTable.TABLE_NAME, null, recordObject);
 
-        return (result >= 0) ? true : false;
+        return result >= 0;
     }
 
     @Override
@@ -142,12 +143,12 @@ public class AdminDao extends Dao<Admin>{
 
         // Filter results WHERE "loginID" = 'A001'
         String selection = DatabaseTable.AdminTable._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(object.getID()) };
+        String[] selectionArgs = {String.valueOf(object.getID())};
 
-        int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME,recordObject,selection,selectionArgs);
+        int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME, recordObject, selection, selectionArgs);
 
 
-        return (result > 0) ? true : false;
+        return result > 0;
     }
 
     @Override
@@ -164,7 +165,7 @@ public class AdminDao extends Dao<Admin>{
         );
 
 
-        return (result > 0) ? true : false;
+        return result > 0;
     }
 
     public int insertWithResult(Admin object) {
@@ -179,6 +180,6 @@ public class AdminDao extends Dao<Admin>{
 
         long result = dbConnection.insert(DatabaseTable.AdminTable.TABLE_NAME, null, recordObject);
 
-        return(int)result;
+        return (int) result;
     }
 }

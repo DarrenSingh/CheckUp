@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteException;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.Cashier;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class CashierDao extends Dao<Cashier> {
                 null               //sort order
         );
 
-        return (cursor.getCount() > 0) ? true : false;
+        return cursor.getCount() > 0;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CashierDao extends Dao<Cashier> {
                 null
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);
@@ -80,29 +80,34 @@ public class CashierDao extends Dao<Cashier> {
     @Override
     public List<Cashier> findAll() {
 
+        List<Cashier> recordObjectList = new ArrayList<>();
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
+        try {
 
-        Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.CashierTable.TABLE_NAME, null);
+            Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.CashierTable.TABLE_NAME, null);
 
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
-        List<Cashier> recordObjectList = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+            while (cursor.moveToNext()) {
 
-            Cashier recordObject = new Cashier(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getInt(5)
-            );
+                Cashier recordObject = new Cashier(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(5)
+                );
 
-            recordObjectList.add(recordObject);
+                recordObjectList.add(recordObject);
 
+            }
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
         return recordObjectList;
@@ -124,7 +129,7 @@ public class CashierDao extends Dao<Cashier> {
 
         long result = dbConnection.insert(DatabaseTable.CashierTable.TABLE_NAME, null, values);
 
-        return (result == -1) ? false : true;
+        return result != -1;
     }
 
     @Override
@@ -145,11 +150,11 @@ public class CashierDao extends Dao<Cashier> {
 
         // Filter results WHERE "loginID" = 'C001'
         String selection = DatabaseTable.CashierTable._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(object.getID()) };
+        String[] selectionArgs = {String.valueOf(object.getID())};
 
-        int result = dbConnection.update(DatabaseTable.CashierTable.TABLE_NAME,recordObject,selection,selectionArgs);
+        int result = dbConnection.update(DatabaseTable.CashierTable.TABLE_NAME, recordObject, selection, selectionArgs);
 
-        return (result > 0)? true : false;
+        return result > 0;
     }
 
     @Override
@@ -159,9 +164,9 @@ public class CashierDao extends Dao<Cashier> {
 
         String selection = DatabaseTable.AdminTable.LOGIN_ID + " = ?";
 
-        int result = dbConnection.delete(DatabaseTable.CashierTable.TABLE_NAME,selection,searchId);
+        int result = dbConnection.delete(DatabaseTable.CashierTable.TABLE_NAME, selection, searchId);
 
-        return (result > 0) ? true : false;
+        return result > 0;
     }
 
     public Cashier findByID(String... cashierId) {
@@ -181,7 +186,7 @@ public class CashierDao extends Dao<Cashier> {
                 null
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);

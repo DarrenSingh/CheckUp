@@ -27,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class PatientHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class PatientHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Session appSession;
     private PatientDao patientDao;
     private Patient currentUser;
@@ -99,7 +99,7 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
         mBtnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PatientHomeActivity.this,AccountProfileActivity.class);
+                Intent intent = new Intent(PatientHomeActivity.this, AccountProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,7 +115,7 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
         mTextViewBalance.setText(getAccountBalance());
     }
 
-    private String getAccountBalance(){
+    private String getAccountBalance() {
         //Set Account Balance
         invoices = invoiceDao.findAllByPatient(String.valueOf(appSession.getUserId()));
 
@@ -131,26 +131,26 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
         return accountBalance;
     }
 
-    private String getNextAppointment(){
+    private String getNextAppointment() {
 
         String upcomingAppointment;
 
         try {
 
-            appointments = appointmentDao.findAllByPatient(AppointmentDao.ASC,String.valueOf(appSession.getUserId()));
+            appointments = appointmentDao.findAllByPatient(AppointmentDao.ASC, String.valueOf(appSession.getUserId()));
             Date date = new Date(appointments.get(0).getAppointmentDateTime());
             SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY @ h:mm a");
             upcomingAppointment = dateFormat.format(date);
 
-        }catch (Exception e){
-           upcomingAppointment = "No upcoming appointments";
+        } catch (Exception e) {
+            upcomingAppointment = "No upcoming appointments";
             e.printStackTrace();
         }
 
         return upcomingAppointment;
     }
 
-    public void toggleSetUp(){
+    public void toggleSetUp() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -172,19 +172,19 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         //here is the main place where we need to work on.
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_home:
-                Intent h= new Intent(PatientHomeActivity.this, PatientHomeActivity.class);
+                Intent h = new Intent(PatientHomeActivity.this, PatientHomeActivity.class);
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientHomeActivity.this, PatientAppointmentHistoryActivity.class);
+                Intent g = new Intent(PatientHomeActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(PatientHomeActivity.this,LoginActivity.class);
+                Intent s = new Intent(PatientHomeActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.Invoice;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class InvoiceDao extends Dao<Invoice> {
                 null               // The sort order
         );
 
-        return (cursor.getCount() > 0) ? true : false;
+        return cursor.getCount() > 0;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class InvoiceDao extends Dao<Invoice> {
 
         List<Invoice> invoiceList = new ArrayList<>();
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
 
             Invoice recordObject = new Invoice(
@@ -119,12 +119,12 @@ public class InvoiceDao extends Dao<Invoice> {
                 patientId,          // The values for the WHERE clause
                 null,                   // don't group the rows
                 null,                   // don't filter by row groups
-                DatabaseTable.InvoiceTable.PAYMENT_STATUS +" DESC"   // The sort order
+                DatabaseTable.InvoiceTable.PAYMENT_STATUS + " DESC"   // The sort order
         );
 
         List<Invoice> invoiceList = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             Invoice recordObject = new Invoice(
                     cursor.getInt(0),
@@ -151,41 +151,41 @@ public class InvoiceDao extends Dao<Invoice> {
         ContentValues recordObject = new ContentValues();
 
         //populate entry with object attributes
-        recordObject.put(DatabaseTable.InvoiceTable.PRICE,object.getPrice());
-        recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_DUE,object.getPaymentDue());
+        recordObject.put(DatabaseTable.InvoiceTable.PRICE, object.getPrice());
+        recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_DUE, object.getPaymentDue());
         recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_STATUS, object.getPaymentStatus());
-        recordObject.put(DatabaseTable.InvoiceTable.INVOICE_DATE,object.getInvoiceDate());
-        recordObject.put(DatabaseTable.InvoiceTable.PATIENT_ID,object.getPatientID());
-        recordObject.put(DatabaseTable.InvoiceTable.CASHIER_ID,object.getCashierID());
-        recordObject.put(DatabaseTable.InvoiceTable.DOCTOR_ID,object.getDoctorID());
-        recordObject.put(DatabaseTable.InvoiceTable.APPOINTMENT_ID,object.getAppointmentID());
+        recordObject.put(DatabaseTable.InvoiceTable.INVOICE_DATE, object.getInvoiceDate());
+        recordObject.put(DatabaseTable.InvoiceTable.PATIENT_ID, object.getPatientID());
+        recordObject.put(DatabaseTable.InvoiceTable.CASHIER_ID, object.getCashierID());
+        recordObject.put(DatabaseTable.InvoiceTable.DOCTOR_ID, object.getDoctorID());
+        recordObject.put(DatabaseTable.InvoiceTable.APPOINTMENT_ID, object.getAppointmentID());
 
         //get writable database
         SQLiteDatabase dbConnection = this.db.getWritableDatabase();
 
-        Long result = dbConnection.insert(DatabaseTable.InvoiceTable.TABLE_NAME,null,recordObject);
+        Long result = dbConnection.insert(DatabaseTable.InvoiceTable.TABLE_NAME, null, recordObject);
 
         return result != -1;
     }
 
-    public long insertWithResult(Invoice object){
+    public long insertWithResult(Invoice object) {
 
         ContentValues recordObject = new ContentValues();
 
         //populate entry with object attributes
-        recordObject.put(DatabaseTable.InvoiceTable.PRICE,object.getPrice());
-        recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_DUE,object.getPaymentDue());
+        recordObject.put(DatabaseTable.InvoiceTable.PRICE, object.getPrice());
+        recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_DUE, object.getPaymentDue());
         recordObject.put(DatabaseTable.InvoiceTable.PAYMENT_STATUS, object.getPaymentStatus());
-        recordObject.put(DatabaseTable.InvoiceTable.INVOICE_DATE,object.getInvoiceDate());
-        recordObject.put(DatabaseTable.InvoiceTable.PATIENT_ID,object.getPatientID());
-        recordObject.put(DatabaseTable.InvoiceTable.CASHIER_ID,object.getCashierID());
-        recordObject.put(DatabaseTable.InvoiceTable.DOCTOR_ID,object.getDoctorID());
-        recordObject.put(DatabaseTable.InvoiceTable.APPOINTMENT_ID,object.getAppointmentID());
+        recordObject.put(DatabaseTable.InvoiceTable.INVOICE_DATE, object.getInvoiceDate());
+        recordObject.put(DatabaseTable.InvoiceTable.PATIENT_ID, object.getPatientID());
+        recordObject.put(DatabaseTable.InvoiceTable.CASHIER_ID, object.getCashierID());
+        recordObject.put(DatabaseTable.InvoiceTable.DOCTOR_ID, object.getDoctorID());
+        recordObject.put(DatabaseTable.InvoiceTable.APPOINTMENT_ID, object.getAppointmentID());
 
         //get writable database
         SQLiteDatabase dbConnection = this.db.getWritableDatabase();
 
-        Long result = dbConnection.insert(DatabaseTable.InvoiceTable.TABLE_NAME,null,recordObject);
+        Long result = dbConnection.insert(DatabaseTable.InvoiceTable.TABLE_NAME, null, recordObject);
 
         return result;
     }
@@ -212,9 +212,9 @@ public class InvoiceDao extends Dao<Invoice> {
 
         // Filter results WHERE "loginID" = 'A001'
         String selection = DatabaseTable.InvoiceTable._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(object.getID()) };
+        String[] selectionArgs = {String.valueOf(object.getID())};
 
-        int result = dbConnection.update(DatabaseTable.InvoiceTable.TABLE_NAME,recordObject,selection,selectionArgs);
+        int result = dbConnection.update(DatabaseTable.InvoiceTable.TABLE_NAME, recordObject, selection, selectionArgs);
 
         return result > 0;
     }
@@ -226,7 +226,7 @@ public class InvoiceDao extends Dao<Invoice> {
 
         String selection = DatabaseTable.InvoiceTable._ID + " = ?";
 
-        int result = dbConnection.delete(DatabaseTable.InvoiceTable.TABLE_NAME,selection,searchId);
+        int result = dbConnection.delete(DatabaseTable.InvoiceTable.TABLE_NAME, selection, searchId);
 
         return result > 0;
     }

@@ -8,13 +8,13 @@ import android.database.sqlite.SQLiteException;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.PaymentNotification;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentNotificationDao extends Dao<PaymentNotification>{
+public class PaymentNotificationDao extends Dao<PaymentNotification> {
 
     public PaymentNotificationDao(@Nullable Context context) {
         super(context);
@@ -38,7 +38,7 @@ public class PaymentNotificationDao extends Dao<PaymentNotification>{
                 null               //sort order
         );
 
-        return (cursor.getCount() > 0) ? true : false;
+        return cursor.getCount() > 0;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class PaymentNotificationDao extends Dao<PaymentNotification>{
                 null
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);
@@ -79,68 +79,79 @@ public class PaymentNotificationDao extends Dao<PaymentNotification>{
     @Override
     public List<PaymentNotification> findAll() {
 
+        List<PaymentNotification> recordObjectList = new ArrayList<>();
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
+        try {
 
-        Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.PaymentNotificationTable.TABLE_NAME, null);
+            Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.PaymentNotificationTable.TABLE_NAME, null);
 
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
 
-        List<PaymentNotification> recordObjectList = new ArrayList<>();
+            while (cursor.moveToNext()) {
 
-        while(cursor.moveToNext()){
+                PaymentNotification recordObject = new PaymentNotification(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getLong(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5)
+                );
 
-            PaymentNotification recordObject = new PaymentNotification(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getLong(3),
-                    cursor.getInt(4),
-                    cursor.getInt(5)
-            );
+                recordObjectList.add(recordObject);
 
-            recordObjectList.add(recordObject);
+            }
 
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
         return recordObjectList;
     }
 
     public List<PaymentNotification> findAllByPatient(String... patientId) {
-        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
-
-        String selection = DatabaseTable.PaymentNotificationTable.PATIENT_ID + " = ?";
-
-        Cursor cursor = dbConnection.query(
-                DatabaseTable.PaymentNotificationTable.TABLE_NAME,   // The table to query
-                null,             // array of columns to return - null to get all
-                selection,              // The columns for the WHERE clause
-                patientId,
-                null,
-                null,
-                null
-        );
-
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
 
         List<PaymentNotification> recordObjectList = new ArrayList<>();
+        SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
-        while(cursor.moveToNext()){
+        try {
 
-            PaymentNotification recordObject = new PaymentNotification(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getLong(3),
-                    cursor.getInt(4),
-                    cursor.getInt(5)
+            String selection = DatabaseTable.PaymentNotificationTable.PATIENT_ID + " = ?";
+
+            Cursor cursor = dbConnection.query(
+                    DatabaseTable.PaymentNotificationTable.TABLE_NAME,   // The table to query
+                    null,             // array of columns to return - null to get all
+                    selection,              // The columns for the WHERE clause
+                    patientId,
+                    null,
+                    null,
+                    null
             );
 
-            recordObjectList.add(recordObject);
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
+
+            while (cursor.moveToNext()) {
+
+                PaymentNotification recordObject = new PaymentNotification(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getLong(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5)
+                );
+
+                recordObjectList.add(recordObject);
+
+            }
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
         return recordObjectList;
@@ -181,9 +192,9 @@ public class PaymentNotificationDao extends Dao<PaymentNotification>{
 
         // Filter results WHERE "loginID" = 'A001'
         String selection = DatabaseTable.PaymentNotificationTable._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(object.getID()) };
+        String[] selectionArgs = {String.valueOf(object.getID())};
 
-        int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME,recordObject,selection,selectionArgs);
+        int result = dbConnection.update(DatabaseTable.AdminTable.TABLE_NAME, recordObject, selection, selectionArgs);
 
         return result > 0;
     }
@@ -195,7 +206,7 @@ public class PaymentNotificationDao extends Dao<PaymentNotification>{
 
         String selection = DatabaseTable.PaymentNotificationTable._ID + " = ?";
 
-        int result = dbConnection.delete(DatabaseTable.PaymentNotificationTable.TABLE_NAME,selection,searchId);
+        int result = dbConnection.delete(DatabaseTable.PaymentNotificationTable.TABLE_NAME, selection, searchId);
 
         return result > 0;
     }

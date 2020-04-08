@@ -8,13 +8,13 @@ import android.database.sqlite.SQLiteException;
 
 import androidx.annotation.Nullable;
 
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import com.Group6.checkup.Database.DatabaseTable;
 import com.Group6.checkup.Entities.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientDao extends Dao<Patient>{
+public class PatientDao extends Dao<Patient> {
 
     public PatientDao(@Nullable Context context) {
         super(context);
@@ -38,7 +38,7 @@ public class PatientDao extends Dao<Patient>{
                 null               // The sort order
         );
 
-        return (cursor.getCount() > 0) ? true : false;
+        return cursor.getCount() > 0;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class PatientDao extends Dao<Patient>{
                 null               // The sort order
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);
@@ -101,7 +101,7 @@ public class PatientDao extends Dao<Patient>{
                 null               // The sort order
         );
 
-        if(cursor.getCount() < 0)
+        if (cursor.getCount() <= 0)
             throw new SQLiteException("No such entry");
 
         cursor.move(1);
@@ -125,39 +125,44 @@ public class PatientDao extends Dao<Patient>{
 
     @Override
     public List<Patient> findAll() {
+        List<Patient> patientsList = new ArrayList<>();
         SQLiteDatabase dbConnection = db.getReadableDatabase();
 
+        try {
 
-        Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.PatientTable.TABLE_NAME, null);
+            Cursor cursor = dbConnection.rawQuery("SELECT * FROM " + DatabaseTable.PatientTable.TABLE_NAME, null);
 
-        if(cursor.getCount() < 0)
-            throw new SQLiteException("No database entries");
-
-
-        List<Patient> patientsList = new ArrayList<>();
-
-        while(cursor.moveToNext()){
+            if (cursor.getCount() <= 0)
+                throw new SQLiteException("No database entries");
 
 
-            Patient patientRecord = new Patient(
-                    cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getString(5),
-                    Boolean.parseBoolean(cursor.getString(6)),
-                    cursor.getString(7),
-                    cursor.getInt(8),
-                    cursor.getString(9),
-                    cursor.getInt(10)
-            );
+            while (cursor.moveToNext()) {
 
-            patientsList.add(patientRecord);
 
+                Patient patientRecord = new Patient(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        Boolean.parseBoolean(cursor.getString(6)),
+                        cursor.getString(7),
+                        cursor.getInt(8),
+                        cursor.getString(9),
+                        cursor.getInt(10)
+                );
+
+                patientsList.add(patientRecord);
+
+            }
+
+        } catch (SQLiteException e) {
+            e.printStackTrace();
         }
 
-        return patientsList;    }
+        return patientsList;
+    }
 
     @Override
     public boolean insert(Patient object) {
@@ -169,22 +174,22 @@ public class PatientDao extends Dao<Patient>{
         ContentValues objectRecord = new ContentValues();
 
         //populate entry with patient attributes
-        objectRecord.put(DatabaseTable.PatientTable.FIRST_NAME,object.getFirstName());
-        objectRecord.put(DatabaseTable.PatientTable.LAST_NAME,object.getLastName());
-        objectRecord.put(DatabaseTable.PatientTable.ADDRESS,object.getAddress());
-        objectRecord.put(DatabaseTable.PatientTable.LOGIN_ID,object.getLoginID());
-        objectRecord.put(DatabaseTable.PatientTable.PASSWORD,object.getPassword());
-        objectRecord.put(DatabaseTable.PatientTable.MSP_STATUS,object.getMspStatus());
-        objectRecord.put(DatabaseTable.PatientTable.PHONE_NUMBER,object.getPhoneNumber());
-        objectRecord.put(DatabaseTable.PatientTable.HEALTH_CARE_CARD_NUMBER,object.getHealthCareCardNumber());
-        objectRecord.put(DatabaseTable.PatientTable.EMAIL_ADDRESS,object.getEmailAddress());
-        if(object.getAdminID() > 0){
-            objectRecord.put(DatabaseTable.PatientTable.ADMIN_ID,object.getAdminID());
+        objectRecord.put(DatabaseTable.PatientTable.FIRST_NAME, object.getFirstName());
+        objectRecord.put(DatabaseTable.PatientTable.LAST_NAME, object.getLastName());
+        objectRecord.put(DatabaseTable.PatientTable.ADDRESS, object.getAddress());
+        objectRecord.put(DatabaseTable.PatientTable.LOGIN_ID, object.getLoginID());
+        objectRecord.put(DatabaseTable.PatientTable.PASSWORD, object.getPassword());
+        objectRecord.put(DatabaseTable.PatientTable.MSP_STATUS, object.getMspStatus());
+        objectRecord.put(DatabaseTable.PatientTable.PHONE_NUMBER, object.getPhoneNumber());
+        objectRecord.put(DatabaseTable.PatientTable.HEALTH_CARE_CARD_NUMBER, object.getHealthCareCardNumber());
+        objectRecord.put(DatabaseTable.PatientTable.EMAIL_ADDRESS, object.getEmailAddress());
+        if (object.getAdminID() > 0) {
+            objectRecord.put(DatabaseTable.PatientTable.ADMIN_ID, object.getAdminID());
         }
 
-        Long result = dbConnection.insert(DatabaseTable.PatientTable.TABLE_NAME,null,objectRecord);
+        Long result = dbConnection.insert(DatabaseTable.PatientTable.TABLE_NAME, null, objectRecord);
 
-        return (result == -1) ? false : true;
+        return result != -1;
     }
 
     @Override
@@ -196,25 +201,26 @@ public class PatientDao extends Dao<Patient>{
         ContentValues objectRecord = new ContentValues();
 
         //populate entry with patient attributes
-        objectRecord.put(DatabaseTable.PatientTable.FIRST_NAME,object.getFirstName());
-        objectRecord.put(DatabaseTable.PatientTable.LAST_NAME,object.getLastName());
-        objectRecord.put(DatabaseTable.PatientTable.ADDRESS,object.getAddress());
-        objectRecord.put(DatabaseTable.PatientTable.LOGIN_ID,object.getLoginID());
-        objectRecord.put(DatabaseTable.PatientTable.PASSWORD,object.getPassword());
-        objectRecord.put(DatabaseTable.PatientTable.MSP_STATUS,object.getMspStatus());
-        objectRecord.put(DatabaseTable.PatientTable.PHONE_NUMBER,object.getPhoneNumber());
-        objectRecord.put(DatabaseTable.PatientTable.HEALTH_CARE_CARD_NUMBER,object.getHealthCareCardNumber());
-        objectRecord.put(DatabaseTable.PatientTable.EMAIL_ADDRESS,object.getEmailAddress());
-        objectRecord.put(DatabaseTable.PatientTable.ADMIN_ID,object.getAdminID());
+        objectRecord.put(DatabaseTable.PatientTable.FIRST_NAME, object.getFirstName());
+        objectRecord.put(DatabaseTable.PatientTable.LAST_NAME, object.getLastName());
+        objectRecord.put(DatabaseTable.PatientTable.ADDRESS, object.getAddress());
+        objectRecord.put(DatabaseTable.PatientTable.LOGIN_ID, object.getLoginID());
+        objectRecord.put(DatabaseTable.PatientTable.PASSWORD, object.getPassword());
+        objectRecord.put(DatabaseTable.PatientTable.MSP_STATUS, object.getMspStatus());
+        objectRecord.put(DatabaseTable.PatientTable.PHONE_NUMBER, object.getPhoneNumber());
+        objectRecord.put(DatabaseTable.PatientTable.HEALTH_CARE_CARD_NUMBER, object.getHealthCareCardNumber());
+        objectRecord.put(DatabaseTable.PatientTable.EMAIL_ADDRESS, object.getEmailAddress());
+        objectRecord.put(DatabaseTable.PatientTable.ADMIN_ID, object.getAdminID());
 
 
         // Filter results WHERE "title" = 'My Title'
         String selection = DatabaseTable.PatientTable._ID + " = ?";
-        String[] selectionArguments = { String.valueOf(object.getID()) };
+        String[] selectionArguments = {String.valueOf(object.getID())};
 
-        int result = dbConnection.update(DatabaseTable.PatientTable.TABLE_NAME,objectRecord,selection,selectionArguments);
+        int result = dbConnection.update(DatabaseTable.PatientTable.TABLE_NAME, objectRecord, selection, selectionArguments);
 
-        return (result > 0)? true : false;    }
+        return result > 0;
+    }
 
     @Override
     public boolean delete(String... searchId) {
@@ -223,9 +229,9 @@ public class PatientDao extends Dao<Patient>{
 
         String selection = DatabaseTable.PatientTable.LOGIN_ID + " = ?";
 
-        int result = dbConnection.delete(DatabaseTable.PatientTable.TABLE_NAME,selection,searchId);
+        int result = dbConnection.delete(DatabaseTable.PatientTable.TABLE_NAME, selection, searchId);
 
-        return (result > 0) ? true : false;
+        return result > 0;
     }
 
 }
