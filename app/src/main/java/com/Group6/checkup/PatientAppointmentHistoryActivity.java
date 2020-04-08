@@ -37,15 +37,21 @@ public class PatientAppointmentHistoryActivity extends AppCompatActivity {
         s = new Session(this);
 
         loginID = String.valueOf(s.getUserId());
-        // loginID = "P001";
+        // loginID = "1";
 
-        appointmentsForPatient(loginID);
+        appointmentsForPatient();
 
     }
 
+//    //get latest data on resume
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        appointmentsForPatient();
+//    }
 
-    public void appointmentsForPatient(String loginID){
-        appointments = appointmentDao.findAllByPatient(loginID);
+    public void appointmentsForPatient(){
+        appointments = appointmentDao.findAllByPatient(AppointmentDao.DESC,loginID);
 
         lv.setAdapter(new AppointmentHistoryAdapter(this,appointments));
     }

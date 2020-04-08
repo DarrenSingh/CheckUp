@@ -16,6 +16,9 @@ import java.util.List;
 
 public class AppointmentDao extends Dao<Appointment> {
 
+    public final static String DESC = "DESC";
+    public final static String ASC = "ASC";
+
     public AppointmentDao(@Nullable Context context) {
         super(context);
     }
@@ -102,13 +105,13 @@ public class AppointmentDao extends Dao<Appointment> {
         return recordObjectList;
     }
 
-    public List<Appointment> findAllByPatient(String... patientId) {
+    public List<Appointment> findAllByPatient(String orderBy, String... patientId) {
 
         SQLiteDatabase dbConnection = this.db.getReadableDatabase();
 
 
         // Filter results WHERE "ID" = '1'
-        String selection = DatabaseTable.AppointmentTable._ID + " = ?";
+        String selection = DatabaseTable.AppointmentTable.PATIENT_ID + " = ?";
 
         Cursor cursor = dbConnection.query(
                 DatabaseTable.AppointmentTable.TABLE_NAME,   // The table to query
@@ -117,7 +120,7 @@ public class AppointmentDao extends Dao<Appointment> {
                 patientId,
                 null,
                 null,
-                DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " DESC"
+                DatabaseTable.AppointmentTable.APPOINTMENT_DATE_TIME + " " + orderBy
         );
         if(cursor.getCount() < 0)
             throw new SQLiteException("No database entries");

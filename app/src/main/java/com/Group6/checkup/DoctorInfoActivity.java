@@ -132,7 +132,6 @@ public class DoctorInfoActivity extends AppCompatActivity implements NavigationV
         DateRecyclerViewAdapter.OnDateClickListener dateListener = new DateRecyclerViewAdapter.OnDateClickListener() {
             @Override
             public void onDateClick(int position) {
-                Toast.makeText(DoctorInfoActivity.this, dateRecyclerViewAdapter.dateRange.get(position), Toast.LENGTH_SHORT).show();
 
                 //my sloppy way of removing underlines on unselected dates...
                 if(selected !=-1) {

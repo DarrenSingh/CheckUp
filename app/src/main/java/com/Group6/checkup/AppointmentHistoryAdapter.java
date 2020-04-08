@@ -23,7 +23,6 @@ public class AppointmentHistoryAdapter extends BaseAdapter {
 
     List<Appointment> appointments;
     Context context;
-
     private static LayoutInflater inflater=null;
 
     public AppointmentHistoryAdapter(Context context, List<Appointment> list){

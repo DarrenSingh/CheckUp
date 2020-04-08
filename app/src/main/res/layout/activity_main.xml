@@ -11,46 +11,41 @@
         style="@style/subTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/hey"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
         style="@style/buttonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="87dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
+        android:layout_marginTop="77dp"
         android:text="@string/btn"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/messageTextView"
+    <Button
+        android:id="@+id/btn_main_patient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="49dp"
-        android:text="@string/msg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv" />
+        android:layout_marginTop="21dp"
+        android:text="Patient"
+        app:layout_constraintStart_toStartOf="@+id/btn_main_doctor"
+        app:layout_constraintTop_toBottomOf="@+id/btn_main_doctor" />
 
     <Button
         android:id="@+id/btn_main_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginLeft="26dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
         android:text="Admin"
-        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <Button
@@ -71,15 +66,14 @@
         app:layout_constraintStart_toStartOf="@+id/btn_main_cashier"
         app:layout_constraintTop_toBottomOf="@+id/btn_main_cashier" />
 
-    <Button
-        android:id="@+id/btn_main_patient"
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/messageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="34dp"
-        android:text="Patient"
-        app:layout_constraintStart_toStartOf="@+id/btn_main_doctor"
-        app:layout_constraintTop_toBottomOf="@+id/btn_main_doctor" />
+        android:layout_marginTop="149dp"
+        android:text="@string/msg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

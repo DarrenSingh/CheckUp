@@ -137,7 +137,7 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
 
         try {
 
-            appointments = appointmentDao.findAllByPatient(String.valueOf(appSession.getUserId()));
+            appointments = appointmentDao.findAllByPatient(AppointmentDao.ASC,String.valueOf(appSession.getUserId()));
             Date date = new Date(appointments.get(0).getAppointmentDateTime());
             SimpleDateFormat dateFormat = new SimpleDateFormat("EE MMMM dd, YYYY @ h:mm a");
             upcomingAppointment = dateFormat.format(date);

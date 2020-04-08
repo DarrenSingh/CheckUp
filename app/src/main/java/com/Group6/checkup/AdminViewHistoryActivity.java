@@ -47,7 +47,6 @@ public class AdminViewHistoryActivity extends AppCompatActivity {
 
     }
 
-
     public void messageForAdmin(){
         onlineHelp = onlineHelpDao.findAll();
         onlineHelpRepy = onlineHelpReplyDao.findAll();
@@ -62,4 +61,5 @@ public class AdminViewHistoryActivity extends AppCompatActivity {
 
         lv.setAdapter(new UserHistoryAdapter(AdminViewHistoryActivity.this,allMessages));
     }
+
 }
