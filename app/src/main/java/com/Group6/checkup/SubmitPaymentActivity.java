@@ -2,33 +2,27 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SubmitPaymentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Utils.Dao.InvoiceDao;
+import com.google.android.material.navigation.NavigationView;
 
 import java.text.DecimalFormat;
 
-public class SubmitPaymentActivity extends AppCompatActivity {
+public class SubmitPaymentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
 
     DrawerLayout drawer;
     Toolbar toolbar;
@@ -171,11 +165,11 @@ public class SubmitPaymentActivity extends AppCompatActivity {
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(SubmitPaymentActivity.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(SubmitPaymentActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(SubmitPaymentActivity.this,loginActivity.class);
+                Intent s= new Intent(SubmitPaymentActivity.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

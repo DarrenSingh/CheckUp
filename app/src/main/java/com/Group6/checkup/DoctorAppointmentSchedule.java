@@ -6,32 +6,18 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import android.view.MenuItem;
-import android.view.View;
-
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.Entities.Appointment;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.AppointmentDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
+import com.google.android.material.navigation.NavigationView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -127,11 +113,11 @@ public class DoctorAppointmentSchedule extends AppCompatActivity implements Navi
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(DoctorAppointmentSchedule.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(DoctorAppointmentSchedule.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(DoctorAppointmentSchedule.this,loginActivity.class);
+                Intent s= new Intent(DoctorAppointmentSchedule.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

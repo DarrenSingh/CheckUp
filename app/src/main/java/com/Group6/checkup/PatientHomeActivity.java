@@ -2,21 +2,8 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.view.MenuItem;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -81,7 +68,6 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
 
         Button mBtnLocateDoctor = findViewById(R.id.btn_locate_doctor);
         Button mBtnProfile = findViewById(R.id.btn_account_profile);
-        Button mBtnLogout = findViewById(R.id.btn_home_logout);
 
         //Activity Logic
 
@@ -114,19 +100,6 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PatientHomeActivity.this,AccountProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        mBtnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //reset session info
-                appSession.setCurrentUsername(null);
-                appSession.setUserId(0);
-                Intent intent = new Intent(PatientHomeActivity.this, LoginActivity.class);
-                //clear task back stack before and send user to login screen
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
@@ -207,7 +180,7 @@ public class PatientHomeActivity extends AppCompatActivity implements Navigation
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientHomeActivity.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(PatientHomeActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:

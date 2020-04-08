@@ -2,27 +2,22 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.InvoiceDao;
 import com.Group6.checkup.Utils.Dao.PatientDao;
-
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,7 +99,7 @@ public class ViewPendingPayments extends AppCompatActivity implements Navigation
                 intent = new Intent(ViewPendingPayments.this,PaymentMessage.class);
 
                 //pass values to intent from list item to intent
-                intent.putExtra("invoiceId", String.valueOf(invoiceAdapter.data.get(position).get("invoiveId")));
+                intent.putExtra("invoiceId", String.valueOf(invoiceAdapter.data.get(position).get("invoiceId")));
                 intent.putExtra("patientName" ,String.valueOf(invoiceAdapter.data.get(position).get("patientName")));
 
                 //start activity
@@ -143,7 +138,7 @@ public class ViewPendingPayments extends AppCompatActivity implements Navigation
                 startActivity(h);
                 break;
             case R.id.nav_logout:
-                Intent is= new Intent(ViewPendingPayments.this,loginActivity.class);
+                Intent is= new Intent(ViewPendingPayments.this,LoginActivity.class);
                 startActivity(is);
                 break;
 

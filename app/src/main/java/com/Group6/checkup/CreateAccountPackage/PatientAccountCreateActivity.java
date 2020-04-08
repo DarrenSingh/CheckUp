@@ -2,29 +2,9 @@ package com.Group6.checkup.CreateAccountPackage;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.Group6.checkup.AdminActivity;
-import com.Group6.checkup.Entities.Patient;
-import com.Group6.checkup.R;
-import com.Group6.checkup.Utils.Dao.PatientDao;
-import com.Group6.checkup.Utils.Session;
-import com.Group6.checkup.ViewUserHistoryActivity;
-import com.Group6.checkup.LoginActivity;
-
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,17 +12,27 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.Group6.checkup.AdminActivity;
 import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.LoginActivity;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
+import com.Group6.checkup.AdminViewHistoryActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class PatientAccountCreateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    DrawerLayout drawer;
+    Toolbar toolbar;
+    NavigationView navigationView;
     Button btnCreateAccount;
     Spinner spinnerYesOrNo;
     EditText etFirstName, etLastName, etAddress, etPhoneNumber, etEmail, etLoginID, etPassword, etHealthCardNumber;
@@ -55,6 +45,13 @@ public class PatientAccountCreateActivity extends AppCompatActivity implements N
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_account_create);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+
+        toggleSetUp();
+        this.setTitle("Create Patient Account");
 
         btnCreateAccount = findViewById(R.id.btn_createPatientAccount);
         spinnerYesOrNo = findViewById(R.id.spinner_patientMSPStatus);
@@ -162,7 +159,6 @@ public class PatientAccountCreateActivity extends AppCompatActivity implements N
                             healthCardNumber = (etHealthCardNumber.getText().toString().compareTo("") == 0)
                                     ? 0 : Integer.parseInt(etHealthCardNumber.getText().toString());
 
-                            //TODO input adminID data from session
                             //Creating patient Object.
                             Patient newPatient = new Patient(
                                     etFirstName.getText().toString(),
@@ -224,11 +220,11 @@ public class PatientAccountCreateActivity extends AppCompatActivity implements N
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientAccountCreateActivity.this, ViewUserHistoryActivity.class);
+                Intent g= new Intent(PatientAccountCreateActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(PatientAccountCreateActivity.this, loginActivity.class);
+                Intent s= new Intent(PatientAccountCreateActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

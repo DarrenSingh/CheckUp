@@ -2,7 +2,6 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,17 +10,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.widget.Button;
 
 import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Utils.Dao.InvoiceDao;
@@ -158,11 +150,11 @@ public class PatientPaymentHistoryActivity extends AppCompatActivity implements 
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientPaymentHistoryActivity.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(PatientPaymentHistoryActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(PatientPaymentHistoryActivity.this,loginActivity.class);
+                Intent s= new Intent(PatientPaymentHistoryActivity.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

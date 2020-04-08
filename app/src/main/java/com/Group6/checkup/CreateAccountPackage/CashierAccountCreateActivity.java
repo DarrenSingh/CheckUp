@@ -1,41 +1,28 @@
 package com.Group6.checkup.CreateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.AdminActivity;
 import com.Group6.checkup.Entities.Cashier;
+import com.Group6.checkup.LoginActivity;
+import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.CashierDao;
-import com.Group6.checkup.R;
-import com.Group6.checkup.Utils.Dao.CashierDao;
 import com.Group6.checkup.Utils.Session;
-import com.Group6.checkup.ViewUserHistoryActivity;
-import com.Group6.checkup.LoginActivity;
-
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
+import com.Group6.checkup.AdminViewHistoryActivity;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class CashierAccountCreateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -158,11 +145,11 @@ public class CashierAccountCreateActivity extends AppCompatActivity implements N
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(CashierAccountCreateActivity.this, ViewUserHistoryActivity.class);
+                Intent g= new Intent(CashierAccountCreateActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(CashierAccountCreateActivity.this, loginActivity.class);
+                Intent s= new Intent(CashierAccountCreateActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

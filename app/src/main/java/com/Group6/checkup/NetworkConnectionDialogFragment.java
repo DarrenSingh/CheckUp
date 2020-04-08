@@ -3,6 +3,7 @@ package com.Group6.checkup;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.app.DialogFragment;
 
 public class NetworkConnectionDialogFragment extends DialogFragment {
 

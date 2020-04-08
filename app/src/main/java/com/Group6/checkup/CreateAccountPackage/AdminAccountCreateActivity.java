@@ -1,44 +1,27 @@
 package com.Group6.checkup.CreateAccountPackage;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-
-import com.Group6.checkup.AdminActivity;
-import com.Group6.checkup.Entities.Admin;
-import com.Group6.checkup.R;
-import com.Group6.checkup.Utils.Dao.AdminDao;
-import com.Group6.checkup.ViewUserHistoryActivity;
-import com.Group6.checkup.loginActivity;
-
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.Group6.checkup.DatabasePackage.DatabaseHelper;
-import com.Group6.checkup.DatabasePackage.DatabaseTable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.Group6.checkup.AdminActivity;
 import com.Group6.checkup.Entities.Admin;
+import com.Group6.checkup.LoginActivity;
+import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.AdminDao;
-import com.Group6.checkup.R;
+import com.Group6.checkup.AdminViewHistoryActivity;
+import com.google.android.material.navigation.NavigationView;
 public class AdminAccountCreateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     DrawerLayout drawer;
@@ -72,15 +55,15 @@ public class AdminAccountCreateActivity extends AppCompatActivity implements Nav
 
                 if (AccountValidation.isEmpty(etFirstName)) {
                     etFirstName.setError("This field is required");
-                }else{
-                    if(AccountValidation.nameValidation(etFirstName) == false){
+                } else {
+                    if (AccountValidation.nameValidation(etFirstName) == false) {
                         etFirstName.setError("Invalid input");
                     }
                 }
                 if (AccountValidation.isEmpty(etLastName)) {
                     etLastName.setError("This field is required");
-                }else{
-                    if(AccountValidation.nameValidation(etLastName) == false){
+                } else {
+                    if (AccountValidation.nameValidation(etLastName) == false) {
                         etLastName.setError("Invalid input");
                     }
                 }
@@ -90,7 +73,7 @@ public class AdminAccountCreateActivity extends AppCompatActivity implements Nav
                 if (AccountValidation.isEmpty(etPassword)) {
                     etPassword.setError("This field is required");
                 }
-                 if(!AccountValidation.isEmpty(etFirstName) && !AccountValidation.isEmpty(etLastName) && !AccountValidation.isEmpty(etLoginID) && !AccountValidation.isEmpty((etPassword)) && AccountValidation.nameValidation(etFirstName) && AccountValidation.nameValidation(etLastName)){
+                if (!AccountValidation.isEmpty(etFirstName) && !AccountValidation.isEmpty(etLastName) && !AccountValidation.isEmpty(etLoginID) && !AccountValidation.isEmpty((etPassword)) && AccountValidation.nameValidation(etFirstName) && AccountValidation.nameValidation(etLastName)) {
                     //Creating account search DAO to search and fetching matching data and save to Array list.
                     AdminDao adminDao = new AdminDao(getApplicationContext());
 
@@ -122,10 +105,10 @@ public class AdminAccountCreateActivity extends AppCompatActivity implements Nav
                             if (inserted) {
                                 Toast.makeText(AdminAccountCreateActivity.this, etLoginID.getText().toString() + " created", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getBaseContext(), AccountTypeOptionActivity.class));
-                            }
-                            else
+                            } else
                                 Toast.makeText(AdminAccountCreateActivity.this, "Unable to Create Account", Toast.LENGTH_SHORT).show();
 
+                        }
                     }
                 }
             }
@@ -162,11 +145,11 @@ public class AdminAccountCreateActivity extends AppCompatActivity implements Nav
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(AdminAccountCreateActivity.this, ViewUserHistoryActivity.class);
+                Intent g= new Intent(AdminAccountCreateActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(AdminAccountCreateActivity.this, loginActivity.class);
+                Intent s= new Intent(AdminAccountCreateActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

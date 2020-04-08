@@ -2,6 +2,7 @@ package com.Group6.checkup;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import android.app.DialogFragment;
 
 import com.Group6.checkup.Entities.Appointment;
 import com.Group6.checkup.Entities.Invoice;

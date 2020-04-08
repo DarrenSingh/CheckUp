@@ -2,24 +2,20 @@ package com.Group6.checkup.CreateAccountPackage;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.Group6.checkup.AdminActivity;
-import com.Group6.checkup.R;
-import com.Group6.checkup.ViewUserHistoryActivity;
-import com.Group6.checkup.loginActivity;
-
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.Group6.checkup.AdminActivity;
+import com.Group6.checkup.AdminViewHistoryActivity;
+import com.Group6.checkup.LoginActivity;
+import com.Group6.checkup.R;
+import com.google.android.material.navigation.NavigationView;
 
 public class AccountTypeOptionActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -84,11 +80,11 @@ public class AccountTypeOptionActivity extends AppCompatActivity implements Navi
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(AccountTypeOptionActivity.this, ViewUserHistoryActivity.class);
+                Intent g= new Intent(AccountTypeOptionActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(AccountTypeOptionActivity.this, loginActivity.class);
+                Intent s= new Intent(AccountTypeOptionActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

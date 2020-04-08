@@ -2,35 +2,26 @@ package com.Group6.checkup.EditAndUpdateAccountPackage;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.Group6.checkup.AdminActivity;
-import com.Group6.checkup.Entities.Doctor;
-import com.Group6.checkup.R;
-import com.Group6.checkup.Utils.Dao.DoctorDao;
-import com.Group6.checkup.ViewUserHistoryActivity;
-import com.Group6.checkup.LoginActivity;
-
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.Group6.checkup.AdminActivity;
+import com.Group6.checkup.AdminViewHistoryActivity;
 import com.Group6.checkup.Entities.Doctor;
+import com.Group6.checkup.LoginActivity;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
+import com.google.android.material.navigation.NavigationView;
 
 public class DoctorAccountEditActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -211,7 +202,7 @@ public class DoctorAccountEditActivity extends AppCompatActivity implements Navi
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(DoctorAccountEditActivity.this, ViewUserHistoryActivity.class);
+                Intent g= new Intent(DoctorAccountEditActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:

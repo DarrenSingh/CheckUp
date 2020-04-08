@@ -2,22 +2,18 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.Group6.checkup.CreateAccountPackage.AccountTypeOptionActivity;
-
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.Group6.checkup.EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.Group6.checkup.CreateAccountPackage.AccountTypeOptionActivity;
+import com.Group6.checkup.EditAndUpdateAccountPackage.EditAndUpdateAccountSearchActivity;
+import com.google.android.material.navigation.NavigationView;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -43,10 +39,6 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
             startActivity(new Intent(AdminActivity.this, AccountTypeOptionActivity.class));
         } else if(view.getId() == R.id.btn_toEditAndUpdateAccountActivity){
             startActivity(new Intent(AdminActivity.this, EditAndUpdateAccountSearchActivity.class));
-        } else if(view.getId() == R.id.btn_toViewUserHistoryActivity){
-            startActivity(new Intent(AdminActivity.this, ViewUserHistoryActivity.class));
-        } else if(view.getId() == R.id.btn_toReturnLogInActivity){
-            startActivity(new Intent(AdminActivity.this, LoginActivity.class));
         }
     }
 
@@ -79,11 +71,11 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(AdminActivity.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(AdminActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(AdminActivity.this,loginActivity.class);
+                Intent s= new Intent(AdminActivity.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

@@ -1,9 +1,7 @@
 package com.Group6.checkup;
 
-import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,36 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import android.view.MenuItem;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.DialogFragment;
-
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Group6.checkup.Entities.Appointment;
-import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Utils.Dao.AppointmentDao;
-import com.Group6.checkup.Utils.Dao.InvoiceDao;
 import com.Group6.checkup.Utils.Session;
+import com.google.android.material.navigation.NavigationView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import androidx.appcompat.widget.Toolbar;
 
 public class DoctorInfoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -309,11 +294,11 @@ public class DoctorInfoActivity extends AppCompatActivity implements NavigationV
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(DoctorInfoActivity.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(DoctorInfoActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(DoctorInfoActivity.this,loginActivity.class);
+                Intent s= new Intent(DoctorInfoActivity.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

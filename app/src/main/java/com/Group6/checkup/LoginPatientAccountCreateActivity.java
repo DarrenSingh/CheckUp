@@ -13,14 +13,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.Group6.checkup.DoctorMessages;
 import com.Group6.checkup.Entities.Patient;
-import com.Group6.checkup.LoginActivity;
-import com.Group6.checkup.PatientComplaint;
-import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.PatientDao;
-import com.Group6.checkup.Utils.Session;
 
 public class LoginPatientAccountCreateActivity extends AppCompatActivity {
 

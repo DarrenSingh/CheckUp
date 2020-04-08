@@ -1,93 +1,75 @@
 package com.Group6.checkup.Entities;
 
-public class OnlineHelp {
+public class OnlineHelp extends Message{
 
     //Attributes
-    private int ID;
-    private String messageTitle;
-    private String message;
-    private long sentDateTime;
-    private int patientID;
-    private int doctorID;
     private int onlineHelpReplyID;
 
     //Constructors
     public OnlineHelp(int ID, String messageTitle, String message, long sentDateTime, int patientID, int doctorID, int onlineHelpReplyID) {
-        this.ID = ID;
-        this.messageTitle = messageTitle;
-        this.message = message;
-        this.sentDateTime = sentDateTime;
-        this.patientID = patientID;
-        this.doctorID = doctorID;
+        super(ID,messageTitle,message,sentDateTime,patientID,doctorID);
         this.onlineHelpReplyID = onlineHelpReplyID;
+        this.isReply = false;
     }
 
     public OnlineHelp(String messageTitle, String message, long sentDateTime, int patientID, int doctorID, int onlineHelpReplyID) {
-        this.messageTitle = messageTitle;
-        this.message = message;
-        this.sentDateTime = sentDateTime;
-        this.patientID = patientID;
-        this.doctorID = doctorID;
+        super(messageTitle,message,sentDateTime,patientID,doctorID);
         this.onlineHelpReplyID = onlineHelpReplyID;
+        this.isReply = false;
     }
 
     public OnlineHelp(String messageTitle, String message, long sentDateTime, int patientID, int doctorID) {
-        this.messageTitle = messageTitle;
-        this.message = message;
-        this.sentDateTime = sentDateTime;
-        this.patientID = patientID;
-        this.doctorID = doctorID;
+        super(messageTitle,message,sentDateTime,patientID,doctorID);
+        this.isReply = false;
     }
-
-    public OnlineHelp() { }
 
     //Getters & Setters
     public int getID() {
-        return ID;
+        return id;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
     public String getMessageTitle() {
-        return messageTitle;
+        return subject;
     }
 
     public void setMessageTitle(String messageTitle) {
-        this.messageTitle = messageTitle;
+        this.subject = messageTitle;
     }
 
     public String getMessage() {
-        return message;
+        return body;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.body = message;
     }
 
     public long getSentDateTime() {
-        return sentDateTime;
+        return timestamp;
     }
 
     public void setSentDateTime(long sentDateTime) {
-        this.sentDateTime = sentDateTime;
+        this.timestamp = sentDateTime;
     }
 
     public int getPatientID() {
-        return patientID;
+        return senderID;
     }
 
     public void setPatientID(int patientID) {
-        this.patientID = patientID;
+        this.senderID = patientID;
     }
 
     public int getDoctorID() {
-        return doctorID;
+        return recipientID;
     }
 
     public void setDoctorID(int doctorID) {
-        this.doctorID = doctorID;
+        this.recipientID = doctorID;
     }
 
     public int getOnlineHelpReplyID() {

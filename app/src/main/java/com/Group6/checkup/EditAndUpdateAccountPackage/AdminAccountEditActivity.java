@@ -1,33 +1,27 @@
 package com.Group6.checkup.EditAndUpdateAccountPackage;
 
-import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.AdminActivity;
+import com.Group6.checkup.AdminViewHistoryActivity;
 import com.Group6.checkup.Entities.Admin;
 import com.Group6.checkup.R;
 import com.Group6.checkup.Utils.AccountValidation;
 import com.Group6.checkup.Utils.Dao.AdminDao;
-import com.Group6.checkup.ViewUserHistoryActivity;
-import com.Group6.checkup.loginActivity;
-
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
+import com.Group6.checkup.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class AdminAccountEditActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -171,11 +165,11 @@ public class AdminAccountEditActivity extends AppCompatActivity implements Navig
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(AdminAccountEditActivity.this, ViewUserHistoryActivity.class);
+                Intent g= new Intent(AdminAccountEditActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(AdminAccountEditActivity.this, loginActivity.class);
+                Intent s= new Intent(AdminAccountEditActivity.this, LoginActivity.class);
                 startActivity(s);
                 break;
 

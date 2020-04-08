@@ -2,31 +2,39 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.Group6.checkup.Entities.Cashier;
-import com.Group6.checkup.Utils.Dao.CashierDao;
-import com.Group6.checkup.Utils.Session;
-
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.widget.Button;
+import com.Group6.checkup.Entities.Cashier;
+import com.Group6.checkup.Entities.Invoice;
+import com.Group6.checkup.Entities.Patient;
+import com.Group6.checkup.Utils.Dao.CashierDao;
+import com.Group6.checkup.Utils.Dao.InvoiceDao;
+import com.Group6.checkup.Utils.Dao.PatientDao;
+import com.Group6.checkup.Utils.Session;
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CashierActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
     InvoiceDao invoiceDao;
     PatientDao patientDao;
+    private CashierDao cashierDao;
+    private Cashier cashier;
+    private Session s;
     List<Invoice> invoices;
     List<HashMap<String,String>> overdueInvoicesData;
     ListView listView;
@@ -41,9 +49,14 @@ public class CashierActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier);
 
-        //initialize daos
-        invoiceDao = new InvoiceDao(this);
-        patientDao = new PatientDao(this);
+        //initialize dao
+        cashierDao = new CashierDao(this);
+        s = new Session(this);
+
+        //get current user
+        cashier = cashierDao.find(s.getCurrentUsername());
+        String fullName = cashier.getFirstName() + " " + cashier.getLastName();
+        this.setTitle("Welcome " + fullName);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,64 +65,16 @@ public class CashierActivity extends AppCompatActivity implements NavigationView
 
         toggleSetUp();
 
-
-        //get all invoices
-        invoices = invoiceDao.findAll();
-
-        //create new array for adapter
-        overdueInvoicesData = new ArrayList<>();
-
-        //loop through
-        for (int j = 0; j < invoices.size() ; j++) {
-
-            Invoice currentInvoice = invoices.get(j);
-
-           if(currentInvoice.getPaymentStatus().equals("unpaid")
-                   && currentInvoice.getPaymentDue() > System.currentTimeMillis()){
-
-                HashMap<String,String> map = new HashMap<>();
-
-
-                Patient associatedPatient = patientDao.findById(String.valueOf(currentInvoice.getPatientID()));
-
-                map.put("patientName", associatedPatient.getFirstName()
-                        + " "
-                        + associatedPatient.getLastName()
-                );
-
-
-                map.put("invoiceId",String.valueOf(currentInvoice.getID()));
-
-                overdueInvoicesData.add(map);
-            }
-        }
-
-        listView = findViewById(R.id.list_view);
-
-        String[] from = {"patientName"};
-        int[] to = {R.id.text_overdue_patient};
-
-        invoiceAdapter = new OverdueInvoicesAdapter(this,overdueInvoicesData,R.layout.card_view,from,to);
-
-        listView.setAdapter(invoiceAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Button btn = findViewById(R.id.pending__pay_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //create intent
-                intent = new Intent(CashierActivity.this,PaymentMessage.class);
-
-                //pass values to intent from list item to intent
-                intent.putExtra("invoiceId", String.valueOf(invoiceAdapter.data.get(position).get("invoiceId")));
-                intent.putExtra("patientName" ,String.valueOf(invoiceAdapter.data.get(position).get("patientName")));
-
-                //start activity
-                startActivity(intent);
+            public void onClick(View v) {
+                startActivity(new Intent(CashierActivity.this, ViewPendingPayments.class));
             }
         });
 
     }
+
 
     public void toggleSetUp(){
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -140,7 +105,7 @@ public class CashierActivity extends AppCompatActivity implements NavigationView
                 startActivity(h);
                 break;
             case R.id.nav_logout:
-                Intent is= new Intent(CashierActivity.this,loginActivity.class);
+                Intent is= new Intent(CashierActivity.this,LoginActivity.class);
                 startActivity(is);
                 break;
 

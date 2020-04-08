@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <!--  Recipient   -->
+            <TextView
+                android:id="@+id/text_appointment_doctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/black"
+                android:text="@string/text_firstName"
+                android:textSize="16sp"
+                style="@style/subTitleTextView"/>
+
+            <!--  Subject  -->
+            <TextView
+                android:id="@+id/text_appointment_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:maxLines="1"
+                android:text="@string/text_officeAddress"
+                android:textSize="14sp"
+                style="@style/normalTextView" />
+
+            <!--  Body  -->
+            <TextView
+                android:id="@+id/text_appointment_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:text="date"
+                style="@style/messageTextView"/>
+
+
+        </LinearLayout>
+
+
+</LinearLayout>

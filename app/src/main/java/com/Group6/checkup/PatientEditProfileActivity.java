@@ -2,30 +2,23 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.MenuItem;
 import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.Entities.Patient;
 import com.Group6.checkup.Utils.Dao.PatientDao;
 import com.Group6.checkup.Utils.Session;
+import com.google.android.material.navigation.NavigationView;
 
 public class PatientEditProfileActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -129,11 +122,11 @@ public class PatientEditProfileActivity extends AppCompatActivity implements Nav
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientEditProfileActivity.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(PatientEditProfileActivity.this, PatientAppointmentHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(PatientEditProfileActivity.this,loginActivity.class);
+                Intent s= new Intent(PatientEditProfileActivity.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

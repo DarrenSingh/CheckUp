@@ -2,25 +2,21 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Session;
+import com.google.android.material.navigation.NavigationView;
 
 public class DoctorActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -57,7 +53,6 @@ public class DoctorActivity extends AppCompatActivity implements NavigationView.
 
         Button buttonViewSchedule = findViewById(R.id.buttonViewSchedule);
         Button buttonViewMessages = findViewById(R.id.buttonViewMessage);
-        Button buttonReturnToLogin = findViewById(R.id.buttonReturnToLogin);
         TextView doctorName = findViewById(R.id.doctor_name);
 
 
@@ -78,18 +73,6 @@ public class DoctorActivity extends AppCompatActivity implements NavigationView.
             }
         });
 
-        buttonReturnToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //reset session info
-                appSession.setCurrentUsername(null);
-                appSession.setUserId(0);
-                Intent intent = new Intent(DoctorActivity.this, LoginActivity.class);
-                //clear task back stack before and send user to login screen
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
     }
 
     public void toggleSetUp(){
@@ -121,11 +104,11 @@ public class DoctorActivity extends AppCompatActivity implements NavigationView.
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(DoctorActivity.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(DoctorActivity.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(DoctorActivity.this,loginActivity.class);
+                Intent s= new Intent(DoctorActivity.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

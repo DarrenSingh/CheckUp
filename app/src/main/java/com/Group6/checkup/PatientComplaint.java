@@ -2,7 +2,6 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -11,16 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.widget.Button;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Entities.OnlineHelp;
@@ -29,6 +22,7 @@ import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Dao.OnlineHelpDao;
 import com.Group6.checkup.Utils.Dao.OnlineHelpReplyDao;
 import com.Group6.checkup.Utils.Session;
+import com.google.android.material.navigation.NavigationView;
 
 public class PatientComplaint extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -135,7 +129,12 @@ public class PatientComplaint extends AppCompatActivity implements NavigationVie
 
                         //update the onlinehelp item in the database with the new reply foreign key
                         onlineHelp.setOnlineHelpReplyID(result);
-                        boolean update = onlineHelpDao.update(onlineHelp);
+
+                        boolean updated = onlineHelpDao.update(onlineHelp);
+
+                        if(!updated){
+                            throw new Exception("Unable update foreign key value" + result + " for reply at row " + onlineHelp.getID());
+                        }
 
                         startActivity(new Intent(PatientComplaint.this, DoctorMessages.class));
 
@@ -181,11 +180,11 @@ public class PatientComplaint extends AppCompatActivity implements NavigationVie
                 startActivity(h);
                 break;
             case R.id.nav_history:
-                Intent g= new Intent(PatientComplaint.this,ViewUserHistoryActivity.class);
+                Intent g= new Intent(PatientComplaint.this, AdminViewHistoryActivity.class);
                 startActivity(g);
                 break;
             case R.id.nav_logout:
-                Intent s= new Intent(PatientComplaint.this,loginActivity.class);
+                Intent s= new Intent(PatientComplaint.this,LoginActivity.class);
                 startActivity(s);
                 break;
 

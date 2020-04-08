@@ -2,40 +2,27 @@ package com.Group6.checkup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.Entities.Invoice;
 import com.Group6.checkup.Entities.PaymentNotification;
 import com.Group6.checkup.Utils.Dao.InvoiceDao;
 import com.Group6.checkup.Utils.Dao.PaymentNotificationDao;
 import com.Group6.checkup.Utils.Session;
-
-import android.view.MenuItem;
-import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class PaymentMessage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -75,8 +62,8 @@ public class PaymentMessage extends AppCompatActivity implements NavigationView.
         intent = getIntent();
 
         if(intent != null){
-             id = intent.getStringExtra("invoiceId");
-             name = intent.getStringExtra("patientName");
+            id = intent.getStringExtra("invoiceId");
+            name = intent.getStringExtra("patientName");
 
 
             // grab invoice object
@@ -99,9 +86,9 @@ public class PaymentMessage extends AppCompatActivity implements NavigationView.
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   String message = msg.getText().toString();
-                   int cId = appSession.getUserId();
-                   String title = "Payment Overdue Reminder";
+                    String message = msg.getText().toString();
+                    int cId = appSession.getUserId();
+                    String title = "Payment Overdue Reminder";
 
                     paymentDao.insert(new PaymentNotification(title,message,System.currentTimeMillis(),Integer.parseInt(id),cId));
 
@@ -113,7 +100,6 @@ public class PaymentMessage extends AppCompatActivity implements NavigationView.
             });
 
         }
-
     }
 
     public void toggleSetUp(){
@@ -145,7 +131,7 @@ public class PaymentMessage extends AppCompatActivity implements NavigationView.
                 startActivity(h);
                 break;
             case R.id.nav_logout:
-                Intent is= new Intent(PaymentMessage.this,loginActivity.class);
+                Intent is= new Intent(PaymentMessage.this,LoginActivity.class);
                 startActivity(is);
                 break;
 
