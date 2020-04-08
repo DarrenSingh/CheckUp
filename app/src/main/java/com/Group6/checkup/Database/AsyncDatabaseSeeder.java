@@ -58,7 +58,7 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
             //Create Cashier Users
             this.cashierDao.insert(new Cashier("Shivangi", "Patel", "C001", "secret", adminId));
             this.cashierDao.insert(new Cashier("Rachel", "Green", "C002", "password", adminId));
-            this.cashierDao.insert(new Cashier("Monica", "Gellar", "C003", "password", adminId));
+            this.cashierDao.insert(new Cashier("Monica", "Geller", "C003", "password", adminId));
 
             //Create Doctor Users
             this.doctorDao.insert(new Doctor("Tonny", "Ogange", "15122 72 Ave, Surrey, BC V3S 2G2", "D001", "secret", "604-555-2144", "scarn@medicine.com", adminId));
@@ -94,7 +94,7 @@ public class AsyncDatabaseSeeder extends AsyncTask<Void,Void,Void> {
 
             //Create Invoices
             this.invoiceDao.insert(new Invoice(19.99,System.currentTimeMillis()+monthToMilliseconds, "unpaid", System.currentTimeMillis(), 1, 1, 1, 1));
-            this.invoiceDao.insert(new Invoice(24.99,System.currentTimeMillis(), "paid", System.currentTimeMillis(), 1, 2, 2, 2));
+            this.invoiceDao.insert(new Invoice(0,System.currentTimeMillis(), "paid", System.currentTimeMillis(), 1, 2, 2, 2));
             this.invoiceDao.insert(new Invoice(19.99,System.currentTimeMillis(),  "unpaid", System.currentTimeMillis(), 1, 1, 4, 2));
             this.invoiceDao.insert(new Invoice(29.99, System.currentTimeMillis()+monthToMilliseconds, "unpaid", System.currentTimeMillis(), 2, 1, 3, 2));
 

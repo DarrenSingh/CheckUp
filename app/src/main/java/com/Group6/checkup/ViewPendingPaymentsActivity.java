@@ -1,6 +1,7 @@
 package com.Group6.checkup;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -92,9 +93,12 @@ public class ViewPendingPaymentsActivity extends AppCompatActivity implements Na
 
         listView.setAdapter(invoiceAdapter);
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                listView.getChildAt(position).setBackgroundColor(Color.LTGRAY);
 
                 //create intent
                 intent = new Intent(ViewPendingPaymentsActivity.this, PaymentMessageActivity.class);

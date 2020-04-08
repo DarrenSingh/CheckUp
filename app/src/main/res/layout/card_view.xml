@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_card_view"
+    style="@style/customCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/customCardView"
     android:layout_margin="10dp"
-    android:id="@+id/list_card_view">
+    app:cardBackgroundColor="@color/lightBlue">
 
     <ImageView
         android:id="@+id/imageView"
@@ -17,14 +18,14 @@
 
     <TextView
         android:id="@+id/text_overdue_patient"
+        style="@style/normalTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hey"
-        android:layout_marginLeft="70dp"
-        android:layout_marginStart="70dp"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/black"
-        style="@style/normalTextView"/>
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:text="@string/hey"
+        android:textColor="@color/black" />
 
 
 </androidx.cardview.widget.CardView>

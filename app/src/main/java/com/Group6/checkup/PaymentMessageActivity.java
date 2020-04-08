@@ -79,7 +79,7 @@ public class PaymentMessageActivity extends AppCompatActivity implements Navigat
 
             patient_name.setText(name);
             msg.setText("Dear " + name + ", your account is overdue $" + price +
-                    " The payment was due by " + date + '\n' + "Please make your payment");
+                    " The payment was due by " + date + ". " + "Please make your payment.");
 
 
             btn.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +92,6 @@ public class PaymentMessageActivity extends AppCompatActivity implements Navigat
                     paymentDao.insert(new PaymentNotification(title, message, System.currentTimeMillis(), Integer.parseInt(id), cId));
 
                     Toast.makeText(PaymentMessageActivity.this, "Message Sent", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PaymentMessageActivity.this, CashierHomeActivity.class));
                 }
             });
 
