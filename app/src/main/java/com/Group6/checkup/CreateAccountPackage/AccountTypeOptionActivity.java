@@ -12,7 +12,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.Group6.checkup.AdminHomeActivity;
-import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
+import com.Group6.checkup.AdminViewHistoryActivity;
 import com.Group6.checkup.LoginActivity;
 import com.Group6.checkup.R;
 import com.google.android.material.navigation.NavigationView;

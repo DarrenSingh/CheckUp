@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.Group6.checkup.Adapters.AdminViewHistoryActivity;
 import com.Group6.checkup.Entities.Doctor;
 import com.Group6.checkup.Utils.Dao.DoctorDao;
 import com.Group6.checkup.Utils.Session;
